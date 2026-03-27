@@ -16,10 +16,12 @@
 			"pluginData": {
 				"resource": "git:directory",
 				"url": "https://github.com/imjlk/k-typewriter",
-				"ref": "feat/poc-typewrite",
+				"ref": "main",
 				"refType": "refname"
 			},
-			"activate": true
+			"options": {
+				"activate": true
+			}
 		},
 		{
 			"step": "runPHP",
