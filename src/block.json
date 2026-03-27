@@ -73,17 +73,17 @@
 			"type": "number",
 			"default": 0.08
 		},
-		"cursorOffsetY": {
+		"cursorOffsetX": {
 			"type": "number",
 			"default": 0
+		},
+		"cursorOffsetY": {
+			"type": "number",
+			"default": -0.08
 		},
 		"cursorBlinkSpeed": {
 			"type": "number",
 			"default": 1000
-		},
-		"hideCursorWhilePaused": {
-			"type": "boolean",
-			"default": false
 		},
 		"hideCursorWhenComplete": {
 			"type": "boolean",

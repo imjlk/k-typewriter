@@ -116,9 +116,9 @@ export default function Edit( {
 		startFromEmpty,
 		showCursor,
 		cursorWidth,
+		cursorOffsetX,
 		cursorOffsetY,
 		cursorBlinkSpeed,
-		hideCursorWhilePaused,
 		hideCursorWhenComplete,
 		startOnView,
 		pauseOnHover,
@@ -566,6 +566,25 @@ export default function Edit( {
 							/>
 							<RangeControl
 								help={ __(
+									'Move the cursor slightly left or right to match your font better.',
+									'k-typewriter'
+								) }
+								label={ __(
+									'Cursor horizontal offset',
+									'k-typewriter'
+								) }
+								max={ 0.3 }
+								min={ -0.3 }
+								step={ 0.01 }
+								value={ cursorOffsetX }
+								onChange={ ( value ) =>
+									setAttributes( {
+										cursorOffsetX: value ?? cursorOffsetX,
+									} )
+								}
+							/>
+							<RangeControl
+								help={ __(
 									'Move the cursor slightly up or down to match your font better.',
 									'k-typewriter'
 								) }
@@ -580,18 +599,6 @@ export default function Edit( {
 								onChange={ ( value ) =>
 									setAttributes( {
 										cursorOffsetY: value ?? cursorOffsetY,
-									} )
-								}
-							/>
-							<ToggleControl
-								label={ __(
-									'Hide cursor while paused',
-									'k-typewriter'
-								) }
-								checked={ hideCursorWhilePaused }
-								onChange={ ( value ) =>
-									setAttributes( {
-										hideCursorWhilePaused: value,
 									} )
 								}
 							/>

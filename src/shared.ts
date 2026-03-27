@@ -31,9 +31,9 @@ export const DEFAULT_ATTRIBUTES = {
 	startFromEmpty: false,
 	showCursor: true,
 	cursorWidth: 0.08,
-	cursorOffsetY: 0,
+	cursorOffsetX: 0,
+	cursorOffsetY: -0.08,
 	cursorBlinkSpeed: 1000,
-	hideCursorWhilePaused: false,
 	hideCursorWhenComplete: false,
 	startOnView: true,
 	pauseOnHover: false,
@@ -83,9 +83,9 @@ export type TypewriterAttributes = {
 	startFromEmpty: boolean;
 	showCursor: boolean;
 	cursorWidth: number;
+	cursorOffsetX: number;
 	cursorOffsetY: number;
 	cursorBlinkSpeed: number;
-	hideCursorWhilePaused: boolean;
 	hideCursorWhenComplete: boolean;
 	startOnView: boolean;
 	pauseOnHover: boolean;
@@ -335,6 +335,11 @@ export function normalizeAttributes(
 			0.04,
 			0.24
 		),
+		cursorOffsetX: clampNumber(
+			attributes.cursorOffsetX ?? DEFAULT_ATTRIBUTES.cursorOffsetX,
+			-0.3,
+			0.3
+		),
 		cursorOffsetY: clampNumber(
 			attributes.cursorOffsetY ?? DEFAULT_ATTRIBUTES.cursorOffsetY,
 			-0.3,
@@ -345,10 +350,6 @@ export function normalizeAttributes(
 			200,
 			2000
 		),
-		hideCursorWhilePaused:
-			typeof attributes.hideCursorWhilePaused === 'boolean'
-				? attributes.hideCursorWhilePaused
-				: DEFAULT_ATTRIBUTES.hideCursorWhilePaused,
 		hideCursorWhenComplete:
 			typeof attributes.hideCursorWhenComplete === 'boolean'
 				? attributes.hideCursorWhenComplete

@@ -42,9 +42,9 @@ export default function EditorPreview( {
 		startFromEmpty,
 		showCursor,
 		cursorWidth,
+		cursorOffsetX,
 		cursorOffsetY,
 		cursorBlinkSpeed,
-		hideCursorWhilePaused,
 		hideCursorWhenComplete,
 		pauseOnHover,
 		tagName,
@@ -91,11 +91,13 @@ export default function EditorPreview( {
 			'--k-typewriter-reserve-lines': String( reserveLines ),
 			'--k-typewriter-vertical-align': justifyContent,
 			'--k-typewriter-cursor-width': `${ cursorWidth }em`,
+			'--k-typewriter-cursor-offset-x': `${ cursorOffsetX }em`,
 			'--k-typewriter-cursor-offset-y': `${ cursorOffsetY }em`,
 			'--k-typewriter-cursor-blink-speed': `${ cursorBlinkSpeed }ms`,
 		} as CSSProperties;
 	}, [
 		cursorBlinkSpeed,
+		cursorOffsetX,
 		cursorOffsetY,
 		cursorWidth,
 		reserveLines,
@@ -114,8 +116,8 @@ export default function EditorPreview( {
 	} );
 	const isCursorVisible =
 		showCursor &&
-		( ! hideCursorWhilePaused || isPreviewPlaying ) &&
-		( ! hideCursorWhenComplete || ! isPreviewComplete );
+		( isPreviewPlaying ||
+			( isPreviewComplete && ! hideCursorWhenComplete ) );
 	let previewState = 'idle';
 
 	if ( isPreviewPlaying ) {

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-27T15:16:50+00:00\n"
+"POT-Creation-Date: 2026-03-27T15:22:48+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: k-typewriter\n"
@@ -328,15 +328,19 @@ msgid "Cursor blink speed (ms)"
 msgstr ""
 
 #: build/index.js:1
+msgid "Move the cursor slightly left or right to match your font better."
+msgstr ""
+
+#: build/index.js:1
+msgid "Cursor horizontal offset"
+msgstr ""
+
+#: build/index.js:1
 msgid "Move the cursor slightly up or down to match your font better."
 msgstr ""
 
 #: build/index.js:1
 msgid "Cursor vertical offset"
-msgstr ""
-
-#: build/index.js:1
-msgid "Hide cursor while paused"
 msgstr ""
 
 #: build/index.js:1

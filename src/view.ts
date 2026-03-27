@@ -29,7 +29,6 @@ type TypewriterContext = {
 	startFromEmpty: boolean;
 	showCursor: boolean;
 	cursorVisible: boolean;
-	hideCursorWhilePaused: boolean;
 	hideCursorWhenComplete: boolean;
 	startOnView: boolean;
 	pauseOnHover: boolean;
@@ -263,12 +262,12 @@ function syncCursorVisibility(
 	} );
 	const isPaused = ! runtime || ! shouldAnimate( context, runtime );
 
-	if ( context.hideCursorWhenComplete && isComplete ) {
-		context.cursorVisible = false;
+	if ( isComplete ) {
+		context.cursorVisible = ! context.hideCursorWhenComplete;
 		return;
 	}
 
-	if ( context.hideCursorWhilePaused && isPaused ) {
+	if ( isPaused ) {
 		context.cursorVisible = false;
 		return;
 	}

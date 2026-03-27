@@ -72,10 +72,11 @@ final class K_Typewriter_Plugin {
 		}
 
 		$text_style       = sprintf(
-			'--k-typewriter-reserve-lines:%1$d;--k-typewriter-vertical-align:%2$s;--k-typewriter-cursor-width:%3$.2Fem;--k-typewriter-cursor-offset-y:%4$.2Fem;--k-typewriter-cursor-blink-speed:%5$dms;',
+			'--k-typewriter-reserve-lines:%1$d;--k-typewriter-vertical-align:%2$s;--k-typewriter-cursor-width:%3$.2Fem;--k-typewriter-cursor-offset-x:%4$.2Fem;--k-typewriter-cursor-offset-y:%5$.2Fem;--k-typewriter-cursor-blink-speed:%6$dms;',
 			(int) $settings['reserveLines'],
 			$vertical_align,
 			(float) $settings['cursorWidth'],
+			(float) $settings['cursorOffsetX'],
 			(float) $settings['cursorOffsetY'],
 			(int) $settings['cursorBlinkSpeed']
 		);
@@ -99,7 +100,6 @@ final class K_Typewriter_Plugin {
 				'startFromEmpty'      => $settings['startFromEmpty'],
 				'showCursor'          => $settings['showCursor'],
 				'cursorVisible'       => $settings['showCursor'],
-				'hideCursorWhilePaused' => $settings['hideCursorWhilePaused'],
 				'hideCursorWhenComplete' => $settings['hideCursorWhenComplete'],
 				'startOnView'         => $settings['startOnView'],
 				'pauseOnHover'        => $settings['pauseOnHover'],
@@ -261,9 +261,9 @@ final class K_Typewriter_Plugin {
 			'startFromEmpty'     => false,
 			'showCursor'         => true,
 			'cursorWidth'        => 0.08,
-			'cursorOffsetY'      => 0,
+			'cursorOffsetX'      => 0,
+			'cursorOffsetY'      => -0.08,
 			'cursorBlinkSpeed'   => 1000,
-			'hideCursorWhilePaused' => false,
 			'hideCursorWhenComplete' => false,
 			'startOnView'        => true,
 			'pauseOnHover'       => false,
@@ -366,9 +366,9 @@ final class K_Typewriter_Plugin {
 			'startFromEmpty'    => (bool) $attributes['startFromEmpty'],
 			'showCursor'        => (bool) $attributes['showCursor'],
 			'cursorWidth'       => min( 0.24, max( 0.04, (float) $attributes['cursorWidth'] ) ),
+			'cursorOffsetX'     => min( 0.3, max( -0.3, (float) $attributes['cursorOffsetX'] ) ),
 			'cursorOffsetY'     => min( 0.3, max( -0.3, (float) $attributes['cursorOffsetY'] ) ),
 			'cursorBlinkSpeed'  => min( 2000, max( 200, (int) $attributes['cursorBlinkSpeed'] ) ),
-			'hideCursorWhilePaused' => (bool) $attributes['hideCursorWhilePaused'],
 			'hideCursorWhenComplete' => (bool) $attributes['hideCursorWhenComplete'],
 			'startOnView'       => (bool) $attributes['startOnView'],
 			'pauseOnHover'      => (bool) $attributes['pauseOnHover'],

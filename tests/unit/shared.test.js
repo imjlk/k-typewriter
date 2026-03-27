@@ -68,9 +68,9 @@ describe( 'shared helpers', () => {
 			textDirection: 'rtl',
 			startFromEmpty: true,
 			cursorWidth: 0.12,
+			cursorOffsetX: 0.03,
 			cursorOffsetY: 0.08,
 			cursorBlinkSpeed: 1600,
-			hideCursorWhilePaused: true,
 			hideCursorWhenComplete: true,
 			fallbackMode: 'custom',
 			fallbackText: 'Static fallback',
@@ -88,9 +88,9 @@ describe( 'shared helpers', () => {
 		expect( normalized.textDirection ).toBe( 'rtl' );
 		expect( normalized.startFromEmpty ).toBe( true );
 		expect( normalized.cursorWidth ).toBe( 0.12 );
+		expect( normalized.cursorOffsetX ).toBe( 0.03 );
 		expect( normalized.cursorOffsetY ).toBe( 0.08 );
 		expect( normalized.cursorBlinkSpeed ).toBe( 1600 );
-		expect( normalized.hideCursorWhilePaused ).toBe( true );
 		expect( normalized.hideCursorWhenComplete ).toBe( true );
 		expect( normalized.fallbackMode ).toBe( 'custom' );
 		expect( normalized.fallbackText ).toBe( 'Static fallback' );
@@ -127,11 +127,13 @@ describe( 'shared helpers', () => {
 	test( 'clamps cursor controls into the supported range', () => {
 		const normalized = normalizeAttributes( {
 			cursorWidth: 0.5,
+			cursorOffsetX: -1,
 			cursorOffsetY: -1,
 			cursorBlinkSpeed: 5000,
 		} );
 
 		expect( normalized.cursorWidth ).toBe( 0.24 );
+		expect( normalized.cursorOffsetX ).toBe( -0.3 );
 		expect( normalized.cursorOffsetY ).toBe( -0.3 );
 		expect( normalized.cursorBlinkSpeed ).toBe( 2000 );
 	} );
