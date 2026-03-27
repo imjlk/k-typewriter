@@ -81,6 +81,10 @@
       "type": "boolean",
       "default": true
     },
+    "cursorAnimationMode": {
+      "type": "string",
+      "default": "blink"
+    },
     "cursorWidth": {
       "type": "number",
       "default": 0.08
@@ -96,6 +100,10 @@
     "cursorBlinkSpeed": {
       "type": "number",
       "default": 1000
+    },
+    "cursorTransitionSpeed": {
+      "type": "number",
+      "default": 900
     },
     "hideCursorWhenComplete": {
       "type": "boolean",

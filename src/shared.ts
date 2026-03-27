@@ -15,6 +15,7 @@ export const TRANSITION_MODES = [ 'backspace', 'restart' ] as const;
 export const VERTICAL_ALIGNMENTS = [ 'top', 'middle', 'bottom' ] as const;
 export const TEXT_DIRECTIONS = [ 'auto', 'ltr', 'rtl' ] as const;
 export const INLINE_WIDTH_MODES = [ 'auto', 'characters', 'measure' ] as const;
+export const CURSOR_ANIMATION_MODES = [ 'blink', 'transition' ] as const;
 
 export const DEFAULT_ATTRIBUTES = {
 	items: DEFAULT_ITEMS,
@@ -33,10 +34,12 @@ export const DEFAULT_ATTRIBUTES = {
 	textDirection: 'auto',
 	startFromEmpty: false,
 	showCursor: true,
+	cursorAnimationMode: 'blink',
 	cursorWidth: 0.08,
 	cursorOffsetX: 0,
 	cursorOffsetY: 0,
 	cursorBlinkSpeed: 1000,
+	cursorTransitionSpeed: 900,
 	hideCursorWhenComplete: false,
 	startOnView: true,
 	pauseOnHover: false,
@@ -70,6 +73,7 @@ export type TransitionMode = ( typeof TRANSITION_MODES )[ number ];
 export type VerticalAlignment = ( typeof VERTICAL_ALIGNMENTS )[ number ];
 export type TextDirection = ( typeof TEXT_DIRECTIONS )[ number ];
 export type InlineWidthMode = ( typeof INLINE_WIDTH_MODES )[ number ];
+export type CursorAnimationMode = ( typeof CURSOR_ANIMATION_MODES )[ number ];
 
 export type TypewriterAttributes = {
 	items: string[];
@@ -88,10 +92,12 @@ export type TypewriterAttributes = {
 	textDirection: TextDirection;
 	startFromEmpty: boolean;
 	showCursor: boolean;
+	cursorAnimationMode: CursorAnimationMode;
 	cursorWidth: number;
 	cursorOffsetX: number;
 	cursorOffsetY: number;
 	cursorBlinkSpeed: number;
+	cursorTransitionSpeed: number;
 	hideCursorWhenComplete: boolean;
 	startOnView: boolean;
 	pauseOnHover: boolean;
@@ -184,6 +190,20 @@ export function coerceInlineWidthMode( value: unknown ): InlineWidthMode {
 	}
 
 	return DEFAULT_ATTRIBUTES.inlineWidthMode;
+}
+
+export function coerceCursorAnimationMode(
+	value: unknown
+): CursorAnimationMode {
+	if ( typeof value === 'string' ) {
+		const candidate = value.toLowerCase() as CursorAnimationMode;
+
+		if ( CURSOR_ANIMATION_MODES.includes( candidate ) ) {
+			return candidate;
+		}
+	}
+
+	return DEFAULT_ATTRIBUTES.cursorAnimationMode;
 }
 
 export function coerceContentSourceMode(
@@ -388,6 +408,9 @@ export function normalizeAttributes(
 			typeof attributes.showCursor === 'boolean'
 				? attributes.showCursor
 				: DEFAULT_ATTRIBUTES.showCursor,
+		cursorAnimationMode: coerceCursorAnimationMode(
+			attributes.cursorAnimationMode
+		),
 		cursorWidth: clampNumber(
 			attributes.cursorWidth ?? DEFAULT_ATTRIBUTES.cursorWidth,
 			0.04,
@@ -405,6 +428,12 @@ export function normalizeAttributes(
 		),
 		cursorBlinkSpeed: clampNumber(
 			attributes.cursorBlinkSpeed ?? DEFAULT_ATTRIBUTES.cursorBlinkSpeed,
+			200,
+			2000
+		),
+		cursorTransitionSpeed: clampNumber(
+			attributes.cursorTransitionSpeed ??
+				DEFAULT_ATTRIBUTES.cursorTransitionSpeed,
 			200,
 			2000
 		),

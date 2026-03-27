@@ -45,10 +45,12 @@ export default function EditorPreview( {
 		textDirection,
 		startFromEmpty,
 		showCursor,
+		cursorAnimationMode,
 		cursorWidth,
 		cursorOffsetX,
 		cursorOffsetY,
 		cursorBlinkSpeed,
+		cursorTransitionSpeed,
 		hideCursorWhenComplete,
 		pauseOnHover,
 		tagName,
@@ -99,6 +101,7 @@ export default function EditorPreview( {
 			'--k-typewriter-cursor-offset-x': `${ cursorOffsetX }em`,
 			'--k-typewriter-cursor-offset-y': `${ cursorOffsetY }em`,
 			'--k-typewriter-cursor-blink-speed': `${ cursorBlinkSpeed }ms`,
+			'--k-typewriter-cursor-transition-speed': `${ cursorTransitionSpeed }ms`,
 			...( widthFallbackCh === null
 				? {}
 				: {
@@ -110,6 +113,7 @@ export default function EditorPreview( {
 		cursorBlinkSpeed,
 		cursorOffsetX,
 		cursorOffsetY,
+		cursorTransitionSpeed,
 		cursorWidth,
 		reserveLines,
 		verticalAlign,
@@ -288,7 +292,11 @@ export default function EditorPreview( {
 					{ isCursorVisible && (
 						<span
 							aria-hidden="true"
-							className="k-typewriter__cursor k-typewriter-editor__cursor"
+							className={ `k-typewriter__cursor k-typewriter-editor__cursor ${
+								cursorAnimationMode === 'transition'
+									? 'k-typewriter__cursor--transition'
+									: 'k-typewriter__cursor--blink'
+							}` }
 						/>
 					) }
 				</span>

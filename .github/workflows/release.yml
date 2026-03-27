@@ -54,6 +54,12 @@ jobs:
             - name: Build plugin
               run: pnpm run build
 
+            - name: Reset Docker auth for wp-env images
+              run: |
+                  mkdir -p "$HOME/.docker"
+                  printf '{}\n' > "$HOME/.docker/config.json"
+                  docker logout || true
+
             - name: Start wp-env
               run: pnpm run env:start
 
@@ -78,7 +84,7 @@ jobs:
 
             - name: Stop wp-env
               if: always()
-              run: pnpm run env:stop
+              run: pnpm run env:stop || true
 
             - name: Deploy to WordPress.org
               if: ${{ vars.WPORG_DEPLOY_ENABLED == 'true' && env.SVN_USERNAME != '' && env.SVN_PASSWORD != '' }}

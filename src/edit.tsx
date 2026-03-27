@@ -21,12 +21,14 @@ import './editor.scss';
 
 import EditorPreview from './editor-preview';
 import {
+	CURSOR_ANIMATION_MODES,
 	getEffectiveFallbackText,
 	getEffectiveSummaryText,
 	INLINE_WIDTH_MODES,
 	normalizeAttributes,
 	START_DELAY_MODES,
 	type ContentSourceMode,
+	type CursorAnimationMode,
 	type InlineWidthMode,
 	type TextDirection,
 	type TypewriterAttributes,
@@ -95,6 +97,16 @@ const inlineWidthModeOptions = INLINE_WIDTH_MODES.map( ( value ) => ( {
 	value,
 } ) );
 
+const cursorAnimationModeLabels = {
+	blink: __( 'Blink', 'k-typewriter' ),
+	transition: __( 'Fade transition', 'k-typewriter' ),
+} as const;
+
+const cursorAnimationModeOptions = CURSOR_ANIMATION_MODES.map( ( value ) => ( {
+	label: cursorAnimationModeLabels[ value ],
+	value,
+} ) );
+
 const contentSourceOptions = [
 	{
 		label: __( 'Auto-generated', 'k-typewriter' ),
@@ -130,10 +142,12 @@ export default function Edit( {
 		textDirection,
 		startFromEmpty,
 		showCursor,
+		cursorAnimationMode,
 		cursorWidth,
 		cursorOffsetX,
 		cursorOffsetY,
 		cursorBlinkSpeed,
+		cursorTransitionSpeed,
 		hideCursorWhenComplete,
 		startOnView,
 		pauseOnHover,
@@ -584,6 +598,24 @@ export default function Edit( {
 					/>
 					{ ! showCursor ? null : (
 						<>
+							<SelectControl
+								help={ __(
+									'Blink gives a crisp on-off cursor. Fade transition keeps the cursor softer and more fluid.',
+									'k-typewriter'
+								) }
+								label={ __(
+									'Cursor animation',
+									'k-typewriter'
+								) }
+								options={ cursorAnimationModeOptions }
+								value={ cursorAnimationMode }
+								onChange={ ( value ) =>
+									setAttributes( {
+										cursorAnimationMode:
+											value as CursorAnimationMode,
+									} )
+								}
+							/>
 							<RangeControl
 								help={ __(
 									'Adjust the cursor bar thickness relative to the current font size.',
@@ -603,26 +635,49 @@ export default function Edit( {
 									} )
 								}
 							/>
-							<RangeControl
-								help={ __(
-									'Adjust how quickly the cursor blinks.',
-									'k-typewriter'
-								) }
-								label={ __(
-									'Cursor blink speed (ms)',
-									'k-typewriter'
-								) }
-								max={ 2000 }
-								min={ 200 }
-								step={ 100 }
-								value={ cursorBlinkSpeed }
-								onChange={ ( value ) =>
-									setAttributes( {
-										cursorBlinkSpeed:
-											value ?? cursorBlinkSpeed,
-									} )
-								}
-							/>
+							{ cursorAnimationMode === 'blink' ? (
+								<RangeControl
+									help={ __(
+										'Adjust how quickly the cursor blinks.',
+										'k-typewriter'
+									) }
+									label={ __(
+										'Cursor blink speed (ms)',
+										'k-typewriter'
+									) }
+									max={ 2000 }
+									min={ 200 }
+									step={ 100 }
+									value={ cursorBlinkSpeed }
+									onChange={ ( value ) =>
+										setAttributes( {
+											cursorBlinkSpeed:
+												value ?? cursorBlinkSpeed,
+										} )
+									}
+								/>
+							) : (
+								<RangeControl
+									help={ __(
+										'Adjust how quickly the cursor fades in and out.',
+										'k-typewriter'
+									) }
+									label={ __(
+										'Cursor transition speed (ms)',
+										'k-typewriter'
+									) }
+									max={ 2000 }
+									min={ 200 }
+									step={ 100 }
+									value={ cursorTransitionSpeed }
+									onChange={ ( value ) =>
+										setAttributes( {
+											cursorTransitionSpeed:
+												value ?? cursorTransitionSpeed,
+										} )
+									}
+								/>
+							) }
 							<RangeControl
 								help={ __(
 									'Move the cursor slightly left or right to match your font better.',

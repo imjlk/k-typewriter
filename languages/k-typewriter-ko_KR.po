@@ -115,6 +115,14 @@ msgid "Measure longest message"
 msgstr "가장 긴 메시지 실측"
 
 #: build/index.js:1
+msgid "Blink"
+msgstr "깜빡임"
+
+#: build/index.js:1
+msgid "Fade transition"
+msgstr "페이드 전환"
+
+#: build/index.js:1
 msgid "Auto-generated"
 msgstr "자동 생성"
 
@@ -374,6 +382,18 @@ msgid "Show cursor"
 msgstr "커서 표시"
 
 #: build/index.js:1
+msgid ""
+"Blink gives a crisp on-off cursor. Fade transition keeps the cursor softer "
+"and more fluid."
+msgstr ""
+"깜빡임은 분명한 온오프 느낌의 커서를 만듭니다. 페이드 전환은 더 부드럽고 유"
+"연한 움직임을 유지합니다."
+
+#: build/index.js:1
+msgid "Cursor animation"
+msgstr "커서 애니메이션"
+
+#: build/index.js:1
 msgid "Adjust the cursor bar thickness relative to the current font size."
 msgstr "현재 폰트 크기를 기준으로 커서 막대 두께를 조절합니다."
 
@@ -388,6 +408,14 @@ msgstr "커서가 깜빡이는 속도를 조절합니다."
 #: build/index.js:1
 msgid "Cursor blink speed (ms)"
 msgstr "커서 깜빡임 속도(ms)"
+
+#: build/index.js:1
+msgid "Adjust how quickly the cursor fades in and out."
+msgstr "커서가 페이드 인과 페이드 아웃하는 속도를 조절합니다."
+
+#: build/index.js:1
+msgid "Cursor transition speed (ms)"
+msgstr "커서 전환 속도(ms)"
 
 #: build/index.js:1
 msgid "Move the cursor slightly left or right to match your font better."

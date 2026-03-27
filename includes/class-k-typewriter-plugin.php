@@ -63,6 +63,9 @@ final class K_Typewriter_Plugin {
 		$seo_summary      = self::get_effective_seo_summary( $settings );
 		$inline_width_ch  = self::get_approximate_inline_width_ch( $settings );
 		$tag_name         = $settings['tagName'];
+		$cursor_class     = 'transition' === $settings['cursorAnimationMode']
+			? 'k-typewriter__cursor k-typewriter__cursor--transition'
+			: 'k-typewriter__cursor k-typewriter__cursor--blink';
 		$text_direction   = 'auto' !== $settings['textDirection'] ? $settings['textDirection'] : '';
 		$vertical_align   = 'flex-start';
 
@@ -79,6 +82,7 @@ final class K_Typewriter_Plugin {
 			sprintf( '--k-typewriter-cursor-offset-x:%.2Fem', (float) $settings['cursorOffsetX'] ),
 			sprintf( '--k-typewriter-cursor-offset-y:%.2Fem', (float) $settings['cursorOffsetY'] ),
 			sprintf( '--k-typewriter-cursor-blink-speed:%dms', (int) $settings['cursorBlinkSpeed'] ),
+			sprintf( '--k-typewriter-cursor-transition-speed:%dms', (int) $settings['cursorTransitionSpeed'] ),
 		);
 
 		if ( null !== $inline_width_ch ) {
@@ -150,7 +154,7 @@ final class K_Typewriter_Plugin {
 						</span>
 						<span
 							aria-hidden="true"
-							class="k-typewriter__cursor"
+							class="<?php echo esc_attr( $cursor_class ); ?>"
 							data-wp-bind--hidden="!context.cursorVisible"
 						></span>
 					</span>
@@ -308,10 +312,12 @@ final class K_Typewriter_Plugin {
 			'textDirection'      => 'auto',
 			'startFromEmpty'     => false,
 			'showCursor'         => true,
+			'cursorAnimationMode' => 'blink',
 			'cursorWidth'        => 0.08,
 			'cursorOffsetX'      => 0,
 			'cursorOffsetY'      => 0,
 			'cursorBlinkSpeed'   => 1000,
+			'cursorTransitionSpeed' => 900,
 			'hideCursorWhenComplete' => false,
 			'startOnView'        => true,
 			'pauseOnHover'       => false,
@@ -377,6 +383,10 @@ final class K_Typewriter_Plugin {
 			'characters',
 			'measure',
 		);
+		$valid_cursor_animation_modes = array(
+			'blink',
+			'transition',
+		);
 		$valid_content_modes = array(
 			'auto',
 			'custom',
@@ -405,6 +415,9 @@ final class K_Typewriter_Plugin {
 		$inline_width_mode = in_array( $attributes['inlineWidthMode'], $valid_inline_width_modes, true )
 			? $attributes['inlineWidthMode']
 			: $defaults['inlineWidthMode'];
+		$cursor_animation_mode = in_array( $attributes['cursorAnimationMode'], $valid_cursor_animation_modes, true )
+			? $attributes['cursorAnimationMode']
+			: $defaults['cursorAnimationMode'];
 
 		return array(
 			'items'             => $items,
@@ -423,10 +436,12 @@ final class K_Typewriter_Plugin {
 			'textDirection'     => $text_direction,
 			'startFromEmpty'    => (bool) $attributes['startFromEmpty'],
 			'showCursor'        => (bool) $attributes['showCursor'],
+			'cursorAnimationMode' => $cursor_animation_mode,
 			'cursorWidth'       => min( 0.24, max( 0.04, (float) $attributes['cursorWidth'] ) ),
 			'cursorOffsetX'     => min( 0.3, max( -0.3, (float) $attributes['cursorOffsetX'] ) ),
 			'cursorOffsetY'     => min( 0.3, max( -0.3, (float) $attributes['cursorOffsetY'] ) ),
 			'cursorBlinkSpeed'  => min( 2000, max( 200, (int) $attributes['cursorBlinkSpeed'] ) ),
+			'cursorTransitionSpeed' => min( 2000, max( 200, (int) $attributes['cursorTransitionSpeed'] ) ),
 			'hideCursorWhenComplete' => (bool) $attributes['hideCursorWhenComplete'],
 			'startOnView'       => (bool) $attributes['startOnView'],
 			'pauseOnHover'      => (bool) $attributes['pauseOnHover'],

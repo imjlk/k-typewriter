@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-27T15:43:55+00:00\n"
+"POT-Creation-Date: 2026-03-27T15:48:20+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: k-typewriter\n"
@@ -39,23 +39,23 @@ msgstr ""
 msgid "https://github.com/imjlk"
 msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:172
+#: includes/class-k-typewriter-plugin.php:176
 #: build/index.js:1
 msgid "한 글자씩, 리듬 있게."
 msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:173
+#: includes/class-k-typewriter-plugin.php:177
 #: build/index.js:1
 msgid "Animate headlines in any language."
 msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:174
+#: includes/class-k-typewriter-plugin.php:178
 #: build/index.js:1
 msgid "Ship polished hero copy in minutes."
 msgstr ""
 
 #. translators: %s: locale-aware list of animated messages.
-#: includes/class-k-typewriter-plugin.php:211
+#: includes/class-k-typewriter-plugin.php:215
 msgid "Typewriter animation that sequentially types %s."
 msgstr ""
 
@@ -109,6 +109,14 @@ msgstr ""
 
 #: build/index.js:1
 msgid "Measure longest message"
+msgstr ""
+
+#: build/index.js:1
+msgid "Blink"
+msgstr ""
+
+#: build/index.js:1
+msgid "Fade transition"
 msgstr ""
 
 #: build/index.js:1
@@ -336,6 +344,14 @@ msgid "Show cursor"
 msgstr ""
 
 #: build/index.js:1
+msgid "Blink gives a crisp on-off cursor. Fade transition keeps the cursor softer and more fluid."
+msgstr ""
+
+#: build/index.js:1
+msgid "Cursor animation"
+msgstr ""
+
+#: build/index.js:1
 msgid "Adjust the cursor bar thickness relative to the current font size."
 msgstr ""
 
@@ -349,6 +365,14 @@ msgstr ""
 
 #: build/index.js:1
 msgid "Cursor blink speed (ms)"
+msgstr ""
+
+#: build/index.js:1
+msgid "Adjust how quickly the cursor fades in and out."
+msgstr ""
+
+#: build/index.js:1
+msgid "Cursor transition speed (ms)"
 msgstr ""
 
 #: build/index.js:1
