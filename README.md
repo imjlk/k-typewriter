@@ -8,6 +8,8 @@ Multilingual typewriter block plugin for WordPress hero headlines, notices, and 
 
 K Typewriter ships as a dynamic Gutenberg block with server-rendered fallback content, Interactivity API playback, and multilingual typing support.
 
+Typing playback is built on top of [UniTyper](https://github.com/beavercoding2022/uni-typer) by Beaver Coding.
+
 Highlights:
 
 - Dynamic rendering with meaningful first paint text

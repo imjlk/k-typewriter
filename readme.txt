@@ -14,6 +14,9 @@ Animate headlines, notices, and hero copy with a polished typewriter block that 
 
 K Typewriter is a dynamic block for WordPress sites that need expressive text motion without sacrificing accessibility or graceful fallbacks.
 
+Its typing playback is built on top of UniTyper by Beaver Coding:
+https://github.com/beavercoding2022/uni-typer
+
 Use it for:
 
 * Homepage hero copy
