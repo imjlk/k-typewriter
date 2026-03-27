@@ -197,11 +197,13 @@ async function getPublishedPageUrl( page ) {
 }
 
 function buildFrontEndUrl( postId, publishedPageUrl ) {
-	const baseUrl =
-		publishedPageUrl ||
-		process.env.PLAYWRIGHT_BASE_URL ||
-		'http://localhost:8888';
-	const siteUrl = new URL( baseUrl );
+	if ( publishedPageUrl ) {
+		return publishedPageUrl;
+	}
+
+	const siteUrl = new URL(
+		process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:8888'
+	);
 
 	siteUrl.pathname = '/';
 	siteUrl.search = '';
@@ -212,12 +214,12 @@ function buildFrontEndUrl( postId, publishedPageUrl ) {
 
 async function attachDebugArtifacts(
 	testInfo,
-	{ page, viewPageUrl, frontEndPage }
+	{ page, viewPageUrl, frontEndPage, frontEndUrl }
 ) {
 	const attachments = [
 		`editorUrl: ${ page?.url?.() ?? '' }`,
 		`viewPageUrl: ${ viewPageUrl ?? '' }`,
-		`frontEndUrl: ${ frontEndPage?.url?.() ?? '' }`,
+		`frontEndUrl: ${ frontEndUrl ?? frontEndPage?.url?.() ?? '' }`,
 	].join( '\n' );
 
 	await testInfo.attach( 'debug-urls.txt', {
@@ -250,6 +252,7 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 }, testInfo ) => {
 	const title = `K Typewriter Smoke ${ Date.now() }`;
 	let viewPageUrl = '';
+	let frontEndUrl = '';
 	let frontEndPage;
 	let frontEndContext;
 	let reducedMotionContext;
@@ -377,7 +380,7 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 			throw new Error( 'Missing published post ID in editor URL.' );
 		}
 
-		const frontEndUrl = buildFrontEndUrl( postId, viewPageUrl );
+		frontEndUrl = buildFrontEndUrl( postId, viewPageUrl );
 
 		await page.reload( {
 			waitUntil: 'domcontentloaded',
@@ -408,9 +411,8 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 						),
 						hasFirstMessage: html.includes( FIRST_MESSAGE ),
 						hasSeoSummary: html.includes( SEO_SUMMARY ),
-						hasHeadingTag: html.includes(
-							'<h6 class="k-typewriter__text"'
-						),
+						hasHeadingTag:
+							/<h6[^>]*class="k-typewriter__text"/u.test( html ),
 						status: response.status(),
 					};
 				},
@@ -437,7 +439,7 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 		expect( html ).toContain( 'wp-block-imjlk-k-typewriter' );
 		expect( html ).toContain( FIRST_MESSAGE );
 		expect( html ).toContain( SEO_SUMMARY );
-		expect( html ).toContain( '<h6 class="k-typewriter__text"' );
+		expect( html ).toMatch( /<h6[^>]*class="k-typewriter__text"/u );
 
 		frontEndContext = await browser.newContext();
 		frontEndPage = await frontEndContext.newPage();
@@ -510,6 +512,7 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 			page,
 			viewPageUrl,
 			frontEndPage,
+			frontEndUrl,
 		} );
 
 		throw error;
