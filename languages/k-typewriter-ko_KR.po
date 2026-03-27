@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: K Typewriter 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/k-typewriter\n"
-"POT-Creation-Date: 2026-03-27T15:43:55+00:00\n"
+"POT-Creation-Date: 2026-03-27T15:48:20+00:00\n"
 "PO-Revision-Date: 2026-03-27 14:50+0900\n"
 "Last-Translator: imjlk\n"
 "Language-Team: Korean\n"
@@ -45,20 +45,20 @@ msgstr "imjlk"
 msgid "https://github.com/imjlk"
 msgstr "https://github.com/imjlk"
 
-#: includes/class-k-typewriter-plugin.php:172 build/index.js:1
+#: includes/class-k-typewriter-plugin.php:176 build/index.js:1
 msgid "한 글자씩, 리듬 있게."
 msgstr "한 글자씩, 리듬 있게."
 
-#: includes/class-k-typewriter-plugin.php:173 build/index.js:1
+#: includes/class-k-typewriter-plugin.php:177 build/index.js:1
 msgid "Animate headlines in any language."
 msgstr "어떤 언어든 자연스럽게 헤드라인을 애니메이션하세요."
 
-#: includes/class-k-typewriter-plugin.php:174 build/index.js:1
+#: includes/class-k-typewriter-plugin.php:178 build/index.js:1
 msgid "Ship polished hero copy in minutes."
 msgstr "완성도 높은 히어로 카피를 몇 분 만에 배포하세요."
 
 #. translators: %s: locale-aware list of animated messages.
-#: includes/class-k-typewriter-plugin.php:211
+#: includes/class-k-typewriter-plugin.php:215
 msgid "Typewriter animation that sequentially types %s."
 msgstr "%s가 순차적으로 타이핑되는 애니메이션"
 
@@ -386,8 +386,8 @@ msgid ""
 "Blink gives a crisp on-off cursor. Fade transition keeps the cursor softer "
 "and more fluid."
 msgstr ""
-"깜빡임은 분명한 온오프 느낌의 커서를 만듭니다. 페이드 전환은 더 부드럽고 유"
-"연한 움직임을 유지합니다."
+"깜빡임은 분명한 온오프 느낌의 커서를 만듭니다. 페이드 전환은 더 부드럽고 유연"
+"한 움직임을 유지합니다."
 
 #: build/index.js:1
 msgid "Cursor animation"
@@ -400,6 +400,14 @@ msgstr "현재 폰트 크기를 기준으로 커서 막대 두께를 조절합�
 #: build/index.js:1
 msgid "Cursor thickness"
 msgstr "커서 두께"
+
+#: build/index.js:1
+msgid "Adjust the cursor bar height relative to the current font size."
+msgstr "현재 폰트 크기를 기준으로 커서 막대 높이를 조절합니다."
+
+#: build/index.js:1
+msgid "Cursor height"
+msgstr "커서 높이"
 
 #: build/index.js:1
 msgid "Adjust how quickly the cursor blinks."

@@ -144,6 +144,7 @@ export default function Edit( {
 		showCursor,
 		cursorAnimationMode,
 		cursorWidth,
+		cursorHeight,
 		cursorOffsetX,
 		cursorOffsetY,
 		cursorBlinkSpeed,
@@ -632,6 +633,22 @@ export default function Edit( {
 								onChange={ ( value ) =>
 									setAttributes( {
 										cursorWidth: value ?? cursorWidth,
+									} )
+								}
+							/>
+							<RangeControl
+								help={ __(
+									'Adjust the cursor bar height relative to the current font size.',
+									'k-typewriter'
+								) }
+								label={ __( 'Cursor height', 'k-typewriter' ) }
+								max={ 1.2 }
+								min={ 0.6 }
+								step={ 0.01 }
+								value={ cursorHeight }
+								onChange={ ( value ) =>
+									setAttributes( {
+										cursorHeight: value ?? cursorHeight,
 									} )
 								}
 							/>

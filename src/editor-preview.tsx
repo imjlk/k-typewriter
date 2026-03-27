@@ -2,6 +2,7 @@ import type { CSSProperties } from 'react';
 import { useEffect, useMemo, useRef, useState } from '@wordpress/element';
 
 import {
+	DEFAULT_ATTRIBUTES,
 	getApproximateInlineWidthCh,
 	getEffectiveFallbackText,
 	getEffectiveSummaryText,
@@ -47,6 +48,7 @@ export default function EditorPreview( {
 		showCursor,
 		cursorAnimationMode,
 		cursorWidth,
+		cursorHeight,
 		cursorOffsetX,
 		cursorOffsetY,
 		cursorBlinkSpeed,
@@ -98,6 +100,9 @@ export default function EditorPreview( {
 			'--k-typewriter-reserve-lines': String( reserveLines ),
 			'--k-typewriter-vertical-align': justifyContent,
 			'--k-typewriter-cursor-width': `${ cursorWidth }em`,
+			'--k-typewriter-cursor-height-scale': String(
+				cursorHeight / DEFAULT_ATTRIBUTES.cursorHeight
+			),
 			'--k-typewriter-cursor-offset-x': `${ cursorOffsetX }em`,
 			'--k-typewriter-cursor-offset-y': `${ cursorOffsetY }em`,
 			'--k-typewriter-cursor-blink-speed': `${ cursorBlinkSpeed }ms`,
@@ -111,6 +116,7 @@ export default function EditorPreview( {
 	}, [
 		attributes,
 		cursorBlinkSpeed,
+		cursorHeight,
 		cursorOffsetX,
 		cursorOffsetY,
 		cursorTransitionSpeed,

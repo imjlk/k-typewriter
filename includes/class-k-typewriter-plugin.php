@@ -80,13 +80,14 @@ final class K_Typewriter_Plugin {
 			sprintf( '--k-typewriter-reserve-lines:%d', (int) $settings['reserveLines'] ),
 			sprintf( '--k-typewriter-vertical-align:%s', $vertical_align ),
 			sprintf( '--k-typewriter-cursor-width:%.2Fem', (float) $settings['cursorWidth'] ),
+			sprintf( '--k-typewriter-cursor-height-scale:%.3F', (float) $settings['cursorHeight'] / 0.86 ),
 			sprintf( '--k-typewriter-cursor-offset-x:%.2Fem', (float) $settings['cursorOffsetX'] ),
 			sprintf( '--k-typewriter-cursor-offset-y:%.2Fem', (float) $settings['cursorOffsetY'] ),
 			sprintf( '--k-typewriter-cursor-blink-speed:%dms', (int) $settings['cursorBlinkSpeed'] ),
 			sprintf( '--k-typewriter-cursor-transition-speed:%dms', (int) $settings['cursorTransitionSpeed'] ),
 		);
 
-		if ( null !== $inline_width_ch ) {
+		if ( $settings['inlineLayout'] && null !== $inline_width_ch ) {
 			$text_style_parts[] = sprintf( '--k-typewriter-inline-width:%dch', $inline_width_ch );
 			$root_classes[]     = 'has-inline-width';
 		}
@@ -337,8 +338,9 @@ final class K_Typewriter_Plugin {
 			'showCursor'         => true,
 			'cursorAnimationMode' => 'blink',
 			'cursorWidth'        => 0.08,
+			'cursorHeight'       => 0.86,
 			'cursorOffsetX'      => 0,
-			'cursorOffsetY'      => 0.03,
+			'cursorOffsetY'      => 0,
 			'cursorBlinkSpeed'   => 1000,
 			'cursorTransitionSpeed' => 900,
 			'hideCursorWhenComplete' => false,
@@ -461,6 +463,7 @@ final class K_Typewriter_Plugin {
 			'showCursor'        => (bool) $attributes['showCursor'],
 			'cursorAnimationMode' => $cursor_animation_mode,
 			'cursorWidth'       => min( 0.24, max( 0.04, (float) $attributes['cursorWidth'] ) ),
+			'cursorHeight'      => min( 1.2, max( 0.6, (float) $attributes['cursorHeight'] ) ),
 			'cursorOffsetX'     => min( 0.3, max( -0.3, (float) $attributes['cursorOffsetX'] ) ),
 			'cursorOffsetY'     => min( 0.3, max( -0.3, (float) $attributes['cursorOffsetY'] ) ),
 			'cursorBlinkSpeed'  => min( 2000, max( 200, (int) $attributes['cursorBlinkSpeed'] ) ),

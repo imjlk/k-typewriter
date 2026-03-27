@@ -85,13 +85,17 @@
 			"type": "number",
 			"default": 0.08
 		},
+		"cursorHeight": {
+			"type": "number",
+			"default": 0.86
+		},
 		"cursorOffsetX": {
 			"type": "number",
 			"default": 0
 		},
 		"cursorOffsetY": {
 			"type": "number",
-			"default": 0.03
+			"default": 0
 		},
 		"cursorBlinkSpeed": {
 			"type": "number",

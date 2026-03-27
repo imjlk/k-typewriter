@@ -36,8 +36,9 @@ export const DEFAULT_ATTRIBUTES = {
 	showCursor: true,
 	cursorAnimationMode: 'blink',
 	cursorWidth: 0.08,
+	cursorHeight: 0.86,
 	cursorOffsetX: 0,
-	cursorOffsetY: 0.03,
+	cursorOffsetY: 0,
 	cursorBlinkSpeed: 1000,
 	cursorTransitionSpeed: 900,
 	hideCursorWhenComplete: false,
@@ -94,6 +95,7 @@ export type TypewriterAttributes = {
 	showCursor: boolean;
 	cursorAnimationMode: CursorAnimationMode;
 	cursorWidth: number;
+	cursorHeight: number;
 	cursorOffsetX: number;
 	cursorOffsetY: number;
 	cursorBlinkSpeed: number;
@@ -415,6 +417,11 @@ export function normalizeAttributes(
 			attributes.cursorWidth ?? DEFAULT_ATTRIBUTES.cursorWidth,
 			0.04,
 			0.24
+		),
+		cursorHeight: clampNumber(
+			attributes.cursorHeight ?? DEFAULT_ATTRIBUTES.cursorHeight,
+			0.6,
+			1.2
 		),
 		cursorOffsetX: clampNumber(
 			attributes.cursorOffsetX ?? DEFAULT_ATTRIBUTES.cursorOffsetX,

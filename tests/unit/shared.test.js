@@ -73,6 +73,7 @@ describe( 'shared helpers', () => {
 			startFromEmpty: true,
 			cursorAnimationMode: 'transition',
 			cursorWidth: 0.12,
+			cursorHeight: 0.9,
 			cursorOffsetX: 0.03,
 			cursorOffsetY: 0.08,
 			cursorBlinkSpeed: 1600,
@@ -97,6 +98,7 @@ describe( 'shared helpers', () => {
 		expect( normalized.startFromEmpty ).toBe( true );
 		expect( normalized.cursorAnimationMode ).toBe( 'transition' );
 		expect( normalized.cursorWidth ).toBe( 0.12 );
+		expect( normalized.cursorHeight ).toBe( 0.9 );
 		expect( normalized.cursorOffsetX ).toBe( 0.03 );
 		expect( normalized.cursorOffsetY ).toBe( 0.08 );
 		expect( normalized.cursorBlinkSpeed ).toBe( 1600 );
@@ -138,6 +140,7 @@ describe( 'shared helpers', () => {
 		const normalized = normalizeAttributes( {
 			cursorAnimationMode: 'smooth',
 			cursorWidth: 0.5,
+			cursorHeight: 9,
 			cursorOffsetX: -1,
 			cursorOffsetY: -1,
 			cursorBlinkSpeed: 5000,
@@ -146,6 +149,7 @@ describe( 'shared helpers', () => {
 
 		expect( normalized.cursorAnimationMode ).toBe( 'blink' );
 		expect( normalized.cursorWidth ).toBe( 0.24 );
+		expect( normalized.cursorHeight ).toBe( 1.2 );
 		expect( normalized.cursorOffsetX ).toBe( -0.3 );
 		expect( normalized.cursorOffsetY ).toBe( -0.3 );
 		expect( normalized.cursorBlinkSpeed ).toBe( 2000 );

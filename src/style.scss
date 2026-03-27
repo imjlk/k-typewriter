@@ -25,7 +25,7 @@
 	min-block-size: var(--k-typewriter-reserved-height, calc(var(--k-typewriter-reserve-lines, 1) * 1lh));
 }
 
-.wp-block-imjlk-k-typewriter.is-inline-layout .k-typewriter__text {
+.wp-block-imjlk-k-typewriter.is-inline-layout .k-typewriter.has-inline-width .k-typewriter__text {
 	inline-size: var(--k-typewriter-inline-measured-width, var(--k-typewriter-inline-width, auto));
 	max-inline-size: 100%;
 }
@@ -45,17 +45,25 @@
 	line-height: inherit;
 	unicode-bidi: isolate;
 	word-break: break-word;
+	transition: opacity 160ms ease;
+}
+
+.wp-block-imjlk-k-typewriter .k-typewriter.is-hover-paused .k-typewriter__content {
+	opacity: 0.9;
 }
 
 .wp-block-imjlk-k-typewriter .k-typewriter__cursor {
 	display: inline-block;
 	margin-inline-start: 0.04em;
 	inline-size: var(--k-typewriter-cursor-width, 0.08em);
-	block-size: 0.92em;
+	block-size: 0.86em;
 	border-radius: 999px;
 	background: currentcolor;
 	line-height: 1;
-	transform: translate(var(--k-typewriter-cursor-offset-x, 0), var(--k-typewriter-cursor-offset-y, 0.03em));
+	transform:
+		translate(var(--k-typewriter-cursor-offset-x, 0), var(--k-typewriter-cursor-offset-y, 0))
+		scaleY(var(--k-typewriter-cursor-height-scale, 1));
+	transform-origin: center center;
 	unicode-bidi: isolate;
 	vertical-align: middle;
 }
@@ -75,6 +83,14 @@
 		k-typewriter-cursor-fade
 		var(--k-typewriter-cursor-transition-speed, 900ms)
 		ease-in-out infinite alternate;
+}
+
+.wp-block-imjlk-k-typewriter .k-typewriter.is-complete .k-typewriter__cursor {
+	animation: none;
+}
+
+.wp-block-imjlk-k-typewriter .k-typewriter.is-complete .k-typewriter__cursor--transition {
+	opacity: 0.35;
 }
 
 @media (prefers-reduced-motion: reduce) {
