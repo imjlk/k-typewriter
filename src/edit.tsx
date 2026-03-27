@@ -86,6 +86,23 @@ export default function Edit( {
 		getEffectiveFallbackText( normalizedAttributes );
 	const effectiveSummaryText =
 		getEffectiveSummaryText( normalizedAttributes );
+	const fallbackSourceHelp =
+		fallbackMode === 'auto'
+			? __( 'Auto uses the first message.', 'k-typewriter' )
+			: __(
+					'Custom mode lets you keep a different first-paint message.',
+					'k-typewriter'
+			  );
+	const summarySourceHelp =
+		summaryMode === 'auto'
+			? __(
+					'Auto combines every message into a single summary.',
+					'k-typewriter'
+			  )
+			: __(
+					'Custom mode lets you write a shorter or more intentional summary.',
+					'k-typewriter'
+			  );
 
 	useEffect( () => {
 		if ( ! isSelected ) {
@@ -160,11 +177,19 @@ export default function Edit( {
 					initialOpen={ false }
 					title={ __( 'Fallback & Summary', 'k-typewriter' ) }
 				>
+					<div className="k-typewriter-editor__settings-section">
+						<p className="k-typewriter-editor__settings-heading">
+							{ __( 'Visible fallback', 'k-typewriter' ) }
+						</p>
+						<p className="k-typewriter-editor__settings-description">
+							{ __(
+								'Shown before animation starts, with reduced motion, and without JavaScript.',
+								'k-typewriter'
+							) }
+						</p>
+					</div>
 					<SelectControl
-						help={ __(
-							'Choose what visitors see before animation starts, with reduced motion, and without JavaScript.',
-							'k-typewriter'
-						) }
+						help={ fallbackSourceHelp }
 						label={ __(
 							'Visible fallback source',
 							'k-typewriter'
@@ -189,15 +214,31 @@ export default function Edit( {
 							setAttributes( { fallbackText: value } )
 						}
 					/>
-					<p className="k-typewriter-editor__control-note">
-						{ __( 'Effective fallback preview:', 'k-typewriter' ) }{ ' ' }
-						<strong>{ effectiveFallbackText }</strong>
-					</p>
+					<div className="k-typewriter-editor__effective-card">
+						<p className="k-typewriter-editor__effective-label">
+							{ __(
+								'Effective fallback preview:',
+								'k-typewriter'
+							) }
+						</p>
+						<p className="k-typewriter-editor__effective-value">
+							{ effectiveFallbackText }
+						</p>
+					</div>
+					<div className="k-typewriter-editor__settings-divider" />
+					<div className="k-typewriter-editor__settings-section">
+						<p className="k-typewriter-editor__settings-heading">
+							{ __( 'Non-visual summary', 'k-typewriter' ) }
+						</p>
+						<p className="k-typewriter-editor__settings-description">
+							{ __(
+								'Used by assistive technology when you want a fuller summary of every message.',
+								'k-typewriter'
+							) }
+						</p>
+					</div>
 					<SelectControl
-						help={ __(
-							'Choose the non-visual summary used for assistive technology. Auto mode combines every message.',
-							'k-typewriter'
-						) }
+						help={ summarySourceHelp }
 						label={ __( 'Summary source', 'k-typewriter' ) }
 						options={ contentSourceOptions }
 						value={ summaryMode }
@@ -220,13 +261,17 @@ export default function Edit( {
 							setAttributes( { summaryText: value } )
 						}
 					/>
-					<p className="k-typewriter-editor__control-note">
-						{ __(
-							'Effective non-visual summary:',
-							'k-typewriter'
-						) }{ ' ' }
-						<strong>{ effectiveSummaryText }</strong>
-					</p>
+					<div className="k-typewriter-editor__effective-card">
+						<p className="k-typewriter-editor__effective-label">
+							{ __(
+								'Effective non-visual summary:',
+								'k-typewriter'
+							) }
+						</p>
+						<p className="k-typewriter-editor__effective-value">
+							{ effectiveSummaryText }
+						</p>
+					</div>
 				</PanelBody>
 				<PanelBody
 					initialOpen={ true }

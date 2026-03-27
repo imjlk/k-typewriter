@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: K Typewriter 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/k-typewriter\n"
-"POT-Creation-Date: 2026-03-27T09:29:45+00:00\n"
+"POT-Creation-Date: 2026-03-27T12:13:41+00:00\n"
 "PO-Revision-Date: 2026-03-27 14:50+0900\n"
 "Last-Translator: imjlk\n"
 "Language-Team: Korean\n"
@@ -17,14 +17,17 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Plugin Name of the plugin
+#: k-typewriter.php
 msgid "K Typewriter"
 msgstr "K Typewriter"
 
 #. Plugin URI of the plugin
+#: k-typewriter.php
 msgid "https://github.com/imjlk/k-typewriter"
 msgstr "https://github.com/imjlk/k-typewriter"
 
 #. Description of the plugin
+#: k-typewriter.php
 msgid ""
 "Add a configurable typewriter text block for hero headlines, notices, and "
 "multilingual messaging."
@@ -33,10 +36,12 @@ msgstr ""
 "스트 블록을 추가합니다."
 
 #. Author of the plugin
+#: k-typewriter.php
 msgid "imjlk"
 msgstr "imjlk"
 
 #. Author URI of the plugin
+#: k-typewriter.php
 msgid "https://github.com/imjlk"
 msgstr "https://github.com/imjlk"
 
@@ -77,6 +82,22 @@ msgid "Custom override"
 msgstr "사용자 지정 덮어쓰기"
 
 #: build/index.js:1
+msgid "Auto uses the first message."
+msgstr "자동 모드는 첫 번째 메시지를 사용합니다."
+
+#: build/index.js:1
+msgid "Custom mode lets you keep a different first-paint message."
+msgstr "사용자 지정 모드에서는 처음 표시할 메시지를 별도로 유지할 수 있습니다."
+
+#: build/index.js:1
+msgid "Auto combines every message into a single summary."
+msgstr "자동 모드는 모든 메시지를 하나의 요약으로 합칩니다."
+
+#: build/index.js:1
+msgid "Custom mode lets you write a shorter or more intentional summary."
+msgstr "사용자 지정 모드에서는 더 짧거나 의도적인 요약을 직접 작성할 수 있습니다."
+
+#: build/index.js:1
 msgid "Pause preview"
 msgstr "미리보기 일시정지"
 
@@ -113,12 +134,14 @@ msgid "Fallback & Summary"
 msgstr "폴백 및 요약"
 
 #: build/index.js:1
+msgid "Visible fallback"
+msgstr "표시용 폴백"
+
+#: build/index.js:1
 msgid ""
-"Choose what visitors see before animation starts, with reduced motion, and "
-"without JavaScript."
+"Shown before animation starts, with reduced motion, and without JavaScript."
 msgstr ""
-"애니메이션이 시작되기 전, 동작 축소 모드, JavaScript 미사용 환경에서 방문자에"
-"게 보일 내용을 선택하세요."
+"애니메이션 시작 전, 동작 축소 모드, JavaScript 미사용 환경에서 표시됩니다."
 
 #: build/index.js:1
 msgid "Visible fallback source"
@@ -137,12 +160,13 @@ msgid "Effective fallback preview:"
 msgstr "실제 적용될 폴백 미리보기:"
 
 #: build/index.js:1
+msgid "Non-visual summary"
+msgstr "비시각 요약"
+
+#: build/index.js:1
 msgid ""
-"Choose the non-visual summary used for assistive technology. Auto mode "
-"combines every message."
-msgstr ""
-"보조 기술에 사용되는 비시각 요약을 선택하세요. 자동 모드는 모든 메시지를 함께 "
-"요약합니다."
+"Used by assistive technology when you want a fuller summary of every message."
+msgstr "모든 메시지를 더 충분하게 전달하고 싶을 때 보조 기술에 사용됩니다."
 
 #: build/index.js:1
 msgid "Summary source"
@@ -228,6 +252,13 @@ msgstr "헤드라인"
 msgctxt "block keyword"
 msgid "hero"
 msgstr "히어로"
+
+#~ msgid ""
+#~ "Choose the non-visual summary used for assistive technology. Auto mode "
+#~ "combines every message."
+#~ msgstr ""
+#~ "보조 기술에 사용되는 비시각 요약을 선택하세요. 자동 모드는 모든 메시지를 "
+#~ "함께 요약합니다."
 
 #~ msgid "Use custom fallback"
 #~ msgstr "커스텀 폴백 사용"

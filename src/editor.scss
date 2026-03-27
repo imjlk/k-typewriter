@@ -26,14 +26,56 @@
 	opacity: 1;
 }
 
-.k-typewriter-editor__control-note {
-	margin: 0 0 1rem;
-	color: #50575e;
-	font-size: 12px;
-	line-height: 1.45;
+.k-typewriter-editor__settings-section {
+	margin-bottom: 12px;
 }
 
-.k-typewriter-editor__control-note strong {
+.k-typewriter-editor__settings-heading {
+	margin: 0 0 4px;
 	color: #1e1e1e;
+	font-size: 12px;
 	font-weight: 600;
+	line-height: 1.4;
+	letter-spacing: 0.01em;
+	text-transform: uppercase;
+}
+
+.k-typewriter-editor__settings-description {
+	margin: 0 0 4px;
+	color: #50575e;
+	font-size: 12px;
+	line-height: 1.5;
+}
+
+.k-typewriter-editor__settings-divider {
+	height: 1px;
+	margin: 14px 0;
+	background: #ddd;
+}
+
+.k-typewriter-editor__effective-card {
+	margin: 0 0 12px;
+	padding: 10px 12px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	background: #f6f7f7;
+}
+
+.k-typewriter-editor__effective-label {
+	margin: 0 0 4px;
+	color: #50575e;
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 1.4;
+	letter-spacing: 0.01em;
+	text-transform: uppercase;
+}
+
+.k-typewriter-editor__effective-value {
+	margin: 0;
+	color: #1e1e1e;
+	font-size: 13px;
+	font-weight: 500;
+	line-height: 1.45;
+	word-break: break-word;
 }

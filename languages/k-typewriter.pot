@@ -9,28 +9,33 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-27T09:29:45+00:00\n"
+"POT-Creation-Date: 2026-03-27T12:13:41+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.9.0\n"
+"X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: k-typewriter\n"
 
 #. Plugin Name of the plugin
+#: k-typewriter.php
 msgid "K Typewriter"
 msgstr ""
 
 #. Plugin URI of the plugin
+#: k-typewriter.php
 msgid "https://github.com/imjlk/k-typewriter"
 msgstr ""
 
 #. Description of the plugin
+#: k-typewriter.php
 msgid "Add a configurable typewriter text block for hero headlines, notices, and multilingual messaging."
 msgstr ""
 
 #. Author of the plugin
+#: k-typewriter.php
 msgid "imjlk"
 msgstr ""
 
 #. Author URI of the plugin
+#: k-typewriter.php
 msgid "https://github.com/imjlk"
 msgstr ""
 
@@ -74,6 +79,22 @@ msgid "Custom override"
 msgstr ""
 
 #: build/index.js:1
+msgid "Auto uses the first message."
+msgstr ""
+
+#: build/index.js:1
+msgid "Custom mode lets you keep a different first-paint message."
+msgstr ""
+
+#: build/index.js:1
+msgid "Auto combines every message into a single summary."
+msgstr ""
+
+#: build/index.js:1
+msgid "Custom mode lets you write a shorter or more intentional summary."
+msgstr ""
+
+#: build/index.js:1
 msgid "Pause preview"
 msgstr ""
 
@@ -106,7 +127,11 @@ msgid "Fallback & Summary"
 msgstr ""
 
 #: build/index.js:1
-msgid "Choose what visitors see before animation starts, with reduced motion, and without JavaScript."
+msgid "Visible fallback"
+msgstr ""
+
+#: build/index.js:1
+msgid "Shown before animation starts, with reduced motion, and without JavaScript."
 msgstr ""
 
 #: build/index.js:1
@@ -126,7 +151,11 @@ msgid "Effective fallback preview:"
 msgstr ""
 
 #: build/index.js:1
-msgid "Choose the non-visual summary used for assistive technology. Auto mode combines every message."
+msgid "Non-visual summary"
+msgstr ""
+
+#: build/index.js:1
+msgid "Used by assistive technology when you want a fuller summary of every message."
 msgstr ""
 
 #: build/index.js:1
