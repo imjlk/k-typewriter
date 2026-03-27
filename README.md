@@ -1,6 +1,33 @@
 # K Typewriter
 
-WordPress block plugin for multilingual typewriter headlines, hero copy, and announcements.
+Multilingual typewriter block plugin for WordPress hero headlines, notices, and announcement copy.
+
+[한국어 문서](./readme-ko_KR.md) · [WordPress.org readme](./readme.txt) · [Release checklist](./docs/release-checklist.md)
+
+## Overview
+
+K Typewriter ships as a dynamic Gutenberg block with server-rendered fallback content, Interactivity API playback, and multilingual typing support.
+
+Highlights:
+
+- Dynamic rendering with meaningful first paint text
+- First-message no-JS fallback, plus optional custom fallback override
+- Optional non-visual summary text for assistive technology
+- Hangul-aware typing playback
+- Start delay controls for first start, every cycle, or every re-entry
+- Semantic tag selection from `p`, `div`, `span`, `h1`-`h6`, `strong`, `em`, `small`, and `mark`
+- Support for theme typography, spacing, and color tools
+
+## Playground Preview
+
+WordPress.org preview support is configured through [`.wordpress-org/blueprints/blueprint.json`](./.wordpress-org/blueprints/blueprint.json). After the first WordPress.org deploy, maintainers can enable the public preview button from the plugin's Advanced view.
+
+For direct GitHub-based previews, use [`.wordpress-org/blueprints/github-playground.json`](./.wordpress-org/blueprints/github-playground.json).
+
+- Raw blueprint:
+  [github-playground.json](https://raw.githubusercontent.com/imjlk/k-typewriter/main/.wordpress-org/blueprints/github-playground.json)
+- Open in Playground:
+  [WordPress Playground](https://playground.wordpress.net/?blueprint-url=https%3A%2F%2Fraw.githubusercontent.com%2Fimjlk%2Fk-typewriter%2Fmain%2F.wordpress-org%2Fblueprints%2Fgithub-playground.json)
 
 ## Local Development
 
@@ -12,7 +39,7 @@ pnpm run env:start
 
 The default local site is `http://localhost:8888`.
 
-If the port is already in use, override it for that shell session:
+If the port is already in use:
 
 ```bash
 WP_ENV_PORT=8898 pnpm run env:start
@@ -32,22 +59,28 @@ php -l k-typewriter.php
 php -l includes/class-k-typewriter-plugin.php
 ```
 
+Notes:
+
+- `test:unit` covers the typing engine and shared attribute helpers.
+- `test:smoke` exercises the editor and front-end flow, but it still depends on the exact Gutenberg UI shape of the local WordPress instance.
+
+## Localization
+
+The plugin keeps translation assets in [`languages/`](./languages).
+
+- Template: `k-typewriter.pot`
+- Bundled Korean translations: `k-typewriter-ko_KR.po`, `k-typewriter-ko_KR.mo`
+- Bundled block editor JSON translations for Korean are committed for direct installs and zip builds
+
+For WordPress.org, approved translations from `translate.wordpress.org` will eventually be delivered as language packs and may take precedence over bundled translations.
+
 ## Release Flow
 
-1. Run the local quality gates.
-2. Confirm the WordPress.org assets in `.wordpress-org/` are up to date.
+1. Run the quality gates.
+2. Confirm `.wordpress-org/` assets and blueprints are up to date.
 3. Regenerate the translation template with `pnpm run make:pot`.
-4. Tag the release with `v*`.
-5. Let GitHub Actions build the release zip, run smoke checks, upload the tested zip artifact, and attach that same zip to the GitHub release.
-6. Enable WordPress.org deploy only after the plugin slug exists by setting the `WPORG_DEPLOY_ENABLED` repository variable to `true` and adding `SVN_USERNAME` / `SVN_PASSWORD` secrets.
-7. After the first deploy, open the plugin's WordPress.org Advanced view and switch the Playground preview to `public` if you want visitors to see the one-click preview button.
-
-## Manual Verification
-
-See [docs/release-checklist.md](./docs/release-checklist.md).
-
-## Playground Preview
-
-WordPress.org Playground preview support is configured through `.wordpress-org/blueprints/blueprint.json`. The deploy workflow syncs `.wordpress-org/` into the WordPress.org assets directory, so this file is published as `assets/blueprints/blueprint.json`. The blueprint activates `K Typewriter`, creates a published demo page, and makes that page the site's front page so the preview button opens directly to a working hero example with semantic headings, static fallback text, and multilingual animation copy.
-
-For direct GitHub-based previews, use `.wordpress-org/blueprints/github-playground.json`. That blueprint installs the plugin from the GitHub repository with Playground's `git:directory` resource, activates it, creates the same demo page, and opens the site on the published front page.
+4. Regenerate language assets if translations changed.
+5. Tag the release with `v*`.
+6. Let GitHub Actions build the tested zip and attach it to the GitHub release.
+7. Enable WordPress.org deployment only after the plugin slug exists by setting `WPORG_DEPLOY_ENABLED=true` and adding `SVN_USERNAME` / `SVN_PASSWORD`.
+8. After the first deploy, enable the public Playground preview from the WordPress.org Advanced view if desired.
