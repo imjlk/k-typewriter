@@ -38,10 +38,15 @@ export default function EditorPreview( {
 		loop,
 		reserveLines,
 		verticalAlign,
+		textDirection,
 		startFromEmpty,
 		showCursor,
 		cursorWidth,
 		cursorOffsetY,
+		cursorBlinkSpeed,
+		hideCursorWhilePaused,
+		hideCursorWhenComplete,
+		pauseOnHover,
 		tagName,
 	} = attributes;
 	const TagName = tagName;
@@ -68,6 +73,7 @@ export default function EditorPreview( {
 		[ stableItems, visibleFallbackText ]
 	);
 	const [ frame, setFrame ] = useState< TypewriterFrame >( fallbackFrame );
+	const [ isHovered, setIsHovered ] = useState( false );
 	const timeoutRef = useRef< number | null >( null );
 	const previousIsSelectedRef = useRef( isSelected );
 	const previousIsPreviewPlayingRef = useRef( false );
@@ -86,9 +92,30 @@ export default function EditorPreview( {
 			'--k-typewriter-vertical-align': justifyContent,
 			'--k-typewriter-cursor-width': `${ cursorWidth }em`,
 			'--k-typewriter-cursor-offset-y': `${ cursorOffsetY }em`,
+			'--k-typewriter-cursor-blink-speed': `${ cursorBlinkSpeed }ms`,
 		} as CSSProperties;
-	}, [ cursorOffsetY, cursorWidth, reserveLines, verticalAlign ] );
-	const isPreviewPlaying = isSelected && ! isPreviewPaused;
+	}, [
+		cursorBlinkSpeed,
+		cursorOffsetY,
+		cursorWidth,
+		reserveLines,
+		verticalAlign,
+	] );
+	const isPreviewPlaying =
+		isSelected && ! isPreviewPaused && ( ! pauseOnHover || ! isHovered );
+	const isPreviewComplete = isAnimationComplete( frame, {
+		items: stableItems,
+		fallbackText: visibleFallbackText,
+		loop,
+		transitionMode,
+		startFromEmpty,
+		startDelay,
+		startDelayMode,
+	} );
+	const isCursorVisible =
+		showCursor &&
+		( ! hideCursorWhilePaused || isPreviewPlaying ) &&
+		( ! hideCursorWhenComplete || ! isPreviewComplete );
 	let previewState = 'idle';
 
 	if ( isPreviewPlaying ) {
@@ -209,6 +236,8 @@ export default function EditorPreview( {
 		<div
 			className="k-typewriter k-typewriter-editor"
 			data-preview-state={ previewState }
+			onMouseEnter={ () => setIsHovered( true ) }
+			onMouseLeave={ () => setIsHovered( false ) }
 		>
 			<TagName
 				aria-label={
@@ -217,6 +246,7 @@ export default function EditorPreview( {
 						: undefined
 				}
 				className="k-typewriter__text k-typewriter-editor__preview"
+				dir={ textDirection === 'auto' ? undefined : textDirection }
 				ref={ textRef }
 				style={ previewStyle }
 			>
@@ -224,7 +254,7 @@ export default function EditorPreview( {
 					<span className="k-typewriter__content">
 						{ frame.displayText }
 					</span>
-					{ showCursor && (
+					{ isCursorVisible && (
 						<span
 							aria-hidden="true"
 							className="k-typewriter__cursor k-typewriter-editor__cursor"

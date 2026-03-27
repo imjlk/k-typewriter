@@ -26,7 +26,9 @@ import {
 	normalizeAttributes,
 	START_DELAY_MODES,
 	type ContentSourceMode,
+	type TextDirection,
 	type TypewriterAttributes,
+	TEXT_DIRECTIONS,
 	TRANSITION_MODES,
 	VALID_TAG_NAMES,
 	VERTICAL_ALIGNMENTS,
@@ -69,6 +71,17 @@ const verticalAlignmentOptions = VERTICAL_ALIGNMENTS.map( ( value ) => ( {
 	value,
 } ) );
 
+const textDirectionLabels = {
+	auto: __( 'Auto', 'k-typewriter' ),
+	ltr: __( 'Left to right', 'k-typewriter' ),
+	rtl: __( 'Right to left', 'k-typewriter' ),
+} as const;
+
+const textDirectionOptions = TEXT_DIRECTIONS.map( ( value ) => ( {
+	label: textDirectionLabels[ value ],
+	value,
+} ) );
+
 const contentSourceOptions = [
 	{
 		label: __( 'Auto-generated', 'k-typewriter' ),
@@ -85,7 +98,6 @@ export default function Edit( {
 	isSelected,
 	setAttributes,
 }: BlockEditProps< TypewriterAttributes > ) {
-	const blockProps = useBlockProps();
 	const normalizedAttributes = normalizeAttributes( attributes );
 	const [ isPreviewPaused, setIsPreviewPaused ] = useState( false );
 	const {
@@ -99,17 +111,26 @@ export default function Edit( {
 		loop,
 		reserveLines,
 		verticalAlign,
+		inlineLayout,
+		textDirection,
 		startFromEmpty,
 		showCursor,
 		cursorWidth,
 		cursorOffsetY,
+		cursorBlinkSpeed,
+		hideCursorWhilePaused,
+		hideCursorWhenComplete,
 		startOnView,
+		pauseOnHover,
 		fallbackMode,
 		fallbackText,
 		summaryMode,
 		summaryText,
 		tagName,
 	} = normalizedAttributes;
+	const blockProps = useBlockProps( {
+		className: inlineLayout ? 'is-inline-layout' : undefined,
+	} );
 	const isPreviewPlaying = isSelected && ! isPreviewPaused;
 	const effectiveFallbackText =
 		getEffectiveFallbackText( normalizedAttributes );
@@ -184,6 +205,31 @@ export default function Edit( {
 									.map( ( item ) => item.trim() )
 									.filter( Boolean ),
 							} )
+						}
+					/>
+					<SelectControl
+						help={ __(
+							'Auto follows the current site or page direction. Choose LTR or RTL only when you want to override it.',
+							'k-typewriter'
+						) }
+						label={ __( 'Text direction', 'k-typewriter' ) }
+						options={ textDirectionOptions }
+						value={ textDirection }
+						onChange={ ( value ) =>
+							setAttributes( {
+								textDirection: value as TextDirection,
+							} )
+						}
+					/>
+					<ToggleControl
+						help={ __(
+							'Shrink the block to its content so it fits more naturally inside groups and flex layouts.',
+							'k-typewriter'
+						) }
+						label={ __( 'Inline layout', 'k-typewriter' ) }
+						checked={ inlineLayout }
+						onChange={ ( value ) =>
+							setAttributes( { inlineLayout: value } )
 						}
 					/>
 					<SelectControl
@@ -437,6 +483,10 @@ export default function Edit( {
 						}
 					/>
 					<ToggleControl
+						help={ __(
+							'Turn this off to stop on the final message instead of looping back to the beginning.',
+							'k-typewriter'
+						) }
 						label={ __( 'Loop messages', 'k-typewriter' ) }
 						checked={ loop }
 						onChange={ ( value ) =>
@@ -448,6 +498,17 @@ export default function Edit( {
 						checked={ startOnView }
 						onChange={ ( value ) =>
 							setAttributes( { startOnView: value } )
+						}
+					/>
+					<ToggleControl
+						help={ __(
+							'Pause the animation while the pointer is over the block.',
+							'k-typewriter'
+						) }
+						label={ __( 'Pause on hover', 'k-typewriter' ) }
+						checked={ pauseOnHover }
+						onChange={ ( value ) =>
+							setAttributes( { pauseOnHover: value } )
 						}
 					/>
 				</PanelBody>
@@ -485,6 +546,26 @@ export default function Edit( {
 							/>
 							<RangeControl
 								help={ __(
+									'Adjust how quickly the cursor blinks.',
+									'k-typewriter'
+								) }
+								label={ __(
+									'Cursor blink speed (ms)',
+									'k-typewriter'
+								) }
+								max={ 2000 }
+								min={ 200 }
+								step={ 100 }
+								value={ cursorBlinkSpeed }
+								onChange={ ( value ) =>
+									setAttributes( {
+										cursorBlinkSpeed:
+											value ?? cursorBlinkSpeed,
+									} )
+								}
+							/>
+							<RangeControl
+								help={ __(
 									'Move the cursor slightly up or down to match your font better.',
 									'k-typewriter'
 								) }
@@ -499,6 +580,30 @@ export default function Edit( {
 								onChange={ ( value ) =>
 									setAttributes( {
 										cursorOffsetY: value ?? cursorOffsetY,
+									} )
+								}
+							/>
+							<ToggleControl
+								label={ __(
+									'Hide cursor while paused',
+									'k-typewriter'
+								) }
+								checked={ hideCursorWhilePaused }
+								onChange={ ( value ) =>
+									setAttributes( {
+										hideCursorWhilePaused: value,
+									} )
+								}
+							/>
+							<ToggleControl
+								label={ __(
+									'Hide cursor when complete',
+									'k-typewriter'
+								) }
+								checked={ hideCursorWhenComplete }
+								onChange={ ( value ) =>
+									setAttributes( {
+										hideCursorWhenComplete: value,
 									} )
 								}
 							/>

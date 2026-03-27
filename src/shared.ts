@@ -13,6 +13,7 @@ export const START_DELAY_MODES = [
 export const CONTENT_SOURCE_MODES = [ 'auto', 'custom' ] as const;
 export const TRANSITION_MODES = [ 'backspace', 'restart' ] as const;
 export const VERTICAL_ALIGNMENTS = [ 'top', 'middle', 'bottom' ] as const;
+export const TEXT_DIRECTIONS = [ 'auto', 'ltr', 'rtl' ] as const;
 
 export const DEFAULT_ATTRIBUTES = {
 	items: DEFAULT_ITEMS,
@@ -25,11 +26,17 @@ export const DEFAULT_ATTRIBUTES = {
 	loop: true,
 	reserveLines: 1,
 	verticalAlign: 'top',
+	inlineLayout: false,
+	textDirection: 'auto',
 	startFromEmpty: false,
 	showCursor: true,
 	cursorWidth: 0.08,
 	cursorOffsetY: 0,
+	cursorBlinkSpeed: 1000,
+	hideCursorWhilePaused: false,
+	hideCursorWhenComplete: false,
 	startOnView: true,
+	pauseOnHover: false,
 	fallbackMode: 'auto',
 	fallbackText: '',
 	summaryMode: 'auto',
@@ -58,6 +65,7 @@ export type StartDelayMode = ( typeof START_DELAY_MODES )[ number ];
 export type ContentSourceMode = ( typeof CONTENT_SOURCE_MODES )[ number ];
 export type TransitionMode = ( typeof TRANSITION_MODES )[ number ];
 export type VerticalAlignment = ( typeof VERTICAL_ALIGNMENTS )[ number ];
+export type TextDirection = ( typeof TEXT_DIRECTIONS )[ number ];
 
 export type TypewriterAttributes = {
 	items: string[];
@@ -70,11 +78,17 @@ export type TypewriterAttributes = {
 	loop: boolean;
 	reserveLines: number;
 	verticalAlign: VerticalAlignment;
+	inlineLayout: boolean;
+	textDirection: TextDirection;
 	startFromEmpty: boolean;
 	showCursor: boolean;
 	cursorWidth: number;
 	cursorOffsetY: number;
+	cursorBlinkSpeed: number;
+	hideCursorWhilePaused: boolean;
+	hideCursorWhenComplete: boolean;
 	startOnView: boolean;
+	pauseOnHover: boolean;
 	fallbackMode: ContentSourceMode;
 	fallbackText: string;
 	summaryMode: ContentSourceMode;
@@ -140,6 +154,18 @@ export function coerceVerticalAlignment( value: unknown ): VerticalAlignment {
 	}
 
 	return DEFAULT_ATTRIBUTES.verticalAlign;
+}
+
+export function coerceTextDirection( value: unknown ): TextDirection {
+	if ( typeof value === 'string' ) {
+		const candidate = value.toLowerCase() as TextDirection;
+
+		if ( TEXT_DIRECTIONS.includes( candidate ) ) {
+			return candidate;
+		}
+	}
+
+	return DEFAULT_ATTRIBUTES.textDirection;
 }
 
 export function coerceContentSourceMode(
@@ -291,6 +317,11 @@ export function normalizeAttributes(
 			6
 		),
 		verticalAlign: coerceVerticalAlignment( attributes.verticalAlign ),
+		inlineLayout:
+			typeof attributes.inlineLayout === 'boolean'
+				? attributes.inlineLayout
+				: DEFAULT_ATTRIBUTES.inlineLayout,
+		textDirection: coerceTextDirection( attributes.textDirection ),
 		startFromEmpty:
 			typeof attributes.startFromEmpty === 'boolean'
 				? attributes.startFromEmpty
@@ -309,10 +340,27 @@ export function normalizeAttributes(
 			-0.3,
 			0.3
 		),
+		cursorBlinkSpeed: clampNumber(
+			attributes.cursorBlinkSpeed ?? DEFAULT_ATTRIBUTES.cursorBlinkSpeed,
+			200,
+			2000
+		),
+		hideCursorWhilePaused:
+			typeof attributes.hideCursorWhilePaused === 'boolean'
+				? attributes.hideCursorWhilePaused
+				: DEFAULT_ATTRIBUTES.hideCursorWhilePaused,
+		hideCursorWhenComplete:
+			typeof attributes.hideCursorWhenComplete === 'boolean'
+				? attributes.hideCursorWhenComplete
+				: DEFAULT_ATTRIBUTES.hideCursorWhenComplete,
 		startOnView:
 			typeof attributes.startOnView === 'boolean'
 				? attributes.startOnView
 				: DEFAULT_ATTRIBUTES.startOnView,
+		pauseOnHover:
+			typeof attributes.pauseOnHover === 'boolean'
+				? attributes.pauseOnHover
+				: DEFAULT_ATTRIBUTES.pauseOnHover,
 		fallbackMode,
 		fallbackText,
 		summaryMode,

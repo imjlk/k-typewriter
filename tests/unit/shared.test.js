@@ -64,9 +64,14 @@ describe( 'shared helpers', () => {
 			startDelayMode: 'every-reentry',
 			reserveLines: 3,
 			verticalAlign: 'bottom',
+			inlineLayout: true,
+			textDirection: 'rtl',
 			startFromEmpty: true,
 			cursorWidth: 0.12,
 			cursorOffsetY: 0.08,
+			cursorBlinkSpeed: 1600,
+			hideCursorWhilePaused: true,
+			hideCursorWhenComplete: true,
 			fallbackMode: 'custom',
 			fallbackText: 'Static fallback',
 			summaryMode: 'custom',
@@ -79,9 +84,14 @@ describe( 'shared helpers', () => {
 		expect( normalized.startDelayMode ).toBe( 'every-reentry' );
 		expect( normalized.reserveLines ).toBe( 3 );
 		expect( normalized.verticalAlign ).toBe( 'bottom' );
+		expect( normalized.inlineLayout ).toBe( true );
+		expect( normalized.textDirection ).toBe( 'rtl' );
 		expect( normalized.startFromEmpty ).toBe( true );
 		expect( normalized.cursorWidth ).toBe( 0.12 );
 		expect( normalized.cursorOffsetY ).toBe( 0.08 );
+		expect( normalized.cursorBlinkSpeed ).toBe( 1600 );
+		expect( normalized.hideCursorWhilePaused ).toBe( true );
+		expect( normalized.hideCursorWhenComplete ).toBe( true );
 		expect( normalized.fallbackMode ).toBe( 'custom' );
 		expect( normalized.fallbackText ).toBe( 'Static fallback' );
 		expect( normalized.summaryMode ).toBe( 'custom' );
@@ -118,9 +128,19 @@ describe( 'shared helpers', () => {
 		const normalized = normalizeAttributes( {
 			cursorWidth: 0.5,
 			cursorOffsetY: -1,
+			cursorBlinkSpeed: 5000,
 		} );
 
 		expect( normalized.cursorWidth ).toBe( 0.24 );
 		expect( normalized.cursorOffsetY ).toBe( -0.3 );
+		expect( normalized.cursorBlinkSpeed ).toBe( 2000 );
+	} );
+
+	test( 'falls back to auto text direction for unsupported values', () => {
+		expect(
+			normalizeAttributes( {
+				textDirection: 'sideways',
+			} ).textDirection
+		).toBe( 'auto' );
 	} );
 } );

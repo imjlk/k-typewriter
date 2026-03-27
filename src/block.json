@@ -53,6 +53,14 @@
 			"type": "string",
 			"default": "top"
 		},
+		"inlineLayout": {
+			"type": "boolean",
+			"default": false
+		},
+		"textDirection": {
+			"type": "string",
+			"default": "auto"
+		},
 		"startFromEmpty": {
 			"type": "boolean",
 			"default": false
@@ -69,9 +77,25 @@
 			"type": "number",
 			"default": 0
 		},
+		"cursorBlinkSpeed": {
+			"type": "number",
+			"default": 1000
+		},
+		"hideCursorWhilePaused": {
+			"type": "boolean",
+			"default": false
+		},
+		"hideCursorWhenComplete": {
+			"type": "boolean",
+			"default": false
+		},
 		"startOnView": {
 			"type": "boolean",
 			"default": true
+		},
+		"pauseOnHover": {
+			"type": "boolean",
+			"default": false
 		},
 		"fallbackMode": {
 			"type": "string",
@@ -102,6 +126,7 @@
 			],
 			"reserveLines": 2,
 			"verticalAlign": "middle",
+			"textDirection": "auto",
 			"startDelay": 250,
 			"startDelayMode": "first-start",
 			"tagName": "h2"

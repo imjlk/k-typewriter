@@ -62,6 +62,7 @@ final class K_Typewriter_Plugin {
 		$visible_fallback = self::get_visible_fallback_text( $settings );
 		$seo_summary      = self::get_effective_seo_summary( $settings );
 		$tag_name         = $settings['tagName'];
+		$text_direction   = 'auto' !== $settings['textDirection'] ? $settings['textDirection'] : '';
 		$vertical_align   = 'flex-start';
 
 		if ( 'middle' === $settings['verticalAlign'] ) {
@@ -71,15 +72,16 @@ final class K_Typewriter_Plugin {
 		}
 
 		$text_style       = sprintf(
-			'--k-typewriter-reserve-lines:%1$d;--k-typewriter-vertical-align:%2$s;--k-typewriter-cursor-width:%3$.2Fem;--k-typewriter-cursor-offset-y:%4$.2Fem;',
+			'--k-typewriter-reserve-lines:%1$d;--k-typewriter-vertical-align:%2$s;--k-typewriter-cursor-width:%3$.2Fem;--k-typewriter-cursor-offset-y:%4$.2Fem;--k-typewriter-cursor-blink-speed:%5$dms;',
 			(int) $settings['reserveLines'],
 			$vertical_align,
 			(float) $settings['cursorWidth'],
-			(float) $settings['cursorOffsetY']
+			(float) $settings['cursorOffsetY'],
+			(int) $settings['cursorBlinkSpeed']
 		);
 		$wrapper          = get_block_wrapper_attributes(
 			array(
-				'class' => 'k-typewriter-block',
+				'class' => $settings['inlineLayout'] ? 'k-typewriter-block is-inline-layout' : 'k-typewriter-block',
 			)
 		);
 		$context          = wp_json_encode(
@@ -96,7 +98,11 @@ final class K_Typewriter_Plugin {
 				'transitionMode'      => $settings['transitionMode'],
 				'startFromEmpty'      => $settings['startFromEmpty'],
 				'showCursor'          => $settings['showCursor'],
+				'cursorVisible'       => $settings['showCursor'],
+				'hideCursorWhilePaused' => $settings['hideCursorWhilePaused'],
+				'hideCursorWhenComplete' => $settings['hideCursorWhenComplete'],
 				'startOnView'         => $settings['startOnView'],
+				'pauseOnHover'        => $settings['pauseOnHover'],
 				'typeDelay'           => $settings['typeDelay'],
 				'deleteDelay'         => $settings['deleteDelay'],
 				'pauseDelay'          => $settings['pauseDelay'],
@@ -122,6 +128,9 @@ final class K_Typewriter_Plugin {
 			>
 				<<?php echo esc_html( $tag_name ); ?>
 					class="k-typewriter__text"
+					<?php if ( $text_direction ) : ?>
+						dir="<?php echo esc_attr( $text_direction ); ?>"
+					<?php endif; ?>
 					style="<?php echo esc_attr( $text_style ); ?>"
 					<?php if ( $seo_summary && $seo_summary !== $visible_fallback ) : ?>
 						aria-label="<?php echo esc_attr( $seo_summary ); ?>"
@@ -134,7 +143,7 @@ final class K_Typewriter_Plugin {
 						<span
 							aria-hidden="true"
 							class="k-typewriter__cursor"
-							data-wp-bind--hidden="!context.showCursor"
+							data-wp-bind--hidden="!context.cursorVisible"
 						></span>
 					</span>
 				</<?php echo esc_html( $tag_name ); ?>>
@@ -247,11 +256,17 @@ final class K_Typewriter_Plugin {
 			'loop'               => true,
 			'reserveLines'       => 1,
 			'verticalAlign'      => 'top',
+			'inlineLayout'       => false,
+			'textDirection'      => 'auto',
 			'startFromEmpty'     => false,
 			'showCursor'         => true,
 			'cursorWidth'        => 0.08,
 			'cursorOffsetY'      => 0,
+			'cursorBlinkSpeed'   => 1000,
+			'hideCursorWhilePaused' => false,
+			'hideCursorWhenComplete' => false,
 			'startOnView'        => true,
+			'pauseOnHover'       => false,
 			'fallbackMode'       => 'auto',
 			'fallbackText'       => '',
 			'summaryMode'        => 'auto',
@@ -304,6 +319,11 @@ final class K_Typewriter_Plugin {
 			'middle',
 			'bottom',
 		);
+		$valid_text_directions = array(
+			'auto',
+			'ltr',
+			'rtl',
+		);
 		$valid_content_modes = array(
 			'auto',
 			'custom',
@@ -326,6 +346,9 @@ final class K_Typewriter_Plugin {
 		$vertical_align    = in_array( $attributes['verticalAlign'], $valid_vertical_alignments, true )
 			? $attributes['verticalAlign']
 			: $defaults['verticalAlign'];
+		$text_direction    = in_array( $attributes['textDirection'], $valid_text_directions, true )
+			? $attributes['textDirection']
+			: $defaults['textDirection'];
 
 		return array(
 			'items'             => $items,
@@ -338,11 +361,17 @@ final class K_Typewriter_Plugin {
 			'loop'              => (bool) $attributes['loop'],
 			'reserveLines'      => min( 6, max( 1, (int) $attributes['reserveLines'] ) ),
 			'verticalAlign'     => $vertical_align,
+			'inlineLayout'      => (bool) $attributes['inlineLayout'],
+			'textDirection'     => $text_direction,
 			'startFromEmpty'    => (bool) $attributes['startFromEmpty'],
 			'showCursor'        => (bool) $attributes['showCursor'],
 			'cursorWidth'       => min( 0.24, max( 0.04, (float) $attributes['cursorWidth'] ) ),
 			'cursorOffsetY'     => min( 0.3, max( -0.3, (float) $attributes['cursorOffsetY'] ) ),
+			'cursorBlinkSpeed'  => min( 2000, max( 200, (int) $attributes['cursorBlinkSpeed'] ) ),
+			'hideCursorWhilePaused' => (bool) $attributes['hideCursorWhilePaused'],
+			'hideCursorWhenComplete' => (bool) $attributes['hideCursorWhenComplete'],
 			'startOnView'       => (bool) $attributes['startOnView'],
+			'pauseOnHover'      => (bool) $attributes['pauseOnHover'],
 			'fallbackMode'      => $fallback_mode,
 			'fallbackText'      => $fallback_text,
 			'summaryMode'       => $summary_mode,

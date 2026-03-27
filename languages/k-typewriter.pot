@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-27T15:06:14+00:00\n"
+"POT-Creation-Date: 2026-03-27T15:16:50+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: k-typewriter\n"
@@ -39,23 +39,23 @@ msgstr ""
 msgid "https://github.com/imjlk"
 msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:155
+#: includes/class-k-typewriter-plugin.php:164
 #: build/index.js:1
 msgid "한 글자씩, 리듬 있게."
 msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:156
+#: includes/class-k-typewriter-plugin.php:165
 #: build/index.js:1
 msgid "Animate headlines in any language."
 msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:157
+#: includes/class-k-typewriter-plugin.php:166
 #: build/index.js:1
 msgid "Ship polished hero copy in minutes."
 msgstr ""
 
 #. translators: %s: locale-aware list of animated messages.
-#: includes/class-k-typewriter-plugin.php:194
+#: includes/class-k-typewriter-plugin.php:203
 msgid "Typewriter animation that sequentially types %s."
 msgstr ""
 
@@ -89,6 +89,18 @@ msgstr ""
 
 #: build/index.js:1
 msgid "Bottom"
+msgstr ""
+
+#: build/index.js:1
+msgid "Auto"
+msgstr ""
+
+#: build/index.js:1
+msgid "Left to right"
+msgstr ""
+
+#: build/index.js:1
+msgid "Right to left"
 msgstr ""
 
 #: build/index.js:1
@@ -133,6 +145,22 @@ msgstr ""
 
 #: build/index.js:1
 msgid "Messages"
+msgstr ""
+
+#: build/index.js:1
+msgid "Auto follows the current site or page direction. Choose LTR or RTL only when you want to override it."
+msgstr ""
+
+#: build/index.js:1
+msgid "Text direction"
+msgstr ""
+
+#: build/index.js:1
+msgid "Shrink the block to its content so it fits more naturally inside groups and flex layouts."
+msgstr ""
+
+#: build/index.js:1
+msgid "Inline layout"
 msgstr ""
 
 #: build/index.js:1
@@ -256,11 +284,23 @@ msgid "Type first message from empty"
 msgstr ""
 
 #: build/index.js:1
+msgid "Turn this off to stop on the final message instead of looping back to the beginning."
+msgstr ""
+
+#: build/index.js:1
 msgid "Loop messages"
 msgstr ""
 
 #: build/index.js:1
 msgid "Start when visible"
+msgstr ""
+
+#: build/index.js:1
+msgid "Pause the animation while the pointer is over the block."
+msgstr ""
+
+#: build/index.js:1
+msgid "Pause on hover"
 msgstr ""
 
 #: build/index.js:1
@@ -280,11 +320,27 @@ msgid "Cursor thickness"
 msgstr ""
 
 #: build/index.js:1
+msgid "Adjust how quickly the cursor blinks."
+msgstr ""
+
+#: build/index.js:1
+msgid "Cursor blink speed (ms)"
+msgstr ""
+
+#: build/index.js:1
 msgid "Move the cursor slightly up or down to match your font better."
 msgstr ""
 
 #: build/index.js:1
 msgid "Cursor vertical offset"
+msgstr ""
+
+#: build/index.js:1
+msgid "Hide cursor while paused"
+msgstr ""
+
+#: build/index.js:1
+msgid "Hide cursor when complete"
 msgstr ""
 
 #: build/block.json

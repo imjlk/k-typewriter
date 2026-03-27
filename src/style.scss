@@ -2,6 +2,18 @@
 	width: 100%;
 }
 
+.wp-block-imjlk-k-typewriter.is-inline-layout {
+	display: inline-block;
+	max-width: 100%;
+	vertical-align: top;
+}
+
+.wp-block-imjlk-k-typewriter.is-inline-layout .k-typewriter {
+	display: inline-block;
+	width: auto;
+	max-width: 100%;
+}
+
 .wp-block-imjlk-k-typewriter .k-typewriter__text {
 	display: flex;
 	flex-direction: column;
@@ -35,7 +47,10 @@
 	line-height: 1;
 	transform: translateY(var(--k-typewriter-cursor-offset-y, 0));
 	vertical-align: text-bottom;
-	animation: k-typewriter-blink 1s steps(2, jump-none) infinite;
+	animation:
+		k-typewriter-blink
+		var(--k-typewriter-cursor-blink-speed, 1000ms)
+		steps(2, jump-none) infinite;
 }
 
 .wp-block-imjlk-k-typewriter .k-typewriter__cursor[hidden] {

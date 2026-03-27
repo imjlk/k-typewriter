@@ -28,7 +28,11 @@ type TypewriterContext = {
 	transitionMode: TransitionMode;
 	startFromEmpty: boolean;
 	showCursor: boolean;
+	cursorVisible: boolean;
+	hideCursorWhilePaused: boolean;
+	hideCursorWhenComplete: boolean;
 	startOnView: boolean;
+	pauseOnHover: boolean;
 	typeDelay: number;
 	deleteDelay: number;
 	pauseDelay: number;
@@ -46,6 +50,7 @@ type RuntimeState = {
 	mediaQuery: MediaQueryList | null;
 	cleanupMotion: ( () => void ) | null;
 	wasActive: boolean;
+	isHovered: boolean;
 };
 
 const STORE_NAME = 'kTypewriter';
@@ -60,11 +65,16 @@ const { actions } = store( STORE_NAME, {
 			if ( ! items.length ) {
 				context.displayText = '';
 				context.charIndex = 0;
+				context.cursorVisible = false;
 				return;
 			}
 
 			if ( context.reducedMotion ) {
 				resetToFallback( context, items );
+				syncCursorVisibility(
+					context,
+					getElement().ref ? ensureRuntime( getElement().ref ) : null
+				);
 				return;
 			}
 
@@ -79,6 +89,10 @@ const { actions } = store( STORE_NAME, {
 					startDelay: context.startDelay,
 					startDelayMode: context.startDelayMode,
 				} )
+			);
+			syncCursorVisibility(
+				context,
+				getElement().ref ? ensureRuntime( getElement().ref ) : null
 			);
 		},
 	},
@@ -100,6 +114,7 @@ const { actions } = store( STORE_NAME, {
 
 			resetToFallback( context, items );
 			runtime.documentVisible = ! document.hidden;
+			syncCursorVisibility( context, runtime );
 
 			const mediaQuery = window.matchMedia(
 				'(prefers-reduced-motion: reduce)'
@@ -113,6 +128,7 @@ const { actions } = store( STORE_NAME, {
 					resetToFallback( context, items );
 				}
 
+				syncCursorVisibility( context, runtime );
 				scheduleTick();
 			} );
 
@@ -135,8 +151,18 @@ const { actions } = store( STORE_NAME, {
 				runtime.documentVisible = ! document.hidden;
 				scheduleTick();
 			} );
+			const handlePointerEnter = withScope( () => {
+				runtime.isHovered = true;
+				scheduleTick();
+			} );
+			const handlePointerLeave = withScope( () => {
+				runtime.isHovered = false;
+				scheduleTick();
+			} );
 
 			document.addEventListener( 'visibilitychange', handleVisibility );
+			ref.addEventListener( 'mouseenter', handlePointerEnter );
+			ref.addEventListener( 'mouseleave', handlePointerLeave );
 
 			if ( context.startOnView ) {
 				runtime.inView = false;
@@ -169,6 +195,8 @@ const { actions } = store( STORE_NAME, {
 					'visibilitychange',
 					handleVisibility
 				);
+				ref.removeEventListener( 'mouseenter', handlePointerEnter );
+				ref.removeEventListener( 'mouseleave', handlePointerLeave );
 				runtimes.delete( ref );
 			};
 		},
@@ -191,6 +219,7 @@ function ensureRuntime( ref: Element ): RuntimeState {
 		mediaQuery: null,
 		cleanupMotion: null,
 		wasActive: false,
+		isHovered: false,
 	};
 
 	runtimes.set( ref, runtime );
@@ -214,6 +243,39 @@ function resetToFallback( context: TypewriterContext, items: string[] ) {
 	);
 }
 
+function syncCursorVisibility(
+	context: TypewriterContext,
+	runtime: RuntimeState | null
+) {
+	if ( ! context.showCursor ) {
+		context.cursorVisible = false;
+		return;
+	}
+
+	const isComplete = isAnimationComplete( context, {
+		items: context.items,
+		fallbackText: context.fallbackText,
+		loop: context.loop,
+		transitionMode: context.transitionMode,
+		startFromEmpty: context.startFromEmpty,
+		startDelay: context.startDelay,
+		startDelayMode: context.startDelayMode,
+	} );
+	const isPaused = ! runtime || ! shouldAnimate( context, runtime );
+
+	if ( context.hideCursorWhenComplete && isComplete ) {
+		context.cursorVisible = false;
+		return;
+	}
+
+	if ( context.hideCursorWhilePaused && isPaused ) {
+		context.cursorVisible = false;
+		return;
+	}
+
+	context.cursorVisible = true;
+}
+
 function shouldAnimate(
 	context: TypewriterContext,
 	runtime: RuntimeState
@@ -233,6 +295,10 @@ function shouldAnimate(
 	}
 
 	if ( context.startOnView && ! runtime.inView ) {
+		return false;
+	}
+
+	if ( context.pauseOnHover && runtime.isHovered ) {
 		return false;
 	}
 
@@ -276,6 +342,7 @@ function scheduleTick() {
 
 	if ( ! shouldAnimate( context, runtime ) ) {
 		runtime.wasActive = false;
+		syncCursorVisibility( context, runtime );
 		return;
 	}
 
@@ -283,6 +350,8 @@ function scheduleTick() {
 		Object.assign( context, armReentryDelay( context ) );
 		runtime.wasActive = true;
 	}
+
+	syncCursorVisibility( context, runtime );
 
 	runtime.timeoutId = window.setTimeout(
 		withScope( () => {
