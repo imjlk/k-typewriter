@@ -305,11 +305,11 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 			.selectOption( 'h6' );
 		await openInspectorPanel(
 			page,
-			'SEO summary text',
-			'SEO & Accessibility'
+			'Summary override',
+			'Fallback & Summary'
 		);
 		await page
-			.getByRole( 'textbox', { name: 'SEO summary text' } )
+			.getByRole( 'textbox', { name: 'Summary override' } )
 			.fill( SEO_SUMMARY );
 		await page
 			.getByRole( 'checkbox', {
