@@ -25,6 +25,7 @@ WP_ENV_PORT=8898 pnpm run env:stop
 ```bash
 pnpm run lint:js
 pnpm run lint:css
+pnpm run test:unit
 pnpm run build
 pnpm run test:smoke
 php -l k-typewriter.php
@@ -47,6 +48,6 @@ See [docs/release-checklist.md](./docs/release-checklist.md).
 
 ## Playground Preview
 
-WordPress.org Playground preview support is configured through `.wordpress-org/blueprints/blueprint.json`. The deploy workflow syncs `.wordpress-org/` into the WordPress.org assets directory, so this file is published as `assets/blueprints/blueprint.json`. The blueprint activates `K Typewriter`, creates a published demo page, and makes that page the site's front page so the preview button opens directly to a working hero example.
+WordPress.org Playground preview support is configured through `.wordpress-org/blueprints/blueprint.json`. The deploy workflow syncs `.wordpress-org/` into the WordPress.org assets directory, so this file is published as `assets/blueprints/blueprint.json`. The blueprint activates `K Typewriter`, creates a published demo page, and makes that page the site's front page so the preview button opens directly to a working hero example with semantic headings, static fallback text, and multilingual animation copy.
 
 For direct GitHub-based previews, use `.wordpress-org/blueprints/github-playground.json`. That blueprint installs the plugin from the GitHub repository with Playground's `git:directory` resource, activates it, creates the same demo page, and opens the site on the published front page.

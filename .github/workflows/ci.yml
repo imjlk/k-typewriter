@@ -41,6 +41,9 @@ jobs:
             - name: Lint styles
               run: pnpm run lint:css
 
+            - name: Run unit tests
+              run: pnpm run test:unit
+
             - name: Build plugin
               run: pnpm run build
 

@@ -1,6 +1,7 @@
 const { expect, test } = require( '@playwright/test' );
 
 const FIRST_MESSAGE = '안녕하세요, 세계';
+const SEO_SUMMARY = '안녕하세요, 세계 and Animate without losing your fallback';
 
 async function login( page ) {
 	await page.goto( '/wp-login.php' );
@@ -16,10 +17,34 @@ async function login( page ) {
 }
 
 async function dismissEditorOverlays( page ) {
+	const patternDialog = page.getByRole( 'dialog', {
+		name: 'Choose a pattern',
+	} );
+
+	if ( ( await patternDialog.count() ) > 0 ) {
+		const closePatternButton = patternDialog.getByRole( 'button', {
+			name: 'Close',
+		} );
+
+		if ( ( await closePatternButton.count() ) > 0 ) {
+			await closePatternButton
+				.first()
+				.click( {
+					timeout: 1000,
+				} )
+				.catch( () => {} );
+		}
+	}
+
 	const dialogCloseButton = page.getByRole( 'button', { name: 'Close' } );
 
 	if ( ( await dialogCloseButton.count() ) > 0 ) {
-		await dialogCloseButton.first().click();
+		await dialogCloseButton
+			.first()
+			.click( {
+				timeout: 1000,
+			} )
+			.catch( () => {} );
 	}
 
 	const welcomeGuideCloseButton = page.getByRole( 'button', {
@@ -27,19 +52,75 @@ async function dismissEditorOverlays( page ) {
 	} );
 
 	if ( ( await welcomeGuideCloseButton.count() ) > 0 ) {
-		await welcomeGuideCloseButton.first().click();
+		await welcomeGuideCloseButton
+			.first()
+			.click( {
+				timeout: 1000,
+			} )
+			.catch( () => {} );
 	}
 }
 
 async function publishPage( page ) {
 	const publishButtons = page.getByRole( 'button', { name: /^Publish$/u } );
 	const publishedViewLink = page.getByRole( 'link', {
-		name: /^View Page$/u,
+		name: /^View(?: Page)?$/u,
 	} );
 
 	await publishButtons.first().click();
 	await publishButtons.last().click();
 	await expect( publishedViewLink.first() ).toBeVisible();
+}
+
+async function openBlockSettings( page ) {
+	const messagesField = page.getByRole( 'textbox', {
+		name: 'Messages',
+		exact: true,
+	} );
+
+	if ( ( await messagesField.count() ) > 0 ) {
+		return;
+	}
+
+	const settingsButton = page.getByRole( 'button', { name: 'Settings' } );
+
+	if ( ( await settingsButton.count() ) > 0 ) {
+		await settingsButton
+			.first()
+			.click()
+			.catch( () => {} );
+	}
+
+	const blockTab = page.getByRole( 'tab', { name: 'Block', exact: true } );
+
+	if ( ( await blockTab.count() ) > 0 ) {
+		await blockTab
+			.first()
+			.click()
+			.catch( () => {} );
+	}
+}
+
+async function openInspectorPanel( page, fieldName, panelTitle ) {
+	const targetField = page.getByRole( 'textbox', {
+		name: fieldName,
+		exact: true,
+	} );
+
+	if ( ( await targetField.count() ) > 0 ) {
+		return;
+	}
+
+	const panelToggle = page.getByRole( 'button', {
+		name: new RegExp( panelTitle, 'u' ),
+	} );
+
+	if ( ( await panelToggle.count() ) > 0 ) {
+		await panelToggle
+			.first()
+			.click()
+			.catch( () => {} );
+	}
 }
 
 async function expectEditorPreviewToChange( locator ) {
@@ -100,7 +181,7 @@ async function getPublishedPageUrl( page ) {
 	}
 
 	const viewPageLinks = page.getByRole( 'link', {
-		name: /^View Page$/u,
+		name: /^View(?: Page)?$/u,
 	} );
 	const linkCount = await viewPageLinks.count();
 
@@ -187,16 +268,19 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 		await canvas
 			.getByRole( 'textbox', { name: 'Add title' } )
 			.fill( title );
+		await dismissEditorOverlays( page );
 		await page
-			.getByRole( 'button', { name: 'Toggle block inserter' } )
+			.getByRole( 'button', {
+				name: /(?:Toggle block inserter|Block Inserter)/iu,
+			} )
 			.click();
 		await page
 			.getByRole( 'searchbox', {
-				name: 'Search for blocks and patterns',
+				name: /Search(?: for blocks and patterns)?/u,
 			} )
 			.fill( 'K Typewriter' );
 		await page.getByRole( 'option', { name: /K Typewriter/u } ).click();
-		await page.getByRole( 'tab', { name: 'Block', exact: true } ).click();
+		await openBlockSettings( page );
 
 		await page
 			.getByRole( 'textbox', { name: 'Messages', exact: true } )
@@ -210,6 +294,23 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 		await page
 			.getByRole( 'spinbutton', { name: 'Pause delay (ms)' } )
 			.fill( '200' );
+		await page
+			.getByRole( 'spinbutton', { name: 'Start delay (ms)' } )
+			.fill( '200' );
+		await page
+			.getByRole( 'combobox', { name: 'Start delay mode' } )
+			.selectOption( 'every-reentry' );
+		await page
+			.getByRole( 'combobox', { name: 'Markup tag' } )
+			.selectOption( 'h6' );
+		await openInspectorPanel(
+			page,
+			'SEO summary text',
+			'SEO & Accessibility'
+		);
+		await page
+			.getByRole( 'textbox', { name: 'SEO summary text' } )
+			.fill( SEO_SUMMARY );
 		await page
 			.getByRole( 'checkbox', {
 				name: 'Start when visible',
@@ -303,6 +404,10 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 							'wp-block-imjlk-k-typewriter'
 						),
 						hasFirstMessage: html.includes( FIRST_MESSAGE ),
+						hasSeoSummary: html.includes( SEO_SUMMARY ),
+						hasHeadingTag: html.includes(
+							'<h6 class="k-typewriter__text"'
+						),
 						status: response.status(),
 					};
 				},
@@ -314,6 +419,8 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 				expect.objectContaining( {
 					hasBlockMarkup: true,
 					hasFirstMessage: true,
+					hasSeoSummary: true,
+					hasHeadingTag: true,
 					status: 200,
 				} )
 			);
@@ -326,6 +433,8 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 		expect( htmlResponse.status() ).toBeLessThan( 400 );
 		expect( html ).toContain( 'wp-block-imjlk-k-typewriter' );
 		expect( html ).toContain( FIRST_MESSAGE );
+		expect( html ).toContain( SEO_SUMMARY );
+		expect( html ).toContain( '<h6 class="k-typewriter__text"' );
 
 		frontEndContext = await browser.newContext();
 		frontEndPage = await frontEndContext.newPage();
@@ -336,8 +445,13 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 
 		const block = frontEndPage.locator( '.wp-block-imjlk-k-typewriter' );
 		const animatedText = block.locator( '.k-typewriter__content' );
+		const animatedHeading = block.locator( 'h6.k-typewriter__text' );
 
 		await expect( block ).toBeVisible();
+		await expect( animatedHeading ).toHaveAttribute(
+			'aria-label',
+			SEO_SUMMARY
+		);
 		await expect( animatedText ).toHaveText( FIRST_MESSAGE );
 
 		await expect

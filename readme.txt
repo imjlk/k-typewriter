@@ -26,10 +26,14 @@ Key features:
 
 * Multiple messages with one message per line
 * Configurable typing, deleting, and pause timing
+* Optional start delay with first-start, every-cycle, and every-reentry timing modes
 * Optional looping and cursor display
+* First-message static fallback by default, with an optional custom fallback override
+* Auto-generated SEO and accessibility summary with optional override text
 * Start animation only when the block enters the viewport
 * Dynamic rendering for SEO-friendly first paint and no-JavaScript fallback
 * Reduced-motion support for visitors who prefer less animation
+* Semantic tag selection for `p`, `div`, `span`, `h1`-`h6`, `strong`, `em`, `small`, and `mark`
 * Support for theme typography, spacing, and color tools
 
 == Installation ==
@@ -44,11 +48,15 @@ Key features:
 
 = Does it work without JavaScript? =
 
-Yes. The first message is rendered on the server so visitors still see meaningful content even if JavaScript does not run.
+Yes. By default the first message is rendered on the server so visitors still see meaningful content even if JavaScript does not run. You can also override that visible fallback with a custom fallback message.
 
 = Is reduced motion supported? =
 
-Yes. Visitors with `prefers-reduced-motion` enabled will see the first message only, without animation.
+Yes. Visitors with `prefers-reduced-motion` enabled will see the visible fallback only, without animation.
+
+= Can I control the non-visual summary for SEO and assistive technology? =
+
+Yes. Leave the `SEO summary text` field empty to auto-generate a locale-aware summary from every message, or provide your own summary override.
 
 = Can I use Korean and English together? =
 
@@ -56,7 +64,7 @@ Yes. The block is designed for multilingual messaging and works well with Korean
 
 = Can I change the HTML tag? =
 
-Yes. Choose between `p`, `h1`, `h2`, `div`, and `span` from the block settings.
+Yes. Choose between `p`, `div`, `span`, `h1`-`h6`, `strong`, `em`, `small`, and `mark` from the block settings. Use `h1` only when the block is the primary page heading.
 
 = Does it support a WordPress Playground preview? =
 

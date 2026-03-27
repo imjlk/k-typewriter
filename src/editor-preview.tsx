@@ -1,10 +1,15 @@
 import { useEffect, useMemo, useRef, useState } from '@wordpress/element';
 
-import type { TypewriterAttributes } from './shared';
 import {
-	advanceFrame,
+	getEffectiveFallbackText,
+	getEffectiveSeoSummary,
+	type TypewriterAttributes,
+} from './shared';
+import {
+	advanceTypewriterFrame,
+	armReentryDelay,
 	createFallbackFrame,
-	getFrameDelay,
+	getNextStepDelay,
 	isAnimationComplete,
 	type TypewriterFrame,
 } from './typewriter-engine';
@@ -25,6 +30,8 @@ export default function EditorPreview( {
 		typeDelay,
 		deleteDelay,
 		pauseDelay,
+		startDelay,
+		startDelayMode,
 		loop,
 		showCursor,
 		tagName,
@@ -35,16 +42,25 @@ export default function EditorPreview( {
 		() => ( itemsKey ? itemsKey.split( '\u0000' ) : [] ),
 		[ itemsKey ]
 	);
-	const playbackKey = `${ itemsKey }::${ typeDelay }::${ deleteDelay }::${ pauseDelay }::${ String(
+	const visibleFallbackText = useMemo(
+		() => getEffectiveFallbackText( attributes ),
+		[ attributes ]
+	);
+	const seoSummary = useMemo(
+		() => getEffectiveSeoSummary( attributes ),
+		[ attributes ]
+	);
+	const playbackKey = `${ itemsKey }::${ typeDelay }::${ deleteDelay }::${ pauseDelay }::${ startDelay }::${ startDelayMode }::${ String(
 		loop
-	) }`;
+	) }::${ visibleFallbackText }::${ seoSummary }`;
 	const fallbackFrame = useMemo(
-		() => createFallbackFrame( stableItems ),
-		[ stableItems ]
+		() => createFallbackFrame( stableItems, visibleFallbackText ),
+		[ stableItems, visibleFallbackText ]
 	);
 	const [ frame, setFrame ] = useState< TypewriterFrame >( fallbackFrame );
 	const timeoutRef = useRef< number | null >( null );
 	const previousIsSelectedRef = useRef( isSelected );
+	const previousIsPreviewPlayingRef = useRef( false );
 	const isPreviewPlaying = isSelected && ! isPreviewPaused;
 	let previewState = 'idle';
 
@@ -69,6 +85,18 @@ export default function EditorPreview( {
 	}, [ fallbackFrame, isSelected ] );
 
 	useEffect( () => {
+		const wasPreviewPlaying = previousIsPreviewPlayingRef.current;
+
+		previousIsPreviewPlayingRef.current = isPreviewPlaying;
+
+		if ( ! isPreviewPlaying || wasPreviewPlaying ) {
+			return;
+		}
+
+		setFrame( ( currentFrame ) => armReentryDelay( currentFrame ) );
+	}, [ isPreviewPlaying ] );
+
+	useEffect( () => {
 		return () => {
 			if ( timeoutRef.current ) {
 				window.clearTimeout( timeoutRef.current );
@@ -86,7 +114,10 @@ export default function EditorPreview( {
 			! isPreviewPlaying ||
 			isAnimationComplete( frame, {
 				items: stableItems,
+				fallbackText: visibleFallbackText,
 				loop,
+				startDelay,
+				startDelayMode,
 			} )
 		) {
 			return;
@@ -95,18 +126,24 @@ export default function EditorPreview( {
 		timeoutRef.current = window.setTimeout(
 			() => {
 				setFrame( ( currentFrame ) =>
-					advanceFrame( currentFrame, {
+					advanceTypewriterFrame( currentFrame, {
 						items: stableItems,
+						fallbackText: visibleFallbackText,
 						loop,
+						startDelay,
+						startDelayMode,
 					} )
 				);
 			},
-			getFrameDelay( frame, {
+			getNextStepDelay( frame, {
 				items: stableItems,
+				fallbackText: visibleFallbackText,
 				loop,
 				typeDelay,
 				deleteDelay,
 				pauseDelay,
+				startDelay,
+				startDelayMode,
 			} )
 		);
 
@@ -123,7 +160,10 @@ export default function EditorPreview( {
 		loop,
 		pauseDelay,
 		stableItems,
+		startDelay,
+		startDelayMode,
 		typeDelay,
+		visibleFallbackText,
 	] );
 
 	return (
@@ -131,7 +171,14 @@ export default function EditorPreview( {
 			className="k-typewriter k-typewriter-editor"
 			data-preview-state={ previewState }
 		>
-			<TagName className="k-typewriter__text k-typewriter-editor__preview">
+			<TagName
+				aria-label={
+					seoSummary && seoSummary !== visibleFallbackText
+						? seoSummary
+						: undefined
+				}
+				className="k-typewriter__text k-typewriter-editor__preview"
+			>
 				<span className="k-typewriter__content">
 					{ frame.displayText }
 				</span>

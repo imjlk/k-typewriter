@@ -9,6 +9,8 @@
 5. Publish the page and confirm there is no invalid block warning.
 6. Open the front-end page and confirm:
    - The first message is present in initial HTML.
+   - Custom fallback text appears when enabled.
+   - The SEO summary override is present as the non-visual label when configured.
    - The text animates when JavaScript is enabled.
    - Reduced-motion mode keeps the first message static.
    - No-JS mode keeps the first message static.
@@ -17,6 +19,7 @@
 
 1. Verify the plugin still activates on WordPress 6.6 / PHP 8.0.
 2. Verify a minimal smoke test on the latest stable WordPress release.
+3. Run the unit tests for the typewriter engine helpers.
 
 ## Packaging
 

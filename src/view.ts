@@ -5,12 +5,14 @@ import {
 	withScope,
 } from '@wordpress/interactivity';
 import {
-	advanceFrame,
+	advanceTypewriterFrame,
+	armReentryDelay,
 	createFallbackFrame,
-	getFrameDelay,
+	getNextStepDelay,
 	isAnimationComplete,
 	normalizeTypingItems,
 } from './typewriter-engine';
+import type { StartDelayMode } from './shared';
 
 type TypewriterContext = {
 	items: string[];
@@ -18,12 +20,17 @@ type TypewriterContext = {
 	itemIndex: number;
 	charIndex: number;
 	isDeleting: boolean;
+	hasStarted: boolean;
+	pendingReentryDelay: boolean;
+	fallbackText: string;
 	loop: boolean;
 	showCursor: boolean;
 	startOnView: boolean;
 	typeDelay: number;
 	deleteDelay: number;
 	pauseDelay: number;
+	startDelay: number;
+	startDelayMode: StartDelayMode;
 	reducedMotion: boolean;
 };
 
@@ -35,6 +42,7 @@ type RuntimeState = {
 	observer: IntersectionObserver | null;
 	mediaQuery: MediaQueryList | null;
 	cleanupMotion: ( () => void ) | null;
+	wasActive: boolean;
 };
 
 const STORE_NAME = 'kTypewriter';
@@ -59,9 +67,12 @@ const { actions } = store( STORE_NAME, {
 
 			Object.assign(
 				context,
-				advanceFrame( context, {
+				advanceTypewriterFrame( context, {
 					items,
+					fallbackText: context.fallbackText,
 					loop: context.loop,
+					startDelay: context.startDelay,
+					startDelayMode: context.startDelayMode,
 				} )
 			);
 		},
@@ -169,6 +180,7 @@ function ensureRuntime( ref: Element ): RuntimeState {
 		observer: null,
 		mediaQuery: null,
 		cleanupMotion: null,
+		wasActive: false,
 	};
 
 	runtimes.set( ref, runtime );
@@ -186,7 +198,10 @@ function clearScheduledTick( ref: Element ) {
 }
 
 function resetToFallback( context: TypewriterContext, items: string[] ) {
-	Object.assign( context, createFallbackFrame( items ) );
+	Object.assign(
+		context,
+		createFallbackFrame( items, context.fallbackText )
+	);
 }
 
 function shouldAnimate(
@@ -213,17 +228,23 @@ function shouldAnimate(
 
 	return ! isAnimationComplete( context, {
 		items,
+		fallbackText: context.fallbackText,
 		loop: context.loop,
+		startDelay: context.startDelay,
+		startDelayMode: context.startDelayMode,
 	} );
 }
 
 function getDelay( context: TypewriterContext ): number {
-	return getFrameDelay( context, {
+	return getNextStepDelay( context, {
 		items: normalizeTypingItems( context.items ),
+		fallbackText: context.fallbackText,
 		loop: context.loop,
 		typeDelay: context.typeDelay,
 		deleteDelay: context.deleteDelay,
 		pauseDelay: context.pauseDelay,
+		startDelay: context.startDelay,
+		startDelayMode: context.startDelayMode,
 	} );
 }
 
@@ -240,7 +261,13 @@ function scheduleTick() {
 	clearScheduledTick( ref );
 
 	if ( ! shouldAnimate( context, runtime ) ) {
+		runtime.wasActive = false;
 		return;
+	}
+
+	if ( ! runtime.wasActive ) {
+		Object.assign( context, armReentryDelay( context ) );
+		runtime.wasActive = true;
 	}
 
 	runtime.timeoutId = window.setTimeout(

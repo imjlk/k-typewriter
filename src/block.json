@@ -29,6 +29,14 @@
 			"type": "number",
 			"default": 1200
 		},
+		"startDelay": {
+			"type": "number",
+			"default": 0
+		},
+		"startDelayMode": {
+			"type": "string",
+			"default": "first-start"
+		},
 		"loop": {
 			"type": "boolean",
 			"default": true
@@ -41,6 +49,18 @@
 			"type": "boolean",
 			"default": true
 		},
+		"useCustomFallback": {
+			"type": "boolean",
+			"default": false
+		},
+		"fallbackText": {
+			"type": "string",
+			"default": ""
+		},
+		"seoSummaryText": {
+			"type": "string",
+			"default": ""
+		},
 		"tagName": {
 			"type": "string",
 			"default": "p"
@@ -52,6 +72,8 @@
 				"한 글자씩, 리듬 있게.",
 				"Animate headlines in any language."
 			],
+			"startDelay": 250,
+			"startDelayMode": "first-start",
 			"tagName": "h2"
 		}
 	},

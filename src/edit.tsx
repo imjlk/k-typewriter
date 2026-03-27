@@ -8,6 +8,7 @@ import {
 	RangeControl,
 	SelectControl,
 	TextareaControl,
+	TextControl,
 	ToolbarButton,
 	ToolbarGroup,
 	ToggleControl,
@@ -21,6 +22,7 @@ import './editor.scss';
 import EditorPreview from './editor-preview';
 import {
 	normalizeAttributes,
+	START_DELAY_MODES,
 	type TypewriterAttributes,
 	VALID_TAG_NAMES,
 } from './shared';
@@ -28,6 +30,17 @@ import {
 const tagNameOptions = VALID_TAG_NAMES.map( ( tagName ) => ( {
 	label: tagName.toUpperCase(),
 	value: tagName,
+} ) );
+
+const startDelayModeLabels = {
+	'first-start': __( 'First start only', 'k-typewriter' ),
+	'every-cycle': __( 'Every cycle', 'k-typewriter' ),
+	'every-reentry': __( 'Every re-entry', 'k-typewriter' ),
+} as const;
+
+const startDelayModeOptions = START_DELAY_MODES.map( ( value ) => ( {
+	label: startDelayModeLabels[ value ],
+	value,
 } ) );
 
 export default function Edit( {
@@ -43,9 +56,14 @@ export default function Edit( {
 		typeDelay,
 		deleteDelay,
 		pauseDelay,
+		startDelay,
+		startDelayMode,
 		loop,
 		showCursor,
 		startOnView,
+		useCustomFallback,
+		fallbackText,
+		seoSummaryText,
 		tagName,
 	} = normalizedAttributes;
 	const isPreviewPlaying = isSelected && ! isPreviewPaused;
@@ -104,6 +122,10 @@ export default function Edit( {
 						}
 					/>
 					<SelectControl
+						help={ __(
+							'Choose a semantic text tag. Use H1 only when this block is the main page heading.',
+							'k-typewriter'
+						) }
 						label={ __( 'Markup tag', 'k-typewriter' ) }
 						options={ tagNameOptions }
 						value={ tagName }
@@ -112,6 +134,53 @@ export default function Edit( {
 								tagName:
 									value as TypewriterAttributes[ 'tagName' ],
 							} )
+						}
+					/>
+				</PanelBody>
+				<PanelBody
+					initialOpen={ false }
+					title={ __( 'Fallback', 'k-typewriter' ) }
+				>
+					<ToggleControl
+						help={ __(
+							'Override the default visible fallback used before animation, with reduced motion, and without JavaScript.',
+							'k-typewriter'
+						) }
+						label={ __( 'Use custom fallback', 'k-typewriter' ) }
+						checked={ useCustomFallback }
+						onChange={ ( value ) =>
+							setAttributes( {
+								useCustomFallback: value,
+							} )
+						}
+					/>
+					<TextControl
+						disabled={ ! useCustomFallback }
+						help={ __(
+							'Leave this empty to fall back to the first message.',
+							'k-typewriter'
+						) }
+						label={ __( 'Fallback text', 'k-typewriter' ) }
+						value={ fallbackText }
+						onChange={ ( value ) =>
+							setAttributes( { fallbackText: value } )
+						}
+					/>
+				</PanelBody>
+				<PanelBody
+					initialOpen={ false }
+					title={ __( 'SEO & Accessibility', 'k-typewriter' ) }
+				>
+					<TextareaControl
+						help={ __(
+							'Used as the non-visual summary for assistive technology. Leave blank to auto-generate it from every message.',
+							'k-typewriter'
+						) }
+						label={ __( 'SEO summary text', 'k-typewriter' ) }
+						rows={ 3 }
+						value={ seoSummaryText }
+						onChange={ ( value ) =>
+							setAttributes( { seoSummaryText: value } )
 						}
 					/>
 				</PanelBody>
@@ -150,6 +219,33 @@ export default function Edit( {
 						onChange={ ( value ) =>
 							setAttributes( {
 								pauseDelay: value ?? pauseDelay,
+							} )
+						}
+					/>
+					<RangeControl
+						label={ __( 'Start delay (ms)', 'k-typewriter' ) }
+						max={ 5000 }
+						min={ 0 }
+						step={ 100 }
+						value={ startDelay }
+						onChange={ ( value ) =>
+							setAttributes( {
+								startDelay: value ?? startDelay,
+							} )
+						}
+					/>
+					<SelectControl
+						help={ __(
+							'Choose when the extra delay should run before animation continues.',
+							'k-typewriter'
+						) }
+						label={ __( 'Start delay mode', 'k-typewriter' ) }
+						options={ startDelayModeOptions }
+						value={ startDelayMode }
+						onChange={ ( value ) =>
+							setAttributes( {
+								startDelayMode:
+									value as TypewriterAttributes[ 'startDelayMode' ],
 							} )
 						}
 					/>

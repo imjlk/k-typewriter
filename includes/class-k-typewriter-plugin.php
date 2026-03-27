@@ -61,23 +61,23 @@ final class K_Typewriter_Plugin {
 	 */
 	private static function register_legacy_block( WP_Block_Type $block ) {
 		$args = array(
-			'api_version'          => $block->api_version,
-			'title'                => __( 'K Typewriter (Legacy)', 'k-typewriter' ),
-			'category'             => $block->category,
-			'icon'                 => $block->icon,
-			'attributes'           => $block->attributes,
-			'supports'             => array_merge(
+			'api_version'           => $block->api_version,
+			'title'                 => __( 'K Typewriter (Legacy)', 'k-typewriter' ),
+			'category'              => $block->category,
+			'icon'                  => $block->icon,
+			'attributes'            => $block->attributes,
+			'supports'              => array_merge(
 				is_array( $block->supports ) ? $block->supports : array(),
 				array(
 					'inserter' => false,
 				)
 			),
-			'style_handles'        => $block->style_handles,
-			'editor_style_handles' => $block->editor_style_handles,
+			'style_handles'         => $block->style_handles,
+			'editor_style_handles'  => $block->editor_style_handles,
 			'editor_script_handles' => $block->editor_script_handles,
-			'script_handles'       => $block->script_handles,
-			'view_script_handles'  => $block->view_script_handles,
-			'render_callback'      => array( __CLASS__, 'render_block' ),
+			'script_handles'        => $block->script_handles,
+			'view_script_handles'   => $block->view_script_handles,
+			'render_callback'       => array( __CLASS__, 'render_block' ),
 		);
 
 		if ( property_exists( $block, 'view_script_module_ids' ) ) {
@@ -96,28 +96,34 @@ final class K_Typewriter_Plugin {
 	 * @return string
 	 */
 	public static function render_block( $attributes, $content, $block ) {
-		$settings   = self::sanitize_attributes( $attributes );
-		$first_item = $settings['items'][0];
-		$tag_name   = $settings['tagName'];
-		$wrapper    = get_block_wrapper_attributes(
+		$settings         = self::sanitize_attributes( $attributes );
+		$visible_fallback = self::get_visible_fallback_text( $settings );
+		$seo_summary      = self::get_effective_seo_summary( $settings );
+		$tag_name         = $settings['tagName'];
+		$wrapper          = get_block_wrapper_attributes(
 			array(
 				'class' => 'k-typewriter-block',
 			)
 		);
-		$context    = wp_json_encode(
+		$context          = wp_json_encode(
 			array(
-				'items'         => $settings['items'],
-				'displayText'   => $first_item,
-				'itemIndex'     => 0,
-				'charIndex'     => 0,
-				'isDeleting'    => false,
-				'loop'          => $settings['loop'],
-				'showCursor'    => $settings['showCursor'],
-				'startOnView'   => $settings['startOnView'],
-				'typeDelay'     => $settings['typeDelay'],
-				'deleteDelay'   => $settings['deleteDelay'],
-				'pauseDelay'    => $settings['pauseDelay'],
-				'reducedMotion' => false,
+				'items'               => $settings['items'],
+				'displayText'         => $visible_fallback,
+				'itemIndex'           => 0,
+				'charIndex'           => 0,
+				'isDeleting'          => false,
+				'hasStarted'          => false,
+				'pendingReentryDelay' => false,
+				'fallbackText'        => $visible_fallback,
+				'loop'                => $settings['loop'],
+				'showCursor'          => $settings['showCursor'],
+				'startOnView'         => $settings['startOnView'],
+				'typeDelay'           => $settings['typeDelay'],
+				'deleteDelay'         => $settings['deleteDelay'],
+				'pauseDelay'          => $settings['pauseDelay'],
+				'startDelay'          => $settings['startDelay'],
+				'startDelayMode'      => $settings['startDelayMode'],
+				'reducedMotion'       => false,
 			),
 			JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
 		);
@@ -135,9 +141,14 @@ final class K_Typewriter_Plugin {
 				data-wp-context="<?php echo esc_attr( $context ); ?>"
 				data-wp-init--typewriter="callbacks.init"
 			>
-				<<?php echo esc_html( $tag_name ); ?> class="k-typewriter__text" aria-atomic="true" aria-live="polite">
+				<<?php echo esc_html( $tag_name ); ?>
+					class="k-typewriter__text"
+					<?php if ( $seo_summary && $seo_summary !== $visible_fallback ) : ?>
+						aria-label="<?php echo esc_attr( $seo_summary ); ?>"
+					<?php endif; ?>
+				>
 					<span class="k-typewriter__content" data-wp-text="context.displayText">
-						<?php echo esc_html( $first_item ); ?>
+						<?php echo esc_html( $visible_fallback ); ?>
 					</span>
 					<span
 						aria-hidden="true"
@@ -155,6 +166,80 @@ final class K_Typewriter_Plugin {
 	}
 
 	/**
+	 * Return the translatable default sample messages.
+	 *
+	 * @return array<int,string>
+	 */
+	private static function get_default_items() {
+		return array(
+			__( '한 글자씩, 리듬 있게.', 'k-typewriter' ),
+			__( 'Animate headlines in any language.', 'k-typewriter' ),
+			__( 'Ship polished hero copy in minutes.', 'k-typewriter' ),
+		);
+	}
+
+	/**
+	 * Return the effective visible fallback.
+	 *
+	 * @param array<string,mixed> $settings Sanitized settings.
+	 * @return string
+	 */
+	private static function get_visible_fallback_text( $settings ) {
+		if ( $settings['useCustomFallback'] && '' !== $settings['fallbackText'] ) {
+			return $settings['fallbackText'];
+		}
+
+		return $settings['items'][0];
+	}
+
+	/**
+	 * Return the effective SEO summary.
+	 *
+	 * @param array<string,mixed> $settings Sanitized settings.
+	 * @return string
+	 */
+	private static function get_effective_seo_summary( $settings ) {
+		if ( '' !== $settings['seoSummaryText'] ) {
+			return $settings['seoSummaryText'];
+		}
+
+		return self::format_locale_list( $settings['items'] );
+	}
+
+	/**
+	 * Format a locale-aware list summary.
+	 *
+	 * @param array<int,string> $items Messages to summarize.
+	 * @return string
+	 */
+	private static function format_locale_list( $items ) {
+		$items = array_values(
+			array_filter(
+				array_map(
+					static function( $item ) {
+						return trim( (string) $item );
+					},
+					$items
+				)
+			)
+		);
+
+		if ( empty( $items ) ) {
+			return '';
+		}
+
+		if ( 1 === count( $items ) ) {
+			return $items[0];
+		}
+
+		if ( function_exists( 'wp_sprintf_l' ) ) {
+			return wp_sprintf_l( '%l', $items );
+		}
+
+		return implode( ', ', $items );
+	}
+
+	/**
 	 * Sanitize and normalize block attributes.
 	 *
 	 * @param array $attributes Raw attributes.
@@ -162,18 +247,19 @@ final class K_Typewriter_Plugin {
 	 */
 	private static function sanitize_attributes( $attributes ) {
 		$defaults = array(
-			'items'       => array(
-				__( '한 글자씩, 리듬 있게.', 'k-typewriter' ),
-				__( 'Animate headlines in any language.', 'k-typewriter' ),
-				__( 'Ship polished hero copy in minutes.', 'k-typewriter' ),
-			),
-			'typeDelay'   => 80,
-			'deleteDelay' => 40,
-			'pauseDelay'  => 1200,
-			'loop'        => true,
-			'showCursor'  => true,
-			'startOnView' => true,
-			'tagName'     => 'p',
+			'items'              => self::get_default_items(),
+			'typeDelay'          => 80,
+			'deleteDelay'        => 40,
+			'pauseDelay'         => 1200,
+			'startDelay'         => 0,
+			'startDelayMode'     => 'first-start',
+			'loop'               => true,
+			'showCursor'         => true,
+			'startOnView'        => true,
+			'useCustomFallback'  => false,
+			'fallbackText'       => '',
+			'seoSummaryText'     => '',
+			'tagName'            => 'p',
 		);
 
 		$attributes = is_array( $attributes ) ? wp_parse_args( $attributes, $defaults ) : $defaults;
@@ -189,22 +275,46 @@ final class K_Typewriter_Plugin {
 		);
 
 		if ( empty( $items ) ) {
-			$items = $defaults['items'];
+			$items = self::get_default_items();
 		}
 
-		$valid_tags = array( 'p', 'h1', 'h2', 'div', 'span' );
-		$tag_name   = in_array( $attributes['tagName'], $valid_tags, true ) ? $attributes['tagName'] : $defaults['tagName'];
+		$valid_tags        = array(
+			'p',
+			'div',
+			'span',
+			'h1',
+			'h2',
+			'h3',
+			'h4',
+			'h5',
+			'h6',
+			'strong',
+			'em',
+			'small',
+			'mark',
+		);
+		$valid_delay_modes = array(
+			'first-start',
+			'every-cycle',
+			'every-reentry',
+		);
+		$tag_name          = in_array( $attributes['tagName'], $valid_tags, true ) ? $attributes['tagName'] : $defaults['tagName'];
+		$delay_mode        = in_array( $attributes['startDelayMode'], $valid_delay_modes, true ) ? $attributes['startDelayMode'] : $defaults['startDelayMode'];
 
 		return array(
-			'items'       => $items,
-			'typeDelay'   => min( 300, max( 20, (int) $attributes['typeDelay'] ) ),
-			'deleteDelay' => min( 240, max( 10, (int) $attributes['deleteDelay'] ) ),
-			'pauseDelay'  => min( 4000, max( 200, (int) $attributes['pauseDelay'] ) ),
-			'loop'        => (bool) $attributes['loop'],
-			'showCursor'  => (bool) $attributes['showCursor'],
-			'startOnView' => (bool) $attributes['startOnView'],
-			'tagName'     => $tag_name,
+			'items'             => $items,
+			'typeDelay'         => min( 300, max( 20, (int) $attributes['typeDelay'] ) ),
+			'deleteDelay'       => min( 240, max( 10, (int) $attributes['deleteDelay'] ) ),
+			'pauseDelay'        => min( 4000, max( 200, (int) $attributes['pauseDelay'] ) ),
+			'startDelay'        => min( 5000, max( 0, (int) $attributes['startDelay'] ) ),
+			'startDelayMode'    => $delay_mode,
+			'loop'              => (bool) $attributes['loop'],
+			'showCursor'        => (bool) $attributes['showCursor'],
+			'startOnView'       => (bool) $attributes['startOnView'],
+			'useCustomFallback' => (bool) $attributes['useCustomFallback'],
+			'fallbackText'      => trim( wp_strip_all_tags( (string) $attributes['fallbackText'] ) ),
+			'seoSummaryText'    => trim( wp_strip_all_tags( (string) $attributes['seoSummaryText'] ) ),
+			'tagName'           => $tag_name,
 		);
 	}
 }
-
