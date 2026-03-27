@@ -24,6 +24,9 @@ import {
 	CURSOR_ANIMATION_MODES,
 	getEffectiveFallbackText,
 	getEffectiveSummaryText,
+	INLINE_WIDTH_CH_INPUT_MAX,
+	INLINE_WIDTH_CH_MIN,
+	INLINE_WIDTH_CH_SLIDER_MAX,
 	INLINE_WIDTH_MODES,
 	normalizeAttributes,
 	START_DELAY_MODES,
@@ -126,6 +129,9 @@ export default function Edit( {
 	const normalizedAttributes = normalizeAttributes( attributes );
 	const [ isPreviewPaused, setIsPreviewPaused ] = useState( false );
 	const [ isEditingMessages, setIsEditingMessages ] = useState( false );
+	const [ inlineWidthChInput, setInlineWidthChInput ] = useState( () =>
+		String( normalizedAttributes.inlineWidthCh )
+	);
 	const {
 		items,
 		typeDelay,
@@ -198,6 +204,10 @@ export default function Edit( {
 		}
 	}, [ isEditingMessages, items ] );
 
+	useEffect( () => {
+		setInlineWidthChInput( String( inlineWidthCh ) );
+	}, [ inlineWidthCh ] );
+
 	const parseMessageDraft = ( value: string ) =>
 		value
 			.split( /\r?\n/u )
@@ -210,6 +220,40 @@ export default function Edit( {
 		if ( event.key === 'Enter' ) {
 			event.stopPropagation();
 		}
+	};
+
+	const commitInlineWidthInput = ( value: string ) => {
+		const numericValue = Number.parseInt( value, 10 );
+
+		if ( ! Number.isFinite( numericValue ) ) {
+			setInlineWidthChInput( String( inlineWidthCh ) );
+			return;
+		}
+
+		const nextValue = Math.min(
+			INLINE_WIDTH_CH_INPUT_MAX,
+			Math.max( INLINE_WIDTH_CH_MIN, numericValue )
+		);
+
+		setAttributes( { inlineWidthCh: nextValue } );
+		setInlineWidthChInput( String( nextValue ) );
+	};
+
+	const syncInlineWidthInput = ( value: string ) => {
+		setInlineWidthChInput( value );
+
+		const numericValue = Number.parseInt( value, 10 );
+
+		if ( ! Number.isFinite( numericValue ) ) {
+			return;
+		}
+
+		setAttributes( {
+			inlineWidthCh: Math.min(
+				INLINE_WIDTH_CH_INPUT_MAX,
+				Math.max( INLINE_WIDTH_CH_MIN, numericValue )
+			),
+		} );
 	};
 
 	return (
@@ -311,26 +355,50 @@ export default function Edit( {
 								}
 							/>
 							{ inlineWidthMode !== 'characters' ? null : (
-								<RangeControl
-									help={ __(
-										'Reserve width using an approximate number of character columns.',
-										'k-typewriter'
-									) }
-									label={ __(
-										'Width in ch',
-										'k-typewriter'
-									) }
-									max={ 80 }
-									min={ 4 }
-									step={ 1 }
-									value={ inlineWidthCh }
-									onChange={ ( value ) =>
-										setAttributes( {
-											inlineWidthCh:
-												value ?? inlineWidthCh,
-										} )
-									}
-								/>
+								<>
+									<RangeControl
+										help={ __(
+											'The slider goes up to 80ch. Enter a larger number directly when you need a wider inline reserve.',
+											'k-typewriter'
+										) }
+										label={ __(
+											'Width in ch',
+											'k-typewriter'
+										) }
+										max={ INLINE_WIDTH_CH_SLIDER_MAX }
+										min={ INLINE_WIDTH_CH_MIN }
+										step={ 1 }
+										value={ Math.min(
+											inlineWidthCh,
+											INLINE_WIDTH_CH_SLIDER_MAX
+										) }
+										onChange={ ( value ) =>
+											setAttributes( {
+												inlineWidthCh:
+													value ?? inlineWidthCh,
+											} )
+										}
+									/>
+									<TextControl
+										help={ __(
+											'Use any value from 1 and up when you want a larger fixed width than the slider range.',
+											'k-typewriter'
+										) }
+										label={ __(
+											'Width in ch input',
+											'k-typewriter'
+										) }
+										type="number"
+										min={ INLINE_WIDTH_CH_MIN }
+										value={ inlineWidthChInput }
+										onBlur={ () =>
+											commitInlineWidthInput(
+												inlineWidthChInput
+											)
+										}
+										onChange={ syncInlineWidthInput }
+									/>
+								</>
 							) }
 						</>
 					) }
@@ -351,7 +419,7 @@ export default function Edit( {
 					/>
 					<RangeControl
 						help={ __(
-							'Reserve extra line height to reduce layout shift when longer messages wrap.',
+							'Reserve extra line height so the layout stays steadier when longer messages wrap.',
 							'k-typewriter'
 						) }
 						label={ __( 'Reserve lines', 'k-typewriter' ) }

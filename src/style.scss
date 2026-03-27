@@ -25,8 +25,12 @@
 	min-block-size: var(--k-typewriter-reserved-height, calc(var(--k-typewriter-reserve-lines, 1) * 1lh));
 }
 
+.wp-block-imjlk-k-typewriter.is-inline-layout .k-typewriter__text {
+	--k-typewriter-inline-cursor-reserve: calc(var(--k-typewriter-cursor-width, 0.08em) + 0.2em);
+}
+
 .wp-block-imjlk-k-typewriter.is-inline-layout .k-typewriter.has-inline-width .k-typewriter__text {
-	inline-size: var(--k-typewriter-inline-measured-width, var(--k-typewriter-inline-width, auto));
+	inline-size: calc(var(--k-typewriter-inline-measured-width, var(--k-typewriter-inline-width, auto)) + var(--k-typewriter-inline-cursor-reserve, 0px));
 	max-inline-size: 100%;
 }
 
@@ -35,9 +39,16 @@
 	max-width: 100%;
 	direction: inherit;
 	line-height: inherit;
+	min-height: 1em;
+	min-block-size: 1lh;
 	text-align: inherit;
 	unicode-bidi: isolate;
 	overflow-wrap: anywhere;
+}
+
+.wp-block-imjlk-k-typewriter.is-inline-layout .k-typewriter__line {
+	overflow-wrap: normal;
+	white-space: nowrap;
 }
 
 .wp-block-imjlk-k-typewriter .k-typewriter__content {
@@ -46,6 +57,10 @@
 	unicode-bidi: isolate;
 	word-break: break-word;
 	transition: opacity 160ms ease;
+}
+
+.wp-block-imjlk-k-typewriter .k-typewriter__content:empty::before {
+	content: "\200b";
 }
 
 .wp-block-imjlk-k-typewriter .k-typewriter.is-hover-paused .k-typewriter__content {

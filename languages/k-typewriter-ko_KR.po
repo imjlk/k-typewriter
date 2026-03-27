@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: K Typewriter 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/k-typewriter\n"
-"POT-Creation-Date: 2026-03-27T15:48:20+00:00\n"
+"POT-Creation-Date: 2026-03-27T18:16:45+00:00\n"
 "PO-Revision-Date: 2026-03-27 14:50+0900\n"
 "Last-Translator: imjlk\n"
 "Language-Team: Korean\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Plugin Name of the plugin
-#: k-typewriter.php
+#: k-typewriter.php includes/class-k-typewriter-plugin.php:67
 msgid "K Typewriter"
 msgstr "K Typewriter"
 
@@ -45,22 +45,83 @@ msgstr "imjlk"
 msgid "https://github.com/imjlk"
 msgstr "https://github.com/imjlk"
 
-#: includes/class-k-typewriter-plugin.php:176 build/index.js:1
+#: includes/class-k-typewriter-plugin.php:68
+msgid "Ready-to-use patterns for K Typewriter."
+msgstr "K Typewriter용 바로 쓸 수 있는 패턴입니다."
+
+#: includes/class-k-typewriter-plugin.php:244 build/index.js:1
 msgid "한 글자씩, 리듬 있게."
 msgstr "한 글자씩, 리듬 있게."
 
-#: includes/class-k-typewriter-plugin.php:177 build/index.js:1
+#: includes/class-k-typewriter-plugin.php:245 build/index.js:1
 msgid "Animate headlines in any language."
 msgstr "어떤 언어든 자연스럽게 헤드라인을 애니메이션하세요."
 
-#: includes/class-k-typewriter-plugin.php:178 build/index.js:1
+#: includes/class-k-typewriter-plugin.php:246 build/index.js:1
 msgid "Ship polished hero copy in minutes."
 msgstr "완성도 높은 히어로 카피를 몇 분 만에 배포하세요."
 
 #. translators: %s: locale-aware list of animated messages.
-#: includes/class-k-typewriter-plugin.php:215
+#: includes/class-k-typewriter-plugin.php:283
 msgid "Typewriter animation that sequentially types %s."
 msgstr "%s가 순차적으로 타이핑되는 애니메이션"
+
+#: patterns/announcement-strip.php:10
+msgid "Announcement Strip"
+msgstr "공지 배너"
+
+#: patterns/announcement-strip.php:11
+msgid "A compact banner for rotating launches, promos, or deadline reminders."
+msgstr "출시, 프로모션, 마감 알림을 순환하기 좋은 간결한 배너입니다."
+
+#: patterns/feature-spotlight.php:10
+msgid "Feature Spotlight"
+msgstr "기능 스포트라이트"
+
+#: patterns/feature-spotlight.php:11
+msgid ""
+"A practical section intro pattern for feature pages, launch sections, and "
+"campaign callouts."
+msgstr ""
+"기능 페이지, 출시 섹션, 캠페인 콜아웃에 어울리는 실용적인 섹션 인트로 패턴입"
+"니다."
+
+#: patterns/hero-headline.php:10
+msgid "Hero Headline"
+msgstr "히어로 헤드라인"
+
+#: patterns/hero-headline.php:11
+msgid ""
+"A centered hero headline with polished typewriter playback and stable "
+"reserved height."
+msgstr ""
+"안정적인 예약 높이와 함께 완성도 높은 타이프라이터 재생을 제공하는 중앙 정렬 "
+"히어로 헤드라인 패턴입니다."
+
+#: patterns/inline-keyword-rotator.php:10
+msgid "Inline Keyword Rotator"
+msgstr "인라인 키워드 로테이터"
+
+#: patterns/inline-keyword-rotator.php:11
+msgid ""
+"A row-based inline layout that rotates compact keywords without widening the "
+"whole line."
+msgstr ""
+"한 줄 전체 폭을 과하게 넓히지 않으면서 짧은 키워드를 순환하는 Row 기반 인라"
+"인 패턴입니다."
+
+#: patterns/multilingual-spotlight.php:10
+msgid "Multilingual Spotlight"
+msgstr "다국어 스포트라이트"
+
+#: patterns/multilingual-spotlight.php:11
+#, fuzzy
+msgid ""
+"A showcase pattern for Korean, English, and Arabic messaging in one polished "
+"section."
+msgstr ""
+"한글, 영어, 일본어 메시지를 하나의 완성도 높은 섹션에서 보여주는 쇼케이스 패"
+"턴입니다."
 
 #: build/index.js:1
 msgid "First start only"
@@ -206,12 +267,27 @@ msgid "Inline width reserve"
 msgstr "인라인 너비 예약"
 
 #: build/index.js:1
-msgid "Reserve width using an approximate number of character columns."
-msgstr "대략적인 문자 칸 수를 기준으로 너비를 예약합니다."
+msgid ""
+"The slider goes up to 80ch. Enter a larger number directly when you need a "
+"wider inline reserve."
+msgstr ""
+"슬라이더는 80ch까지 지원합니다. 더 넓은 인라인 예약 폭이 필요하면 큰 값을 직"
+"접 입력하세요."
 
 #: build/index.js:1
 msgid "Width in ch"
 msgstr "ch 기준 너비"
+
+#: build/index.js:1
+msgid ""
+"Use any value from 1 and up when you want a larger fixed width than the "
+"slider range."
+msgstr ""
+"슬라이더 범위보다 더 큰 고정 폭이 필요하면 1 이상의 값을 직접 입력하세요."
+
+#: build/index.js:1
+msgid "Width in ch input"
+msgstr "ch 기준 너비 입력"
 
 #: build/index.js:1
 msgid ""
@@ -227,10 +303,11 @@ msgstr "마크업 태그"
 
 #: build/index.js:1
 msgid ""
-"Reserve extra line height to reduce layout shift when longer messages wrap."
+"Reserve extra line height so the layout stays steadier when longer messages "
+"wrap."
 msgstr ""
-"더 긴 메시지가 줄바꿈될 때 레이아웃이 흔들리지 않도록 줄 높이를 미리 확보합니"
-"다."
+"더 긴 메시지가 줄바꿈될 때도 레이아웃이 더 안정적으로 유지되도록 줄 높이를 미"
+"리 확보합니다."
 
 #: build/index.js:1
 msgid "Reserve lines"
@@ -473,6 +550,9 @@ msgstr "헤드라인"
 msgctxt "block keyword"
 msgid "hero"
 msgstr "히어로"
+
+#~ msgid "Reserve width using an approximate number of character columns."
+#~ msgstr "대략적인 문자 칸 수를 기준으로 너비를 예약합니다."
 
 #~ msgid ""
 #~ "Choose the non-visual summary used for assistive technology. Auto mode "

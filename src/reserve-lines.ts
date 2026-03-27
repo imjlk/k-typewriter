@@ -140,14 +140,10 @@ function setupMetricObservers( textElement: HTMLElement, apply: () => void ) {
 	};
 }
 
-function createMeasurementProbe(
-	textElement: HTMLElement,
-	showCursor: boolean
-) {
+function createMeasurementProbe( textElement: HTMLElement ) {
 	const probe = document.createElement( 'span' );
 	const line = document.createElement( 'span' );
 	const content = document.createElement( 'span' );
-	let cursor: HTMLSpanElement | null = null;
 
 	probe.setAttribute( 'aria-hidden', 'true' );
 	probe.style.position = 'absolute';
@@ -171,21 +167,11 @@ function createMeasurementProbe(
 
 	line.appendChild( content );
 
-	if ( showCursor ) {
-		cursor = document.createElement( 'span' );
-		cursor.className = 'k-typewriter__cursor';
-		cursor.setAttribute( 'aria-hidden', 'true' );
-		cursor.style.animation = 'none';
-		cursor.hidden = false;
-		line.appendChild( cursor );
-	}
-
 	probe.appendChild( line );
 	textElement.appendChild( probe );
 
 	return {
 		content,
-		cursor,
 		line,
 		probe,
 		remove() {
@@ -194,12 +180,8 @@ function createMeasurementProbe(
 	};
 }
 
-function getMeasuredInlineWidth(
-	textElement: HTMLElement,
-	strings: string[],
-	showCursor: boolean
-) {
-	const probe = createMeasurementProbe( textElement, showCursor );
+function getMeasuredInlineWidth( textElement: HTMLElement, strings: string[] ) {
+	const probe = createMeasurementProbe( textElement );
 	let maxWidth = 0;
 
 	for ( const value of strings ) {
@@ -288,13 +270,7 @@ export function syncInlineWidth(
 
 export function observeInlineWidth(
 	textElement: HTMLElement | null,
-	{
-		inlineLayout,
-		mode,
-		items,
-		fallbackText,
-		showCursor,
-	}: InlineWidthSyncOptions,
+	{ inlineLayout, mode, items, fallbackText }: InlineWidthSyncOptions,
 	onChange: MeasurementCallback
 ) {
 	if ( ! textElement ) {
@@ -318,8 +294,7 @@ export function observeInlineWidth(
 	const applyMeasuredWidth = () => {
 		const measuredWidth = getMeasuredInlineWidth(
 			textElement,
-			measurementStrings,
-			showCursor
+			measurementStrings
 		);
 
 		if ( ! measuredWidth ) {
@@ -327,7 +302,11 @@ export function observeInlineWidth(
 			return;
 		}
 
-		onChange( `${ Math.ceil( measuredWidth ) }px` );
+		onChange(
+			`calc(${ Math.ceil(
+				measuredWidth
+			) }px + var(--k-typewriter-inline-cursor-reserve, 0px))`
+		);
 	};
 
 	applyMeasuredWidth();

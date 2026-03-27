@@ -167,12 +167,27 @@ describe( 'shared helpers', () => {
 	test( 'clamps inline width settings into the supported range', () => {
 		const normalized = normalizeAttributes( {
 			inlineWidthMode: 'characters',
-			inlineWidthCh: 999,
+			inlineWidthCh: 1200,
 		} );
 
 		expect( normalized.inlineWidthMode ).toBe( 'characters' );
-		expect( normalized.inlineWidthCh ).toBe( 80 );
+		expect( normalized.inlineWidthCh ).toBe( 1200 );
 		expect( coerceInlineWidthMode( 'stretch' ) ).toBe( 'auto' );
+	} );
+
+	test( 'allows inline width values down to 1ch', () => {
+		expect(
+			normalizeAttributes( {
+				inlineWidthMode: 'characters',
+				inlineWidthCh: 0,
+			} ).inlineWidthCh
+		).toBe( 1 );
+		expect(
+			normalizeAttributes( {
+				inlineWidthMode: 'characters',
+				inlineWidthCh: 12000,
+			} ).inlineWidthCh
+		).toBe( 9999 );
 	} );
 
 	test( 'approximates inline width fallback for measure mode from content', () => {

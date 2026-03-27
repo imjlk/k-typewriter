@@ -9,13 +9,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-27T16:16:06+00:00\n"
+"POT-Creation-Date: 2026-03-27T18:16:45+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: k-typewriter\n"
 
 #. Plugin Name of the plugin
 #: k-typewriter.php
+#: includes/class-k-typewriter-plugin.php:67
 msgid "K Typewriter"
 msgstr ""
 
@@ -39,24 +40,68 @@ msgstr ""
 msgid "https://github.com/imjlk"
 msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:200
+#: includes/class-k-typewriter-plugin.php:68
+msgid "Ready-to-use patterns for K Typewriter."
+msgstr ""
+
+#: includes/class-k-typewriter-plugin.php:244
 #: build/index.js:1
 msgid "한 글자씩, 리듬 있게."
 msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:201
+#: includes/class-k-typewriter-plugin.php:245
 #: build/index.js:1
 msgid "Animate headlines in any language."
 msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:202
+#: includes/class-k-typewriter-plugin.php:246
 #: build/index.js:1
 msgid "Ship polished hero copy in minutes."
 msgstr ""
 
 #. translators: %s: locale-aware list of animated messages.
-#: includes/class-k-typewriter-plugin.php:239
+#: includes/class-k-typewriter-plugin.php:283
 msgid "Typewriter animation that sequentially types %s."
+msgstr ""
+
+#: patterns/announcement-strip.php:10
+msgid "Announcement Strip"
+msgstr ""
+
+#: patterns/announcement-strip.php:11
+msgid "A compact banner for rotating launches, promos, or deadline reminders."
+msgstr ""
+
+#: patterns/feature-spotlight.php:10
+msgid "Feature Spotlight"
+msgstr ""
+
+#: patterns/feature-spotlight.php:11
+msgid "A practical section intro pattern for feature pages, launch sections, and campaign callouts."
+msgstr ""
+
+#: patterns/hero-headline.php:10
+msgid "Hero Headline"
+msgstr ""
+
+#: patterns/hero-headline.php:11
+msgid "A centered hero headline with polished typewriter playback and stable reserved height."
+msgstr ""
+
+#: patterns/inline-keyword-rotator.php:10
+msgid "Inline Keyword Rotator"
+msgstr ""
+
+#: patterns/inline-keyword-rotator.php:11
+msgid "A row-based inline layout that rotates compact keywords without widening the whole line."
+msgstr ""
+
+#: patterns/multilingual-spotlight.php:10
+msgid "Multilingual Spotlight"
+msgstr ""
+
+#: patterns/multilingual-spotlight.php:11
+msgid "A showcase pattern for Korean, English, and Arabic messaging in one polished section."
 msgstr ""
 
 #: build/index.js:1
@@ -188,11 +233,19 @@ msgid "Inline width reserve"
 msgstr ""
 
 #: build/index.js:1
-msgid "Reserve width using an approximate number of character columns."
+msgid "The slider goes up to 80ch. Enter a larger number directly when you need a wider inline reserve."
 msgstr ""
 
 #: build/index.js:1
 msgid "Width in ch"
+msgstr ""
+
+#: build/index.js:1
+msgid "Use any value from 1 and up when you want a larger fixed width than the slider range."
+msgstr ""
+
+#: build/index.js:1
+msgid "Width in ch input"
 msgstr ""
 
 #: build/index.js:1
@@ -204,7 +257,7 @@ msgid "Markup tag"
 msgstr ""
 
 #: build/index.js:1
-msgid "Reserve extra line height to reduce layout shift when longer messages wrap."
+msgid "Reserve extra line height so the layout stays steadier when longer messages wrap."
 msgstr ""
 
 #: build/index.js:1

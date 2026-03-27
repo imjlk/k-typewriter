@@ -24,6 +24,7 @@ Use it for:
 * Announcement banners
 * Event pages
 * Multilingual headline rotations
+* Inline keyword rotators inside rows and grouped layouts
 
 Key features:
 
@@ -38,6 +39,7 @@ Key features:
 * Reduced-motion support for visitors who prefer less animation
 * Semantic tag selection for `p`, `div`, `span`, `h1`-`h6`, `strong`, `em`, `small`, and `mark`
 * Support for theme typography, spacing, and color tools
+* Bundled starter patterns for hero headlines, inline keyword rotators, announcement strips, feature spotlights, and multilingual sections
 
 == Installation ==
 
@@ -59,7 +61,7 @@ Yes. Visitors with `prefers-reduced-motion` enabled will see the visible fallbac
 
 = Can I control the non-visual summary for assistive technology? =
 
-Yes. Leave the `SEO summary text` field empty to auto-generate a locale-aware summary from every message, or provide your own summary override for assistive technology.
+Yes. Leave the summary on `Auto-generated` to build a locale-aware summary from every message, or switch the source to `Custom override` and provide your own summary for assistive technology.
 
 = Can I use Korean and English together? =
 

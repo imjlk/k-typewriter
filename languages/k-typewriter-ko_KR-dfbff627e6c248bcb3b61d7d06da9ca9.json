@@ -1,1 +1,288 @@
-{"translation-revision-date":"2026-03-27 14:50+0900","generator":"WP-CLI\/2.11.0","source":"build\/index.js","domain":"messages","locale_data":{"messages":{"":{"domain":"messages","lang":"ko_KR","plural-forms":"nplurals=1; plural=0;"},"\ud55c \uae00\uc790\uc529, \ub9ac\ub4ec \uc788\uac8c.":["\ud55c \uae00\uc790\uc529, \ub9ac\ub4ec \uc788\uac8c."],"Animate headlines in any language.":["\uc5b4\ub5a4 \uc5b8\uc5b4\ub4e0 \uc790\uc5f0\uc2a4\ub7fd\uac8c \ud5e4\ub4dc\ub77c\uc778\uc744 \uc560\ub2c8\uba54\uc774\uc158\ud558\uc138\uc694."],"Ship polished hero copy in minutes.":["\uc644\uc131\ub3c4 \ub192\uc740 \ud788\uc5b4\ub85c \uce74\ud53c\ub97c \uba87 \ubd84 \ub9cc\uc5d0 \ubc30\ud3ec\ud558\uc138\uc694."],"First start only":["\ucc98\uc74c \uc2dc\uc791\ud560 \ub54c\ub9cc"],"Every cycle":["\ub9e4 \uc0ac\uc774\ud074\ub9c8\ub2e4"],"Every re-entry":["\ub2e4\uc2dc \uc9c4\uc785\ud560 \ub54c\ub9c8\ub2e4"],"Backspace previous message":["\uc774\uc804 \uba54\uc2dc\uc9c0\ub97c \ubc31\uc2a4\ud398\uc774\uc2a4"],"Restart from empty":["\ube48 \uc0c1\ud0dc\uc5d0\uc11c \ub2e4\uc2dc \uc2dc\uc791"],"Top":["\uc704\ucabd"],"Middle":["\uac00\uc6b4\ub370"],"Bottom":["\uc544\ub798\ucabd"],"Auto":["\uc790\ub3d9"],"Left to right":["\uc67c\ucabd\uc5d0\uc11c \uc624\ub978\ucabd"],"Right to left":["\uc624\ub978\ucabd\uc5d0\uc11c \uc67c\ucabd"],"Characters (ch)":["\ubb38\uc790 \uc218(ch)"],"Measure longest message":["\uac00\uc7a5 \uae34 \uba54\uc2dc\uc9c0 \uc2e4\uce21"],"Blink":["\uae5c\ube61\uc784"],"Fade transition":["\ud398\uc774\ub4dc \uc804\ud658"],"Auto-generated":["\uc790\ub3d9 \uc0dd\uc131"],"Custom override":["\uc0ac\uc6a9\uc790 \uc9c0\uc815 \ub36e\uc5b4\uc4f0\uae30"],"Auto uses the first message.":["\uc790\ub3d9 \ubaa8\ub4dc\ub294 \uccab \ubc88\uc9f8 \uba54\uc2dc\uc9c0\ub97c \uc0ac\uc6a9\ud569\ub2c8\ub2e4."],"Custom mode lets you keep a different first-paint message.":["\uc0ac\uc6a9\uc790 \uc9c0\uc815 \ubaa8\ub4dc\uc5d0\uc11c\ub294 \ucc98\uc74c \ud45c\uc2dc\ud560 \uba54\uc2dc\uc9c0\ub97c \ubcc4\ub3c4\ub85c \uc720\uc9c0\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4."],"Auto combines every message into a single summary.":["\uc790\ub3d9 \ubaa8\ub4dc\ub294 \ubaa8\ub4e0 \uba54\uc2dc\uc9c0\ub97c \ud558\ub098\uc758 \uc694\uc57d\uc73c\ub85c \ud569\uce69\ub2c8\ub2e4."],"Custom mode lets you write a shorter or more intentional summary.":["\uc0ac\uc6a9\uc790 \uc9c0\uc815 \ubaa8\ub4dc\uc5d0\uc11c\ub294 \ub354 \uc9e7\uac70\ub098 \uc758\ub3c4\uc801\uc778 \uc694\uc57d\uc744 \uc9c1\uc811 \uc791\uc131\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4."],"Pause preview":["\ubbf8\ub9ac\ubcf4\uae30 \uc77c\uc2dc\uc815\uc9c0"],"Play preview":["\ubbf8\ub9ac\ubcf4\uae30 \uc7ac\uc0dd"],"Content":["\ucf58\ud150\uce20"],"Write one message per line. Empty lines are ignored.":["\uba54\uc2dc\uc9c0\ub97c \ud55c \uc904\uc5d0 \ud558\ub098\uc529 \uc785\ub825\ud558\uc138\uc694. \ube48 \uc904\uc740 \ubb34\uc2dc\ub429\ub2c8\ub2e4."],"Messages":["\uba54\uc2dc\uc9c0"],"Auto follows the current site or page direction. Choose LTR or RTL only when you want to override it.":["\uc790\ub3d9\uc740 \ud604\uc7ac \uc0ac\uc774\ud2b8 \ub610\ub294 \ud398\uc774\uc9c0\uc758 \ubc29\ud5a5\uc744 \ub530\ub985\ub2c8\ub2e4. \ud544\uc694\ud560 \ub54c\ub9cc LTR \ub610\ub294 RTL\ub85c \ub36e\uc5b4\uc4f0\uc138\uc694."],"Text direction":["\ud14d\uc2a4\ud2b8 \ubc29\ud5a5"],"Shrink the block to its content so it fits more naturally inside groups and flex layouts.":["\ube14\ub85d\uc744 \ucf58\ud150\uce20 \ud06c\uae30\uc5d0 \ub9de\uac8c \uc904\uc5ec \uadf8\ub8f9\uacfc flex \ub808\uc774\uc544\uc6c3 \uc548\uc5d0\uc11c \ub354 \uc790\uc5f0\uc2a4\ub7fd\uac8c \ubc30\uce58\ud569\ub2c8\ub2e4."],"Inline layout":["\uc778\ub77c\uc778 \ub808\uc774\uc544\uc6c3"],"Auto lets the block grow naturally. Characters uses an approximate ch width. Measure longest message uses the current font to reserve a steadier inline width.":["\uc790\ub3d9\uc740 \ube14\ub85d\uc774 \uc790\uc5f0\uc2a4\ub7fd\uac8c \ub298\uc5b4\ub098\uace0 \uc904\uc5b4\ub4e4\uac8c \ub461\ub2c8\ub2e4. \ubb38\uc790 \uc218(ch)\ub294 \ub300\ub7b5\uc801\uc778 ch \ud3ed\uc744 \uc0ac\uc6a9\ud569\ub2c8\ub2e4. \uac00\uc7a5 \uae34 \uba54\uc2dc\uc9c0 \uc2e4\uce21\uc740 \ud604\uc7ac \ud3f0\ud2b8\ub97c \uae30\uc900\uc73c\ub85c \ub354 \uc548\uc815\uc801\uc778 \uc778\ub77c\uc778 \ud3ed\uc744 \uc608\uc57d\ud569\ub2c8\ub2e4."],"Inline width reserve":["\uc778\ub77c\uc778 \ub108\ube44 \uc608\uc57d"],"Reserve width using an approximate number of character columns.":["\ub300\ub7b5\uc801\uc778 \ubb38\uc790 \uce78 \uc218\ub97c \uae30\uc900\uc73c\ub85c \ub108\ube44\ub97c \uc608\uc57d\ud569\ub2c8\ub2e4."],"Width in ch":["ch \uae30\uc900 \ub108\ube44"],"Choose a semantic text tag. Use H1 only when this block is the main page heading.":["\uc758\ubbf8\uc5d0 \ub9de\ub294 \ud14d\uc2a4\ud2b8 \ud0dc\uadf8\ub97c \uc120\ud0dd\ud558\uc138\uc694. H1\uc740 \uc774 \ube14\ub85d\uc774 \ud398\uc774\uc9c0\uc758 \uba54\uc778 \uc81c\ubaa9\uc77c \ub54c\ub9cc \uc0ac\uc6a9\ud558\uc138\uc694."],"Markup tag":["\ub9c8\ud06c\uc5c5 \ud0dc\uadf8"],"Reserve extra line height to reduce layout shift when longer messages wrap.":["\ub354 \uae34 \uba54\uc2dc\uc9c0\uac00 \uc904\ubc14\uafc8\ub420 \ub54c \ub808\uc774\uc544\uc6c3\uc774 \ud754\ub4e4\ub9ac\uc9c0 \uc54a\ub3c4\ub85d \uc904 \ub192\uc774\ub97c \ubbf8\ub9ac \ud655\ubcf4\ud569\ub2c8\ub2e4."],"Reserve lines":["\uc608\uc57d \uc904 \uc218"],"Choose how the animated line sits inside the reserved height.":["\uc560\ub2c8\uba54\uc774\uc158 \uc904\uc774 \uc608\uc57d\ub41c \ub192\uc774 \uc548\uc5d0\uc11c \uc5b4\ub514\uc5d0 \uc704\uce58\ud560\uc9c0 \uc120\ud0dd\ud558\uc138\uc694."],"Vertical align":["\uc138\ub85c \uc815\ub82c"],"Fallback & Summary":["\ud3f4\ubc31 \ubc0f \uc694\uc57d"],"Visible fallback":["\ud45c\uc2dc\uc6a9 \ud3f4\ubc31"],"Shown before animation starts, with reduced motion, and without JavaScript.":["\uc560\ub2c8\uba54\uc774\uc158 \uc2dc\uc791 \uc804, \ub3d9\uc791 \ucd95\uc18c \ubaa8\ub4dc, JavaScript \ubbf8\uc0ac\uc6a9 \ud658\uacbd\uc5d0\uc11c \ud45c\uc2dc\ub429\ub2c8\ub2e4."],"Visible fallback source":["\ud45c\uc2dc\uc6a9 \ud3f4\ubc31 \uc18c\uc2a4"],"Leave this empty to fall back to the first message.":["\ube44\uc6cc\ub450\uba74 \uccab \ubc88\uc9f8 \uba54\uc2dc\uc9c0\ub97c \ud3f4\ubc31\uc73c\ub85c \uc0ac\uc6a9\ud569\ub2c8\ub2e4."],"Fallback override":["\ud3f4\ubc31 \ub36e\uc5b4\uc4f0\uae30"],"Effective fallback preview:":["\uc2e4\uc81c \uc801\uc6a9\ub420 \ud3f4\ubc31 \ubbf8\ub9ac\ubcf4\uae30:"],"Non-visual summary":["\ube44\uc2dc\uac01 \uc694\uc57d"],"Used by assistive technology when you want a fuller summary of every message.":["\ubaa8\ub4e0 \uba54\uc2dc\uc9c0\ub97c \ub354 \ucda9\ubd84\ud558\uac8c \uc804\ub2ec\ud558\uace0 \uc2f6\uc744 \ub54c \ubcf4\uc870 \uae30\uc220\uc5d0 \uc0ac\uc6a9\ub429\ub2c8\ub2e4."],"Summary source":["\uc694\uc57d \uc18c\uc2a4"],"Leave this empty to auto-generate the summary from every message.":["\ube44\uc6cc\ub450\uba74 \ubaa8\ub4e0 \uba54\uc2dc\uc9c0\ub85c\ubd80\ud130 \uc694\uc57d\uc744 \uc790\ub3d9 \uc0dd\uc131\ud569\ub2c8\ub2e4."],"Summary override":["\uc694\uc57d \ub36e\uc5b4\uc4f0\uae30"],"Effective non-visual summary:":["\uc2e4\uc81c \uc801\uc6a9\ub420 \ube44\uc2dc\uac01 \uc694\uc57d:"],"Animation":["\uc560\ub2c8\uba54\uc774\uc158"],"Typing delay (ms)":["\ud0c0\uc774\ud551 \uc9c0\uc5f0(ms)"],"Choose whether each new message backspaces the previous one or restarts from an empty state.":["\uac01 \uba54\uc2dc\uc9c0\uac00 \uc774\uc804 \uba54\uc2dc\uc9c0\ub97c \ubc31\uc2a4\ud398\uc774\uc2a4\ud560\uc9c0, \ube48 \uc0c1\ud0dc\uc5d0\uc11c \ub2e4\uc2dc \uc2dc\uc791\ud560\uc9c0 \uc120\ud0dd\ud558\uc138\uc694."],"Transition mode":["\uc804\ud658 \ubc29\uc2dd"],"Deleting delay (ms)":["\uc0ad\uc81c \uc9c0\uc5f0(ms)"],"Pause delay (ms)":["\uc77c\uc2dc\uc815\uc9c0 \uc9c0\uc5f0(ms)"],"Choose when the extra delay should run before animation continues.":["\uc560\ub2c8\uba54\uc774\uc158\uc774 \uc774\uc5b4\uc9c0\uae30 \uc804\uc5d0 \ucd94\uac00 \uc9c0\uc5f0\uc744 \uc5b8\uc81c \uc801\uc6a9\ud560\uc9c0 \uc120\ud0dd\ud558\uc138\uc694."],"Start delay mode":["\uc2dc\uc791 \uc9c0\uc5f0 \ubc29\uc2dd"],"Start delay (ms)":["\uc2dc\uc791 \uc9c0\uc5f0(ms)"],"Clear the static fallback and type the first message from an empty state when animation begins.":["\uc560\ub2c8\uba54\uc774\uc158\uc774 \uc2dc\uc791\ub420 \ub54c \uc815\uc801\uc778 \ud3f4\ubc31\uc744 \uc9c0\uc6b0\uace0 \uccab \uba54\uc2dc\uc9c0\ub97c \ube48 \uc0c1\ud0dc\uc5d0\uc11c\ubd80\ud130 \ud0c0\uc774\ud551\ud569\ub2c8\ub2e4."],"Type first message from empty":["\uccab \uba54\uc2dc\uc9c0\ub97c \ube48 \uc0c1\ud0dc\uc5d0\uc11c \ud0c0\uc774\ud551"],"Turn this off to stop on the final message instead of looping back to the beginning.":["\uc774 \uc635\uc158\uc744 \ub044\uba74 \ucc98\uc74c\uc73c\ub85c \ub418\ub3cc\uc544\uac00\uc9c0 \uc54a\uace0 \ub9c8\uc9c0\ub9c9 \uba54\uc2dc\uc9c0\uc5d0\uc11c \uba48\ucda5\ub2c8\ub2e4."],"Loop messages":["\uba54\uc2dc\uc9c0 \ubc18\ubcf5"],"Start when visible":["\ubcf4\uc77c \ub54c \uc2dc\uc791"],"Pause the animation while the pointer is over the block.":["\ud3ec\uc778\ud130\uac00 \ube14\ub85d \uc704\uc5d0 \uc788\ub294 \ub3d9\uc548 \uc560\ub2c8\uba54\uc774\uc158\uc744 \uc77c\uc2dc\uc815\uc9c0\ud569\ub2c8\ub2e4."],"Pause on hover":["\ud638\ubc84 \uc2dc \uc77c\uc2dc\uc815\uc9c0"],"Cursor":["\ucee4\uc11c"],"Show cursor":["\ucee4\uc11c \ud45c\uc2dc"],"Blink gives a crisp on-off cursor. Fade transition keeps the cursor softer and more fluid.":["\uae5c\ube61\uc784\uc740 \ubd84\uba85\ud55c \uc628\uc624\ud504 \ub290\ub08c\uc758 \ucee4\uc11c\ub97c \ub9cc\ub4ed\ub2c8\ub2e4. \ud398\uc774\ub4dc \uc804\ud658\uc740 \ub354 \ubd80\ub4dc\ub7fd\uace0 \uc720\uc5f0\ud55c \uc6c0\uc9c1\uc784\uc744 \uc720\uc9c0\ud569\ub2c8\ub2e4."],"Cursor animation":["\ucee4\uc11c \uc560\ub2c8\uba54\uc774\uc158"],"Adjust the cursor bar thickness relative to the current font size.":["\ud604\uc7ac \ud3f0\ud2b8 \ud06c\uae30\ub97c \uae30\uc900\uc73c\ub85c \ucee4\uc11c \ub9c9\ub300 \ub450\uaed8\ub97c \uc870\uc808\ud569\ub2c8\ub2e4."],"Cursor thickness":["\ucee4\uc11c \ub450\uaed8"],"Adjust the cursor bar height relative to the current font size.":["\ud604\uc7ac \ud3f0\ud2b8 \ud06c\uae30\ub97c \uae30\uc900\uc73c\ub85c \ucee4\uc11c \ub9c9\ub300 \ub192\uc774\ub97c \uc870\uc808\ud569\ub2c8\ub2e4."],"Cursor height":["\ucee4\uc11c \ub192\uc774"],"Adjust how quickly the cursor blinks.":["\ucee4\uc11c\uac00 \uae5c\ube61\uc774\ub294 \uc18d\ub3c4\ub97c \uc870\uc808\ud569\ub2c8\ub2e4."],"Cursor blink speed (ms)":["\ucee4\uc11c \uae5c\ube61\uc784 \uc18d\ub3c4(ms)"],"Adjust how quickly the cursor fades in and out.":["\ucee4\uc11c\uac00 \ud398\uc774\ub4dc \uc778\uacfc \ud398\uc774\ub4dc \uc544\uc6c3\ud558\ub294 \uc18d\ub3c4\ub97c \uc870\uc808\ud569\ub2c8\ub2e4."],"Cursor transition speed (ms)":["\ucee4\uc11c \uc804\ud658 \uc18d\ub3c4(ms)"],"Move the cursor slightly left or right to match your font better.":["\ud3f0\ud2b8\uc5d0 \ub354 \uc798 \ub9de\ub3c4\ub85d \ucee4\uc11c\ub97c \uc870\uae08 \uc67c\ucabd\uc774\ub098 \uc624\ub978\ucabd\uc73c\ub85c \uc870\uc815\ud569\ub2c8\ub2e4."],"Cursor horizontal offset":["\ucee4\uc11c \uac00\ub85c \uc624\ud504\uc14b"],"Move the cursor slightly up or down to match your font better.":["\ud3f0\ud2b8\uc5d0 \ub354 \uc798 \ub9de\ub3c4\ub85d \ucee4\uc11c\ub97c \uc870\uae08 \uc704\ub098 \uc544\ub798\ub85c \uc870\uc815\ud569\ub2c8\ub2e4."],"Cursor vertical offset":["\ucee4\uc11c \uc138\ub85c \uc624\ud504\uc14b"],"Hide cursor when complete":["\uc644\ub8cc \uc2dc \ucee4\uc11c \uc228\uae30\uae30"]}}}
+{
+    "translation-revision-date": "2026-03-27 14:50+0900",
+    "generator": "WP-CLI\/2.11.0",
+    "source": "build\/index.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "ko_KR",
+                "plural-forms": "nplurals=1; plural=0;"
+            },
+            "\ud55c \uae00\uc790\uc529, \ub9ac\ub4ec \uc788\uac8c.": [
+                "\ud55c \uae00\uc790\uc529, \ub9ac\ub4ec \uc788\uac8c."
+            ],
+            "Animate headlines in any language.": [
+                "\uc5b4\ub5a4 \uc5b8\uc5b4\ub4e0 \uc790\uc5f0\uc2a4\ub7fd\uac8c \ud5e4\ub4dc\ub77c\uc778\uc744 \uc560\ub2c8\uba54\uc774\uc158\ud558\uc138\uc694."
+            ],
+            "Ship polished hero copy in minutes.": [
+                "\uc644\uc131\ub3c4 \ub192\uc740 \ud788\uc5b4\ub85c \uce74\ud53c\ub97c \uba87 \ubd84 \ub9cc\uc5d0 \ubc30\ud3ec\ud558\uc138\uc694."
+            ],
+            "First start only": [
+                "\ucc98\uc74c \uc2dc\uc791\ud560 \ub54c\ub9cc"
+            ],
+            "Every cycle": [
+                "\ub9e4 \uc0ac\uc774\ud074\ub9c8\ub2e4"
+            ],
+            "Every re-entry": [
+                "\ub2e4\uc2dc \uc9c4\uc785\ud560 \ub54c\ub9c8\ub2e4"
+            ],
+            "Backspace previous message": [
+                "\uc774\uc804 \uba54\uc2dc\uc9c0\ub97c \ubc31\uc2a4\ud398\uc774\uc2a4"
+            ],
+            "Restart from empty": [
+                "\ube48 \uc0c1\ud0dc\uc5d0\uc11c \ub2e4\uc2dc \uc2dc\uc791"
+            ],
+            "Top": [
+                "\uc704\ucabd"
+            ],
+            "Middle": [
+                "\uac00\uc6b4\ub370"
+            ],
+            "Bottom": [
+                "\uc544\ub798\ucabd"
+            ],
+            "Auto": [
+                "\uc790\ub3d9"
+            ],
+            "Left to right": [
+                "\uc67c\ucabd\uc5d0\uc11c \uc624\ub978\ucabd"
+            ],
+            "Right to left": [
+                "\uc624\ub978\ucabd\uc5d0\uc11c \uc67c\ucabd"
+            ],
+            "Characters (ch)": [
+                "\ubb38\uc790 \uc218(ch)"
+            ],
+            "Measure longest message": [
+                "\uac00\uc7a5 \uae34 \uba54\uc2dc\uc9c0 \uc2e4\uce21"
+            ],
+            "Blink": [
+                "\uae5c\ube61\uc784"
+            ],
+            "Fade transition": [
+                "\ud398\uc774\ub4dc \uc804\ud658"
+            ],
+            "Auto-generated": [
+                "\uc790\ub3d9 \uc0dd\uc131"
+            ],
+            "Custom override": [
+                "\uc0ac\uc6a9\uc790 \uc9c0\uc815 \ub36e\uc5b4\uc4f0\uae30"
+            ],
+            "Auto uses the first message.": [
+                "\uc790\ub3d9 \ubaa8\ub4dc\ub294 \uccab \ubc88\uc9f8 \uba54\uc2dc\uc9c0\ub97c \uc0ac\uc6a9\ud569\ub2c8\ub2e4."
+            ],
+            "Custom mode lets you keep a different first-paint message.": [
+                "\uc0ac\uc6a9\uc790 \uc9c0\uc815 \ubaa8\ub4dc\uc5d0\uc11c\ub294 \ucc98\uc74c \ud45c\uc2dc\ud560 \uba54\uc2dc\uc9c0\ub97c \ubcc4\ub3c4\ub85c \uc720\uc9c0\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4."
+            ],
+            "Auto combines every message into a single summary.": [
+                "\uc790\ub3d9 \ubaa8\ub4dc\ub294 \ubaa8\ub4e0 \uba54\uc2dc\uc9c0\ub97c \ud558\ub098\uc758 \uc694\uc57d\uc73c\ub85c \ud569\uce69\ub2c8\ub2e4."
+            ],
+            "Custom mode lets you write a shorter or more intentional summary.": [
+                "\uc0ac\uc6a9\uc790 \uc9c0\uc815 \ubaa8\ub4dc\uc5d0\uc11c\ub294 \ub354 \uc9e7\uac70\ub098 \uc758\ub3c4\uc801\uc778 \uc694\uc57d\uc744 \uc9c1\uc811 \uc791\uc131\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4."
+            ],
+            "Pause preview": [
+                "\ubbf8\ub9ac\ubcf4\uae30 \uc77c\uc2dc\uc815\uc9c0"
+            ],
+            "Play preview": [
+                "\ubbf8\ub9ac\ubcf4\uae30 \uc7ac\uc0dd"
+            ],
+            "Content": [
+                "\ucf58\ud150\uce20"
+            ],
+            "Write one message per line. Empty lines are ignored.": [
+                "\uba54\uc2dc\uc9c0\ub97c \ud55c \uc904\uc5d0 \ud558\ub098\uc529 \uc785\ub825\ud558\uc138\uc694. \ube48 \uc904\uc740 \ubb34\uc2dc\ub429\ub2c8\ub2e4."
+            ],
+            "Messages": [
+                "\uba54\uc2dc\uc9c0"
+            ],
+            "Auto follows the current site or page direction. Choose LTR or RTL only when you want to override it.": [
+                "\uc790\ub3d9\uc740 \ud604\uc7ac \uc0ac\uc774\ud2b8 \ub610\ub294 \ud398\uc774\uc9c0\uc758 \ubc29\ud5a5\uc744 \ub530\ub985\ub2c8\ub2e4. \ud544\uc694\ud560 \ub54c\ub9cc LTR \ub610\ub294 RTL\ub85c \ub36e\uc5b4\uc4f0\uc138\uc694."
+            ],
+            "Text direction": [
+                "\ud14d\uc2a4\ud2b8 \ubc29\ud5a5"
+            ],
+            "Shrink the block to its content so it fits more naturally inside groups and flex layouts.": [
+                "\ube14\ub85d\uc744 \ucf58\ud150\uce20 \ud06c\uae30\uc5d0 \ub9de\uac8c \uc904\uc5ec \uadf8\ub8f9\uacfc flex \ub808\uc774\uc544\uc6c3 \uc548\uc5d0\uc11c \ub354 \uc790\uc5f0\uc2a4\ub7fd\uac8c \ubc30\uce58\ud569\ub2c8\ub2e4."
+            ],
+            "Inline layout": [
+                "\uc778\ub77c\uc778 \ub808\uc774\uc544\uc6c3"
+            ],
+            "Auto lets the block grow naturally. Characters uses an approximate ch width. Measure longest message uses the current font to reserve a steadier inline width.": [
+                "\uc790\ub3d9\uc740 \ube14\ub85d\uc774 \uc790\uc5f0\uc2a4\ub7fd\uac8c \ub298\uc5b4\ub098\uace0 \uc904\uc5b4\ub4e4\uac8c \ub461\ub2c8\ub2e4. \ubb38\uc790 \uc218(ch)\ub294 \ub300\ub7b5\uc801\uc778 ch \ud3ed\uc744 \uc0ac\uc6a9\ud569\ub2c8\ub2e4. \uac00\uc7a5 \uae34 \uba54\uc2dc\uc9c0 \uc2e4\uce21\uc740 \ud604\uc7ac \ud3f0\ud2b8\ub97c \uae30\uc900\uc73c\ub85c \ub354 \uc548\uc815\uc801\uc778 \uc778\ub77c\uc778 \ud3ed\uc744 \uc608\uc57d\ud569\ub2c8\ub2e4."
+            ],
+            "Inline width reserve": [
+                "\uc778\ub77c\uc778 \ub108\ube44 \uc608\uc57d"
+            ],
+            "The slider goes up to 80ch. Enter a larger number directly when you need a wider inline reserve.": [
+                "\uc2ac\ub77c\uc774\ub354\ub294 80ch\uae4c\uc9c0 \uc9c0\uc6d0\ud569\ub2c8\ub2e4. \ub354 \ub113\uc740 \uc778\ub77c\uc778 \uc608\uc57d \ud3ed\uc774 \ud544\uc694\ud558\uba74 \ud070 \uac12\uc744 \uc9c1\uc811 \uc785\ub825\ud558\uc138\uc694."
+            ],
+            "Width in ch": [
+                "ch \uae30\uc900 \ub108\ube44"
+            ],
+            "Use any value from 1 and up when you want a larger fixed width than the slider range.": [
+                "\uc2ac\ub77c\uc774\ub354 \ubc94\uc704\ubcf4\ub2e4 \ub354 \ud070 \uace0\uc815 \ud3ed\uc774 \ud544\uc694\ud558\uba74 1 \uc774\uc0c1\uc758 \uac12\uc744 \uc9c1\uc811 \uc785\ub825\ud558\uc138\uc694."
+            ],
+            "Width in ch input": [
+                "ch \uae30\uc900 \ub108\ube44 \uc785\ub825"
+            ],
+            "Choose a semantic text tag. Use H1 only when this block is the main page heading.": [
+                "\uc758\ubbf8\uc5d0 \ub9de\ub294 \ud14d\uc2a4\ud2b8 \ud0dc\uadf8\ub97c \uc120\ud0dd\ud558\uc138\uc694. H1\uc740 \uc774 \ube14\ub85d\uc774 \ud398\uc774\uc9c0\uc758 \uba54\uc778 \uc81c\ubaa9\uc77c \ub54c\ub9cc \uc0ac\uc6a9\ud558\uc138\uc694."
+            ],
+            "Markup tag": [
+                "\ub9c8\ud06c\uc5c5 \ud0dc\uadf8"
+            ],
+            "Reserve extra line height so the layout stays steadier when longer messages wrap.": [
+                "\ub354 \uae34 \uba54\uc2dc\uc9c0\uac00 \uc904\ubc14\uafc8\ub420 \ub54c\ub3c4 \ub808\uc774\uc544\uc6c3\uc774 \ub354 \uc548\uc815\uc801\uc73c\ub85c \uc720\uc9c0\ub418\ub3c4\ub85d \uc904 \ub192\uc774\ub97c \ubbf8\ub9ac \ud655\ubcf4\ud569\ub2c8\ub2e4."
+            ],
+            "Reserve lines": [
+                "\uc608\uc57d \uc904 \uc218"
+            ],
+            "Choose how the animated line sits inside the reserved height.": [
+                "\uc560\ub2c8\uba54\uc774\uc158 \uc904\uc774 \uc608\uc57d\ub41c \ub192\uc774 \uc548\uc5d0\uc11c \uc5b4\ub514\uc5d0 \uc704\uce58\ud560\uc9c0 \uc120\ud0dd\ud558\uc138\uc694."
+            ],
+            "Vertical align": [
+                "\uc138\ub85c \uc815\ub82c"
+            ],
+            "Fallback & Summary": [
+                "\ud3f4\ubc31 \ubc0f \uc694\uc57d"
+            ],
+            "Visible fallback": [
+                "\ud45c\uc2dc\uc6a9 \ud3f4\ubc31"
+            ],
+            "Shown before animation starts, with reduced motion, and without JavaScript.": [
+                "\uc560\ub2c8\uba54\uc774\uc158 \uc2dc\uc791 \uc804, \ub3d9\uc791 \ucd95\uc18c \ubaa8\ub4dc, JavaScript \ubbf8\uc0ac\uc6a9 \ud658\uacbd\uc5d0\uc11c \ud45c\uc2dc\ub429\ub2c8\ub2e4."
+            ],
+            "Visible fallback source": [
+                "\ud45c\uc2dc\uc6a9 \ud3f4\ubc31 \uc18c\uc2a4"
+            ],
+            "Leave this empty to fall back to the first message.": [
+                "\ube44\uc6cc\ub450\uba74 \uccab \ubc88\uc9f8 \uba54\uc2dc\uc9c0\ub97c \ud3f4\ubc31\uc73c\ub85c \uc0ac\uc6a9\ud569\ub2c8\ub2e4."
+            ],
+            "Fallback override": [
+                "\ud3f4\ubc31 \ub36e\uc5b4\uc4f0\uae30"
+            ],
+            "Effective fallback preview:": [
+                "\uc2e4\uc81c \uc801\uc6a9\ub420 \ud3f4\ubc31 \ubbf8\ub9ac\ubcf4\uae30:"
+            ],
+            "Non-visual summary": [
+                "\ube44\uc2dc\uac01 \uc694\uc57d"
+            ],
+            "Used by assistive technology when you want a fuller summary of every message.": [
+                "\ubaa8\ub4e0 \uba54\uc2dc\uc9c0\ub97c \ub354 \ucda9\ubd84\ud558\uac8c \uc804\ub2ec\ud558\uace0 \uc2f6\uc744 \ub54c \ubcf4\uc870 \uae30\uc220\uc5d0 \uc0ac\uc6a9\ub429\ub2c8\ub2e4."
+            ],
+            "Summary source": [
+                "\uc694\uc57d \uc18c\uc2a4"
+            ],
+            "Leave this empty to auto-generate the summary from every message.": [
+                "\ube44\uc6cc\ub450\uba74 \ubaa8\ub4e0 \uba54\uc2dc\uc9c0\ub85c\ubd80\ud130 \uc694\uc57d\uc744 \uc790\ub3d9 \uc0dd\uc131\ud569\ub2c8\ub2e4."
+            ],
+            "Summary override": [
+                "\uc694\uc57d \ub36e\uc5b4\uc4f0\uae30"
+            ],
+            "Effective non-visual summary:": [
+                "\uc2e4\uc81c \uc801\uc6a9\ub420 \ube44\uc2dc\uac01 \uc694\uc57d:"
+            ],
+            "Animation": [
+                "\uc560\ub2c8\uba54\uc774\uc158"
+            ],
+            "Typing delay (ms)": [
+                "\ud0c0\uc774\ud551 \uc9c0\uc5f0(ms)"
+            ],
+            "Choose whether each new message backspaces the previous one or restarts from an empty state.": [
+                "\uac01 \uba54\uc2dc\uc9c0\uac00 \uc774\uc804 \uba54\uc2dc\uc9c0\ub97c \ubc31\uc2a4\ud398\uc774\uc2a4\ud560\uc9c0, \ube48 \uc0c1\ud0dc\uc5d0\uc11c \ub2e4\uc2dc \uc2dc\uc791\ud560\uc9c0 \uc120\ud0dd\ud558\uc138\uc694."
+            ],
+            "Transition mode": [
+                "\uc804\ud658 \ubc29\uc2dd"
+            ],
+            "Deleting delay (ms)": [
+                "\uc0ad\uc81c \uc9c0\uc5f0(ms)"
+            ],
+            "Pause delay (ms)": [
+                "\uc77c\uc2dc\uc815\uc9c0 \uc9c0\uc5f0(ms)"
+            ],
+            "Choose when the extra delay should run before animation continues.": [
+                "\uc560\ub2c8\uba54\uc774\uc158\uc774 \uc774\uc5b4\uc9c0\uae30 \uc804\uc5d0 \ucd94\uac00 \uc9c0\uc5f0\uc744 \uc5b8\uc81c \uc801\uc6a9\ud560\uc9c0 \uc120\ud0dd\ud558\uc138\uc694."
+            ],
+            "Start delay mode": [
+                "\uc2dc\uc791 \uc9c0\uc5f0 \ubc29\uc2dd"
+            ],
+            "Start delay (ms)": [
+                "\uc2dc\uc791 \uc9c0\uc5f0(ms)"
+            ],
+            "Clear the static fallback and type the first message from an empty state when animation begins.": [
+                "\uc560\ub2c8\uba54\uc774\uc158\uc774 \uc2dc\uc791\ub420 \ub54c \uc815\uc801\uc778 \ud3f4\ubc31\uc744 \uc9c0\uc6b0\uace0 \uccab \uba54\uc2dc\uc9c0\ub97c \ube48 \uc0c1\ud0dc\uc5d0\uc11c\ubd80\ud130 \ud0c0\uc774\ud551\ud569\ub2c8\ub2e4."
+            ],
+            "Type first message from empty": [
+                "\uccab \uba54\uc2dc\uc9c0\ub97c \ube48 \uc0c1\ud0dc\uc5d0\uc11c \ud0c0\uc774\ud551"
+            ],
+            "Turn this off to stop on the final message instead of looping back to the beginning.": [
+                "\uc774 \uc635\uc158\uc744 \ub044\uba74 \ucc98\uc74c\uc73c\ub85c \ub418\ub3cc\uc544\uac00\uc9c0 \uc54a\uace0 \ub9c8\uc9c0\ub9c9 \uba54\uc2dc\uc9c0\uc5d0\uc11c \uba48\ucda5\ub2c8\ub2e4."
+            ],
+            "Loop messages": [
+                "\uba54\uc2dc\uc9c0 \ubc18\ubcf5"
+            ],
+            "Start when visible": [
+                "\ubcf4\uc77c \ub54c \uc2dc\uc791"
+            ],
+            "Pause the animation while the pointer is over the block.": [
+                "\ud3ec\uc778\ud130\uac00 \ube14\ub85d \uc704\uc5d0 \uc788\ub294 \ub3d9\uc548 \uc560\ub2c8\uba54\uc774\uc158\uc744 \uc77c\uc2dc\uc815\uc9c0\ud569\ub2c8\ub2e4."
+            ],
+            "Pause on hover": [
+                "\ud638\ubc84 \uc2dc \uc77c\uc2dc\uc815\uc9c0"
+            ],
+            "Cursor": [
+                "\ucee4\uc11c"
+            ],
+            "Show cursor": [
+                "\ucee4\uc11c \ud45c\uc2dc"
+            ],
+            "Blink gives a crisp on-off cursor. Fade transition keeps the cursor softer and more fluid.": [
+                "\uae5c\ube61\uc784\uc740 \ubd84\uba85\ud55c \uc628\uc624\ud504 \ub290\ub08c\uc758 \ucee4\uc11c\ub97c \ub9cc\ub4ed\ub2c8\ub2e4. \ud398\uc774\ub4dc \uc804\ud658\uc740 \ub354 \ubd80\ub4dc\ub7fd\uace0 \uc720\uc5f0\ud55c \uc6c0\uc9c1\uc784\uc744 \uc720\uc9c0\ud569\ub2c8\ub2e4."
+            ],
+            "Cursor animation": [
+                "\ucee4\uc11c \uc560\ub2c8\uba54\uc774\uc158"
+            ],
+            "Adjust the cursor bar thickness relative to the current font size.": [
+                "\ud604\uc7ac \ud3f0\ud2b8 \ud06c\uae30\ub97c \uae30\uc900\uc73c\ub85c \ucee4\uc11c \ub9c9\ub300 \ub450\uaed8\ub97c \uc870\uc808\ud569\ub2c8\ub2e4."
+            ],
+            "Cursor thickness": [
+                "\ucee4\uc11c \ub450\uaed8"
+            ],
+            "Adjust the cursor bar height relative to the current font size.": [
+                "\ud604\uc7ac \ud3f0\ud2b8 \ud06c\uae30\ub97c \uae30\uc900\uc73c\ub85c \ucee4\uc11c \ub9c9\ub300 \ub192\uc774\ub97c \uc870\uc808\ud569\ub2c8\ub2e4."
+            ],
+            "Cursor height": [
+                "\ucee4\uc11c \ub192\uc774"
+            ],
+            "Adjust how quickly the cursor blinks.": [
+                "\ucee4\uc11c\uac00 \uae5c\ube61\uc774\ub294 \uc18d\ub3c4\ub97c \uc870\uc808\ud569\ub2c8\ub2e4."
+            ],
+            "Cursor blink speed (ms)": [
+                "\ucee4\uc11c \uae5c\ube61\uc784 \uc18d\ub3c4(ms)"
+            ],
+            "Adjust how quickly the cursor fades in and out.": [
+                "\ucee4\uc11c\uac00 \ud398\uc774\ub4dc \uc778\uacfc \ud398\uc774\ub4dc \uc544\uc6c3\ud558\ub294 \uc18d\ub3c4\ub97c \uc870\uc808\ud569\ub2c8\ub2e4."
+            ],
+            "Cursor transition speed (ms)": [
+                "\ucee4\uc11c \uc804\ud658 \uc18d\ub3c4(ms)"
+            ],
+            "Move the cursor slightly left or right to match your font better.": [
+                "\ud3f0\ud2b8\uc5d0 \ub354 \uc798 \ub9de\ub3c4\ub85d \ucee4\uc11c\ub97c \uc870\uae08 \uc67c\ucabd\uc774\ub098 \uc624\ub978\ucabd\uc73c\ub85c \uc870\uc815\ud569\ub2c8\ub2e4."
+            ],
+            "Cursor horizontal offset": [
+                "\ucee4\uc11c \uac00\ub85c \uc624\ud504\uc14b"
+            ],
+            "Move the cursor slightly up or down to match your font better.": [
+                "\ud3f0\ud2b8\uc5d0 \ub354 \uc798 \ub9de\ub3c4\ub85d \ucee4\uc11c\ub97c \uc870\uae08 \uc704\ub098 \uc544\ub798\ub85c \uc870\uc815\ud569\ub2c8\ub2e4."
+            ],
+            "Cursor vertical offset": [
+                "\ucee4\uc11c \uc138\ub85c \uc624\ud504\uc14b"
+            ],
+            "Hide cursor when complete": [
+                "\uc644\ub8cc \uc2dc \ucee4\uc11c \uc228\uae30\uae30"
+            ]
+        }
+    }
+}

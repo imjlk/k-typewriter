@@ -288,7 +288,7 @@ export default function EditorPreview( {
 						: undefined
 				}
 				className="k-typewriter__text k-typewriter-editor__preview"
-				dir={ textDirection === 'auto' ? undefined : textDirection }
+				dir={ textDirection === 'auto' ? 'auto' : textDirection }
 				ref={ textRef }
 				style={ previewStyle }
 			>

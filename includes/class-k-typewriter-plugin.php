@@ -20,6 +20,8 @@ final class K_Typewriter_Plugin {
 	public static function boot() {
 		add_action( 'init', array( __CLASS__, 'load_textdomain' ) );
 		add_action( 'init', array( __CLASS__, 'register_blocks' ) );
+		add_action( 'init', array( __CLASS__, 'register_pattern_category' ) );
+		add_action( 'init', array( __CLASS__, 'register_patterns' ) );
 	}
 
 	/**
@@ -50,6 +52,48 @@ final class K_Typewriter_Plugin {
 	}
 
 	/**
+	 * Register the plugin pattern category.
+	 *
+	 * @return void
+	 */
+	public static function register_pattern_category() {
+		if ( ! function_exists( 'register_block_pattern_category' ) ) {
+			return;
+		}
+
+		register_block_pattern_category(
+			'k-typewriter',
+			array(
+				'label'       => __( 'K Typewriter', 'k-typewriter' ),
+				'description' => __( 'Ready-to-use patterns for K Typewriter.', 'k-typewriter' ),
+			)
+		);
+	}
+
+	/**
+	 * Register bundled block patterns.
+	 *
+	 * @return void
+	 */
+	public static function register_patterns() {
+		if ( ! function_exists( 'register_block_pattern' ) ) {
+			return;
+		}
+
+		foreach ( glob( __DIR__ . '/../patterns/*.php' ) as $pattern_file ) {
+			$pattern = require $pattern_file;
+
+			if ( ! is_array( $pattern ) || empty( $pattern['slug'] ) ) {
+				continue;
+			}
+
+			$slug = (string) $pattern['slug'];
+			unset( $pattern['slug'] );
+			register_block_pattern( $slug, $pattern );
+		}
+	}
+
+	/**
 	 * Render the block output.
 	 *
 	 * @param array  $attributes Block attributes.
@@ -67,7 +111,7 @@ final class K_Typewriter_Plugin {
 			? 'k-typewriter__cursor k-typewriter__cursor--transition'
 			: 'k-typewriter__cursor k-typewriter__cursor--blink';
 		$root_classes     = array( 'k-typewriter', 'is-paused' );
-		$text_direction   = 'auto' !== $settings['textDirection'] ? $settings['textDirection'] : '';
+		$text_direction   = 'auto' === $settings['textDirection'] ? 'auto' : $settings['textDirection'];
 		$vertical_align   = 'flex-start';
 
 		if ( 'middle' === $settings['verticalAlign'] ) {
@@ -253,7 +297,7 @@ final class K_Typewriter_Plugin {
 		}
 
 		if ( 'characters' === $settings['inlineWidthMode'] ) {
-			return min( 80, max( 4, (int) $settings['inlineWidthCh'] ) );
+			return min( 9999, max( 1, (int) $settings['inlineWidthCh'] ) );
 		}
 
 		$messages = array_values(
@@ -276,7 +320,7 @@ final class K_Typewriter_Plugin {
 			}
 		}
 
-		return min( 80, max( 4, $longest ) );
+		return min( 9999, max( 1, $longest ) );
 	}
 
 	/**
@@ -457,7 +501,7 @@ final class K_Typewriter_Plugin {
 			'verticalAlign'     => $vertical_align,
 			'inlineLayout'      => (bool) $attributes['inlineLayout'],
 			'inlineWidthMode'   => $inline_width_mode,
-			'inlineWidthCh'     => min( 80, max( 4, (int) $attributes['inlineWidthCh'] ) ),
+			'inlineWidthCh'     => min( 9999, max( 1, (int) $attributes['inlineWidthCh'] ) ),
 			'textDirection'     => $text_direction,
 			'startFromEmpty'    => (bool) $attributes['startFromEmpty'],
 			'showCursor'        => (bool) $attributes['showCursor'],

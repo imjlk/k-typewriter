@@ -20,6 +20,18 @@ Highlights:
 - Semantic tag selection from `p`, `div`, `span`, `h1`-`h6`, `strong`, `em`, `small`, and `mark`
 - Support for theme typography, spacing, and color tools
 
+## Ready-to-use Patterns
+
+The plugin now ships starter block patterns so the block is useful immediately after activation.
+
+- `Hero Headline`: a centered hero section with reserved lines and polished headline motion
+- `Inline Keyword Rotator`: a row-based inline example that pairs fixed copy with `inline layout + measure`
+- `Announcement Strip`: a compact banner for launches, reminders, and promo messages
+- `Feature Spotlight`: a practical mid-page section intro with CTA buttons
+- `Multilingual Spotlight`: a showcase section for Korean, English, and Arabic messaging
+
+For more experimental width and layout stability comparisons, use the Playground `Stability Examples` page instead of the starter patterns.
+
 ## Playground Preview
 
 WordPress.org preview support is configured through [`.wordpress-org/blueprints/blueprint.json`](./.wordpress-org/blueprints/blueprint.json). After the first WordPress.org deploy, maintainers can enable the public preview button from the plugin's Advanced view.

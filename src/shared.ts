@@ -51,6 +51,10 @@ export const DEFAULT_ATTRIBUTES = {
 	tagName: 'p',
 } as const;
 
+export const INLINE_WIDTH_CH_MIN = 1;
+export const INLINE_WIDTH_CH_SLIDER_MAX = 80;
+export const INLINE_WIDTH_CH_INPUT_MAX = 9999;
+
 export const VALID_TAG_NAMES = [
 	'p',
 	'div',
@@ -308,8 +312,8 @@ export function getApproximateInlineWidthCh(
 	if ( attributes.inlineWidthMode === 'characters' ) {
 		return clampNumber(
 			attributes.inlineWidthCh ?? DEFAULT_ATTRIBUTES.inlineWidthCh,
-			4,
-			80
+			INLINE_WIDTH_CH_MIN,
+			INLINE_WIDTH_CH_INPUT_MAX
 		);
 	}
 
@@ -322,7 +326,11 @@ export function getApproximateInlineWidthCh(
 		DEFAULT_ATTRIBUTES.inlineWidthCh
 	);
 
-	return clampNumber( longestLength, 4, 80 );
+	return clampNumber(
+		longestLength,
+		INLINE_WIDTH_CH_MIN,
+		INLINE_WIDTH_CH_INPUT_MAX
+	);
 }
 
 export function getEffectiveSummaryText(
@@ -398,8 +406,8 @@ export function normalizeAttributes(
 		inlineWidthMode: coerceInlineWidthMode( attributes.inlineWidthMode ),
 		inlineWidthCh: clampNumber(
 			attributes.inlineWidthCh ?? DEFAULT_ATTRIBUTES.inlineWidthCh,
-			4,
-			80
+			INLINE_WIDTH_CH_MIN,
+			INLINE_WIDTH_CH_INPUT_MAX
 		),
 		textDirection: coerceTextDirection( attributes.textDirection ),
 		startFromEmpty:
