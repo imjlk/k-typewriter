@@ -125,6 +125,7 @@ export default function Edit( {
 }: BlockEditProps< TypewriterAttributes > ) {
 	const normalizedAttributes = normalizeAttributes( attributes );
 	const [ isPreviewPaused, setIsPreviewPaused ] = useState( false );
+	const [ isEditingMessages, setIsEditingMessages ] = useState( false );
 	const {
 		items,
 		typeDelay,
@@ -158,6 +159,7 @@ export default function Edit( {
 		summaryText,
 		tagName,
 	} = normalizedAttributes;
+	const [ itemsDraft, setItemsDraft ] = useState( () => items.join( '\n' ) );
 	const blockProps = useBlockProps( {
 		className: inlineLayout ? 'is-inline-layout' : undefined,
 	} );
@@ -189,6 +191,26 @@ export default function Edit( {
 			setIsPreviewPaused( false );
 		}
 	}, [ isSelected ] );
+
+	useEffect( () => {
+		if ( ! isEditingMessages ) {
+			setItemsDraft( items.join( '\n' ) );
+		}
+	}, [ isEditingMessages, items ] );
+
+	const parseMessageDraft = ( value: string ) =>
+		value
+			.split( /\r?\n/u )
+			.map( ( item ) => item.trim() )
+			.filter( Boolean );
+
+	const stopTextareaEnterPropagation = (
+		event: KeyboardEvent & { stopPropagation: () => void }
+	) => {
+		if ( event.key === 'Enter' ) {
+			event.stopPropagation();
+		}
+	};
 
 	return (
 		<>
@@ -227,15 +249,21 @@ export default function Edit( {
 						) }
 						label={ __( 'Messages', 'k-typewriter' ) }
 						rows={ 6 }
-						value={ items.join( '\n' ) }
-						onChange={ ( value ) =>
+						value={ itemsDraft }
+						onBlur={ () => {
+							const nextItems = parseMessageDraft( itemsDraft );
+							setIsEditingMessages( false );
+							setAttributes( { items: nextItems } );
+							setItemsDraft( nextItems.join( '\n' ) );
+						} }
+						onChange={ ( value ) => {
+							setItemsDraft( value );
 							setAttributes( {
-								items: value
-									.split( /\r?\n/u )
-									.map( ( item ) => item.trim() )
-									.filter( Boolean ),
-							} )
-						}
+								items: parseMessageDraft( value ),
+							} );
+						} }
+						onFocus={ () => setIsEditingMessages( true ) }
+						onKeyDown={ stopTextareaEnterPropagation }
 					/>
 					<SelectControl
 						help={ __(
@@ -438,6 +466,7 @@ export default function Edit( {
 								'k-typewriter'
 							) }
 							label={ __( 'Summary override', 'k-typewriter' ) }
+							onKeyDown={ stopTextareaEnterPropagation }
 							rows={ 3 }
 							value={ summaryText }
 							onChange={ ( value ) =>
