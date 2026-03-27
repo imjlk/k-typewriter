@@ -1,0 +1,202 @@
+# Copyright (C) 2026 imjlk
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: K Typewriter 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/k-typewriter-src\n"
+"Last-Translator: imjlk\n"
+"Language-Team: Korean\n"
+"Language: ko_KR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2026-03-27 14:50+0900\n"
+"X-Generator: Codex\n"
+"X-Domain: k-typewriter\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Plugin Name of the plugin
+#: k-typewriter.php
+msgid "K Typewriter"
+msgstr "K Typewriter"
+
+#. Plugin URI of the plugin
+#: k-typewriter.php
+msgid "https://github.com/imjlk/k-typewriter"
+msgstr "https://github.com/imjlk/k-typewriter"
+
+#. Description of the plugin
+#: k-typewriter.php
+msgid "Add a configurable typewriter text block for hero headlines, notices, and multilingual messaging."
+msgstr "히어로 헤드라인, 공지, 다국어 메시지에 사용할 수 있는 설정형 타이프라이터 텍스트 블록을 추가합니다."
+
+#. Author of the plugin
+#: k-typewriter.php
+msgid "imjlk"
+msgstr "imjlk"
+
+#. Author URI of the plugin
+#: k-typewriter.php
+msgid "https://github.com/imjlk"
+msgstr "https://github.com/imjlk"
+
+#: includes/class-k-typewriter-plugin.php:65
+msgid "K Typewriter (Legacy)"
+msgstr "K Typewriter (레거시)"
+
+#: includes/class-k-typewriter-plugin.php:175
+#: build/index.js:1
+msgid "한 글자씩, 리듬 있게."
+msgstr "한 글자씩, 리듬 있게."
+
+#: includes/class-k-typewriter-plugin.php:176
+#: build/index.js:1
+msgid "Animate headlines in any language."
+msgstr "어떤 언어든 자연스럽게 헤드라인을 애니메이션하세요."
+
+#: includes/class-k-typewriter-plugin.php:177
+#: build/index.js:1
+msgid "Ship polished hero copy in minutes."
+msgstr "완성도 높은 히어로 카피를 몇 분 만에 배포하세요."
+
+#: build/index.js:1
+msgid "First start only"
+msgstr "처음 시작할 때만"
+
+#: build/index.js:1
+msgid "Every cycle"
+msgstr "매 사이클마다"
+
+#: build/index.js:1
+msgid "Every re-entry"
+msgstr "다시 진입할 때마다"
+
+#: build/index.js:1
+msgid "Pause preview"
+msgstr "미리보기 일시정지"
+
+#: build/index.js:1
+msgid "Play preview"
+msgstr "미리보기 재생"
+
+#: build/index.js:1
+msgid "Content"
+msgstr "콘텐츠"
+
+#: build/index.js:1
+msgid "Write one message per line. Empty lines are ignored."
+msgstr "메시지를 한 줄에 하나씩 입력하세요. 빈 줄은 무시됩니다."
+
+#: build/index.js:1
+msgid "Messages"
+msgstr "메시지"
+
+#: build/index.js:1
+msgid "Choose a semantic text tag. Use H1 only when this block is the main page heading."
+msgstr "의미에 맞는 텍스트 태그를 선택하세요. H1은 이 블록이 페이지의 메인 제목일 때만 사용하세요."
+
+#: build/index.js:1
+msgid "Markup tag"
+msgstr "마크업 태그"
+
+#: build/index.js:1
+msgid "Fallback"
+msgstr "폴백"
+
+#: build/index.js:1
+msgid "Override the default visible fallback used before animation, with reduced motion, and without JavaScript."
+msgstr "애니메이션 시작 전, 동작 축소 모드, JavaScript 미사용 환경에서 보이는 기본 폴백 텍스트를 덮어씁니다."
+
+#: build/index.js:1
+msgid "Use custom fallback"
+msgstr "커스텀 폴백 사용"
+
+#: build/index.js:1
+msgid "Leave this empty to fall back to the first message."
+msgstr "비워두면 첫 번째 메시지를 폴백으로 사용합니다."
+
+#: build/index.js:1
+msgid "Fallback text"
+msgstr "폴백 텍스트"
+
+#: build/index.js:1
+msgid "SEO & Accessibility"
+msgstr "SEO 및 접근성"
+
+#: build/index.js:1
+msgid "Used as the non-visual summary for assistive technology. Leave blank to auto-generate it from every message."
+msgstr "보조 기술을 위한 비시각 요약 텍스트로 사용됩니다. 비워두면 모든 메시지로부터 자동 생성됩니다."
+
+#: build/index.js:1
+msgid "SEO summary text"
+msgstr "SEO 요약 텍스트"
+
+#: build/index.js:1
+msgid "Animation"
+msgstr "애니메이션"
+
+#: build/index.js:1
+msgid "Typing delay (ms)"
+msgstr "타이핑 지연(ms)"
+
+#: build/index.js:1
+msgid "Deleting delay (ms)"
+msgstr "삭제 지연(ms)"
+
+#: build/index.js:1
+msgid "Pause delay (ms)"
+msgstr "일시정지 지연(ms)"
+
+#: build/index.js:1
+msgid "Start delay (ms)"
+msgstr "시작 지연(ms)"
+
+#: build/index.js:1
+msgid "Choose when the extra delay should run before animation continues."
+msgstr "애니메이션이 이어지기 전에 추가 지연을 언제 적용할지 선택하세요."
+
+#: build/index.js:1
+msgid "Start delay mode"
+msgstr "시작 지연 방식"
+
+#: build/index.js:1
+msgid "Loop messages"
+msgstr "메시지 반복"
+
+#: build/index.js:1
+msgid "Show cursor"
+msgstr "커서 표시"
+
+#: build/index.js:1
+msgid "Start when visible"
+msgstr "보일 때 시작"
+
+#: build/block.json
+#: src/block.json
+msgctxt "block title"
+msgid "K Typewriter"
+msgstr "K Typewriter"
+
+#: build/block.json
+#: src/block.json
+msgctxt "block description"
+msgid "Animate multilingual headlines, notices, and hero copy with a polished typewriter effect."
+msgstr "다국어 헤드라인, 공지, 히어로 카피를 완성도 높은 타이프라이터 효과로 애니메이션합니다."
+
+#: build/block.json
+#: src/block.json
+msgctxt "block keyword"
+msgid "typewriter"
+msgstr "타이프라이터"
+
+#: build/block.json
+#: src/block.json
+msgctxt "block keyword"
+msgid "headline"
+msgstr "헤드라인"
+
+#: build/block.json
+#: src/block.json
+msgctxt "block keyword"
+msgid "hero"
+msgstr "히어로"
