@@ -33,12 +33,13 @@ async function dismissEditorOverlays( page ) {
 
 async function publishPage( page ) {
 	const publishButtons = page.getByRole( 'button', { name: /^Publish$/u } );
+	const publishedViewLink = page.getByRole( 'link', {
+		name: /^View Page$/u,
+	} );
 
 	await publishButtons.first().click();
 	await publishButtons.last().click();
-	await expect(
-		page.getByRole( 'link', { name: /View Page/u } )
-	).toBeVisible();
+	await expect( publishedViewLink.first() ).toBeVisible();
 }
 
 async function expectEditorPreviewToChange( locator ) {
