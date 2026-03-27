@@ -37,8 +37,9 @@ php -l includes/class-k-typewriter-plugin.php
 2. Confirm the WordPress.org assets in `.wordpress-org/` are up to date.
 3. Regenerate the translation template with `pnpm run make:pot`.
 4. Tag the release with `v*`.
-5. Let GitHub Actions build the release zip, run smoke checks, upload the tested zip artifact, deploy to WordPress.org, and attach that same zip to the GitHub release.
-6. After the first deploy, open the plugin's WordPress.org Advanced view and switch the Playground preview to `public` if you want visitors to see the one-click preview button.
+5. Let GitHub Actions build the release zip, run smoke checks, upload the tested zip artifact, and attach that same zip to the GitHub release.
+6. Enable WordPress.org deploy only after the plugin slug exists by setting the `WPORG_DEPLOY_ENABLED` repository variable to `true` and adding `SVN_USERNAME` / `SVN_PASSWORD` secrets.
+7. After the first deploy, open the plugin's WordPress.org Advanced view and switch the Playground preview to `public` if you want visitors to see the one-click preview button.
 
 ## Manual Verification
 

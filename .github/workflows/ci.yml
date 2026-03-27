@@ -51,9 +51,7 @@ jobs:
               run: pnpm run test:smoke
 
             - name: Build release zip
-              uses: 10up/action-wordpress-plugin-build-zip@stable
-              with:
-                  retention-days: 7
+              run: pnpm run plugin-zip
 
             - name: Upload release zip artifact
               uses: actions/upload-artifact@v4

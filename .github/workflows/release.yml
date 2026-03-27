@@ -49,9 +49,7 @@ jobs:
               run: pnpm run build
 
             - name: Build release zip
-              uses: 10up/action-wordpress-plugin-build-zip@stable
-              with:
-                  retention-days: 14
+              run: pnpm run plugin-zip
 
             - name: Start wp-env
               run: pnpm run env:start
@@ -81,6 +79,7 @@ jobs:
                   if-no-files-found: error
 
             - name: Deploy to WordPress.org
+              if: ${{ vars.WPORG_DEPLOY_ENABLED == 'true' && secrets.SVN_USERNAME != '' && secrets.SVN_PASSWORD != '' }}
               id: deploy
               uses: 10up/action-wordpress-plugin-deploy@stable
               env:

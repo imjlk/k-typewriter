@@ -37,9 +37,10 @@
 
 ## GitHub Actions
 
-1. Confirm `SVN_USERNAME` and `SVN_PASSWORD` are set.
-2. Confirm the tag follows the `v*` pattern.
-3. Confirm the CI and release workflows upload the tested `k-typewriter.zip` artifact.
-4. Confirm the GitHub release attaches the same tested zip that was built before deploy.
-5. Confirm the WordPress.org deploy step runs only after the smoke checks pass.
-6. After the first WordPress.org deploy, confirm the plugin Advanced view has Playground preview set to `public`.
+1. Confirm the tag follows the `v*` pattern.
+2. Confirm the CI and release workflows upload the tested `k-typewriter.zip` artifact.
+3. Confirm the GitHub release attaches the same tested zip that was built before deploy.
+4. Confirm the WordPress.org deploy step is enabled only when the plugin slug exists by setting `WPORG_DEPLOY_ENABLED=true`.
+5. Confirm `SVN_USERNAME` and `SVN_PASSWORD` are set before enabling WordPress.org deploy.
+6. Confirm the WordPress.org deploy step runs only after the smoke checks pass.
+7. After the first WordPress.org deploy, confirm the plugin Advanced view has Playground preview set to `public`.
