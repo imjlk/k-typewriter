@@ -26,12 +26,14 @@
    - `banner-772x250.png`
    - `banner-1544x500.png`
    - `blueprints/blueprint.json`
+   - `blueprints/github-playground.json`
    - `screenshot-1.png`
    - `screenshot-2.png`
    - `screenshot-3.png`
 2. Confirm `readme.txt` screenshot count matches the actual files.
 3. Confirm `languages/k-typewriter.pot` exists and reflects the latest strings.
 4. Confirm `.wordpress-org/blueprints/blueprint.json` still matches the current plugin slug and demo messaging.
+5. Confirm `.wordpress-org/blueprints/github-playground.json` points at the correct GitHub repo/ref before sharing a branch preview link.
 
 ## GitHub Actions
 
