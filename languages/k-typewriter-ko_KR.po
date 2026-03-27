@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: K Typewriter 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/k-typewriter\n"
-"POT-Creation-Date: 2026-03-27T14:02:45+00:00\n"
+"POT-Creation-Date: 2026-03-27T15:05:48+00:00\n"
 "PO-Revision-Date: 2026-03-27 14:50+0900\n"
 "Last-Translator: imjlk\n"
 "Language-Team: Korean\n"
@@ -45,20 +45,20 @@ msgstr "imjlk"
 msgid "https://github.com/imjlk"
 msgstr "https://github.com/imjlk"
 
-#: includes/class-k-typewriter-plugin.php:177 build/index.js:1
+#: includes/class-k-typewriter-plugin.php:155 build/index.js:1
 msgid "한 글자씩, 리듬 있게."
 msgstr "한 글자씩, 리듬 있게."
 
-#: includes/class-k-typewriter-plugin.php:178 build/index.js:1
+#: includes/class-k-typewriter-plugin.php:156 build/index.js:1
 msgid "Animate headlines in any language."
 msgstr "어떤 언어든 자연스럽게 헤드라인을 애니메이션하세요."
 
-#: includes/class-k-typewriter-plugin.php:179 build/index.js:1
+#: includes/class-k-typewriter-plugin.php:157 build/index.js:1
 msgid "Ship polished hero copy in minutes."
 msgstr "완성도 높은 히어로 카피를 몇 분 만에 배포하세요."
 
 #. translators: %s: locale-aware list of animated messages.
-#: includes/class-k-typewriter-plugin.php:216
+#: includes/class-k-typewriter-plugin.php:194
 msgid "Typewriter animation that sequentially types %s."
 msgstr "%s가 순차적으로 타이핑되는 애니메이션"
 
@@ -81,6 +81,18 @@ msgstr "이전 메시지를 백스페이스"
 #: build/index.js:1
 msgid "Restart from empty"
 msgstr "빈 상태에서 다시 시작"
+
+#: build/index.js:1
+msgid "Top"
+msgstr ""
+
+#: build/index.js:1
+msgid "Middle"
+msgstr ""
+
+#: build/index.js:1
+msgid "Bottom"
+msgstr ""
 
 #: build/index.js:1
 msgid "Auto-generated"
@@ -140,12 +152,23 @@ msgid "Markup tag"
 msgstr "마크업 태그"
 
 #: build/index.js:1
-msgid "Reserve extra line height to reduce layout shift when longer messages wrap."
-msgstr "더 긴 메시지가 줄바꿈될 때 레이아웃이 흔들리지 않도록 줄 높이를 미리 확보합니다."
+msgid ""
+"Reserve extra line height to reduce layout shift when longer messages wrap."
+msgstr ""
+"더 긴 메시지가 줄바꿈될 때 레이아웃이 흔들리지 않도록 줄 높이를 미리 확보합니"
+"다."
 
 #: build/index.js:1
 msgid "Reserve lines"
 msgstr "예약 줄 수"
+
+#: build/index.js:1
+msgid "Choose how the animated line sits inside the reserved height."
+msgstr ""
+
+#: build/index.js:1
+msgid "Vertical align"
+msgstr ""
 
 #: build/index.js:1
 msgid "Fallback & Summary"
@@ -214,7 +237,9 @@ msgstr "타이핑 지연(ms)"
 msgid ""
 "Choose whether each new message backspaces the previous one or restarts from "
 "an empty state."
-msgstr "각 메시지가 이전 메시지를 백스페이스할지, 빈 상태에서 다시 시작할지 선택하세요."
+msgstr ""
+"각 메시지가 이전 메시지를 백스페이스할지, 빈 상태에서 다시 시작할지 선택하세"
+"요."
 
 #: build/index.js:1
 msgid "Transition mode"
@@ -244,7 +269,9 @@ msgstr "시작 지연(ms)"
 msgid ""
 "Clear the static fallback and type the first message from an empty state "
 "when animation begins."
-msgstr "애니메이션이 시작될 때 정적인 폴백을 지우고 첫 메시지를 빈 상태에서부터 타이핑합니다."
+msgstr ""
+"애니메이션이 시작될 때 정적인 폴백을 지우고 첫 메시지를 빈 상태에서부터 타이"
+"핑합니다."
 
 #: build/index.js:1
 msgid "Type first message from empty"
@@ -255,12 +282,32 @@ msgid "Loop messages"
 msgstr "메시지 반복"
 
 #: build/index.js:1
+msgid "Start when visible"
+msgstr "보일 때 시작"
+
+#: build/index.js:1
+msgid "Cursor"
+msgstr "커서"
+
+#: build/index.js:1
 msgid "Show cursor"
 msgstr "커서 표시"
 
 #: build/index.js:1
-msgid "Start when visible"
-msgstr "보일 때 시작"
+msgid "Adjust the cursor bar thickness relative to the current font size."
+msgstr "현재 폰트 크기를 기준으로 커서 막대 두께를 조절합니다."
+
+#: build/index.js:1
+msgid "Cursor thickness"
+msgstr "커서 두께"
+
+#: build/index.js:1
+msgid "Move the cursor slightly up or down to match your font better."
+msgstr "폰트에 더 잘 맞도록 커서를 조금 위나 아래로 조정합니다."
+
+#: build/index.js:1
+msgid "Cursor vertical offset"
+msgstr "커서 세로 오프셋"
 
 #: build/block.json src/block.json
 msgctxt "block title"

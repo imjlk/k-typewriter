@@ -61,6 +61,14 @@
 			"type": "boolean",
 			"default": true
 		},
+		"cursorWidth": {
+			"type": "number",
+			"default": 0.08
+		},
+		"cursorOffsetY": {
+			"type": "number",
+			"default": 0
+		},
 		"startOnView": {
 			"type": "boolean",
 			"default": true

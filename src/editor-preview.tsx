@@ -40,6 +40,8 @@ export default function EditorPreview( {
 		verticalAlign,
 		startFromEmpty,
 		showCursor,
+		cursorWidth,
+		cursorOffsetY,
 		tagName,
 	} = attributes;
 	const TagName = tagName;
@@ -82,8 +84,10 @@ export default function EditorPreview( {
 		return {
 			'--k-typewriter-reserve-lines': String( reserveLines ),
 			'--k-typewriter-vertical-align': justifyContent,
+			'--k-typewriter-cursor-width': `${ cursorWidth }em`,
+			'--k-typewriter-cursor-offset-y': `${ cursorOffsetY }em`,
 		} as CSSProperties;
-	}, [ reserveLines, verticalAlign ] );
+	}, [ cursorOffsetY, cursorWidth, reserveLines, verticalAlign ] );
 	const isPreviewPlaying = isSelected && ! isPreviewPaused;
 	let previewState = 'idle';
 
@@ -224,9 +228,7 @@ export default function EditorPreview( {
 						<span
 							aria-hidden="true"
 							className="k-typewriter__cursor k-typewriter-editor__cursor"
-						>
-							|
-						</span>
+						/>
 					) }
 				</span>
 			</TagName>

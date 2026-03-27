@@ -27,6 +27,8 @@ export const DEFAULT_ATTRIBUTES = {
 	verticalAlign: 'top',
 	startFromEmpty: false,
 	showCursor: true,
+	cursorWidth: 0.08,
+	cursorOffsetY: 0,
 	startOnView: true,
 	fallbackMode: 'auto',
 	fallbackText: '',
@@ -70,6 +72,8 @@ export type TypewriterAttributes = {
 	verticalAlign: VerticalAlignment;
 	startFromEmpty: boolean;
 	showCursor: boolean;
+	cursorWidth: number;
+	cursorOffsetY: number;
 	startOnView: boolean;
 	fallbackMode: ContentSourceMode;
 	fallbackText: string;
@@ -295,6 +299,16 @@ export function normalizeAttributes(
 			typeof attributes.showCursor === 'boolean'
 				? attributes.showCursor
 				: DEFAULT_ATTRIBUTES.showCursor,
+		cursorWidth: clampNumber(
+			attributes.cursorWidth ?? DEFAULT_ATTRIBUTES.cursorWidth,
+			0.04,
+			0.24
+		),
+		cursorOffsetY: clampNumber(
+			attributes.cursorOffsetY ?? DEFAULT_ATTRIBUTES.cursorOffsetY,
+			-0.3,
+			0.3
+		),
 		startOnView:
 			typeof attributes.startOnView === 'boolean'
 				? attributes.startOnView

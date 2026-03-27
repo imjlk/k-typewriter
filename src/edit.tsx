@@ -101,6 +101,8 @@ export default function Edit( {
 		verticalAlign,
 		startFromEmpty,
 		showCursor,
+		cursorWidth,
+		cursorOffsetY,
 		startOnView,
 		fallbackMode,
 		fallbackText,
@@ -442,19 +444,66 @@ export default function Edit( {
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Show cursor', 'k-typewriter' ) }
-						checked={ showCursor }
-						onChange={ ( value ) =>
-							setAttributes( { showCursor: value } )
-						}
-					/>
-					<ToggleControl
 						label={ __( 'Start when visible', 'k-typewriter' ) }
 						checked={ startOnView }
 						onChange={ ( value ) =>
 							setAttributes( { startOnView: value } )
 						}
 					/>
+				</PanelBody>
+				<PanelBody
+					initialOpen={ false }
+					title={ __( 'Cursor', 'k-typewriter' ) }
+				>
+					<ToggleControl
+						label={ __( 'Show cursor', 'k-typewriter' ) }
+						checked={ showCursor }
+						onChange={ ( value ) =>
+							setAttributes( { showCursor: value } )
+						}
+					/>
+					{ ! showCursor ? null : (
+						<>
+							<RangeControl
+								help={ __(
+									'Adjust the cursor bar thickness relative to the current font size.',
+									'k-typewriter'
+								) }
+								label={ __(
+									'Cursor thickness',
+									'k-typewriter'
+								) }
+								max={ 0.24 }
+								min={ 0.04 }
+								step={ 0.01 }
+								value={ cursorWidth }
+								onChange={ ( value ) =>
+									setAttributes( {
+										cursorWidth: value ?? cursorWidth,
+									} )
+								}
+							/>
+							<RangeControl
+								help={ __(
+									'Move the cursor slightly up or down to match your font better.',
+									'k-typewriter'
+								) }
+								label={ __(
+									'Cursor vertical offset',
+									'k-typewriter'
+								) }
+								max={ 0.3 }
+								min={ -0.3 }
+								step={ 0.01 }
+								value={ cursorOffsetY }
+								onChange={ ( value ) =>
+									setAttributes( {
+										cursorOffsetY: value ?? cursorOffsetY,
+									} )
+								}
+							/>
+						</>
+					) }
 				</PanelBody>
 			</InspectorControls>
 			<div { ...blockProps }>

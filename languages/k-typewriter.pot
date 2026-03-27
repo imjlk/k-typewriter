@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-27T14:02:45+00:00\n"
+"POT-Creation-Date: 2026-03-27T15:06:14+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: k-typewriter\n"
@@ -39,23 +39,23 @@ msgstr ""
 msgid "https://github.com/imjlk"
 msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:177
+#: includes/class-k-typewriter-plugin.php:155
 #: build/index.js:1
 msgid "한 글자씩, 리듬 있게."
 msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:178
+#: includes/class-k-typewriter-plugin.php:156
 #: build/index.js:1
 msgid "Animate headlines in any language."
 msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:179
+#: includes/class-k-typewriter-plugin.php:157
 #: build/index.js:1
 msgid "Ship polished hero copy in minutes."
 msgstr ""
 
 #. translators: %s: locale-aware list of animated messages.
-#: includes/class-k-typewriter-plugin.php:216
+#: includes/class-k-typewriter-plugin.php:194
 msgid "Typewriter animation that sequentially types %s."
 msgstr ""
 
@@ -77,6 +77,18 @@ msgstr ""
 
 #: build/index.js:1
 msgid "Restart from empty"
+msgstr ""
+
+#: build/index.js:1
+msgid "Top"
+msgstr ""
+
+#: build/index.js:1
+msgid "Middle"
+msgstr ""
+
+#: build/index.js:1
+msgid "Bottom"
 msgstr ""
 
 #: build/index.js:1
@@ -137,6 +149,14 @@ msgstr ""
 
 #: build/index.js:1
 msgid "Reserve lines"
+msgstr ""
+
+#: build/index.js:1
+msgid "Choose how the animated line sits inside the reserved height."
+msgstr ""
+
+#: build/index.js:1
+msgid "Vertical align"
 msgstr ""
 
 #: build/index.js:1
@@ -240,11 +260,31 @@ msgid "Loop messages"
 msgstr ""
 
 #: build/index.js:1
+msgid "Start when visible"
+msgstr ""
+
+#: build/index.js:1
+msgid "Cursor"
+msgstr ""
+
+#: build/index.js:1
 msgid "Show cursor"
 msgstr ""
 
 #: build/index.js:1
-msgid "Start when visible"
+msgid "Adjust the cursor bar thickness relative to the current font size."
+msgstr ""
+
+#: build/index.js:1
+msgid "Cursor thickness"
+msgstr ""
+
+#: build/index.js:1
+msgid "Move the cursor slightly up or down to match your font better."
+msgstr ""
+
+#: build/index.js:1
+msgid "Cursor vertical offset"
 msgstr ""
 
 #: build/block.json

@@ -71,9 +71,11 @@ final class K_Typewriter_Plugin {
 		}
 
 		$text_style       = sprintf(
-			'--k-typewriter-reserve-lines:%1$d;--k-typewriter-vertical-align:%2$s;',
+			'--k-typewriter-reserve-lines:%1$d;--k-typewriter-vertical-align:%2$s;--k-typewriter-cursor-width:%3$.2Fem;--k-typewriter-cursor-offset-y:%4$.2Fem;',
 			(int) $settings['reserveLines'],
-			$vertical_align
+			$vertical_align,
+			(float) $settings['cursorWidth'],
+			(float) $settings['cursorOffsetY']
 		);
 		$wrapper          = get_block_wrapper_attributes(
 			array(
@@ -133,9 +135,7 @@ final class K_Typewriter_Plugin {
 							aria-hidden="true"
 							class="k-typewriter__cursor"
 							data-wp-bind--hidden="!context.showCursor"
-						>
-							|
-						</span>
+						></span>
 					</span>
 				</<?php echo esc_html( $tag_name ); ?>>
 			</div>
@@ -249,6 +249,8 @@ final class K_Typewriter_Plugin {
 			'verticalAlign'      => 'top',
 			'startFromEmpty'     => false,
 			'showCursor'         => true,
+			'cursorWidth'        => 0.08,
+			'cursorOffsetY'      => 0,
 			'startOnView'        => true,
 			'fallbackMode'       => 'auto',
 			'fallbackText'       => '',
@@ -338,6 +340,8 @@ final class K_Typewriter_Plugin {
 			'verticalAlign'     => $vertical_align,
 			'startFromEmpty'    => (bool) $attributes['startFromEmpty'],
 			'showCursor'        => (bool) $attributes['showCursor'],
+			'cursorWidth'       => min( 0.24, max( 0.04, (float) $attributes['cursorWidth'] ) ),
+			'cursorOffsetY'     => min( 0.3, max( -0.3, (float) $attributes['cursorOffsetY'] ) ),
 			'startOnView'       => (bool) $attributes['startOnView'],
 			'fallbackMode'      => $fallback_mode,
 			'fallbackText'      => $fallback_text,

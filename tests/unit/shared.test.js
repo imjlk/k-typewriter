@@ -65,6 +65,8 @@ describe( 'shared helpers', () => {
 			reserveLines: 3,
 			verticalAlign: 'bottom',
 			startFromEmpty: true,
+			cursorWidth: 0.12,
+			cursorOffsetY: 0.08,
 			fallbackMode: 'custom',
 			fallbackText: 'Static fallback',
 			summaryMode: 'custom',
@@ -78,6 +80,8 @@ describe( 'shared helpers', () => {
 		expect( normalized.reserveLines ).toBe( 3 );
 		expect( normalized.verticalAlign ).toBe( 'bottom' );
 		expect( normalized.startFromEmpty ).toBe( true );
+		expect( normalized.cursorWidth ).toBe( 0.12 );
+		expect( normalized.cursorOffsetY ).toBe( 0.08 );
 		expect( normalized.fallbackMode ).toBe( 'custom' );
 		expect( normalized.fallbackText ).toBe( 'Static fallback' );
 		expect( normalized.summaryMode ).toBe( 'custom' );
@@ -108,5 +112,15 @@ describe( 'shared helpers', () => {
 				verticalAlign: 'sideways',
 			} ).verticalAlign
 		).toBe( 'top' );
+	} );
+
+	test( 'clamps cursor controls into the supported range', () => {
+		const normalized = normalizeAttributes( {
+			cursorWidth: 0.5,
+			cursorOffsetY: -1,
+		} );
+
+		expect( normalized.cursorWidth ).toBe( 0.24 );
+		expect( normalized.cursorOffsetY ).toBe( -0.3 );
 	} );
 } );
