@@ -2,7 +2,7 @@
 Contributors: imjlk
 Tags: block, typewriter, headline, hero, multilingual
 Requires at least: 6.6
-Tested up to: 6.9.4
+Tested up to: 6.9
 Requires PHP: 8.0
 Stable tag: 1.0.0
 License: GPL-2.0-or-later
@@ -29,7 +29,7 @@ Key features:
 * Optional start delay with first-start, every-cycle, and every-reentry timing modes
 * Optional looping and cursor display
 * First-message static fallback by default, with an optional custom fallback override
-* Auto-generated SEO and accessibility summary with optional override text
+* Auto-generated non-visual summary with optional override text
 * Start animation only when the block enters the viewport
 * Dynamic rendering for SEO-friendly first paint and no-JavaScript fallback
 * Reduced-motion support for visitors who prefer less animation
@@ -54,9 +54,9 @@ Yes. By default the first message is rendered on the server so visitors still se
 
 Yes. Visitors with `prefers-reduced-motion` enabled will see the visible fallback only, without animation.
 
-= Can I control the non-visual summary for SEO and assistive technology? =
+= Can I control the non-visual summary for assistive technology? =
 
-Yes. Leave the `SEO summary text` field empty to auto-generate a locale-aware summary from every message, or provide your own summary override.
+Yes. Leave the `SEO summary text` field empty to auto-generate a locale-aware summary from every message, or provide your own summary override for assistive technology.
 
 = Can I use Korean and English together? =
 
