@@ -17,23 +17,45 @@ async function login( page ) {
 }
 
 async function dismissEditorOverlays( page ) {
-	const patternDialog = page.getByRole( 'dialog', {
+	const patternHeading = page.getByRole( 'heading', {
 		name: 'Choose a pattern',
+		exact: true,
 	} );
 
-	if ( ( await patternDialog.count() ) > 0 ) {
-		const closePatternButton = patternDialog.getByRole( 'button', {
-			name: 'Close',
-		} );
+	if (
+		( await patternHeading.count() ) > 0 &&
+		( await patternHeading
+			.first()
+			.isVisible()
+			.catch( () => false ) )
+	) {
+		await page.keyboard.press( 'Escape' ).catch( () => {} );
 
-		if ( ( await closePatternButton.count() ) > 0 ) {
-			await closePatternButton
-				.first()
-				.click( {
-					timeout: 1000,
-				} )
-				.catch( () => {} );
+		const closePatternButtons = [
+			page.getByRole( 'button', { name: /^Close$/u } ).last(),
+			page.locator( 'button[aria-label="Close"]' ).last(),
+		];
+
+		for ( const closePatternButton of closePatternButtons ) {
+			if (
+				( await closePatternButton.count() ) > 0 &&
+				( await closePatternButton.isVisible().catch( () => false ) )
+			) {
+				await closePatternButton
+					.click( {
+						timeout: 1000,
+					} )
+					.catch( () => {} );
+			}
 		}
+
+		await patternHeading
+			.first()
+			.waitFor( {
+				state: 'hidden',
+				timeout: 3000,
+			} )
+			.catch( () => {} );
 	}
 
 	const dialogCloseButton = page.getByRole( 'button', { name: 'Close' } );
@@ -101,26 +123,69 @@ async function openBlockSettings( page ) {
 	}
 }
 
-async function openInspectorPanel( page, fieldName, panelTitle ) {
-	const targetField = page.getByRole( 'textbox', {
-		name: fieldName,
+async function openSummarySettings( page ) {
+	const summarySource = page.getByRole( 'combobox', {
+		name: 'Summary source',
+		exact: true,
+	} );
+	const legacySummaryField = page.getByRole( 'textbox', {
+		name: 'SEO summary text',
 		exact: true,
 	} );
 
-	if ( ( await targetField.count() ) > 0 ) {
+	if (
+		( await summarySource.count() ) > 0 ||
+		( await legacySummaryField.count() ) > 0
+	) {
 		return;
 	}
 
-	const panelToggle = page.getByRole( 'button', {
-		name: new RegExp( panelTitle, 'u' ),
+	for ( const panelTitle of [
+		'Fallback & Summary',
+		'SEO & Accessibility',
+	] ) {
+		const panelToggle = page.getByRole( 'button', {
+			name: new RegExp( panelTitle, 'u' ),
+		} );
+
+		if ( ( await panelToggle.count() ) > 0 ) {
+			await panelToggle
+				.first()
+				.click()
+				.catch( () => {} );
+		}
+	}
+}
+
+async function setSummaryOverride( page, summaryText ) {
+	await openSummarySettings( page );
+
+	const summarySource = page.getByRole( 'combobox', {
+		name: 'Summary source',
+		exact: true,
 	} );
 
-	if ( ( await panelToggle.count() ) > 0 ) {
-		await panelToggle
-			.first()
-			.click()
-			.catch( () => {} );
+	if ( ( await summarySource.count() ) > 0 ) {
+		await summarySource.selectOption( 'custom' );
+		await page
+			.getByRole( 'textbox', { name: 'Summary override' } )
+			.fill( summaryText );
+
+		return;
 	}
+
+	const legacySummaryField = page.getByRole( 'textbox', {
+		name: 'SEO summary text',
+		exact: true,
+	} );
+
+	if ( ( await legacySummaryField.count() ) > 0 ) {
+		await legacySummaryField.fill( summaryText );
+
+		return;
+	}
+
+	throw new Error( 'Missing summary controls in block inspector.' );
 }
 
 async function expectEditorPreviewToChange( locator ) {
@@ -306,17 +371,7 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 		await page
 			.getByRole( 'combobox', { name: 'Markup tag' } )
 			.selectOption( 'h6' );
-		await openInspectorPanel(
-			page,
-			'Summary override',
-			'Fallback & Summary'
-		);
-		await page
-			.getByRole( 'combobox', { name: 'Summary source' } )
-			.selectOption( 'custom' );
-		await page
-			.getByRole( 'textbox', { name: 'Summary override' } )
-			.fill( SEO_SUMMARY );
+		await setSummaryOverride( page, SEO_SUMMARY );
 		await page
 			.getByRole( 'checkbox', {
 				name: 'Start when visible',

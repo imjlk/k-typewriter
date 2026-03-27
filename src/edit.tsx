@@ -85,6 +85,7 @@ export default function Edit( {
 		startDelay,
 		startDelayMode,
 		loop,
+		reserveLines,
 		startFromEmpty,
 		showCursor,
 		startOnView,
@@ -182,6 +183,22 @@ export default function Edit( {
 							setAttributes( {
 								tagName:
 									value as TypewriterAttributes[ 'tagName' ],
+							} )
+						}
+					/>
+					<RangeControl
+						help={ __(
+							'Reserve extra line height to reduce layout shift when longer messages wrap.',
+							'k-typewriter'
+						) }
+						label={ __( 'Reserve lines', 'k-typewriter' ) }
+						max={ 6 }
+						min={ 1 }
+						step={ 1 }
+						value={ reserveLines }
+						onChange={ ( value ) =>
+							setAttributes( {
+								reserveLines: value ?? reserveLines,
 							} )
 						}
 					/>
@@ -346,7 +363,7 @@ export default function Edit( {
 							} )
 						}
 					/>
-					<RangeControl
+					<SelectControl
 						help={ __(
 							'Choose when the extra delay should run before animation continues.',
 							'k-typewriter'

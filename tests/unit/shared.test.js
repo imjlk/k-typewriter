@@ -62,6 +62,7 @@ describe( 'shared helpers', () => {
 			transitionMode: 'restart',
 			startDelay: 800,
 			startDelayMode: 'every-reentry',
+			reserveLines: 3,
 			startFromEmpty: true,
 			fallbackMode: 'custom',
 			fallbackText: 'Static fallback',
@@ -73,11 +74,25 @@ describe( 'shared helpers', () => {
 		expect( normalized.transitionMode ).toBe( 'restart' );
 		expect( normalized.startDelay ).toBe( 800 );
 		expect( normalized.startDelayMode ).toBe( 'every-reentry' );
+		expect( normalized.reserveLines ).toBe( 3 );
 		expect( normalized.startFromEmpty ).toBe( true );
 		expect( normalized.fallbackMode ).toBe( 'custom' );
 		expect( normalized.fallbackText ).toBe( 'Static fallback' );
 		expect( normalized.summaryMode ).toBe( 'custom' );
 		expect( normalized.summaryText ).toBe( 'Summary' );
+	} );
+
+	test( 'clamps reserve lines into the supported range', () => {
+		expect(
+			normalizeAttributes( {
+				reserveLines: 0,
+			} ).reserveLines
+		).toBe( 1 );
+		expect(
+			normalizeAttributes( {
+				reserveLines: 9,
+			} ).reserveLines
+		).toBe( 6 );
 	} );
 
 	test( 'rejects unsupported custom tags', () => {

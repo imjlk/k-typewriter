@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import { useEffect, useMemo, useRef, useState } from '@wordpress/element';
 
 import {
@@ -34,6 +35,7 @@ export default function EditorPreview( {
 		startDelay,
 		startDelayMode,
 		loop,
+		reserveLines,
 		startFromEmpty,
 		showCursor,
 		tagName,
@@ -65,6 +67,13 @@ export default function EditorPreview( {
 	const timeoutRef = useRef< number | null >( null );
 	const previousIsSelectedRef = useRef( isSelected );
 	const previousIsPreviewPlayingRef = useRef( false );
+	const previewStyle = useMemo(
+		() =>
+			( {
+				'--k-typewriter-reserve-lines': String( reserveLines ),
+			} ) as CSSProperties,
+		[ reserveLines ]
+	);
 	const isPreviewPlaying = isSelected && ! isPreviewPaused;
 	let previewState = 'idle';
 
@@ -190,6 +199,7 @@ export default function EditorPreview( {
 						: undefined
 				}
 				className="k-typewriter__text k-typewriter-editor__preview"
+				style={ previewStyle }
 			>
 				<span className="k-typewriter__content">
 					{ frame.displayText }

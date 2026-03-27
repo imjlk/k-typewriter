@@ -22,6 +22,8 @@ export const DEFAULT_ATTRIBUTES = {
 	startDelay: 0,
 	startDelayMode: 'first-start',
 	loop: true,
+	reserveLines: 1,
+	startFromEmpty: false,
 	showCursor: true,
 	startOnView: true,
 	fallbackMode: 'auto',
@@ -30,8 +32,6 @@ export const DEFAULT_ATTRIBUTES = {
 	summaryText: '',
 	tagName: 'p',
 } as const;
-
-export const LEGACY_BLOCK_NAME = 'create-block/k-typewriter';
 
 export const VALID_TAG_NAMES = [
 	'p',
@@ -63,6 +63,7 @@ export type TypewriterAttributes = {
 	startDelay: number;
 	startDelayMode: StartDelayMode;
 	loop: boolean;
+	reserveLines: number;
 	startFromEmpty: boolean;
 	showCursor: boolean;
 	startOnView: boolean;
@@ -71,12 +72,6 @@ export type TypewriterAttributes = {
 	summaryMode: ContentSourceMode;
 	summaryText: string;
 	tagName: TypewriterTagName;
-};
-
-export type LegacyAttributes = {
-	texts?: string[];
-	text?: string;
-	testToggle?: boolean;
 };
 
 function sanitizeText( value: unknown ): string {
@@ -270,6 +265,11 @@ export function normalizeAttributes(
 			typeof attributes.loop === 'boolean'
 				? attributes.loop
 				: DEFAULT_ATTRIBUTES.loop,
+		reserveLines: clampNumber(
+			attributes.reserveLines ?? DEFAULT_ATTRIBUTES.reserveLines,
+			1,
+			6
+		),
 		startFromEmpty:
 			typeof attributes.startFromEmpty === 'boolean'
 				? attributes.startFromEmpty
@@ -287,20 +287,5 @@ export function normalizeAttributes(
 		summaryMode,
 		summaryText,
 		tagName: coerceTagName( attributes.tagName ),
-	};
-}
-
-export function migrateLegacyAttributes(
-	attributes: LegacyAttributes
-): TypewriterAttributes {
-	const items = attributes.testToggle
-		? sanitizeItems( attributes.texts )
-		: sanitizeItems(
-				attributes.text ? [ attributes.text ] : attributes.texts
-		  );
-
-	return {
-		...DEFAULT_ATTRIBUTES,
-		items,
 	};
 }

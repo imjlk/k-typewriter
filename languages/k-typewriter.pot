@@ -39,10 +39,6 @@ msgstr ""
 msgid "https://github.com/imjlk"
 msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:65
-msgid "K Typewriter (Legacy)"
-msgstr ""
-
 #: includes/class-k-typewriter-plugin.php:177
 #: build/index.js:1
 msgid "한 글자씩, 리듬 있게."
@@ -133,6 +129,14 @@ msgstr ""
 
 #: build/index.js:1
 msgid "Markup tag"
+msgstr ""
+
+#: build/index.js:1
+msgid "Reserve extra line height to reduce layout shift when longer messages wrap."
+msgstr ""
+
+#: build/index.js:1
+msgid "Reserve lines"
 msgstr ""
 
 #: build/index.js:1

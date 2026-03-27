@@ -49,6 +49,10 @@
       "type": "boolean",
       "default": true
     },
+    "reserveLines": {
+      "type": "number",
+      "default": 1
+    },
     "startFromEmpty": {
       "type": "boolean",
       "default": false
@@ -88,6 +92,7 @@
         "한 글자씩, 리듬 있게.",
         "Animate headlines in any language."
       ],
+      "reserveLines": 2,
       "startDelay": 250,
       "startDelayMode": "first-start",
       "tagName": "h2"

@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-03-27 14:50+0900",
+    "translation-revision-date": "2026-03-27 23:20+0900",
     "generator": "WP-CLI\/2.11.0",
     "source": "build\/index.js",
     "domain": "messages",
@@ -72,6 +72,12 @@
             ],
             "Markup tag": [
                 "\ub9c8\ud06c\uc5c5 \ud0dc\uadf8"
+            ],
+            "Reserve extra line height to reduce layout shift when longer messages wrap.": [
+                "\ub354 \uae34 \uba54\uc2dc\uc9c0\uac00 \uc904\ubc14\uafc8\ub420 \ub54c \ub808\uc774\uc544\uc6c3\uc774 \ud754\ub4e4\ub9ac\uc9c0 \uc54a\ub3c4\ub85d \uc904 \ub192\uc774\ub97c \ubbf8\ub9ac \ud655\ubcf4\ud569\ub2c8\ub2e4."
+            ],
+            "Reserve lines": [
+                "\uc608\uc57d \uc904 \uc218"
             ],
             "Fallback & Summary": [
                 "\ud3f4\ubc31 \ubc0f \uc694\uc57d"

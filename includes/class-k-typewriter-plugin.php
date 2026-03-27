@@ -36,55 +36,17 @@ final class K_Typewriter_Plugin {
 	}
 
 	/**
-	 * Register the current and legacy block names.
+	 * Register the block from metadata.
 	 *
 	 * @return void
 	 */
 	public static function register_blocks() {
-		$block = register_block_type(
+		register_block_type(
 			__DIR__ . '/../build',
 			array(
 				'render_callback' => array( __CLASS__, 'render_block' ),
 			)
 		);
-
-		if ( $block instanceof WP_Block_Type ) {
-			self::register_legacy_block( $block );
-		}
-	}
-
-	/**
-	 * Register the legacy block name to keep older content rendering.
-	 *
-	 * @param WP_Block_Type $block The primary block type.
-	 * @return void
-	 */
-	private static function register_legacy_block( WP_Block_Type $block ) {
-		$args = array(
-			'api_version'           => $block->api_version,
-			'title'                 => __( 'K Typewriter (Legacy)', 'k-typewriter' ),
-			'category'              => $block->category,
-			'icon'                  => $block->icon,
-			'attributes'            => $block->attributes,
-			'supports'              => array_merge(
-				is_array( $block->supports ) ? $block->supports : array(),
-				array(
-					'inserter' => false,
-				)
-			),
-			'style_handles'         => $block->style_handles,
-			'editor_style_handles'  => $block->editor_style_handles,
-			'editor_script_handles' => $block->editor_script_handles,
-			'script_handles'        => $block->script_handles,
-			'view_script_handles'   => $block->view_script_handles,
-			'render_callback'       => array( __CLASS__, 'render_block' ),
-		);
-
-		if ( property_exists( $block, 'view_script_module_ids' ) ) {
-			$args['view_script_module_ids'] = $block->view_script_module_ids;
-		}
-
-		register_block_type( 'create-block/k-typewriter', $args );
 	}
 
 	/**
@@ -100,6 +62,10 @@ final class K_Typewriter_Plugin {
 		$visible_fallback = self::get_visible_fallback_text( $settings );
 		$seo_summary      = self::get_effective_seo_summary( $settings );
 		$tag_name         = $settings['tagName'];
+		$text_style       = sprintf(
+			'--k-typewriter-reserve-lines:%d;',
+			(int) $settings['reserveLines']
+		);
 		$wrapper          = get_block_wrapper_attributes(
 			array(
 				'class' => 'k-typewriter-block',
@@ -145,6 +111,7 @@ final class K_Typewriter_Plugin {
 			>
 				<<?php echo esc_html( $tag_name ); ?>
 					class="k-typewriter__text"
+					style="<?php echo esc_attr( $text_style ); ?>"
 					<?php if ( $seo_summary && $seo_summary !== $visible_fallback ) : ?>
 						aria-label="<?php echo esc_attr( $seo_summary ); ?>"
 					<?php endif; ?>
@@ -267,6 +234,7 @@ final class K_Typewriter_Plugin {
 			'startDelay'         => 0,
 			'startDelayMode'     => 'first-start',
 			'loop'               => true,
+			'reserveLines'       => 1,
 			'startFromEmpty'     => false,
 			'showCursor'         => true,
 			'startOnView'        => true,
@@ -346,6 +314,7 @@ final class K_Typewriter_Plugin {
 			'startDelay'        => min( 5000, max( 0, (int) $attributes['startDelay'] ) ),
 			'startDelayMode'    => $delay_mode,
 			'loop'              => (bool) $attributes['loop'],
+			'reserveLines'      => min( 6, max( 1, (int) $attributes['reserveLines'] ) ),
 			'startFromEmpty'    => (bool) $attributes['startFromEmpty'],
 			'showCursor'        => (bool) $attributes['showCursor'],
 			'startOnView'       => (bool) $attributes['startOnView'],
