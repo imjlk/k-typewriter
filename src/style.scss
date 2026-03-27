@@ -28,12 +28,17 @@
 .wp-block-imjlk-k-typewriter .k-typewriter__line {
 	display: block;
 	max-width: 100%;
+	direction: inherit;
 	line-height: inherit;
+	text-align: start;
+	unicode-bidi: isolate;
 	overflow-wrap: anywhere;
 }
 
 .wp-block-imjlk-k-typewriter .k-typewriter__content {
+	direction: inherit;
 	line-height: inherit;
+	unicode-bidi: isolate;
 	word-break: break-word;
 }
 
@@ -46,6 +51,7 @@
 	background: currentcolor;
 	line-height: 1;
 	transform: translate(var(--k-typewriter-cursor-offset-x, 0), var(--k-typewriter-cursor-offset-y, -0.08em));
+	unicode-bidi: isolate;
 	vertical-align: baseline;
 	animation:
 		k-typewriter-blink
