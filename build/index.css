@@ -1,13 +1,1 @@
-/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/.pnpm/css-loader@6.11.0_webpack@5.92.0_webpack-cli@5.1.4_/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/.pnpm/postcss-loader@6.2.1_postcss@8.4.38_webpack@5.92.0_webpack-cli@5.1.4_/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/.pnpm/sass-loader@12.6.0_sass@1.77.5_webpack@5.92.0_webpack-cli@5.1.4_/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/editor.scss ***!
-  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/**
- * The following styles get applied inside the editor only.
- *
- * Replace them with your own styles or remove the file completely.
- */
-.wp-block-create-block-k-typewriter {
-  border: 1px dotted #f00;
-}
-
-/*# sourceMappingURL=index.css.map*/
+.wp-block-imjlk-k-typewriter .k-typewriter-editor{min-height:clamp(3rem,6vw,5.25rem);padding:.15rem 0;text-align:inherit;width:100%}.wp-block-imjlk-k-typewriter .k-typewriter-editor__preview{margin:0;max-width:100%}.wp-block-imjlk-k-typewriter .k-typewriter-editor__preview:is(p,div,span){font-size:inherit;line-height:inherit}.wp-block-imjlk-k-typewriter .k-typewriter-editor[data-preview-state=idle],.wp-block-imjlk-k-typewriter .k-typewriter-editor[data-preview-state=paused]{opacity:.98}.wp-block-imjlk-k-typewriter .k-typewriter-editor[data-preview-state=idle] .k-typewriter__cursor,.wp-block-imjlk-k-typewriter .k-typewriter-editor[data-preview-state=paused] .k-typewriter__cursor{animation:none;opacity:1}

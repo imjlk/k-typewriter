@@ -1,30 +1,25 @@
 <?php
 /**
  * Plugin Name:       K Typewriter
- * Description:       Example block scaffolded with Create Block tool.
- * Requires at least: 6.1
- * Requires PHP:      7.0
- * Version:           0.1.0
- * Author:            The WordPress Contributors
+ * Plugin URI:        https://github.com/imjlk/k-typewriter
+ * Description:       Add a configurable typewriter text block for hero headlines, notices, and multilingual messaging.
+ * Version:           1.0.0
+ * Requires at least: 6.6
+ * Requires PHP:      8.0
+ * Author:            imjlk
+ * Author URI:        https://github.com/imjlk
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       k-typewriter
  *
- * @package CreateBlock
+ * @package KTypewriter
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+	exit;
 }
 
-/**
- * Registers the block using the metadata loaded from the `block.json` file.
- * Behind the scenes, it registers also all assets so they can be enqueued
- * through the block editor in the corresponding context.
- *
- * @see https://developer.wordpress.org/reference/functions/register_block_type/
- */
-function create_block_k_typewriter_block_init() {
-	register_block_type( __DIR__ . '/build' );
-}
-add_action( 'init', 'create_block_k_typewriter_block_init' );
+require_once __DIR__ . '/includes/class-k-typewriter-plugin.php';
+
+K_Typewriter_Plugin::boot();
+

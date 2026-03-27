@@ -1,55 +1,84 @@
 === K Typewriter ===
-Contributors:      The WordPress Contributors
-Tags:              block
-Tested up to:      6.1
-Stable tag:        0.1.0
-License:           GPL-2.0-or-later
-License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+Contributors: imjlk
+Tags: block, typewriter, headline, hero, multilingual
+Requires at least: 6.6
+Tested up to: 6.9.4
+Requires PHP: 8.0
+Stable tag: 1.0.0
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Example block scaffolded with Create Block tool.
+Animate headlines, notices, and hero copy with a polished typewriter block that works beautifully with multilingual text.
 
 == Description ==
 
-This is the long description. No limit, and you can use Markdown (as well as in the following sections).
+K Typewriter is a dynamic block for WordPress sites that need expressive text motion without sacrificing accessibility or graceful fallbacks.
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+Use it for:
+
+* Homepage hero copy
+* Product callouts
+* Announcement banners
+* Event pages
+* Multilingual headline rotations
+
+Key features:
+
+* Multiple messages with one message per line
+* Configurable typing, deleting, and pause timing
+* Optional looping and cursor display
+* Start animation only when the block enters the viewport
+* Dynamic rendering for SEO-friendly first paint and no-JavaScript fallback
+* Reduced-motion support for visitors who prefer less animation
+* Support for theme typography, spacing, and color tools
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-e.g.
-
-1. Upload the plugin files to the `/wp-content/plugins/k-typewriter` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
-
+1. Upload the plugin files to the `/wp-content/plugins/k-typewriter` directory, or install the plugin through the WordPress plugins screen.
+2. Activate the plugin through the `Plugins` screen in WordPress.
+3. Open the block editor and insert the `K Typewriter` block.
+4. Add one message per line in the block settings sidebar.
+5. Adjust timing, cursor, loop, and viewport options to match your design.
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= Does it work without JavaScript? =
 
-An answer to that question.
+Yes. The first message is rendered on the server so visitors still see meaningful content even if JavaScript does not run.
 
-= What about foo bar? =
+= Is reduced motion supported? =
 
-Answer to foo bar dilemma.
+Yes. Visitors with `prefers-reduced-motion` enabled will see the first message only, without animation.
+
+= Can I use Korean and English together? =
+
+Yes. The block is designed for multilingual messaging and works well with Korean, English, and mixed-language headlines.
+
+= Can I change the HTML tag? =
+
+Yes. Choose between `p`, `h1`, `h2`, `div`, and `span` from the block settings.
+
+= Does it support a WordPress Playground preview? =
+
+Yes. The plugin includes a WordPress.org Playground blueprint, so maintainers can enable a one-click preview from the plugin's Advanced view after deployment.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. Editing multiple messages and animation timing in the block sidebar.
+2. A front-end hero section using K Typewriter with multilingual text.
+3. Reduced-motion mode preserving the first message as a static fallback.
 
 == Changelog ==
 
-= 0.1.0 =
-* Release
+= 1.0.0 =
 
-== Arbitrary section ==
+* First public release.
+* Added a dynamic, Interactivity API-powered typewriter block.
+* Added viewport-aware animation start, reduced-motion support, and graceful no-JS fallback.
+* Added packaging, local `wp-env` tooling, smoke tests, and release workflows.
 
-You may provide arbitrary sections, in the same format as the ones above. This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation." Arbitrary sections will be shown below the built-in sections outlined above.
+== Upgrade Notice ==
+
+= 1.0.0 =
+
+First public release of K Typewriter.

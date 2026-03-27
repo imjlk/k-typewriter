@@ -1,0 +1,95 @@
+name: Release
+
+on:
+    push:
+        tags:
+            - 'v*'
+
+permissions:
+    contents: write
+
+env:
+    PLAYWRIGHT_BASE_URL: http://localhost:8888
+    WP_ENV_PORT: 8888
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 10.20.0
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  cache: pnpm
+                  node-version: 20
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Install Playwright browser
+              run: pnpm exec playwright install --with-deps chromium
+
+            - name: Lint JavaScript
+              run: pnpm run lint:js
+
+            - name: Lint styles
+              run: pnpm run lint:css
+
+            - name: Build plugin
+              run: pnpm run build
+
+            - name: Build release zip
+              uses: 10up/action-wordpress-plugin-build-zip@stable
+              with:
+                  retention-days: 14
+
+            - name: Start wp-env
+              run: pnpm run env:start
+
+            - name: Smoke test
+              run: pnpm run test:smoke
+
+            - name: Upload Playwright artifacts
+              if: failure()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: playwright-artifacts
+                  path: |
+                      test-results
+                      playwright-report
+                  if-no-files-found: ignore
+
+            - name: Stop wp-env
+              if: always()
+              run: pnpm run env:stop
+
+            - name: Upload release zip artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: k-typewriter-zip
+                  path: ./${{ github.event.repository.name }}.zip
+                  if-no-files-found: error
+
+            - name: Deploy to WordPress.org
+              id: deploy
+              uses: 10up/action-wordpress-plugin-deploy@stable
+              env:
+                  SLUG: k-typewriter
+                  SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+                  SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+
+            - name: Create GitHub release
+              uses: softprops/action-gh-release@v2
+              with:
+                  files: ./${{ github.event.repository.name }}.zip
+                  generate_release_notes: true

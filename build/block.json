@@ -1,19 +1,84 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "create-block/k-typewriter",
-  "version": "0.1.0",
+  "name": "imjlk/k-typewriter",
+  "version": "1.0.0",
   "title": "K Typewriter",
-  "category": "widgets",
-  "icon": "smiley",
-  "description": "Example block scaffolded with Create Block tool.",
-  "example": {},
+  "category": "text",
+  "icon": "editor-textcolor",
+  "description": "Animate multilingual headlines, notices, and hero copy with a polished typewriter effect.",
+  "keywords": [
+    "typewriter",
+    "headline",
+    "hero"
+  ],
+  "attributes": {
+    "items": {
+      "type": "array",
+      "default": [
+        "한 글자씩, 리듬 있게.",
+        "Animate headlines in any language.",
+        "Ship polished hero copy in minutes."
+      ]
+    },
+    "typeDelay": {
+      "type": "number",
+      "default": 80
+    },
+    "deleteDelay": {
+      "type": "number",
+      "default": 40
+    },
+    "pauseDelay": {
+      "type": "number",
+      "default": 1200
+    },
+    "loop": {
+      "type": "boolean",
+      "default": true
+    },
+    "showCursor": {
+      "type": "boolean",
+      "default": true
+    },
+    "startOnView": {
+      "type": "boolean",
+      "default": true
+    },
+    "tagName": {
+      "type": "string",
+      "default": "p"
+    }
+  },
+  "example": {
+    "attributes": {
+      "items": [
+        "한 글자씩, 리듬 있게.",
+        "Animate headlines in any language."
+      ],
+      "tagName": "h2"
+    }
+  },
   "supports": {
-    "html": false
+    "html": false,
+    "interactivity": true,
+    "color": {
+      "text": true,
+      "background": true
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "textAlign": true
+    }
   },
   "textdomain": "k-typewriter",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
-  "viewScript": "file:./view.js"
+  "viewScriptModule": "file:./view.js"
 }

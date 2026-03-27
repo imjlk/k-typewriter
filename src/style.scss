@@ -1,12 +1,48 @@
-/**
- * The following styles get applied both on the front of your site
- * and in the editor.
- *
- * Replace them with your own styles or remove the file completely.
- */
+.wp-block-imjlk-k-typewriter .k-typewriter {
+	width: 100%;
+}
 
-.wp-block-create-block-k-typewriter {
-	background-color: #21759b;
-	color: #fff;
-	padding: 2px;
+.wp-block-imjlk-k-typewriter .k-typewriter__text {
+	display: inline-flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 0.1em;
+	margin: 0;
+	max-width: 100%;
+}
+
+.wp-block-imjlk-k-typewriter .k-typewriter__content {
+	min-width: 1ch;
+	word-break: break-word;
+}
+
+.wp-block-imjlk-k-typewriter .k-typewriter__cursor {
+	display: inline-block;
+	font-weight: 600;
+	line-height: 1;
+	animation: k-typewriter-blink 1s steps(2, jump-none) infinite;
+}
+
+.wp-block-imjlk-k-typewriter .k-typewriter__cursor[hidden] {
+	display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+	.wp-block-imjlk-k-typewriter .k-typewriter__cursor {
+		animation: none;
+	}
+}
+
+@keyframes k-typewriter-blink {
+
+	0%,
+	49% {
+		opacity: 1;
+	}
+
+	50%,
+	100% {
+		opacity: 0;
+	}
 }

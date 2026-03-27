@@ -1,9 +1,27 @@
-/**
- * The following styles get applied inside the editor only.
- *
- * Replace them with your own styles or remove the file completely.
- */
+.wp-block-imjlk-k-typewriter .k-typewriter-editor {
+	width: 100%;
+	min-height: clamp(3rem, 6vw, 5.25rem);
+	padding: 0.15rem 0;
+	text-align: inherit;
+}
 
-.wp-block-create-block-k-typewriter {
-	border: 1px dotted #f00;
+.wp-block-imjlk-k-typewriter .k-typewriter-editor__preview {
+	max-width: 100%;
+	margin: 0;
+}
+
+.wp-block-imjlk-k-typewriter .k-typewriter-editor__preview:is(p, div, span) {
+	font-size: inherit;
+	line-height: inherit;
+}
+
+.wp-block-imjlk-k-typewriter .k-typewriter-editor[data-preview-state="idle"],
+.wp-block-imjlk-k-typewriter .k-typewriter-editor[data-preview-state="paused"] {
+	opacity: 0.98;
+}
+
+.wp-block-imjlk-k-typewriter .k-typewriter-editor[data-preview-state="idle"] .k-typewriter__cursor,
+.wp-block-imjlk-k-typewriter .k-typewriter-editor[data-preview-state="paused"] .k-typewriter__cursor {
+	animation: none;
+	opacity: 1;
 }

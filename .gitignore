@@ -26,5 +26,10 @@ node_modules/
 # Output of `wp-scripts plugin-zip`
 *.zip
 
+# Playwright output
+playwright-report/
+test-results/
+
 # dotenv environment variables file
 .env
+.DS_Store

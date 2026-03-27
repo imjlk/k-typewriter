@@ -1,24 +1,37 @@
 {
 	"name": "k-typewriter",
-	"version": "0.1.0",
-	"description": "Example block scaffolded with Create Block tool.",
-	"author": "The WordPress Contributors",
+	"version": "1.0.0",
+	"description": "A polished WordPress block for multilingual typewriter headlines and hero copy.",
+	"author": "imjlk",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
-		"build": "wp-scripts build",
+		"build": "wp-scripts build --experimental-modules",
+		"env:clean": "wp-env clean all",
+		"env:start": "wp-env start",
+		"env:stop": "wp-env stop",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
+		"make:pot": "wp-env run cli --env-cwd=wp-content/plugins/k-typewriter wp i18n make-pot . languages/k-typewriter.pot --allow-root",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
-		"start": "wp-scripts start"
+		"start": "wp-scripts start --experimental-modules",
+		"test:smoke": "playwright test"
+	},
+	"engines": {
+		"node": ">=20.0.0"
 	},
 	"devDependencies": {
+		"@beavercoding/uni-typer": "1.0.1",
+		"@playwright/test": "^1.58.2",
 		"@types/react": "^18.3.3",
 		"@types/wordpress__block-editor": "^11.5.15",
-		"@wordpress/scripts": "^27.9.0",
-		"ts-loader": "^9.5.1",
+		"@wordpress/env": "^11.2.0",
+		"@wordpress/interactivity": "^6.42.0",
+		"@wordpress/scripts": "^31.7.0",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
 		"typescript": "^5.4.5"
 	}
 }
