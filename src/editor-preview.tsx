@@ -124,8 +124,6 @@ export default function EditorPreview( {
 		reserveLines,
 		verticalAlign,
 	] );
-	const isPreviewPlaying =
-		isSelected && ! isPreviewPaused && ( ! pauseOnHover || ! isHovered );
 	const isPreviewComplete = isAnimationComplete( frame, {
 		items: stableItems,
 		fallbackText: visibleFallbackText,
@@ -135,6 +133,9 @@ export default function EditorPreview( {
 		startDelay,
 		startDelayMode,
 	} );
+	const canPreviewPlay =
+		isSelected && ! isPreviewPaused && ( ! pauseOnHover || ! isHovered );
+	const isPreviewPlaying = canPreviewPlay && ! isPreviewComplete;
 	const isCursorVisible =
 		showCursor &&
 		( isPreviewPlaying ||
