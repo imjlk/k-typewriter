@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: K Typewriter 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/k-typewriter\n"
-"POT-Creation-Date: 2026-03-27T12:13:41+00:00\n"
+"POT-Creation-Date: 2026-03-27T14:02:45+00:00\n"
 "PO-Revision-Date: 2026-03-27 14:50+0900\n"
 "Last-Translator: imjlk\n"
 "Language-Team: Korean\n"
@@ -49,20 +49,20 @@ msgstr "https://github.com/imjlk"
 msgid "K Typewriter (Legacy)"
 msgstr "K Typewriter (레거시)"
 
-#: includes/class-k-typewriter-plugin.php:175 build/index.js:1
+#: includes/class-k-typewriter-plugin.php:177 build/index.js:1
 msgid "한 글자씩, 리듬 있게."
 msgstr "한 글자씩, 리듬 있게."
 
-#: includes/class-k-typewriter-plugin.php:176 build/index.js:1
+#: includes/class-k-typewriter-plugin.php:178 build/index.js:1
 msgid "Animate headlines in any language."
 msgstr "어떤 언어든 자연스럽게 헤드라인을 애니메이션하세요."
 
-#: includes/class-k-typewriter-plugin.php:177 build/index.js:1
+#: includes/class-k-typewriter-plugin.php:179 build/index.js:1
 msgid "Ship polished hero copy in minutes."
 msgstr "완성도 높은 히어로 카피를 몇 분 만에 배포하세요."
 
 #. translators: %s: locale-aware list of animated messages.
-#: includes/class-k-typewriter-plugin.php:214
+#: includes/class-k-typewriter-plugin.php:216
 msgid "Typewriter animation that sequentially types %s."
 msgstr "%s가 순차적으로 타이핑되는 애니메이션"
 
@@ -77,6 +77,14 @@ msgstr "매 사이클마다"
 #: build/index.js:1
 msgid "Every re-entry"
 msgstr "다시 진입할 때마다"
+
+#: build/index.js:1
+msgid "Backspace previous message"
+msgstr "이전 메시지를 백스페이스"
+
+#: build/index.js:1
+msgid "Restart from empty"
+msgstr "빈 상태에서 다시 시작"
 
 #: build/index.js:1
 msgid "Auto-generated"
@@ -100,7 +108,8 @@ msgstr "자동 모드는 모든 메시지를 하나의 요약으로 합칩니다
 
 #: build/index.js:1
 msgid "Custom mode lets you write a shorter or more intentional summary."
-msgstr "사용자 지정 모드에서는 더 짧거나 의도적인 요약을 직접 작성할 수 있습니다."
+msgstr ""
+"사용자 지정 모드에서는 더 짧거나 의도적인 요약을 직접 작성할 수 있습니다."
 
 #: build/index.js:1
 msgid "Pause preview"
@@ -198,6 +207,16 @@ msgid "Typing delay (ms)"
 msgstr "타이핑 지연(ms)"
 
 #: build/index.js:1
+msgid ""
+"Choose whether each new message backspaces the previous one or restarts from "
+"an empty state."
+msgstr "각 메시지가 이전 메시지를 백스페이스할지, 빈 상태에서 다시 시작할지 선택하세요."
+
+#: build/index.js:1
+msgid "Transition mode"
+msgstr "전환 방식"
+
+#: build/index.js:1
 msgid "Deleting delay (ms)"
 msgstr "삭제 지연(ms)"
 
@@ -206,16 +225,26 @@ msgid "Pause delay (ms)"
 msgstr "일시정지 지연(ms)"
 
 #: build/index.js:1
-msgid "Start delay (ms)"
-msgstr "시작 지연(ms)"
-
-#: build/index.js:1
 msgid "Choose when the extra delay should run before animation continues."
 msgstr "애니메이션이 이어지기 전에 추가 지연을 언제 적용할지 선택하세요."
 
 #: build/index.js:1
 msgid "Start delay mode"
 msgstr "시작 지연 방식"
+
+#: build/index.js:1
+msgid "Start delay (ms)"
+msgstr "시작 지연(ms)"
+
+#: build/index.js:1
+msgid ""
+"Clear the static fallback and type the first message from an empty state "
+"when animation begins."
+msgstr "애니메이션이 시작될 때 정적인 폴백을 지우고 첫 메시지를 빈 상태에서부터 타이핑합니다."
+
+#: build/index.js:1
+msgid "Type first message from empty"
+msgstr "첫 메시지를 빈 상태에서 타이핑"
 
 #: build/index.js:1
 msgid "Loop messages"

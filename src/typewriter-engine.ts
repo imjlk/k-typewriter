@@ -1,5 +1,9 @@
 import { combine, decompose } from '@beavercoding/uni-typer';
-import { type StartDelayMode, getEffectiveFallbackText } from './shared';
+import {
+	type StartDelayMode,
+	type TransitionMode,
+	getEffectiveFallbackText,
+} from './shared';
 
 export type TypewriterFrame = {
 	displayText: string;
@@ -14,6 +18,8 @@ export type TypewriterPlaybackOptions = {
 	items: string[];
 	fallbackText?: string;
 	loop: boolean;
+	transitionMode: TransitionMode;
+	startFromEmpty: boolean;
 	startDelay: number;
 	startDelayMode: StartDelayMode;
 };
@@ -130,6 +136,18 @@ function shouldUseStartDelay(
 	);
 }
 
+function getNextItemIndex(
+	frame: TypewriterFrame,
+	options: TypewriterPlaybackOptions,
+	itemCount: number
+) {
+	if ( options.loop ) {
+		return ( frame.itemIndex + 1 ) % itemCount;
+	}
+
+	return Math.min( frame.itemIndex + 1, itemCount - 1 );
+}
+
 export function getFrameDelay(
 	frame: TypewriterFrame,
 	options: TypewriterTimingOptions
@@ -201,7 +219,11 @@ export function advanceFrame(
 		return {
 			...frame,
 			displayText: '',
-			itemIndex: ( frame.itemIndex + 1 ) % normalizedItems.length,
+			itemIndex: getNextItemIndex(
+				frame,
+				options,
+				normalizedItems.length
+			),
 			charIndex: 0,
 			isDeleting: false,
 		};
@@ -221,6 +243,20 @@ export function advanceFrame(
 
 	if ( ! options.loop && frame.itemIndex === normalizedItems.length - 1 ) {
 		return frame;
+	}
+
+	if ( options.transitionMode === 'restart' ) {
+		return {
+			...frame,
+			displayText: '',
+			itemIndex: getNextItemIndex(
+				frame,
+				options,
+				normalizedItems.length
+			),
+			charIndex: 0,
+			isDeleting: false,
+		};
 	}
 
 	return {
@@ -243,6 +279,17 @@ export function advanceTypewriterFrame(
 	const firstItemLength = getTypingUnits( firstItem ).length;
 
 	if ( ! frame.hasStarted ) {
+		if ( options.startFromEmpty ) {
+			return {
+				displayText: '',
+				itemIndex: 0,
+				charIndex: 0,
+				isDeleting: false,
+				hasStarted: true,
+				pendingReentryDelay: false,
+			};
+		}
+
 		if ( frame.displayText !== firstItem ) {
 			return {
 				displayText: firstItem,

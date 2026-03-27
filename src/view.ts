@@ -12,7 +12,7 @@ import {
 	isAnimationComplete,
 	normalizeTypingItems,
 } from './typewriter-engine';
-import type { StartDelayMode } from './shared';
+import type { StartDelayMode, TransitionMode } from './shared';
 
 type TypewriterContext = {
 	items: string[];
@@ -24,6 +24,8 @@ type TypewriterContext = {
 	pendingReentryDelay: boolean;
 	fallbackText: string;
 	loop: boolean;
+	transitionMode: TransitionMode;
+	startFromEmpty: boolean;
 	showCursor: boolean;
 	startOnView: boolean;
 	typeDelay: number;
@@ -71,6 +73,8 @@ const { actions } = store( STORE_NAME, {
 					items,
 					fallbackText: context.fallbackText,
 					loop: context.loop,
+					transitionMode: context.transitionMode,
+					startFromEmpty: context.startFromEmpty,
 					startDelay: context.startDelay,
 					startDelayMode: context.startDelayMode,
 				} )
@@ -230,6 +234,8 @@ function shouldAnimate(
 		items,
 		fallbackText: context.fallbackText,
 		loop: context.loop,
+		transitionMode: context.transitionMode,
+		startFromEmpty: context.startFromEmpty,
 		startDelay: context.startDelay,
 		startDelayMode: context.startDelayMode,
 	} );
@@ -240,6 +246,8 @@ function getDelay( context: TypewriterContext ): number {
 		items: normalizeTypingItems( context.items ),
 		fallbackText: context.fallbackText,
 		loop: context.loop,
+		transitionMode: context.transitionMode,
+		startFromEmpty: context.startFromEmpty,
 		typeDelay: context.typeDelay,
 		deleteDelay: context.deleteDelay,
 		pauseDelay: context.pauseDelay,

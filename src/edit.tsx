@@ -27,6 +27,7 @@ import {
 	START_DELAY_MODES,
 	type ContentSourceMode,
 	type TypewriterAttributes,
+	TRANSITION_MODES,
 	VALID_TAG_NAMES,
 } from './shared';
 
@@ -43,6 +44,16 @@ const startDelayModeLabels = {
 
 const startDelayModeOptions = START_DELAY_MODES.map( ( value ) => ( {
 	label: startDelayModeLabels[ value ],
+	value,
+} ) );
+
+const transitionModeLabels = {
+	backspace: __( 'Backspace previous message', 'k-typewriter' ),
+	restart: __( 'Restart from empty', 'k-typewriter' ),
+} as const;
+
+const transitionModeOptions = TRANSITION_MODES.map( ( value ) => ( {
+	label: transitionModeLabels[ value ],
 	value,
 } ) );
 
@@ -68,11 +79,13 @@ export default function Edit( {
 	const {
 		items,
 		typeDelay,
+		transitionMode,
 		deleteDelay,
 		pauseDelay,
 		startDelay,
 		startDelayMode,
 		loop,
+		startFromEmpty,
 		showCursor,
 		startOnView,
 		fallbackMode,
@@ -289,18 +302,38 @@ export default function Edit( {
 							setAttributes( { typeDelay: value ?? typeDelay } )
 						}
 					/>
-					<RangeControl
-						label={ __( 'Deleting delay (ms)', 'k-typewriter' ) }
-						max={ 240 }
-						min={ 10 }
-						step={ 10 }
-						value={ deleteDelay }
+					<SelectControl
+						help={ __(
+							'Choose whether each new message backspaces the previous one or restarts from an empty state.',
+							'k-typewriter'
+						) }
+						label={ __( 'Transition mode', 'k-typewriter' ) }
+						options={ transitionModeOptions }
+						value={ transitionMode }
 						onChange={ ( value ) =>
 							setAttributes( {
-								deleteDelay: value ?? deleteDelay,
+								transitionMode:
+									value as TypewriterAttributes[ 'transitionMode' ],
 							} )
 						}
 					/>
+					{ transitionMode !== 'backspace' ? null : (
+						<RangeControl
+							label={ __(
+								'Deleting delay (ms)',
+								'k-typewriter'
+							) }
+							max={ 240 }
+							min={ 10 }
+							step={ 10 }
+							value={ deleteDelay }
+							onChange={ ( value ) =>
+								setAttributes( {
+									deleteDelay: value ?? deleteDelay,
+								} )
+							}
+						/>
+					) }
 					<RangeControl
 						label={ __( 'Pause delay (ms)', 'k-typewriter' ) }
 						max={ 4000 }
@@ -310,6 +343,21 @@ export default function Edit( {
 						onChange={ ( value ) =>
 							setAttributes( {
 								pauseDelay: value ?? pauseDelay,
+							} )
+						}
+					/>
+					<RangeControl
+						help={ __(
+							'Choose when the extra delay should run before animation continues.',
+							'k-typewriter'
+						) }
+						label={ __( 'Start delay mode', 'k-typewriter' ) }
+						options={ startDelayModeOptions }
+						value={ startDelayMode }
+						onChange={ ( value ) =>
+							setAttributes( {
+								startDelayMode:
+									value as TypewriterAttributes[ 'startDelayMode' ],
 							} )
 						}
 					/>
@@ -325,19 +373,18 @@ export default function Edit( {
 							} )
 						}
 					/>
-					<SelectControl
+					<ToggleControl
 						help={ __(
-							'Choose when the extra delay should run before animation continues.',
+							'Clear the static fallback and type the first message from an empty state when animation begins.',
 							'k-typewriter'
 						) }
-						label={ __( 'Start delay mode', 'k-typewriter' ) }
-						options={ startDelayModeOptions }
-						value={ startDelayMode }
+						label={ __(
+							'Type first message from empty',
+							'k-typewriter'
+						) }
+						checked={ startFromEmpty }
 						onChange={ ( value ) =>
-							setAttributes( {
-								startDelayMode:
-									value as TypewriterAttributes[ 'startDelayMode' ],
-							} )
+							setAttributes( { startFromEmpty: value } )
 						}
 					/>
 					<ToggleControl

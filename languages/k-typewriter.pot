@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-27T13:54:30+00:00\n"
+"POT-Creation-Date: 2026-03-27T14:02:45+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: k-typewriter\n"
@@ -43,23 +43,23 @@ msgstr ""
 msgid "K Typewriter (Legacy)"
 msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:175
+#: includes/class-k-typewriter-plugin.php:177
 #: build/index.js:1
 msgid "한 글자씩, 리듬 있게."
 msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:176
+#: includes/class-k-typewriter-plugin.php:178
 #: build/index.js:1
 msgid "Animate headlines in any language."
 msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:177
+#: includes/class-k-typewriter-plugin.php:179
 #: build/index.js:1
 msgid "Ship polished hero copy in minutes."
 msgstr ""
 
 #. translators: %s: locale-aware list of animated messages.
-#: includes/class-k-typewriter-plugin.php:214
+#: includes/class-k-typewriter-plugin.php:216
 msgid "Typewriter animation that sequentially types %s."
 msgstr ""
 
@@ -73,6 +73,14 @@ msgstr ""
 
 #: build/index.js:1
 msgid "Every re-entry"
+msgstr ""
+
+#: build/index.js:1
+msgid "Backspace previous message"
+msgstr ""
+
+#: build/index.js:1
+msgid "Restart from empty"
 msgstr ""
 
 #: build/index.js:1
@@ -188,6 +196,14 @@ msgid "Typing delay (ms)"
 msgstr ""
 
 #: build/index.js:1
+msgid "Choose whether each new message backspaces the previous one or restarts from an empty state."
+msgstr ""
+
+#: build/index.js:1
+msgid "Transition mode"
+msgstr ""
+
+#: build/index.js:1
 msgid "Deleting delay (ms)"
 msgstr ""
 
@@ -196,15 +212,23 @@ msgid "Pause delay (ms)"
 msgstr ""
 
 #: build/index.js:1
-msgid "Start delay (ms)"
-msgstr ""
-
-#: build/index.js:1
 msgid "Choose when the extra delay should run before animation continues."
 msgstr ""
 
 #: build/index.js:1
 msgid "Start delay mode"
+msgstr ""
+
+#: build/index.js:1
+msgid "Start delay (ms)"
+msgstr ""
+
+#: build/index.js:1
+msgid "Clear the static fallback and type the first message from an empty state when animation begins."
+msgstr ""
+
+#: build/index.js:1
+msgid "Type first message from empty"
 msgstr ""
 
 #: build/index.js:1

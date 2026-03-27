@@ -25,6 +25,10 @@
       "type": "number",
       "default": 80
     },
+    "transitionMode": {
+      "type": "string",
+      "default": "backspace"
+    },
     "deleteDelay": {
       "type": "number",
       "default": 40
@@ -44,6 +48,10 @@
     "loop": {
       "type": "boolean",
       "default": true
+    },
+    "startFromEmpty": {
+      "type": "boolean",
+      "default": false
     },
     "showCursor": {
       "type": "boolean",

@@ -28,11 +28,13 @@ export default function EditorPreview( {
 	const {
 		items,
 		typeDelay,
+		transitionMode,
 		deleteDelay,
 		pauseDelay,
 		startDelay,
 		startDelayMode,
 		loop,
+		startFromEmpty,
 		showCursor,
 		tagName,
 	} = attributes;
@@ -50,8 +52,10 @@ export default function EditorPreview( {
 		() => getEffectiveSummaryText( attributes ),
 		[ attributes ]
 	);
-	const playbackKey = `${ itemsKey }::${ typeDelay }::${ deleteDelay }::${ pauseDelay }::${ startDelay }::${ startDelayMode }::${ String(
+	const playbackKey = `${ itemsKey }::${ typeDelay }::${ transitionMode }::${ deleteDelay }::${ pauseDelay }::${ startDelay }::${ startDelayMode }::${ String(
 		loop
+	) }::${ String(
+		startFromEmpty
 	) }::${ visibleFallbackText }::${ seoSummary }`;
 	const fallbackFrame = useMemo(
 		() => createFallbackFrame( stableItems, visibleFallbackText ),
@@ -116,6 +120,8 @@ export default function EditorPreview( {
 				items: stableItems,
 				fallbackText: visibleFallbackText,
 				loop,
+				transitionMode,
+				startFromEmpty,
 				startDelay,
 				startDelayMode,
 			} )
@@ -130,6 +136,8 @@ export default function EditorPreview( {
 						items: stableItems,
 						fallbackText: visibleFallbackText,
 						loop,
+						transitionMode,
+						startFromEmpty,
 						startDelay,
 						startDelayMode,
 					} )
@@ -139,6 +147,8 @@ export default function EditorPreview( {
 				items: stableItems,
 				fallbackText: visibleFallbackText,
 				loop,
+				transitionMode,
+				startFromEmpty,
 				typeDelay,
 				deleteDelay,
 				pauseDelay,
@@ -160,9 +170,11 @@ export default function EditorPreview( {
 		loop,
 		pauseDelay,
 		stableItems,
+		startFromEmpty,
 		startDelay,
 		startDelayMode,
 		typeDelay,
+		transitionMode,
 		visibleFallbackText,
 	] );
 

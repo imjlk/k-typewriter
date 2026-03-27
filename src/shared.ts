@@ -11,10 +11,12 @@ export const START_DELAY_MODES = [
 ] as const;
 
 export const CONTENT_SOURCE_MODES = [ 'auto', 'custom' ] as const;
+export const TRANSITION_MODES = [ 'backspace', 'restart' ] as const;
 
 export const DEFAULT_ATTRIBUTES = {
 	items: DEFAULT_ITEMS,
 	typeDelay: 80,
+	transitionMode: 'backspace',
 	deleteDelay: 40,
 	pauseDelay: 1200,
 	startDelay: 0,
@@ -50,15 +52,18 @@ export const VALID_TAG_NAMES = [
 export type TypewriterTagName = ( typeof VALID_TAG_NAMES )[ number ];
 export type StartDelayMode = ( typeof START_DELAY_MODES )[ number ];
 export type ContentSourceMode = ( typeof CONTENT_SOURCE_MODES )[ number ];
+export type TransitionMode = ( typeof TRANSITION_MODES )[ number ];
 
 export type TypewriterAttributes = {
 	items: string[];
 	typeDelay: number;
+	transitionMode: TransitionMode;
 	deleteDelay: number;
 	pauseDelay: number;
 	startDelay: number;
 	startDelayMode: StartDelayMode;
 	loop: boolean;
+	startFromEmpty: boolean;
 	showCursor: boolean;
 	startOnView: boolean;
 	fallbackMode: ContentSourceMode;
@@ -108,6 +113,18 @@ export function coerceStartDelayMode( value: unknown ): StartDelayMode {
 	}
 
 	return DEFAULT_ATTRIBUTES.startDelayMode;
+}
+
+export function coerceTransitionMode( value: unknown ): TransitionMode {
+	if ( typeof value === 'string' ) {
+		const candidate = value.toLowerCase() as TransitionMode;
+
+		if ( TRANSITION_MODES.includes( candidate ) ) {
+			return candidate;
+		}
+	}
+
+	return DEFAULT_ATTRIBUTES.transitionMode;
 }
 
 export function coerceContentSourceMode(
@@ -232,6 +249,7 @@ export function normalizeAttributes(
 			20,
 			300
 		),
+		transitionMode: coerceTransitionMode( attributes.transitionMode ),
 		deleteDelay: clampNumber(
 			attributes.deleteDelay ?? DEFAULT_ATTRIBUTES.deleteDelay,
 			10,
@@ -252,6 +270,10 @@ export function normalizeAttributes(
 			typeof attributes.loop === 'boolean'
 				? attributes.loop
 				: DEFAULT_ATTRIBUTES.loop,
+		startFromEmpty:
+			typeof attributes.startFromEmpty === 'boolean'
+				? attributes.startFromEmpty
+				: DEFAULT_ATTRIBUTES.startFromEmpty,
 		showCursor:
 			typeof attributes.showCursor === 'boolean'
 				? attributes.showCursor

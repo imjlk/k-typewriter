@@ -59,8 +59,10 @@ describe( 'shared helpers', () => {
 		const normalized = normalizeAttributes( {
 			items: [ 'Alpha', 'Beta' ],
 			tagName: 'h6',
+			transitionMode: 'restart',
 			startDelay: 800,
 			startDelayMode: 'every-reentry',
+			startFromEmpty: true,
 			fallbackMode: 'custom',
 			fallbackText: 'Static fallback',
 			summaryMode: 'custom',
@@ -68,8 +70,10 @@ describe( 'shared helpers', () => {
 		} );
 
 		expect( normalized.tagName ).toBe( 'h6' );
+		expect( normalized.transitionMode ).toBe( 'restart' );
 		expect( normalized.startDelay ).toBe( 800 );
 		expect( normalized.startDelayMode ).toBe( 'every-reentry' );
+		expect( normalized.startFromEmpty ).toBe( true );
 		expect( normalized.fallbackMode ).toBe( 'custom' );
 		expect( normalized.fallbackText ).toBe( 'Static fallback' );
 		expect( normalized.summaryMode ).toBe( 'custom' );

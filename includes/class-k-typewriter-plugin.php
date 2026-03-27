@@ -116,6 +116,8 @@ final class K_Typewriter_Plugin {
 				'pendingReentryDelay' => false,
 				'fallbackText'        => $visible_fallback,
 				'loop'                => $settings['loop'],
+				'transitionMode'      => $settings['transitionMode'],
+				'startFromEmpty'      => $settings['startFromEmpty'],
 				'showCursor'          => $settings['showCursor'],
 				'startOnView'         => $settings['startOnView'],
 				'typeDelay'           => $settings['typeDelay'],
@@ -259,11 +261,13 @@ final class K_Typewriter_Plugin {
 		$defaults = array(
 			'items'              => self::get_default_items(),
 			'typeDelay'          => 80,
+			'transitionMode'     => 'backspace',
 			'deleteDelay'        => 40,
 			'pauseDelay'         => 1200,
 			'startDelay'         => 0,
 			'startDelayMode'     => 'first-start',
 			'loop'               => true,
+			'startFromEmpty'     => false,
 			'showCursor'         => true,
 			'startOnView'        => true,
 			'fallbackMode'       => 'auto',
@@ -309,12 +313,17 @@ final class K_Typewriter_Plugin {
 			'every-cycle',
 			'every-reentry',
 		);
+		$valid_transition_modes = array(
+			'backspace',
+			'restart',
+		);
 		$valid_content_modes = array(
 			'auto',
 			'custom',
 		);
 		$tag_name          = in_array( $attributes['tagName'], $valid_tags, true ) ? $attributes['tagName'] : $defaults['tagName'];
 		$delay_mode        = in_array( $attributes['startDelayMode'], $valid_delay_modes, true ) ? $attributes['startDelayMode'] : $defaults['startDelayMode'];
+		$transition_mode   = in_array( $attributes['transitionMode'], $valid_transition_modes, true ) ? $attributes['transitionMode'] : $defaults['transitionMode'];
 		$fallback_text     = trim( wp_strip_all_tags( (string) $attributes['fallbackText'] ) );
 		$summary_text      = trim(
 			wp_strip_all_tags(
@@ -331,11 +340,13 @@ final class K_Typewriter_Plugin {
 		return array(
 			'items'             => $items,
 			'typeDelay'         => min( 300, max( 20, (int) $attributes['typeDelay'] ) ),
+			'transitionMode'    => $transition_mode,
 			'deleteDelay'       => min( 240, max( 10, (int) $attributes['deleteDelay'] ) ),
 			'pauseDelay'        => min( 4000, max( 200, (int) $attributes['pauseDelay'] ) ),
 			'startDelay'        => min( 5000, max( 0, (int) $attributes['startDelay'] ) ),
 			'startDelayMode'    => $delay_mode,
 			'loop'              => (bool) $attributes['loop'],
+			'startFromEmpty'    => (bool) $attributes['startFromEmpty'],
 			'showCursor'        => (bool) $attributes['showCursor'],
 			'startOnView'       => (bool) $attributes['startOnView'],
 			'fallbackMode'      => $fallback_mode,
