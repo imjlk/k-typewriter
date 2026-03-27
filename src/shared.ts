@@ -37,7 +37,7 @@ export const DEFAULT_ATTRIBUTES = {
 	cursorAnimationMode: 'blink',
 	cursorWidth: 0.08,
 	cursorOffsetX: 0,
-	cursorOffsetY: 0,
+	cursorOffsetY: 0.03,
 	cursorBlinkSpeed: 1000,
 	cursorTransitionSpeed: 900,
 	hideCursorWhenComplete: false,

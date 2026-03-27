@@ -91,7 +91,7 @@
 		},
 		"cursorOffsetY": {
 			"type": "number",
-			"default": 0
+			"default": 0.03
 		},
 		"cursorBlinkSpeed": {
 			"type": "number",

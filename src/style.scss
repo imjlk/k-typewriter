@@ -35,7 +35,7 @@
 	max-width: 100%;
 	direction: inherit;
 	line-height: inherit;
-	text-align: start;
+	text-align: inherit;
 	unicode-bidi: isolate;
 	overflow-wrap: anywhere;
 }
@@ -55,9 +55,9 @@
 	border-radius: 999px;
 	background: currentcolor;
 	line-height: 1;
-	transform: translate(var(--k-typewriter-cursor-offset-x, 0), calc(var(--k-typewriter-cursor-offset-y, 0em) + max((1lh - 1em) / 2, 0px)));
+	transform: translate(var(--k-typewriter-cursor-offset-x, 0), var(--k-typewriter-cursor-offset-y, 0.03em));
 	unicode-bidi: isolate;
-	vertical-align: baseline;
+	vertical-align: middle;
 }
 
 .wp-block-imjlk-k-typewriter .k-typewriter__cursor[hidden] {

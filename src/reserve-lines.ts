@@ -8,6 +8,8 @@ type InlineWidthSyncOptions = {
 	showCursor: boolean;
 };
 
+type MeasurementCallback = ( value: string | null ) => void;
+
 function getMeasuredLineHeight( textElement: HTMLElement ) {
 	const computedStyle = window.getComputedStyle( textElement );
 	const numericLineHeight = Number.parseFloat( computedStyle.lineHeight );
@@ -214,6 +216,29 @@ function getMeasuredInlineWidth(
 }
 
 export function syncReservedHeight( textElement: HTMLElement | null ) {
+	return observeReservedHeight( textElement, ( reservedHeight ) => {
+		if ( ! textElement ) {
+			return;
+		}
+
+		if ( ! reservedHeight ) {
+			textElement.style.removeProperty(
+				'--k-typewriter-reserved-height'
+			);
+			return;
+		}
+
+		textElement.style.setProperty(
+			'--k-typewriter-reserved-height',
+			reservedHeight
+		);
+	} );
+}
+
+export function observeReservedHeight(
+	textElement: HTMLElement | null,
+	onChange: MeasurementCallback
+) {
 	if ( ! textElement ) {
 		return () => {};
 	}
@@ -226,17 +251,11 @@ export function syncReservedHeight( textElement: HTMLElement | null ) {
 		);
 
 		if ( ! reservedHeight ) {
-			textElement.style.removeProperty(
-				'--k-typewriter-reserved-height'
-			);
+			onChange( null );
 			return;
 		}
 
-		// Round up so reserve lines never undershoot by a fractional pixel.
-		textElement.style.setProperty(
-			'--k-typewriter-reserved-height',
-			`${ Math.ceil( reservedHeight ) }px`
-		);
+		onChange( `${ Math.ceil( reservedHeight ) }px` );
 	};
 
 	applyReservedHeight();
@@ -246,26 +265,44 @@ export function syncReservedHeight( textElement: HTMLElement | null ) {
 
 export function syncInlineWidth(
 	textElement: HTMLElement | null,
+	options: InlineWidthSyncOptions
+) {
+	return observeInlineWidth( textElement, options, ( measuredWidth ) => {
+		if ( ! textElement ) {
+			return;
+		}
+
+		if ( ! measuredWidth ) {
+			textElement.style.removeProperty(
+				'--k-typewriter-inline-measured-width'
+			);
+			return;
+		}
+
+		textElement.style.setProperty(
+			'--k-typewriter-inline-measured-width',
+			measuredWidth
+		);
+	} );
+}
+
+export function observeInlineWidth(
+	textElement: HTMLElement | null,
 	{
 		inlineLayout,
 		mode,
 		items,
 		fallbackText,
 		showCursor,
-	}: InlineWidthSyncOptions
+	}: InlineWidthSyncOptions,
+	onChange: MeasurementCallback
 ) {
 	if ( ! textElement ) {
 		return () => {};
 	}
 
-	const clearMeasuredWidth = () => {
-		textElement.style.removeProperty(
-			'--k-typewriter-inline-measured-width'
-		);
-	};
-
 	if ( ! inlineLayout || mode !== 'measure' ) {
-		clearMeasuredWidth();
+		onChange( null );
 		return () => {};
 	}
 
@@ -274,7 +311,7 @@ export function syncInlineWidth(
 	);
 
 	if ( ! measurementStrings.length ) {
-		clearMeasuredWidth();
+		onChange( null );
 		return () => {};
 	}
 
@@ -286,14 +323,11 @@ export function syncInlineWidth(
 		);
 
 		if ( ! measuredWidth ) {
-			clearMeasuredWidth();
+			onChange( null );
 			return;
 		}
 
-		textElement.style.setProperty(
-			'--k-typewriter-inline-measured-width',
-			`${ Math.ceil( measuredWidth ) }px`
-		);
+		onChange( `${ Math.ceil( measuredWidth ) }px` );
 	};
 
 	applyMeasuredWidth();
@@ -305,6 +339,6 @@ export function syncInlineWidth(
 
 	return () => {
 		cleanupObservers();
-		clearMeasuredWidth();
+		onChange( null );
 	};
 }

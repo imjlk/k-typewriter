@@ -66,6 +66,7 @@ final class K_Typewriter_Plugin {
 		$cursor_class     = 'transition' === $settings['cursorAnimationMode']
 			? 'k-typewriter__cursor k-typewriter__cursor--transition'
 			: 'k-typewriter__cursor k-typewriter__cursor--blink';
+		$root_classes     = array( 'k-typewriter', 'is-paused' );
 		$text_direction   = 'auto' !== $settings['textDirection'] ? $settings['textDirection'] : '';
 		$vertical_align   = 'flex-start';
 
@@ -87,6 +88,7 @@ final class K_Typewriter_Plugin {
 
 		if ( null !== $inline_width_ch ) {
 			$text_style_parts[] = sprintf( '--k-typewriter-inline-width:%dch', $inline_width_ch );
+			$root_classes[]     = 'has-inline-width';
 		}
 
 		$text_style       = implode( ';', $text_style_parts ) . ';';
@@ -110,9 +112,20 @@ final class K_Typewriter_Plugin {
 				'startFromEmpty'      => $settings['startFromEmpty'],
 				'inlineLayout'        => $settings['inlineLayout'],
 				'inlineWidthMode'     => $settings['inlineWidthMode'],
+				'cursorAnimationMode' => $settings['cursorAnimationMode'],
 				'showCursor'          => $settings['showCursor'],
 				'cursorVisible'       => $settings['showCursor'],
 				'hideCursorWhenComplete' => $settings['hideCursorWhenComplete'],
+				'isPlaying'           => false,
+				'isPaused'            => true,
+				'isComplete'          => false,
+				'isHoverPaused'       => false,
+				'hasInlineWidthReserve' => $settings['inlineLayout'] && 'auto' !== $settings['inlineWidthMode'],
+				'useBlinkCursor'      => 'blink' === $settings['cursorAnimationMode'],
+				'useTransitionCursor' => 'transition' === $settings['cursorAnimationMode'],
+				'inlineSize'          => '',
+				'reservedMinHeight'   => '',
+				'reservedMinBlockSize' => '',
 				'startOnView'         => $settings['startOnView'],
 				'pauseOnHover'        => $settings['pauseOnHover'],
 				'typeDelay'           => $settings['typeDelay'],
@@ -131,13 +144,18 @@ final class K_Typewriter_Plugin {
 
 		ob_start();
 		?>
-		<div <?php echo $wrapper; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-			<div
-				class="k-typewriter"
-				data-wp-interactive="<?php echo esc_attr( self::STORE_NAMESPACE ); ?>"
-				data-wp-context="<?php echo esc_attr( $context ); ?>"
-				data-wp-init--typewriter="callbacks.init"
-			>
+			<div <?php echo $wrapper; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+				<div
+					class="<?php echo esc_attr( implode( ' ', $root_classes ) ); ?>"
+					data-wp-interactive="<?php echo esc_attr( self::STORE_NAMESPACE ); ?>"
+					data-wp-context="<?php echo esc_attr( $context ); ?>"
+					data-wp-init--typewriter="callbacks.init"
+					data-wp-class--is-playing="context.isPlaying"
+					data-wp-class--is-paused="context.isPaused"
+					data-wp-class--is-complete="context.isComplete"
+					data-wp-class--is-hover-paused="context.isHoverPaused"
+					data-wp-class--has-inline-width="context.hasInlineWidthReserve"
+				>
 				<<?php echo esc_html( $tag_name ); ?>
 					class="k-typewriter__text"
 					<?php if ( $text_direction ) : ?>
@@ -147,6 +165,9 @@ final class K_Typewriter_Plugin {
 					<?php if ( $seo_summary && $seo_summary !== $visible_fallback ) : ?>
 						aria-label="<?php echo esc_attr( $seo_summary ); ?>"
 					<?php endif; ?>
+					data-wp-style--inline-size="context.inlineSize"
+					data-wp-style--min-height="context.reservedMinHeight"
+					data-wp-style--min-block-size="context.reservedMinBlockSize"
 				>
 					<span class="k-typewriter__line">
 						<span class="k-typewriter__content" data-wp-text="context.displayText">
@@ -156,6 +177,8 @@ final class K_Typewriter_Plugin {
 							aria-hidden="true"
 							class="<?php echo esc_attr( $cursor_class ); ?>"
 							data-wp-bind--hidden="!context.cursorVisible"
+							data-wp-class--k-typewriter__cursor--blink="context.useBlinkCursor"
+							data-wp-class--k-typewriter__cursor--transition="context.useTransitionCursor"
 						></span>
 					</span>
 				</<?php echo esc_html( $tag_name ); ?>>
@@ -315,7 +338,7 @@ final class K_Typewriter_Plugin {
 			'cursorAnimationMode' => 'blink',
 			'cursorWidth'        => 0.08,
 			'cursorOffsetX'      => 0,
-			'cursorOffsetY'      => 0,
+			'cursorOffsetY'      => 0.03,
 			'cursorBlinkSpeed'   => 1000,
 			'cursorTransitionSpeed' => 900,
 			'hideCursorWhenComplete' => false,

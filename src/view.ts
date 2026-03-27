@@ -12,8 +12,13 @@ import {
 	isAnimationComplete,
 	normalizeTypingItems,
 } from './typewriter-engine';
-import { syncInlineWidth, syncReservedHeight } from './reserve-lines';
-import type { InlineWidthMode, StartDelayMode, TransitionMode } from './shared';
+import { observeInlineWidth, observeReservedHeight } from './reserve-lines';
+import type {
+	CursorAnimationMode,
+	InlineWidthMode,
+	StartDelayMode,
+	TransitionMode,
+} from './shared';
 
 type TypewriterContext = {
 	items: string[];
@@ -29,9 +34,20 @@ type TypewriterContext = {
 	startFromEmpty: boolean;
 	inlineLayout: boolean;
 	inlineWidthMode: InlineWidthMode;
+	cursorAnimationMode: CursorAnimationMode;
 	showCursor: boolean;
 	cursorVisible: boolean;
 	hideCursorWhenComplete: boolean;
+	isPlaying: boolean;
+	isPaused: boolean;
+	isComplete: boolean;
+	isHoverPaused: boolean;
+	hasInlineWidthReserve: boolean;
+	useBlinkCursor: boolean;
+	useTransitionCursor: boolean;
+	inlineSize: string;
+	reservedMinHeight: string;
+	reservedMinBlockSize: string;
 	startOnView: boolean;
 	pauseOnHover: boolean;
 	typeDelay: number;
@@ -72,7 +88,7 @@ const { actions } = store( STORE_NAME, {
 
 			if ( context.reducedMotion ) {
 				resetToFallback( context, items );
-				syncCursorVisibility(
+				syncPresentation(
 					context,
 					getElement().ref ? ensureRuntime( getElement().ref ) : null
 				);
@@ -91,7 +107,7 @@ const { actions } = store( STORE_NAME, {
 					startDelayMode: context.startDelayMode,
 				} )
 			);
-			syncCursorVisibility(
+			syncPresentation(
 				context,
 				getElement().ref ? ensureRuntime( getElement().ref ) : null
 			);
@@ -111,18 +127,30 @@ const { actions } = store( STORE_NAME, {
 			const textElement = ref.querySelector(
 				'.k-typewriter__text'
 			) as HTMLElement | null;
-			const cleanupReservedHeight = syncReservedHeight( textElement );
-			const cleanupInlineWidth = syncInlineWidth( textElement, {
-				inlineLayout: context.inlineLayout,
-				mode: context.inlineWidthMode,
-				items,
-				fallbackText: context.fallbackText,
-				showCursor: context.showCursor,
-			} );
+			const cleanupReservedHeight = observeReservedHeight(
+				textElement,
+				withScope( ( reservedHeight: string | null ) => {
+					context.reservedMinHeight = reservedHeight ?? '';
+					context.reservedMinBlockSize = reservedHeight ?? '';
+				} )
+			);
+			const cleanupInlineWidth = observeInlineWidth(
+				textElement,
+				{
+					inlineLayout: context.inlineLayout,
+					mode: context.inlineWidthMode,
+					items,
+					fallbackText: context.fallbackText,
+					showCursor: context.showCursor,
+				},
+				withScope( ( measuredWidth: string | null ) => {
+					context.inlineSize = measuredWidth ?? '';
+				} )
+			);
 
 			resetToFallback( context, items );
 			runtime.documentVisible = ! document.hidden;
-			syncCursorVisibility( context, runtime );
+			syncPresentation( context, runtime );
 
 			const mediaQuery = window.matchMedia(
 				'(prefers-reduced-motion: reduce)'
@@ -136,7 +164,7 @@ const { actions } = store( STORE_NAME, {
 					resetToFallback( context, items );
 				}
 
-				syncCursorVisibility( context, runtime );
+				syncPresentation( context, runtime );
 				scheduleTick();
 			} );
 
@@ -252,6 +280,18 @@ function resetToFallback( context: TypewriterContext, items: string[] ) {
 	);
 }
 
+function getIsComplete( context: TypewriterContext ) {
+	return isAnimationComplete( context, {
+		items: context.items,
+		fallbackText: context.fallbackText,
+		loop: context.loop,
+		transitionMode: context.transitionMode,
+		startFromEmpty: context.startFromEmpty,
+		startDelay: context.startDelay,
+		startDelayMode: context.startDelayMode,
+	} );
+}
+
 function syncCursorVisibility(
 	context: TypewriterContext,
 	runtime: RuntimeState | null
@@ -261,15 +301,7 @@ function syncCursorVisibility(
 		return;
 	}
 
-	const isComplete = isAnimationComplete( context, {
-		items: context.items,
-		fallbackText: context.fallbackText,
-		loop: context.loop,
-		transitionMode: context.transitionMode,
-		startFromEmpty: context.startFromEmpty,
-		startDelay: context.startDelay,
-		startDelayMode: context.startDelayMode,
-	} );
+	const isComplete = getIsComplete( context );
 	const isPaused = ! runtime || ! shouldAnimate( context, runtime );
 
 	if ( isComplete ) {
@@ -283,6 +315,26 @@ function syncCursorVisibility(
 	}
 
 	context.cursorVisible = true;
+}
+
+function syncPresentation(
+	context: TypewriterContext,
+	runtime: RuntimeState | null
+) {
+	const isComplete = getIsComplete( context );
+	const isPlaying = runtime ? shouldAnimate( context, runtime ) : false;
+
+	context.isPlaying = isPlaying;
+	context.isComplete = isComplete;
+	context.isPaused = ! isPlaying && ! isComplete;
+	context.isHoverPaused =
+		!! runtime && context.pauseOnHover && runtime.isHovered && ! isComplete;
+	context.hasInlineWidthReserve =
+		context.inlineLayout && context.inlineWidthMode !== 'auto';
+	context.useBlinkCursor = context.cursorAnimationMode === 'blink';
+	context.useTransitionCursor = context.cursorAnimationMode === 'transition';
+
+	syncCursorVisibility( context, runtime );
 }
 
 function shouldAnimate(
@@ -351,7 +403,7 @@ function scheduleTick() {
 
 	if ( ! shouldAnimate( context, runtime ) ) {
 		runtime.wasActive = false;
-		syncCursorVisibility( context, runtime );
+		syncPresentation( context, runtime );
 		return;
 	}
 
@@ -360,7 +412,7 @@ function scheduleTick() {
 		runtime.wasActive = true;
 	}
 
-	syncCursorVisibility( context, runtime );
+	syncPresentation( context, runtime );
 
 	runtime.timeoutId = window.setTimeout(
 		withScope( () => {
