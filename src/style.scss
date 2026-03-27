@@ -9,10 +9,17 @@
 	gap: 0.1em;
 	margin: 0;
 	max-width: 100%;
+	line-height: inherit;
+	min-height: 1em;
+	min-block-size: 1lh;
 }
 
 .wp-block-imjlk-k-typewriter .k-typewriter__content {
+	display: inline-block;
 	min-width: 1ch;
+	min-height: 1em;
+	min-block-size: 1lh;
+	line-height: inherit;
 	word-break: break-word;
 }
 
