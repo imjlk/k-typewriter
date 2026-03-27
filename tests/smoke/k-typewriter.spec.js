@@ -309,6 +309,9 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 			'Fallback & Summary'
 		);
 		await page
+			.getByRole( 'combobox', { name: 'Summary source' } )
+			.selectOption( 'custom' );
+		await page
 			.getByRole( 'textbox', { name: 'Summary override' } )
 			.fill( SEO_SUMMARY );
 		await page
