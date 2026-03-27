@@ -65,7 +65,7 @@
 		scaleY(var(--k-typewriter-cursor-height-scale, 1));
 	transform-origin: center center;
 	unicode-bidi: isolate;
-	vertical-align: middle;
+	vertical-align: baseline;
 }
 
 .wp-block-imjlk-k-typewriter .k-typewriter__cursor[hidden] {
