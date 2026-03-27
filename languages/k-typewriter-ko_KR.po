@@ -61,6 +61,11 @@ msgstr "어떤 언어든 자연스럽게 헤드라인을 애니메이션하세�
 msgid "Ship polished hero copy in minutes."
 msgstr "완성도 높은 히어로 카피를 몇 분 만에 배포하세요."
 
+#. translators: %s: locale-aware list of animated messages.
+#: includes/class-k-typewriter-plugin.php:214
+msgid "Typewriter animation that sequentially types %s."
+msgstr "%s가 순차적으로 타이핑되는 애니메이션"
+
 #: build/index.js:1
 msgid "First start only"
 msgstr "처음 시작할 때만"

@@ -202,18 +202,19 @@ export default function Edit( {
 							} )
 						}
 					/>
-					<TextControl
-						disabled={ fallbackMode !== 'custom' }
-						help={ __(
-							'Leave this empty to fall back to the first message.',
-							'k-typewriter'
-						) }
-						label={ __( 'Fallback override', 'k-typewriter' ) }
-						value={ fallbackText }
-						onChange={ ( value ) =>
-							setAttributes( { fallbackText: value } )
-						}
-					/>
+					{ fallbackMode !== 'custom' ? null : (
+						<TextControl
+							help={ __(
+								'Leave this empty to fall back to the first message.',
+								'k-typewriter'
+							) }
+							label={ __( 'Fallback override', 'k-typewriter' ) }
+							value={ fallbackText }
+							onChange={ ( value ) =>
+								setAttributes( { fallbackText: value } )
+							}
+						/>
+					) }
 					<div className="k-typewriter-editor__effective-card">
 						<p className="k-typewriter-editor__effective-label">
 							{ __(
@@ -248,19 +249,20 @@ export default function Edit( {
 							} )
 						}
 					/>
-					<TextareaControl
-						disabled={ summaryMode !== 'custom' }
-						help={ __(
-							'Leave this empty to auto-generate the summary from every message.',
-							'k-typewriter'
-						) }
-						label={ __( 'Summary override', 'k-typewriter' ) }
-						rows={ 3 }
-						value={ summaryText }
-						onChange={ ( value ) =>
-							setAttributes( { summaryText: value } )
-						}
-					/>
+					{ summaryMode !== 'custom' ? null : (
+						<TextareaControl
+							help={ __(
+								'Leave this empty to auto-generate the summary from every message.',
+								'k-typewriter'
+							) }
+							label={ __( 'Summary override', 'k-typewriter' ) }
+							rows={ 3 }
+							value={ summaryText }
+							onChange={ ( value ) =>
+								setAttributes( { summaryText: value } )
+							}
+						/>
+					) }
 					<div className="k-typewriter-editor__effective-card">
 						<p className="k-typewriter-editor__effective-label">
 							{ __(

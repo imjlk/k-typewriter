@@ -39,7 +39,7 @@ describe( 'shared helpers', () => {
 		).toBe( 'Custom summary' );
 	} );
 
-	test( 'auto-generates a locale-aware summary when blank', () => {
+	test( 'auto-generates a locale-aware descriptive summary when blank', () => {
 		const summary = getEffectiveSummaryText(
 			{
 				items: [ 'Alpha', 'Beta', 'Gamma' ],
@@ -52,6 +52,7 @@ describe( 'shared helpers', () => {
 		expect( summary ).toContain( 'Alpha' );
 		expect( summary ).toContain( 'Beta' );
 		expect( summary ).toContain( 'Gamma' );
+		expect( summary ).toContain( 'Typewriter animation' );
 	} );
 
 	test( 'normalizes extended tag names and unified fallback attributes', () => {

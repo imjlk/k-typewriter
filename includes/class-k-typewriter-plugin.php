@@ -203,7 +203,17 @@ final class K_Typewriter_Plugin {
 			return $settings['summaryText'];
 		}
 
-		return self::format_locale_list( $settings['items'] );
+		$summary_list = self::format_locale_list( $settings['items'] );
+
+		if ( '' === $summary_list ) {
+			return '';
+		}
+
+		return sprintf(
+			/* translators: %s: locale-aware list of animated messages. */
+			__( 'Typewriter animation that sequentially types %s.', 'k-typewriter' ),
+			$summary_list
+		);
 	}
 
 	/**

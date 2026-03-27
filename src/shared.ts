@@ -178,6 +178,21 @@ export function formatLocaleList( items: string[], locale?: string ) {
 	return items.join( ', ' );
 }
 
+export function formatAutoSummaryText( items: string[], locale?: string ) {
+	const summaryList = formatLocaleList( items, locale );
+	const normalizedLocale = locale?.toLowerCase() ?? '';
+
+	if ( ! summaryList ) {
+		return '';
+	}
+
+	if ( normalizedLocale.startsWith( 'ko' ) ) {
+		return `${ summaryList }가 순차적으로 타이핑되는 애니메이션`;
+	}
+
+	return `Typewriter animation that sequentially types ${ summaryList }.`;
+}
+
 export function getEffectiveSummaryText(
 	attributes: Pick<
 		TypewriterAttributes,
@@ -193,7 +208,7 @@ export function getEffectiveSummaryText(
 		}
 	}
 
-	return formatLocaleList( sanitizeItems( attributes.items ), locale );
+	return formatAutoSummaryText( sanitizeItems( attributes.items ), locale );
 }
 
 export function normalizeAttributes(
