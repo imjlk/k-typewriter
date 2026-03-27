@@ -53,15 +53,13 @@ jobs:
             - name: Smoke test
               run: pnpm run test:smoke
 
-            - name: Build release zip
-              run: pnpm run plugin-zip
-
-            - name: Upload release zip artifact
-              uses: actions/upload-artifact@v4
+            - name: Build tested release zip
+              uses: 10up/action-wordpress-plugin-build-zip@b9e621e1261ccf51592b6f3943e4dc4518fca0d1
               with:
-                  name: k-typewriter-zip
-                  path: ./${{ github.event.repository.name }}.zip
-                  if-no-files-found: error
+                  retention-days: 5
+
+            - name: Verify tested release zip
+              run: test -f "./${{ github.event.repository.name }}.zip"
 
             - name: Upload Playwright artifacts
               if: failure()

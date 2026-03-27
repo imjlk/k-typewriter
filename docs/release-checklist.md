@@ -41,8 +41,8 @@
 ## GitHub Actions
 
 1. Confirm the tag follows the `v*` pattern.
-2. Confirm the CI and release workflows upload the tested `k-typewriter.zip` artifact.
-3. Confirm the GitHub release attaches the same tested zip that was built before deploy.
+2. Confirm the CI and release workflows build the tested package with the 10up build-zip action.
+3. Confirm the GitHub release attaches the tested `k-typewriter.zip` built in the release workflow.
 4. Confirm the WordPress.org deploy step is enabled only when the plugin slug exists by setting `WPORG_DEPLOY_ENABLED=true`.
 5. Confirm `SVN_USERNAME` and `SVN_PASSWORD` are set before enabling WordPress.org deploy.
 6. Confirm the WordPress.org deploy step runs only after the smoke checks pass.

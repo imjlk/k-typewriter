@@ -81,6 +81,6 @@ For WordPress.org, approved translations from `translate.wordpress.org` will eve
 3. Regenerate the translation template with `pnpm run make:pot`.
 4. Regenerate language assets if translations changed.
 5. Tag the release with `v*`.
-6. Let GitHub Actions build the tested zip and attach it to the GitHub release.
+6. Let GitHub Actions build the tested zip with the 10up build-zip action and attach it to the GitHub release.
 7. Enable WordPress.org deployment only after the plugin slug exists by setting `WPORG_DEPLOY_ENABLED=true` and adding `SVN_USERNAME` / `SVN_PASSWORD`.
 8. After the first deploy, enable the public Playground preview from the WordPress.org Advanced view if desired.

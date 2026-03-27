@@ -12,6 +12,7 @@
 .gitignore
 .wp-env.json
 README.md
+readme-ko_KR.md
 package.json
 package-lock.json
 playwright.config.js

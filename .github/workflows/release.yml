@@ -54,14 +54,19 @@ jobs:
             - name: Build plugin
               run: pnpm run build
 
-            - name: Build release zip
-              run: pnpm run plugin-zip
-
             - name: Start wp-env
               run: pnpm run env:start
 
             - name: Smoke test
               run: pnpm run test:smoke
+
+            - name: Build tested release zip
+              uses: 10up/action-wordpress-plugin-build-zip@b9e621e1261ccf51592b6f3943e4dc4518fca0d1
+              with:
+                  retention-days: 5
+
+            - name: Verify tested release zip
+              run: test -f "./${{ github.event.repository.name }}.zip"
 
             - name: Upload Playwright artifacts
               if: failure()
@@ -77,17 +82,10 @@ jobs:
               if: always()
               run: pnpm run env:stop
 
-            - name: Upload release zip artifact
-              uses: actions/upload-artifact@v4
-              with:
-                  name: k-typewriter-zip
-                  path: ./${{ github.event.repository.name }}.zip
-                  if-no-files-found: error
-
             - name: Deploy to WordPress.org
               if: ${{ vars.WPORG_DEPLOY_ENABLED == 'true' && env.SVN_USERNAME != '' && env.SVN_PASSWORD != '' }}
               id: deploy
-              uses: 10up/action-wordpress-plugin-deploy@stable
+              uses: 10up/action-wordpress-plugin-deploy@54bd289b8525fd23a5c365ec369185f2966529c2
               env:
                   SLUG: k-typewriter
                   SVN_USERNAME: ${{ env.SVN_USERNAME }}
