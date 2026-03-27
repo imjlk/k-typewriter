@@ -12,6 +12,7 @@ import {
 	isAnimationComplete,
 	normalizeTypingItems,
 } from './typewriter-engine';
+import { syncReservedHeight } from './reserve-lines';
 import type { StartDelayMode, TransitionMode } from './shared';
 
 type TypewriterContext = {
@@ -92,6 +93,10 @@ const { actions } = store( STORE_NAME, {
 			const context = getContext< TypewriterContext >();
 			const items = normalizeTypingItems( context.items );
 			const runtime = ensureRuntime( ref );
+			const textElement = ref.querySelector(
+				'.k-typewriter__text'
+			) as HTMLElement | null;
+			const cleanupReservedHeight = syncReservedHeight( textElement );
 
 			resetToFallback( context, items );
 			runtime.documentVisible = ! document.hidden;
@@ -159,6 +164,7 @@ const { actions } = store( STORE_NAME, {
 				clearScheduledTick( ref );
 				runtime.observer?.disconnect();
 				runtime.cleanupMotion?.();
+				cleanupReservedHeight();
 				document.removeEventListener(
 					'visibilitychange',
 					handleVisibility

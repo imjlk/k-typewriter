@@ -49,6 +49,10 @@
 			"type": "number",
 			"default": 1
 		},
+		"verticalAlign": {
+			"type": "string",
+			"default": "top"
+		},
 		"startFromEmpty": {
 			"type": "boolean",
 			"default": false
@@ -89,6 +93,7 @@
 				"Animate headlines in any language."
 			],
 			"reserveLines": 2,
+			"verticalAlign": "middle",
 			"startDelay": 250,
 			"startDelayMode": "first-start",
 			"tagName": "h2"

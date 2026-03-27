@@ -29,6 +29,7 @@ import {
 	type TypewriterAttributes,
 	TRANSITION_MODES,
 	VALID_TAG_NAMES,
+	VERTICAL_ALIGNMENTS,
 } from './shared';
 
 const tagNameOptions = VALID_TAG_NAMES.map( ( tagName ) => ( {
@@ -54,6 +55,17 @@ const transitionModeLabels = {
 
 const transitionModeOptions = TRANSITION_MODES.map( ( value ) => ( {
 	label: transitionModeLabels[ value ],
+	value,
+} ) );
+
+const verticalAlignmentLabels = {
+	top: __( 'Top', 'k-typewriter' ),
+	middle: __( 'Middle', 'k-typewriter' ),
+	bottom: __( 'Bottom', 'k-typewriter' ),
+} as const;
+
+const verticalAlignmentOptions = VERTICAL_ALIGNMENTS.map( ( value ) => ( {
+	label: verticalAlignmentLabels[ value ],
 	value,
 } ) );
 
@@ -86,6 +98,7 @@ export default function Edit( {
 		startDelayMode,
 		loop,
 		reserveLines,
+		verticalAlign,
 		startFromEmpty,
 		showCursor,
 		startOnView,
@@ -202,6 +215,23 @@ export default function Edit( {
 							} )
 						}
 					/>
+					{ reserveLines <= 1 ? null : (
+						<SelectControl
+							help={ __(
+								'Choose how the animated line sits inside the reserved height.',
+								'k-typewriter'
+							) }
+							label={ __( 'Vertical align', 'k-typewriter' ) }
+							options={ verticalAlignmentOptions }
+							value={ verticalAlign }
+							onChange={ ( value ) =>
+								setAttributes( {
+									verticalAlign:
+										value as TypewriterAttributes[ 'verticalAlign' ],
+								} )
+							}
+						/>
+					) }
 				</PanelBody>
 				<PanelBody
 					initialOpen={ false }

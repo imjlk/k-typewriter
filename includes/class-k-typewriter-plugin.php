@@ -62,9 +62,18 @@ final class K_Typewriter_Plugin {
 		$visible_fallback = self::get_visible_fallback_text( $settings );
 		$seo_summary      = self::get_effective_seo_summary( $settings );
 		$tag_name         = $settings['tagName'];
+		$vertical_align   = 'flex-start';
+
+		if ( 'middle' === $settings['verticalAlign'] ) {
+			$vertical_align = 'center';
+		} elseif ( 'bottom' === $settings['verticalAlign'] ) {
+			$vertical_align = 'flex-end';
+		}
+
 		$text_style       = sprintf(
-			'--k-typewriter-reserve-lines:%d;',
-			(int) $settings['reserveLines']
+			'--k-typewriter-reserve-lines:%1$d;--k-typewriter-vertical-align:%2$s;',
+			(int) $settings['reserveLines'],
+			$vertical_align
 		);
 		$wrapper          = get_block_wrapper_attributes(
 			array(
@@ -116,15 +125,17 @@ final class K_Typewriter_Plugin {
 						aria-label="<?php echo esc_attr( $seo_summary ); ?>"
 					<?php endif; ?>
 				>
-					<span class="k-typewriter__content" data-wp-text="context.displayText">
-						<?php echo esc_html( $visible_fallback ); ?>
-					</span>
-					<span
-						aria-hidden="true"
-						class="k-typewriter__cursor"
-						data-wp-bind--hidden="!context.showCursor"
-					>
-						|
+					<span class="k-typewriter__line">
+						<span class="k-typewriter__content" data-wp-text="context.displayText">
+							<?php echo esc_html( $visible_fallback ); ?>
+						</span>
+						<span
+							aria-hidden="true"
+							class="k-typewriter__cursor"
+							data-wp-bind--hidden="!context.showCursor"
+						>
+							|
+						</span>
 					</span>
 				</<?php echo esc_html( $tag_name ); ?>>
 			</div>
@@ -235,6 +246,7 @@ final class K_Typewriter_Plugin {
 			'startDelayMode'     => 'first-start',
 			'loop'               => true,
 			'reserveLines'       => 1,
+			'verticalAlign'      => 'top',
 			'startFromEmpty'     => false,
 			'showCursor'         => true,
 			'startOnView'        => true,
@@ -285,6 +297,11 @@ final class K_Typewriter_Plugin {
 			'backspace',
 			'restart',
 		);
+		$valid_vertical_alignments = array(
+			'top',
+			'middle',
+			'bottom',
+		);
 		$valid_content_modes = array(
 			'auto',
 			'custom',
@@ -304,6 +321,9 @@ final class K_Typewriter_Plugin {
 		$summary_mode      = in_array( $attributes['summaryMode'], $valid_content_modes, true )
 			? $attributes['summaryMode']
 			: $defaults['summaryMode'];
+		$vertical_align    = in_array( $attributes['verticalAlign'], $valid_vertical_alignments, true )
+			? $attributes['verticalAlign']
+			: $defaults['verticalAlign'];
 
 		return array(
 			'items'             => $items,
@@ -315,6 +335,7 @@ final class K_Typewriter_Plugin {
 			'startDelayMode'    => $delay_mode,
 			'loop'              => (bool) $attributes['loop'],
 			'reserveLines'      => min( 6, max( 1, (int) $attributes['reserveLines'] ) ),
+			'verticalAlign'     => $vertical_align,
 			'startFromEmpty'    => (bool) $attributes['startFromEmpty'],
 			'showCursor'        => (bool) $attributes['showCursor'],
 			'startOnView'       => (bool) $attributes['startOnView'],

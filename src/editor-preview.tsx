@@ -14,6 +14,7 @@ import {
 	isAnimationComplete,
 	type TypewriterFrame,
 } from './typewriter-engine';
+import { syncReservedHeight } from './reserve-lines';
 
 type EditorPreviewProps = {
 	attributes: TypewriterAttributes;
@@ -36,6 +37,7 @@ export default function EditorPreview( {
 		startDelayMode,
 		loop,
 		reserveLines,
+		verticalAlign,
 		startFromEmpty,
 		showCursor,
 		tagName,
@@ -67,13 +69,21 @@ export default function EditorPreview( {
 	const timeoutRef = useRef< number | null >( null );
 	const previousIsSelectedRef = useRef( isSelected );
 	const previousIsPreviewPlayingRef = useRef( false );
-	const previewStyle = useMemo(
-		() =>
-			( {
-				'--k-typewriter-reserve-lines': String( reserveLines ),
-			} ) as CSSProperties,
-		[ reserveLines ]
-	);
+	const textRef = useRef< HTMLElement | null >( null );
+	const previewStyle = useMemo( () => {
+		let justifyContent = 'flex-start';
+
+		if ( verticalAlign === 'middle' ) {
+			justifyContent = 'center';
+		} else if ( verticalAlign === 'bottom' ) {
+			justifyContent = 'flex-end';
+		}
+
+		return {
+			'--k-typewriter-reserve-lines': String( reserveLines ),
+			'--k-typewriter-vertical-align': justifyContent,
+		} as CSSProperties;
+	}, [ reserveLines, verticalAlign ] );
 	const isPreviewPlaying = isSelected && ! isPreviewPaused;
 	let previewState = 'idle';
 
@@ -108,6 +118,10 @@ export default function EditorPreview( {
 
 		setFrame( ( currentFrame ) => armReentryDelay( currentFrame ) );
 	}, [ isPreviewPlaying ] );
+
+	useEffect( () => {
+		return syncReservedHeight( textRef.current );
+	}, [ reserveLines, tagName ] );
 
 	useEffect( () => {
 		return () => {
@@ -199,19 +213,22 @@ export default function EditorPreview( {
 						: undefined
 				}
 				className="k-typewriter__text k-typewriter-editor__preview"
+				ref={ textRef }
 				style={ previewStyle }
 			>
-				<span className="k-typewriter__content">
-					{ frame.displayText }
-				</span>
-				{ showCursor && (
-					<span
-						aria-hidden="true"
-						className="k-typewriter__cursor k-typewriter-editor__cursor"
-					>
-						|
+				<span className="k-typewriter__line">
+					<span className="k-typewriter__content">
+						{ frame.displayText }
 					</span>
-				) }
+					{ showCursor && (
+						<span
+							aria-hidden="true"
+							className="k-typewriter__cursor k-typewriter-editor__cursor"
+						>
+							|
+						</span>
+					) }
+				</span>
 			</TagName>
 		</div>
 	);

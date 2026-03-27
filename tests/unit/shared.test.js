@@ -63,6 +63,7 @@ describe( 'shared helpers', () => {
 			startDelay: 800,
 			startDelayMode: 'every-reentry',
 			reserveLines: 3,
+			verticalAlign: 'bottom',
 			startFromEmpty: true,
 			fallbackMode: 'custom',
 			fallbackText: 'Static fallback',
@@ -75,6 +76,7 @@ describe( 'shared helpers', () => {
 		expect( normalized.startDelay ).toBe( 800 );
 		expect( normalized.startDelayMode ).toBe( 'every-reentry' );
 		expect( normalized.reserveLines ).toBe( 3 );
+		expect( normalized.verticalAlign ).toBe( 'bottom' );
 		expect( normalized.startFromEmpty ).toBe( true );
 		expect( normalized.fallbackMode ).toBe( 'custom' );
 		expect( normalized.fallbackText ).toBe( 'Static fallback' );
@@ -98,5 +100,13 @@ describe( 'shared helpers', () => {
 	test( 'rejects unsupported custom tags', () => {
 		expect( coerceTagName( 'script' ) ).toBe( 'p' );
 		expect( coerceTagName( 'mark' ) ).toBe( 'mark' );
+	} );
+
+	test( 'falls back to top vertical alignment for unsupported values', () => {
+		expect(
+			normalizeAttributes( {
+				verticalAlign: 'sideways',
+			} ).verticalAlign
+		).toBe( 'top' );
 	} );
 } );

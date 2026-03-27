@@ -12,6 +12,7 @@ export const START_DELAY_MODES = [
 
 export const CONTENT_SOURCE_MODES = [ 'auto', 'custom' ] as const;
 export const TRANSITION_MODES = [ 'backspace', 'restart' ] as const;
+export const VERTICAL_ALIGNMENTS = [ 'top', 'middle', 'bottom' ] as const;
 
 export const DEFAULT_ATTRIBUTES = {
 	items: DEFAULT_ITEMS,
@@ -23,6 +24,7 @@ export const DEFAULT_ATTRIBUTES = {
 	startDelayMode: 'first-start',
 	loop: true,
 	reserveLines: 1,
+	verticalAlign: 'top',
 	startFromEmpty: false,
 	showCursor: true,
 	startOnView: true,
@@ -53,6 +55,7 @@ export type TypewriterTagName = ( typeof VALID_TAG_NAMES )[ number ];
 export type StartDelayMode = ( typeof START_DELAY_MODES )[ number ];
 export type ContentSourceMode = ( typeof CONTENT_SOURCE_MODES )[ number ];
 export type TransitionMode = ( typeof TRANSITION_MODES )[ number ];
+export type VerticalAlignment = ( typeof VERTICAL_ALIGNMENTS )[ number ];
 
 export type TypewriterAttributes = {
 	items: string[];
@@ -64,6 +67,7 @@ export type TypewriterAttributes = {
 	startDelayMode: StartDelayMode;
 	loop: boolean;
 	reserveLines: number;
+	verticalAlign: VerticalAlignment;
 	startFromEmpty: boolean;
 	showCursor: boolean;
 	startOnView: boolean;
@@ -120,6 +124,18 @@ export function coerceTransitionMode( value: unknown ): TransitionMode {
 	}
 
 	return DEFAULT_ATTRIBUTES.transitionMode;
+}
+
+export function coerceVerticalAlignment( value: unknown ): VerticalAlignment {
+	if ( typeof value === 'string' ) {
+		const candidate = value.toLowerCase() as VerticalAlignment;
+
+		if ( VERTICAL_ALIGNMENTS.includes( candidate ) ) {
+			return candidate;
+		}
+	}
+
+	return DEFAULT_ATTRIBUTES.verticalAlign;
 }
 
 export function coerceContentSourceMode(
@@ -270,6 +286,7 @@ export function normalizeAttributes(
 			1,
 			6
 		),
+		verticalAlign: coerceVerticalAlignment( attributes.verticalAlign ),
 		startFromEmpty:
 			typeof attributes.startFromEmpty === 'boolean'
 				? attributes.startFromEmpty

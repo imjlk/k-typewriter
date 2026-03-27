@@ -3,12 +3,20 @@
 }
 
 .wp-block-imjlk-k-typewriter .k-typewriter__text {
-	display: block;
+	display: flex;
+	flex-direction: column;
+	justify-content: var(--k-typewriter-vertical-align, flex-start);
 	margin: 0;
 	max-width: 100%;
 	line-height: inherit;
-	min-height: calc(var(--k-typewriter-reserve-lines, 1) * 1em);
-	min-block-size: calc(var(--k-typewriter-reserve-lines, 1) * 1lh);
+	min-height: var(--k-typewriter-reserved-height, calc(var(--k-typewriter-reserve-lines, 1) * 1em));
+	min-block-size: var(--k-typewriter-reserved-height, calc(var(--k-typewriter-reserve-lines, 1) * 1lh));
+}
+
+.wp-block-imjlk-k-typewriter .k-typewriter__line {
+	display: block;
+	max-width: 100%;
+	line-height: inherit;
 	overflow-wrap: anywhere;
 }
 
