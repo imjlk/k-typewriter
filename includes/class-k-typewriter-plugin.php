@@ -185,7 +185,7 @@ final class K_Typewriter_Plugin {
 	 * @return string
 	 */
 	private static function get_visible_fallback_text( $settings ) {
-		if ( $settings['useCustomFallback'] && '' !== $settings['fallbackText'] ) {
+		if ( 'custom' === $settings['fallbackMode'] && '' !== $settings['fallbackText'] ) {
 			return $settings['fallbackText'];
 		}
 
@@ -199,8 +199,8 @@ final class K_Typewriter_Plugin {
 	 * @return string
 	 */
 	private static function get_effective_seo_summary( $settings ) {
-		if ( '' !== $settings['seoSummaryText'] ) {
-			return $settings['seoSummaryText'];
+		if ( 'custom' === $settings['summaryMode'] && '' !== $settings['summaryText'] ) {
+			return $settings['summaryText'];
 		}
 
 		return self::format_locale_list( $settings['items'] );
@@ -256,9 +256,10 @@ final class K_Typewriter_Plugin {
 			'loop'               => true,
 			'showCursor'         => true,
 			'startOnView'        => true,
-			'useCustomFallback'  => false,
+			'fallbackMode'       => 'auto',
 			'fallbackText'       => '',
-			'seoSummaryText'     => '',
+			'summaryMode'        => 'auto',
+			'summaryText'        => '',
 			'tagName'            => 'p',
 		);
 
@@ -298,8 +299,24 @@ final class K_Typewriter_Plugin {
 			'every-cycle',
 			'every-reentry',
 		);
+		$valid_content_modes = array(
+			'auto',
+			'custom',
+		);
 		$tag_name          = in_array( $attributes['tagName'], $valid_tags, true ) ? $attributes['tagName'] : $defaults['tagName'];
 		$delay_mode        = in_array( $attributes['startDelayMode'], $valid_delay_modes, true ) ? $attributes['startDelayMode'] : $defaults['startDelayMode'];
+		$fallback_text     = trim( wp_strip_all_tags( (string) $attributes['fallbackText'] ) );
+		$summary_text      = trim(
+			wp_strip_all_tags(
+				(string) $attributes['summaryText']
+			)
+		);
+		$fallback_mode     = in_array( $attributes['fallbackMode'], $valid_content_modes, true )
+			? $attributes['fallbackMode']
+			: $defaults['fallbackMode'];
+		$summary_mode      = in_array( $attributes['summaryMode'], $valid_content_modes, true )
+			? $attributes['summaryMode']
+			: $defaults['summaryMode'];
 
 		return array(
 			'items'             => $items,
@@ -311,9 +328,10 @@ final class K_Typewriter_Plugin {
 			'loop'              => (bool) $attributes['loop'],
 			'showCursor'        => (bool) $attributes['showCursor'],
 			'startOnView'       => (bool) $attributes['startOnView'],
-			'useCustomFallback' => (bool) $attributes['useCustomFallback'],
-			'fallbackText'      => trim( wp_strip_all_tags( (string) $attributes['fallbackText'] ) ),
-			'seoSummaryText'    => trim( wp_strip_all_tags( (string) $attributes['seoSummaryText'] ) ),
+			'fallbackMode'      => $fallback_mode,
+			'fallbackText'      => $fallback_text,
+			'summaryMode'       => $summary_mode,
+			'summaryText'       => $summary_text,
 			'tagName'           => $tag_name,
 		);
 	}

@@ -10,6 +10,8 @@ export const START_DELAY_MODES = [
 	'every-reentry',
 ] as const;
 
+export const CONTENT_SOURCE_MODES = [ 'auto', 'custom' ] as const;
+
 export const DEFAULT_ATTRIBUTES = {
 	items: DEFAULT_ITEMS,
 	typeDelay: 80,
@@ -20,9 +22,10 @@ export const DEFAULT_ATTRIBUTES = {
 	loop: true,
 	showCursor: true,
 	startOnView: true,
-	useCustomFallback: false,
+	fallbackMode: 'auto',
 	fallbackText: '',
-	seoSummaryText: '',
+	summaryMode: 'auto',
+	summaryText: '',
 	tagName: 'p',
 } as const;
 
@@ -46,6 +49,7 @@ export const VALID_TAG_NAMES = [
 
 export type TypewriterTagName = ( typeof VALID_TAG_NAMES )[ number ];
 export type StartDelayMode = ( typeof START_DELAY_MODES )[ number ];
+export type ContentSourceMode = ( typeof CONTENT_SOURCE_MODES )[ number ];
 
 export type TypewriterAttributes = {
 	items: string[];
@@ -57,9 +61,10 @@ export type TypewriterAttributes = {
 	loop: boolean;
 	showCursor: boolean;
 	startOnView: boolean;
-	useCustomFallback: boolean;
+	fallbackMode: ContentSourceMode;
 	fallbackText: string;
-	seoSummaryText: string;
+	summaryMode: ContentSourceMode;
+	summaryText: string;
 	tagName: TypewriterTagName;
 };
 
@@ -105,6 +110,21 @@ export function coerceStartDelayMode( value: unknown ): StartDelayMode {
 	return DEFAULT_ATTRIBUTES.startDelayMode;
 }
 
+export function coerceContentSourceMode(
+	value: unknown,
+	fallbackMode: ContentSourceMode = DEFAULT_ATTRIBUTES.fallbackMode
+): ContentSourceMode {
+	if ( typeof value === 'string' ) {
+		const candidate = value.toLowerCase() as ContentSourceMode;
+
+		if ( CONTENT_SOURCE_MODES.includes( candidate ) ) {
+			return candidate;
+		}
+	}
+
+	return fallbackMode;
+}
+
 export function coerceTagName( tagName: unknown ): TypewriterTagName {
 	if ( typeof tagName === 'string' ) {
 		const lowerTagName = tagName.toLowerCase() as TypewriterTagName;
@@ -120,10 +140,10 @@ export function coerceTagName( tagName: unknown ): TypewriterTagName {
 export function getEffectiveFallbackText(
 	attributes: Pick<
 		TypewriterAttributes,
-		'items' | 'useCustomFallback' | 'fallbackText'
+		'items' | 'fallbackMode' | 'fallbackText'
 	>
 ) {
-	if ( attributes.useCustomFallback ) {
+	if ( attributes.fallbackMode === 'custom' ) {
 		const customFallback = sanitizeText( attributes.fallbackText );
 
 		if ( customFallback ) {
@@ -158,14 +178,19 @@ export function formatLocaleList( items: string[], locale?: string ) {
 	return items.join( ', ' );
 }
 
-export function getEffectiveSeoSummary(
-	attributes: Pick< TypewriterAttributes, 'items' | 'seoSummaryText' >,
+export function getEffectiveSummaryText(
+	attributes: Pick<
+		TypewriterAttributes,
+		'items' | 'summaryMode' | 'summaryText'
+	>,
 	locale?: string
 ) {
-	const customSummary = sanitizeText( attributes.seoSummaryText );
+	if ( attributes.summaryMode === 'custom' ) {
+		const customSummary = sanitizeText( attributes.summaryText );
 
-	if ( customSummary ) {
-		return customSummary;
+		if ( customSummary ) {
+			return customSummary;
+		}
 	}
 
 	return formatLocaleList( sanitizeItems( attributes.items ), locale );
@@ -174,6 +199,17 @@ export function getEffectiveSeoSummary(
 export function normalizeAttributes(
 	attributes: Partial< TypewriterAttributes >
 ): TypewriterAttributes {
+	const fallbackText = sanitizeText( attributes.fallbackText );
+	const summaryText = sanitizeText( attributes.summaryText );
+	const fallbackMode = coerceContentSourceMode(
+		attributes.fallbackMode,
+		DEFAULT_ATTRIBUTES.fallbackMode
+	);
+	const summaryMode = coerceContentSourceMode(
+		attributes.summaryMode,
+		DEFAULT_ATTRIBUTES.summaryMode
+	);
+
 	return {
 		items: sanitizeItems( attributes.items ),
 		typeDelay: clampNumber(
@@ -209,12 +245,10 @@ export function normalizeAttributes(
 			typeof attributes.startOnView === 'boolean'
 				? attributes.startOnView
 				: DEFAULT_ATTRIBUTES.startOnView,
-		useCustomFallback:
-			typeof attributes.useCustomFallback === 'boolean'
-				? attributes.useCustomFallback
-				: DEFAULT_ATTRIBUTES.useCustomFallback,
-		fallbackText: sanitizeText( attributes.fallbackText ),
-		seoSummaryText: sanitizeText( attributes.seoSummaryText ),
+		fallbackMode,
+		fallbackText,
+		summaryMode,
+		summaryText,
 		tagName: coerceTagName( attributes.tagName ),
 	};
 }

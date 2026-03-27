@@ -21,8 +21,11 @@ import './editor.scss';
 
 import EditorPreview from './editor-preview';
 import {
+	getEffectiveFallbackText,
+	getEffectiveSummaryText,
 	normalizeAttributes,
 	START_DELAY_MODES,
+	type ContentSourceMode,
 	type TypewriterAttributes,
 	VALID_TAG_NAMES,
 } from './shared';
@@ -43,6 +46,17 @@ const startDelayModeOptions = START_DELAY_MODES.map( ( value ) => ( {
 	value,
 } ) );
 
+const contentSourceOptions = [
+	{
+		label: __( 'Auto-generated', 'k-typewriter' ),
+		value: 'auto',
+	},
+	{
+		label: __( 'Custom override', 'k-typewriter' ),
+		value: 'custom',
+	},
+] as const;
+
 export default function Edit( {
 	attributes,
 	isSelected,
@@ -61,12 +75,17 @@ export default function Edit( {
 		loop,
 		showCursor,
 		startOnView,
-		useCustomFallback,
+		fallbackMode,
 		fallbackText,
-		seoSummaryText,
+		summaryMode,
+		summaryText,
 		tagName,
 	} = normalizedAttributes;
 	const isPreviewPlaying = isSelected && ! isPreviewPaused;
+	const effectiveFallbackText =
+		getEffectiveFallbackText( normalizedAttributes );
+	const effectiveSummaryText =
+		getEffectiveSummaryText( normalizedAttributes );
 
 	useEffect( () => {
 		if ( ! isSelected ) {
@@ -139,50 +158,75 @@ export default function Edit( {
 				</PanelBody>
 				<PanelBody
 					initialOpen={ false }
-					title={ __( 'Fallback', 'k-typewriter' ) }
+					title={ __( 'Fallback & Summary', 'k-typewriter' ) }
 				>
-					<ToggleControl
+					<SelectControl
 						help={ __(
-							'Override the default visible fallback used before animation, with reduced motion, and without JavaScript.',
+							'Choose what visitors see before animation starts, with reduced motion, and without JavaScript.',
 							'k-typewriter'
 						) }
-						label={ __( 'Use custom fallback', 'k-typewriter' ) }
-						checked={ useCustomFallback }
+						label={ __(
+							'Visible fallback source',
+							'k-typewriter'
+						) }
+						options={ contentSourceOptions }
+						value={ fallbackMode }
 						onChange={ ( value ) =>
 							setAttributes( {
-								useCustomFallback: value,
+								fallbackMode: value as ContentSourceMode,
 							} )
 						}
 					/>
 					<TextControl
-						disabled={ ! useCustomFallback }
+						disabled={ fallbackMode !== 'custom' }
 						help={ __(
 							'Leave this empty to fall back to the first message.',
 							'k-typewriter'
 						) }
-						label={ __( 'Fallback text', 'k-typewriter' ) }
+						label={ __( 'Fallback override', 'k-typewriter' ) }
 						value={ fallbackText }
 						onChange={ ( value ) =>
 							setAttributes( { fallbackText: value } )
 						}
 					/>
-				</PanelBody>
-				<PanelBody
-					initialOpen={ false }
-					title={ __( 'SEO & Accessibility', 'k-typewriter' ) }
-				>
-					<TextareaControl
+					<p className="k-typewriter-editor__control-note">
+						{ __( 'Effective fallback preview:', 'k-typewriter' ) }{ ' ' }
+						<strong>{ effectiveFallbackText }</strong>
+					</p>
+					<SelectControl
 						help={ __(
-							'Used as the non-visual summary for assistive technology. Leave blank to auto-generate it from every message.',
+							'Choose the non-visual summary used for assistive technology. Auto mode combines every message.',
 							'k-typewriter'
 						) }
-						label={ __( 'SEO summary text', 'k-typewriter' ) }
-						rows={ 3 }
-						value={ seoSummaryText }
+						label={ __( 'Summary source', 'k-typewriter' ) }
+						options={ contentSourceOptions }
+						value={ summaryMode }
 						onChange={ ( value ) =>
-							setAttributes( { seoSummaryText: value } )
+							setAttributes( {
+								summaryMode: value as ContentSourceMode,
+							} )
 						}
 					/>
+					<TextareaControl
+						disabled={ summaryMode !== 'custom' }
+						help={ __(
+							'Leave this empty to auto-generate the summary from every message.',
+							'k-typewriter'
+						) }
+						label={ __( 'Summary override', 'k-typewriter' ) }
+						rows={ 3 }
+						value={ summaryText }
+						onChange={ ( value ) =>
+							setAttributes( { summaryText: value } )
+						}
+					/>
+					<p className="k-typewriter-editor__control-note">
+						{ __(
+							'Effective non-visual summary:',
+							'k-typewriter'
+						) }{ ' ' }
+						<strong>{ effectiveSummaryText }</strong>
+					</p>
 				</PanelBody>
 				<PanelBody
 					initialOpen={ true }

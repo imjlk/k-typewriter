@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from '@wordpress/element';
 
 import {
 	getEffectiveFallbackText,
-	getEffectiveSeoSummary,
+	getEffectiveSummaryText,
 	type TypewriterAttributes,
 } from './shared';
 import {
@@ -47,7 +47,7 @@ export default function EditorPreview( {
 		[ attributes ]
 	);
 	const seoSummary = useMemo(
-		() => getEffectiveSeoSummary( attributes ),
+		() => getEffectiveSummaryText( attributes ),
 		[ attributes ]
 	);
 	const playbackKey = `${ itemsKey }::${ typeDelay }::${ deleteDelay }::${ pauseDelay }::${ startDelay }::${ startDelayMode }::${ String(

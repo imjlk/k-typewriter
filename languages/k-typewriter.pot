@@ -3,39 +3,34 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: K Typewriter 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/k-typewriter-src\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/k-typewriter\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-27T05:33:59+00:00\n"
+"POT-Creation-Date: 2026-03-27T09:29:45+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.12.0\n"
+"X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: k-typewriter\n"
 
 #. Plugin Name of the plugin
-#: k-typewriter.php
 msgid "K Typewriter"
 msgstr ""
 
 #. Plugin URI of the plugin
-#: k-typewriter.php
 msgid "https://github.com/imjlk/k-typewriter"
 msgstr ""
 
 #. Description of the plugin
-#: k-typewriter.php
 msgid "Add a configurable typewriter text block for hero headlines, notices, and multilingual messaging."
 msgstr ""
 
 #. Author of the plugin
-#: k-typewriter.php
 msgid "imjlk"
 msgstr ""
 
 #. Author URI of the plugin
-#: k-typewriter.php
 msgid "https://github.com/imjlk"
 msgstr ""
 
@@ -71,6 +66,14 @@ msgid "Every re-entry"
 msgstr ""
 
 #: build/index.js:1
+msgid "Auto-generated"
+msgstr ""
+
+#: build/index.js:1
+msgid "Custom override"
+msgstr ""
+
+#: build/index.js:1
 msgid "Pause preview"
 msgstr ""
 
@@ -99,15 +102,15 @@ msgid "Markup tag"
 msgstr ""
 
 #: build/index.js:1
-msgid "Fallback"
+msgid "Fallback & Summary"
 msgstr ""
 
 #: build/index.js:1
-msgid "Override the default visible fallback used before animation, with reduced motion, and without JavaScript."
+msgid "Choose what visitors see before animation starts, with reduced motion, and without JavaScript."
 msgstr ""
 
 #: build/index.js:1
-msgid "Use custom fallback"
+msgid "Visible fallback source"
 msgstr ""
 
 #: build/index.js:1
@@ -115,19 +118,31 @@ msgid "Leave this empty to fall back to the first message."
 msgstr ""
 
 #: build/index.js:1
-msgid "Fallback text"
+msgid "Fallback override"
 msgstr ""
 
 #: build/index.js:1
-msgid "SEO & Accessibility"
+msgid "Effective fallback preview:"
 msgstr ""
 
 #: build/index.js:1
-msgid "Used as the non-visual summary for assistive technology. Leave blank to auto-generate it from every message."
+msgid "Choose the non-visual summary used for assistive technology. Auto mode combines every message."
 msgstr ""
 
 #: build/index.js:1
-msgid "SEO summary text"
+msgid "Summary source"
+msgstr ""
+
+#: build/index.js:1
+msgid "Leave this empty to auto-generate the summary from every message."
+msgstr ""
+
+#: build/index.js:1
+msgid "Summary override"
+msgstr ""
+
+#: build/index.js:1
+msgid "Effective non-visual summary:"
 msgstr ""
 
 #: build/index.js:1

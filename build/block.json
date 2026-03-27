@@ -53,15 +53,19 @@
       "type": "boolean",
       "default": true
     },
-    "useCustomFallback": {
-      "type": "boolean",
-      "default": false
+    "fallbackMode": {
+      "type": "string",
+      "default": "auto"
     },
     "fallbackText": {
       "type": "string",
       "default": ""
     },
-    "seoSummaryText": {
+    "summaryMode": {
+      "type": "string",
+      "default": "auto"
+    },
+    "summaryText": {
       "type": "string",
       "default": ""
     },

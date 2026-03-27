@@ -61,7 +61,7 @@ export function createFallbackFrame(
 		fallbackText ||
 		getEffectiveFallbackText( {
 			items: normalizedItems,
-			useCustomFallback: false,
+			fallbackMode: 'auto',
 			fallbackText: '',
 		} );
 

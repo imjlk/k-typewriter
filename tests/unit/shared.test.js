@@ -1,7 +1,7 @@
 import {
 	coerceTagName,
+	getEffectiveSummaryText,
 	getEffectiveFallbackText,
-	getEffectiveSeoSummary,
 	normalizeAttributes,
 } from '../../src/shared';
 
@@ -10,7 +10,7 @@ describe( 'shared helpers', () => {
 		expect(
 			getEffectiveFallbackText( {
 				items: [ 'Alpha', 'Beta' ],
-				useCustomFallback: false,
+				fallbackMode: 'auto',
 				fallbackText: 'Ignored',
 			} )
 		).toBe( 'Alpha' );
@@ -20,29 +20,31 @@ describe( 'shared helpers', () => {
 		expect(
 			getEffectiveFallbackText( {
 				items: [ 'Alpha', 'Beta' ],
-				useCustomFallback: true,
+				fallbackMode: 'custom',
 				fallbackText: 'Static fallback',
 			} )
 		).toBe( 'Static fallback' );
 	} );
 
-	test( 'uses the custom SEO summary when provided', () => {
+	test( 'uses the custom summary when provided', () => {
 		expect(
-			getEffectiveSeoSummary(
+			getEffectiveSummaryText(
 				{
 					items: [ 'Alpha', 'Beta', 'Gamma' ],
-					seoSummaryText: 'Custom summary',
+					summaryMode: 'custom',
+					summaryText: 'Custom summary',
 				},
 				'en-US'
 			)
 		).toBe( 'Custom summary' );
 	} );
 
-	test( 'auto-generates a locale-aware SEO summary when blank', () => {
-		const summary = getEffectiveSeoSummary(
+	test( 'auto-generates a locale-aware summary when blank', () => {
+		const summary = getEffectiveSummaryText(
 			{
 				items: [ 'Alpha', 'Beta', 'Gamma' ],
-				seoSummaryText: '',
+				summaryMode: 'auto',
+				summaryText: '',
 			},
 			'en-US'
 		);
@@ -52,23 +54,25 @@ describe( 'shared helpers', () => {
 		expect( summary ).toContain( 'Gamma' );
 	} );
 
-	test( 'normalizes extended tag names and new fallback attributes', () => {
+	test( 'normalizes extended tag names and unified fallback attributes', () => {
 		const normalized = normalizeAttributes( {
 			items: [ 'Alpha', 'Beta' ],
 			tagName: 'h6',
 			startDelay: 800,
 			startDelayMode: 'every-reentry',
-			useCustomFallback: true,
+			fallbackMode: 'custom',
 			fallbackText: 'Static fallback',
-			seoSummaryText: 'Summary',
+			summaryMode: 'custom',
+			summaryText: 'Summary',
 		} );
 
 		expect( normalized.tagName ).toBe( 'h6' );
 		expect( normalized.startDelay ).toBe( 800 );
 		expect( normalized.startDelayMode ).toBe( 'every-reentry' );
-		expect( normalized.useCustomFallback ).toBe( true );
+		expect( normalized.fallbackMode ).toBe( 'custom' );
 		expect( normalized.fallbackText ).toBe( 'Static fallback' );
-		expect( normalized.seoSummaryText ).toBe( 'Summary' );
+		expect( normalized.summaryMode ).toBe( 'custom' );
+		expect( normalized.summaryText ).toBe( 'Summary' );
 	} );
 
 	test( 'rejects unsupported custom tags', () => {
