@@ -61,6 +61,7 @@ final class K_Typewriter_Plugin {
 		$settings         = self::sanitize_attributes( $attributes );
 		$visible_fallback = self::get_visible_fallback_text( $settings );
 		$seo_summary      = self::get_effective_seo_summary( $settings );
+		$inline_width_ch  = self::get_approximate_inline_width_ch( $settings );
 		$tag_name         = $settings['tagName'];
 		$text_direction   = 'auto' !== $settings['textDirection'] ? $settings['textDirection'] : '';
 		$vertical_align   = 'flex-start';
@@ -71,15 +72,20 @@ final class K_Typewriter_Plugin {
 			$vertical_align = 'flex-end';
 		}
 
-		$text_style       = sprintf(
-			'--k-typewriter-reserve-lines:%1$d;--k-typewriter-vertical-align:%2$s;--k-typewriter-cursor-width:%3$.2Fem;--k-typewriter-cursor-offset-x:%4$.2Fem;--k-typewriter-cursor-offset-y:%5$.2Fem;--k-typewriter-cursor-blink-speed:%6$dms;',
-			(int) $settings['reserveLines'],
-			$vertical_align,
-			(float) $settings['cursorWidth'],
-			(float) $settings['cursorOffsetX'],
-			(float) $settings['cursorOffsetY'],
-			(int) $settings['cursorBlinkSpeed']
+		$text_style_parts = array(
+			sprintf( '--k-typewriter-reserve-lines:%d', (int) $settings['reserveLines'] ),
+			sprintf( '--k-typewriter-vertical-align:%s', $vertical_align ),
+			sprintf( '--k-typewriter-cursor-width:%.2Fem', (float) $settings['cursorWidth'] ),
+			sprintf( '--k-typewriter-cursor-offset-x:%.2Fem', (float) $settings['cursorOffsetX'] ),
+			sprintf( '--k-typewriter-cursor-offset-y:%.2Fem', (float) $settings['cursorOffsetY'] ),
+			sprintf( '--k-typewriter-cursor-blink-speed:%dms', (int) $settings['cursorBlinkSpeed'] ),
 		);
+
+		if ( null !== $inline_width_ch ) {
+			$text_style_parts[] = sprintf( '--k-typewriter-inline-width:%dch', $inline_width_ch );
+		}
+
+		$text_style       = implode( ';', $text_style_parts ) . ';';
 		$wrapper          = get_block_wrapper_attributes(
 			array(
 				'class' => $settings['inlineLayout'] ? 'k-typewriter-block is-inline-layout' : 'k-typewriter-block',
@@ -98,6 +104,8 @@ final class K_Typewriter_Plugin {
 				'loop'                => $settings['loop'],
 				'transitionMode'      => $settings['transitionMode'],
 				'startFromEmpty'      => $settings['startFromEmpty'],
+				'inlineLayout'        => $settings['inlineLayout'],
+				'inlineWidthMode'     => $settings['inlineWidthMode'],
 				'showCursor'          => $settings['showCursor'],
 				'cursorVisible'       => $settings['showCursor'],
 				'hideCursorWhenComplete' => $settings['hideCursorWhenComplete'],
@@ -206,6 +214,44 @@ final class K_Typewriter_Plugin {
 	}
 
 	/**
+	 * Return the approximate inline width in ch units for SSR fallback.
+	 *
+	 * @param array<string,mixed> $settings Sanitized settings.
+	 * @return int|null
+	 */
+	private static function get_approximate_inline_width_ch( $settings ) {
+		if ( 'auto' === $settings['inlineWidthMode'] ) {
+			return null;
+		}
+
+		if ( 'characters' === $settings['inlineWidthMode'] ) {
+			return min( 80, max( 4, (int) $settings['inlineWidthCh'] ) );
+		}
+
+		$messages = array_values(
+			array_unique(
+				array_filter(
+					array_merge(
+						$settings['items'],
+						array( self::get_visible_fallback_text( $settings ) )
+					)
+				)
+			)
+		);
+		$longest  = 24;
+
+		foreach ( $messages as $message ) {
+			if ( function_exists( 'mb_strlen' ) ) {
+				$longest = max( $longest, (int) mb_strlen( $message ) );
+			} else {
+				$longest = max( $longest, strlen( $message ) );
+			}
+		}
+
+		return min( 80, max( 4, $longest ) );
+	}
+
+	/**
 	 * Format a locale-aware list summary.
 	 *
 	 * @param array<int,string> $items Messages to summarize.
@@ -257,12 +303,14 @@ final class K_Typewriter_Plugin {
 			'reserveLines'       => 1,
 			'verticalAlign'      => 'top',
 			'inlineLayout'       => false,
+			'inlineWidthMode'    => 'auto',
+			'inlineWidthCh'      => 24,
 			'textDirection'      => 'auto',
 			'startFromEmpty'     => false,
 			'showCursor'         => true,
 			'cursorWidth'        => 0.08,
 			'cursorOffsetX'      => 0,
-			'cursorOffsetY'      => -0.08,
+			'cursorOffsetY'      => 0,
 			'cursorBlinkSpeed'   => 1000,
 			'hideCursorWhenComplete' => false,
 			'startOnView'        => true,
@@ -324,6 +372,11 @@ final class K_Typewriter_Plugin {
 			'ltr',
 			'rtl',
 		);
+		$valid_inline_width_modes = array(
+			'auto',
+			'characters',
+			'measure',
+		);
 		$valid_content_modes = array(
 			'auto',
 			'custom',
@@ -349,6 +402,9 @@ final class K_Typewriter_Plugin {
 		$text_direction    = in_array( $attributes['textDirection'], $valid_text_directions, true )
 			? $attributes['textDirection']
 			: $defaults['textDirection'];
+		$inline_width_mode = in_array( $attributes['inlineWidthMode'], $valid_inline_width_modes, true )
+			? $attributes['inlineWidthMode']
+			: $defaults['inlineWidthMode'];
 
 		return array(
 			'items'             => $items,
@@ -362,6 +418,8 @@ final class K_Typewriter_Plugin {
 			'reserveLines'      => min( 6, max( 1, (int) $attributes['reserveLines'] ) ),
 			'verticalAlign'     => $vertical_align,
 			'inlineLayout'      => (bool) $attributes['inlineLayout'],
+			'inlineWidthMode'   => $inline_width_mode,
+			'inlineWidthCh'     => min( 80, max( 4, (int) $attributes['inlineWidthCh'] ) ),
 			'textDirection'     => $text_direction,
 			'startFromEmpty'    => (bool) $attributes['startFromEmpty'],
 			'showCursor'        => (bool) $attributes['showCursor'],

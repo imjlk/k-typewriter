@@ -1,5 +1,7 @@
 import {
+	coerceInlineWidthMode,
 	coerceTagName,
+	getApproximateInlineWidthCh,
 	getEffectiveSummaryText,
 	getEffectiveFallbackText,
 	normalizeAttributes,
@@ -65,6 +67,8 @@ describe( 'shared helpers', () => {
 			reserveLines: 3,
 			verticalAlign: 'bottom',
 			inlineLayout: true,
+			inlineWidthMode: 'measure',
+			inlineWidthCh: 32,
 			textDirection: 'rtl',
 			startFromEmpty: true,
 			cursorWidth: 0.12,
@@ -85,6 +89,8 @@ describe( 'shared helpers', () => {
 		expect( normalized.reserveLines ).toBe( 3 );
 		expect( normalized.verticalAlign ).toBe( 'bottom' );
 		expect( normalized.inlineLayout ).toBe( true );
+		expect( normalized.inlineWidthMode ).toBe( 'measure' );
+		expect( normalized.inlineWidthCh ).toBe( 32 );
 		expect( normalized.textDirection ).toBe( 'rtl' );
 		expect( normalized.startFromEmpty ).toBe( true );
 		expect( normalized.cursorWidth ).toBe( 0.12 );
@@ -144,5 +150,28 @@ describe( 'shared helpers', () => {
 				textDirection: 'sideways',
 			} ).textDirection
 		).toBe( 'auto' );
+	} );
+
+	test( 'clamps inline width settings into the supported range', () => {
+		const normalized = normalizeAttributes( {
+			inlineWidthMode: 'characters',
+			inlineWidthCh: 999,
+		} );
+
+		expect( normalized.inlineWidthMode ).toBe( 'characters' );
+		expect( normalized.inlineWidthCh ).toBe( 80 );
+		expect( coerceInlineWidthMode( 'stretch' ) ).toBe( 'auto' );
+	} );
+
+	test( 'approximates inline width fallback for measure mode from content', () => {
+		expect(
+			getApproximateInlineWidthCh( {
+				items: [ 'Short', 'A much longer message' ],
+				fallbackMode: 'custom',
+				fallbackText: 'Fallback',
+				inlineWidthMode: 'measure',
+				inlineWidthCh: 24,
+			} )
+		).toBeGreaterThanOrEqual( 21 );
 	} );
 } );

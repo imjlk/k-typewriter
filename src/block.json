@@ -7,7 +7,7 @@
 	"category": "text",
 	"icon": "editor-textcolor",
 	"description": "Animate multilingual headlines, notices, and hero copy with a polished typewriter effect.",
-	"keywords": [ "typewriter", "headline", "hero" ],
+	"keywords": ["typewriter", "headline", "hero"],
 	"attributes": {
 		"items": {
 			"type": "array",
@@ -57,6 +57,14 @@
 			"type": "boolean",
 			"default": false
 		},
+		"inlineWidthMode": {
+			"type": "string",
+			"default": "auto"
+		},
+		"inlineWidthCh": {
+			"type": "number",
+			"default": 24
+		},
 		"textDirection": {
 			"type": "string",
 			"default": "auto"
@@ -79,7 +87,7 @@
 		},
 		"cursorOffsetY": {
 			"type": "number",
-			"default": -0.08
+			"default": 0
 		},
 		"cursorBlinkSpeed": {
 			"type": "number",
@@ -120,12 +128,11 @@
 	},
 	"example": {
 		"attributes": {
-			"items": [
-				"한 글자씩, 리듬 있게.",
-				"Animate headlines in any language."
-			],
+			"items": ["한 글자씩, 리듬 있게.", "Animate headlines in any language."],
 			"reserveLines": 2,
 			"verticalAlign": "middle",
+			"inlineLayout": true,
+			"inlineWidthMode": "measure",
 			"textDirection": "auto",
 			"startDelay": 250,
 			"startDelayMode": "first-start",

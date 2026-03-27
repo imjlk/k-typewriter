@@ -61,6 +61,14 @@
       "type": "boolean",
       "default": false
     },
+    "inlineWidthMode": {
+      "type": "string",
+      "default": "auto"
+    },
+    "inlineWidthCh": {
+      "type": "number",
+      "default": 24
+    },
     "textDirection": {
       "type": "string",
       "default": "auto"
@@ -83,7 +91,7 @@
     },
     "cursorOffsetY": {
       "type": "number",
-      "default": -0.08
+      "default": 0
     },
     "cursorBlinkSpeed": {
       "type": "number",
@@ -130,6 +138,8 @@
       ],
       "reserveLines": 2,
       "verticalAlign": "middle",
+      "inlineLayout": true,
+      "inlineWidthMode": "measure",
       "textDirection": "auto",
       "startDelay": 250,
       "startDelayMode": "first-start",

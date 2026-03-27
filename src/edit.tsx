@@ -23,9 +23,11 @@ import EditorPreview from './editor-preview';
 import {
 	getEffectiveFallbackText,
 	getEffectiveSummaryText,
+	INLINE_WIDTH_MODES,
 	normalizeAttributes,
 	START_DELAY_MODES,
 	type ContentSourceMode,
+	type InlineWidthMode,
 	type TextDirection,
 	type TypewriterAttributes,
 	TEXT_DIRECTIONS,
@@ -82,6 +84,17 @@ const textDirectionOptions = TEXT_DIRECTIONS.map( ( value ) => ( {
 	value,
 } ) );
 
+const inlineWidthModeLabels = {
+	auto: __( 'Auto', 'k-typewriter' ),
+	characters: __( 'Characters (ch)', 'k-typewriter' ),
+	measure: __( 'Measure longest message', 'k-typewriter' ),
+} as const;
+
+const inlineWidthModeOptions = INLINE_WIDTH_MODES.map( ( value ) => ( {
+	label: inlineWidthModeLabels[ value ],
+	value,
+} ) );
+
 const contentSourceOptions = [
 	{
 		label: __( 'Auto-generated', 'k-typewriter' ),
@@ -112,6 +125,8 @@ export default function Edit( {
 		reserveLines,
 		verticalAlign,
 		inlineLayout,
+		inlineWidthMode,
+		inlineWidthCh,
 		textDirection,
 		startFromEmpty,
 		showCursor,
@@ -232,6 +247,50 @@ export default function Edit( {
 							setAttributes( { inlineLayout: value } )
 						}
 					/>
+					{ ! inlineLayout ? null : (
+						<>
+							<SelectControl
+								help={ __(
+									'Auto lets the block grow naturally. Characters uses an approximate ch width. Measure longest message uses the current font to reserve a steadier inline width.',
+									'k-typewriter'
+								) }
+								label={ __(
+									'Inline width reserve',
+									'k-typewriter'
+								) }
+								options={ inlineWidthModeOptions }
+								value={ inlineWidthMode }
+								onChange={ ( value ) =>
+									setAttributes( {
+										inlineWidthMode:
+											value as InlineWidthMode,
+									} )
+								}
+							/>
+							{ inlineWidthMode !== 'characters' ? null : (
+								<RangeControl
+									help={ __(
+										'Reserve width using an approximate number of character columns.',
+										'k-typewriter'
+									) }
+									label={ __(
+										'Width in ch',
+										'k-typewriter'
+									) }
+									max={ 80 }
+									min={ 4 }
+									step={ 1 }
+									value={ inlineWidthCh }
+									onChange={ ( value ) =>
+										setAttributes( {
+											inlineWidthCh:
+												value ?? inlineWidthCh,
+										} )
+									}
+								/>
+							) }
+						</>
+					) }
 					<SelectControl
 						help={ __(
 							'Choose a semantic text tag. Use H1 only when this block is the main page heading.',

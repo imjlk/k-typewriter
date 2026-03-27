@@ -14,6 +14,7 @@ export const CONTENT_SOURCE_MODES = [ 'auto', 'custom' ] as const;
 export const TRANSITION_MODES = [ 'backspace', 'restart' ] as const;
 export const VERTICAL_ALIGNMENTS = [ 'top', 'middle', 'bottom' ] as const;
 export const TEXT_DIRECTIONS = [ 'auto', 'ltr', 'rtl' ] as const;
+export const INLINE_WIDTH_MODES = [ 'auto', 'characters', 'measure' ] as const;
 
 export const DEFAULT_ATTRIBUTES = {
 	items: DEFAULT_ITEMS,
@@ -27,12 +28,14 @@ export const DEFAULT_ATTRIBUTES = {
 	reserveLines: 1,
 	verticalAlign: 'top',
 	inlineLayout: false,
+	inlineWidthMode: 'auto',
+	inlineWidthCh: 24,
 	textDirection: 'auto',
 	startFromEmpty: false,
 	showCursor: true,
 	cursorWidth: 0.08,
 	cursorOffsetX: 0,
-	cursorOffsetY: -0.08,
+	cursorOffsetY: 0,
 	cursorBlinkSpeed: 1000,
 	hideCursorWhenComplete: false,
 	startOnView: true,
@@ -66,6 +69,7 @@ export type ContentSourceMode = ( typeof CONTENT_SOURCE_MODES )[ number ];
 export type TransitionMode = ( typeof TRANSITION_MODES )[ number ];
 export type VerticalAlignment = ( typeof VERTICAL_ALIGNMENTS )[ number ];
 export type TextDirection = ( typeof TEXT_DIRECTIONS )[ number ];
+export type InlineWidthMode = ( typeof INLINE_WIDTH_MODES )[ number ];
 
 export type TypewriterAttributes = {
 	items: string[];
@@ -79,6 +83,8 @@ export type TypewriterAttributes = {
 	reserveLines: number;
 	verticalAlign: VerticalAlignment;
 	inlineLayout: boolean;
+	inlineWidthMode: InlineWidthMode;
+	inlineWidthCh: number;
 	textDirection: TextDirection;
 	startFromEmpty: boolean;
 	showCursor: boolean;
@@ -168,6 +174,18 @@ export function coerceTextDirection( value: unknown ): TextDirection {
 	return DEFAULT_ATTRIBUTES.textDirection;
 }
 
+export function coerceInlineWidthMode( value: unknown ): InlineWidthMode {
+	if ( typeof value === 'string' ) {
+		const candidate = value.toLowerCase() as InlineWidthMode;
+
+		if ( INLINE_WIDTH_MODES.includes( candidate ) ) {
+			return candidate;
+		}
+	}
+
+	return DEFAULT_ATTRIBUTES.inlineWidthMode;
+}
+
 export function coerceContentSourceMode(
 	value: unknown,
 	fallbackMode: ContentSourceMode = DEFAULT_ATTRIBUTES.fallbackMode
@@ -251,6 +269,40 @@ export function formatAutoSummaryText( items: string[], locale?: string ) {
 	return `Typewriter animation that sequentially types ${ summaryList }.`;
 }
 
+export function getApproximateInlineWidthCh(
+	attributes: Pick<
+		TypewriterAttributes,
+		| 'items'
+		| 'fallbackMode'
+		| 'fallbackText'
+		| 'inlineWidthMode'
+		| 'inlineWidthCh'
+	>
+) {
+	if ( attributes.inlineWidthMode === 'auto' ) {
+		return null;
+	}
+
+	if ( attributes.inlineWidthMode === 'characters' ) {
+		return clampNumber(
+			attributes.inlineWidthCh ?? DEFAULT_ATTRIBUTES.inlineWidthCh,
+			4,
+			80
+		);
+	}
+
+	const messages = new Set( [
+		...sanitizeItems( attributes.items ),
+		getEffectiveFallbackText( attributes ),
+	] );
+	const longestLength = Math.max(
+		...Array.from( messages, ( message ) => Array.from( message ).length ),
+		DEFAULT_ATTRIBUTES.inlineWidthCh
+	);
+
+	return clampNumber( longestLength, 4, 80 );
+}
+
 export function getEffectiveSummaryText(
 	attributes: Pick<
 		TypewriterAttributes,
@@ -321,6 +373,12 @@ export function normalizeAttributes(
 			typeof attributes.inlineLayout === 'boolean'
 				? attributes.inlineLayout
 				: DEFAULT_ATTRIBUTES.inlineLayout,
+		inlineWidthMode: coerceInlineWidthMode( attributes.inlineWidthMode ),
+		inlineWidthCh: clampNumber(
+			attributes.inlineWidthCh ?? DEFAULT_ATTRIBUTES.inlineWidthCh,
+			4,
+			80
+		),
 		textDirection: coerceTextDirection( attributes.textDirection ),
 		startFromEmpty:
 			typeof attributes.startFromEmpty === 'boolean'

@@ -2,6 +2,7 @@ import type { CSSProperties } from 'react';
 import { useEffect, useMemo, useRef, useState } from '@wordpress/element';
 
 import {
+	getApproximateInlineWidthCh,
 	getEffectiveFallbackText,
 	getEffectiveSummaryText,
 	type TypewriterAttributes,
@@ -14,7 +15,7 @@ import {
 	isAnimationComplete,
 	type TypewriterFrame,
 } from './typewriter-engine';
-import { syncReservedHeight } from './reserve-lines';
+import { syncInlineWidth, syncReservedHeight } from './reserve-lines';
 
 type EditorPreviewProps = {
 	attributes: TypewriterAttributes;
@@ -38,6 +39,9 @@ export default function EditorPreview( {
 		loop,
 		reserveLines,
 		verticalAlign,
+		inlineLayout,
+		inlineWidthMode,
+		inlineWidthCh,
 		textDirection,
 		startFromEmpty,
 		showCursor,
@@ -80,6 +84,7 @@ export default function EditorPreview( {
 	const textRef = useRef< HTMLElement | null >( null );
 	const previewStyle = useMemo( () => {
 		let justifyContent = 'flex-start';
+		const widthFallbackCh = getApproximateInlineWidthCh( attributes );
 
 		if ( verticalAlign === 'middle' ) {
 			justifyContent = 'center';
@@ -94,8 +99,14 @@ export default function EditorPreview( {
 			'--k-typewriter-cursor-offset-x': `${ cursorOffsetX }em`,
 			'--k-typewriter-cursor-offset-y': `${ cursorOffsetY }em`,
 			'--k-typewriter-cursor-blink-speed': `${ cursorBlinkSpeed }ms`,
+			...( widthFallbackCh === null
+				? {}
+				: {
+						'--k-typewriter-inline-width': `${ widthFallbackCh }ch`,
+				  } ),
 		} as CSSProperties;
 	}, [
+		attributes,
 		cursorBlinkSpeed,
 		cursorOffsetX,
 		cursorOffsetY,
@@ -155,6 +166,24 @@ export default function EditorPreview( {
 	useEffect( () => {
 		return syncReservedHeight( textRef.current );
 	}, [ reserveLines, tagName ] );
+
+	useEffect( () => {
+		return syncInlineWidth( textRef.current, {
+			inlineLayout,
+			mode: inlineWidthMode,
+			items: stableItems,
+			fallbackText: visibleFallbackText,
+			showCursor,
+		} );
+	}, [
+		inlineLayout,
+		inlineWidthMode,
+		inlineWidthCh,
+		showCursor,
+		stableItems,
+		tagName,
+		visibleFallbackText,
+	] );
 
 	useEffect( () => {
 		return () => {

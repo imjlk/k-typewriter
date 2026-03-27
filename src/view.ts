@@ -12,8 +12,8 @@ import {
 	isAnimationComplete,
 	normalizeTypingItems,
 } from './typewriter-engine';
-import { syncReservedHeight } from './reserve-lines';
-import type { StartDelayMode, TransitionMode } from './shared';
+import { syncInlineWidth, syncReservedHeight } from './reserve-lines';
+import type { InlineWidthMode, StartDelayMode, TransitionMode } from './shared';
 
 type TypewriterContext = {
 	items: string[];
@@ -27,6 +27,8 @@ type TypewriterContext = {
 	loop: boolean;
 	transitionMode: TransitionMode;
 	startFromEmpty: boolean;
+	inlineLayout: boolean;
+	inlineWidthMode: InlineWidthMode;
 	showCursor: boolean;
 	cursorVisible: boolean;
 	hideCursorWhenComplete: boolean;
@@ -110,6 +112,13 @@ const { actions } = store( STORE_NAME, {
 				'.k-typewriter__text'
 			) as HTMLElement | null;
 			const cleanupReservedHeight = syncReservedHeight( textElement );
+			const cleanupInlineWidth = syncInlineWidth( textElement, {
+				inlineLayout: context.inlineLayout,
+				mode: context.inlineWidthMode,
+				items,
+				fallbackText: context.fallbackText,
+				showCursor: context.showCursor,
+			} );
 
 			resetToFallback( context, items );
 			runtime.documentVisible = ! document.hidden;
@@ -189,6 +198,7 @@ const { actions } = store( STORE_NAME, {
 				clearScheduledTick( ref );
 				runtime.observer?.disconnect();
 				runtime.cleanupMotion?.();
+				cleanupInlineWidth();
 				cleanupReservedHeight();
 				document.removeEventListener(
 					'visibilitychange',

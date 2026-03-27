@@ -25,6 +25,11 @@
 	min-block-size: var(--k-typewriter-reserved-height, calc(var(--k-typewriter-reserve-lines, 1) * 1lh));
 }
 
+.wp-block-imjlk-k-typewriter.is-inline-layout .k-typewriter__text {
+	inline-size: var(--k-typewriter-inline-measured-width, var(--k-typewriter-inline-width, auto));
+	max-inline-size: 100%;
+}
+
 .wp-block-imjlk-k-typewriter .k-typewriter__line {
 	display: block;
 	max-width: 100%;
@@ -50,12 +55,11 @@
 	border-radius: 999px;
 	background: currentcolor;
 	line-height: 1;
-	transform: translate(var(--k-typewriter-cursor-offset-x, 0), var(--k-typewriter-cursor-offset-y, -0.08em));
+	transform: translate(var(--k-typewriter-cursor-offset-x, 0), calc(var(--k-typewriter-cursor-offset-y, 0em) + max((1lh - 1em) / 2, 0px)));
 	unicode-bidi: isolate;
 	vertical-align: baseline;
 	animation:
-		k-typewriter-blink
-		var(--k-typewriter-cursor-blink-speed, 1000ms)
+		k-typewriter-blink var(--k-typewriter-cursor-blink-speed, 1000ms)
 		steps(2, jump-none) infinite;
 }
 

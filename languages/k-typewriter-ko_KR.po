@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: K Typewriter 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/k-typewriter\n"
-"POT-Creation-Date: 2026-03-27T15:16:50+00:00\n"
+"POT-Creation-Date: 2026-03-27T15:43:55+00:00\n"
 "PO-Revision-Date: 2026-03-27 14:50+0900\n"
 "Last-Translator: imjlk\n"
 "Language-Team: Korean\n"
@@ -45,20 +45,20 @@ msgstr "imjlk"
 msgid "https://github.com/imjlk"
 msgstr "https://github.com/imjlk"
 
-#: includes/class-k-typewriter-plugin.php:164 build/index.js:1
+#: includes/class-k-typewriter-plugin.php:172 build/index.js:1
 msgid "한 글자씩, 리듬 있게."
 msgstr "한 글자씩, 리듬 있게."
 
-#: includes/class-k-typewriter-plugin.php:165 build/index.js:1
+#: includes/class-k-typewriter-plugin.php:173 build/index.js:1
 msgid "Animate headlines in any language."
 msgstr "어떤 언어든 자연스럽게 헤드라인을 애니메이션하세요."
 
-#: includes/class-k-typewriter-plugin.php:166 build/index.js:1
+#: includes/class-k-typewriter-plugin.php:174 build/index.js:1
 msgid "Ship polished hero copy in minutes."
 msgstr "완성도 높은 히어로 카피를 몇 분 만에 배포하세요."
 
 #. translators: %s: locale-aware list of animated messages.
-#: includes/class-k-typewriter-plugin.php:203
+#: includes/class-k-typewriter-plugin.php:211
 msgid "Typewriter animation that sequentially types %s."
 msgstr "%s가 순차적으로 타이핑되는 애니메이션"
 
@@ -105,6 +105,14 @@ msgstr "왼쪽에서 오른쪽"
 #: build/index.js:1
 msgid "Right to left"
 msgstr "오른쪽에서 왼쪽"
+
+#: build/index.js:1
+msgid "Characters (ch)"
+msgstr "문자 수(ch)"
+
+#: build/index.js:1
+msgid "Measure longest message"
+msgstr "가장 긴 메시지 실측"
 
 #: build/index.js:1
 msgid "Auto-generated"
@@ -174,6 +182,28 @@ msgstr ""
 #: build/index.js:1
 msgid "Inline layout"
 msgstr "인라인 레이아웃"
+
+#: build/index.js:1
+msgid ""
+"Auto lets the block grow naturally. Characters uses an approximate ch width. "
+"Measure longest message uses the current font to reserve a steadier inline "
+"width."
+msgstr ""
+"자동은 블록이 자연스럽게 늘어나고 줄어들게 둡니다. 문자 수(ch)는 대략적인 ch "
+"폭을 사용합니다. 가장 긴 메시지 실측은 현재 폰트를 기준으로 더 안정적인 인라"
+"인 폭을 예약합니다."
+
+#: build/index.js:1
+msgid "Inline width reserve"
+msgstr "인라인 너비 예약"
+
+#: build/index.js:1
+msgid "Reserve width using an approximate number of character columns."
+msgstr "대략적인 문자 칸 수를 기준으로 너비를 예약합니다."
+
+#: build/index.js:1
+msgid "Width in ch"
+msgstr "ch 기준 너비"
 
 #: build/index.js:1
 msgid ""

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-27T15:22:48+00:00\n"
+"POT-Creation-Date: 2026-03-27T15:43:55+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: k-typewriter\n"
@@ -39,23 +39,23 @@ msgstr ""
 msgid "https://github.com/imjlk"
 msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:164
+#: includes/class-k-typewriter-plugin.php:172
 #: build/index.js:1
 msgid "한 글자씩, 리듬 있게."
 msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:165
+#: includes/class-k-typewriter-plugin.php:173
 #: build/index.js:1
 msgid "Animate headlines in any language."
 msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:166
+#: includes/class-k-typewriter-plugin.php:174
 #: build/index.js:1
 msgid "Ship polished hero copy in minutes."
 msgstr ""
 
 #. translators: %s: locale-aware list of animated messages.
-#: includes/class-k-typewriter-plugin.php:203
+#: includes/class-k-typewriter-plugin.php:211
 msgid "Typewriter animation that sequentially types %s."
 msgstr ""
 
@@ -101,6 +101,14 @@ msgstr ""
 
 #: build/index.js:1
 msgid "Right to left"
+msgstr ""
+
+#: build/index.js:1
+msgid "Characters (ch)"
+msgstr ""
+
+#: build/index.js:1
+msgid "Measure longest message"
 msgstr ""
 
 #: build/index.js:1
@@ -161,6 +169,22 @@ msgstr ""
 
 #: build/index.js:1
 msgid "Inline layout"
+msgstr ""
+
+#: build/index.js:1
+msgid "Auto lets the block grow naturally. Characters uses an approximate ch width. Measure longest message uses the current font to reserve a steadier inline width."
+msgstr ""
+
+#: build/index.js:1
+msgid "Inline width reserve"
+msgstr ""
+
+#: build/index.js:1
+msgid "Reserve width using an approximate number of character columns."
+msgstr ""
+
+#: build/index.js:1
+msgid "Width in ch"
 msgstr ""
 
 #: build/index.js:1
