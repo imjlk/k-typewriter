@@ -8,6 +8,8 @@
 
 K Typewriter는 서버 렌더링 기반 폴백 콘텐츠, Interactivity API 재생, 다국어 타이핑 지원을 갖춘 동적 Gutenberg 블록입니다.
 
+타이핑 재생은 Beaver Coding의 [UniTyper](https://github.com/beavercoding2022/uni-typer)를 기반으로 구현되어 있습니다.
+
 주요 기능:
 
 - 초기 렌더부터 의미 있는 텍스트를 출력하는 동적 블록
