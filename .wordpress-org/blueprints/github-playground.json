@@ -17,10 +17,11 @@
 				"resource": "git:directory",
 				"url": "https://github.com/imjlk/k-typewriter",
 				"ref": "main",
-				"refType": "refname"
+				"refType": "branch"
 			},
 			"options": {
-				"activate": true
+				"activate": true,
+				"targetFolderName": "k-typewriter"
 			}
 		},
 		{
