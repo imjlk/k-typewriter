@@ -8,6 +8,7 @@ import Edit from './edit';
 import metadata from './block.json';
 import save from './save';
 import type { TypewriterAttributes } from './shared';
+import transforms from './transforms';
 
 const translatedDefaultItems = [
 	__( '한 글자씩, 리듬 있게.', 'k-typewriter' ),
@@ -36,6 +37,7 @@ const translatedMetadata = {
 const blockSettings: Partial< BlockConfiguration< TypewriterAttributes > > = {
 	edit: Edit,
 	save,
+	transforms,
 };
 
 registerBlockType( translatedMetadata.name, {
