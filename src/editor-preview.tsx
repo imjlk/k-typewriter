@@ -20,12 +20,14 @@ import { syncInlineWidth, syncReservedHeight } from './reserve-lines';
 
 type EditorPreviewProps = {
 	attributes: TypewriterAttributes;
+	emptyPreviewPlaceholder: string;
 	isSelected: boolean;
 	isPreviewPaused: boolean;
 };
 
 export default function EditorPreview( {
 	attributes,
+	emptyPreviewPlaceholder,
 	isSelected,
 	isPreviewPaused,
 }: EditorPreviewProps ) {
@@ -54,6 +56,7 @@ export default function EditorPreview( {
 		cursorBlinkSpeed,
 		cursorTransitionSpeed,
 		hideCursorWhenComplete,
+		keepCursorAnimationOnComplete,
 		pauseOnHover,
 		tagName,
 	} = attributes;
@@ -138,12 +141,23 @@ export default function EditorPreview( {
 	const isPreviewPlaying = canPreviewPlay && ! isPreviewComplete;
 	const isCursorVisible =
 		showCursor &&
+		stableItems.length > 0 &&
 		( isPreviewPlaying ||
 			( isPreviewComplete && ! hideCursorWhenComplete ) );
+	const isEmptyPreview = stableItems.length === 0;
+	const previewDisplayText = isEmptyPreview
+		? emptyPreviewPlaceholder
+		: frame.displayText;
+	const previewAriaLabel =
+		isEmptyPreview || ! seoSummary || seoSummary === visibleFallbackText
+			? undefined
+			: seoSummary;
 	let previewState = 'idle';
 
 	if ( isPreviewPlaying ) {
 		previewState = 'playing';
+	} else if ( isPreviewComplete ) {
+		previewState = 'complete';
 	} else if ( isSelected ) {
 		previewState = 'paused';
 	}
@@ -277,24 +291,27 @@ export default function EditorPreview( {
 	return (
 		<div
 			className="k-typewriter k-typewriter-editor"
+			data-keep-complete-cursor-animation={
+				keepCursorAnimationOnComplete ? 'true' : 'false'
+			}
 			data-preview-state={ previewState }
 			onMouseEnter={ () => setIsHovered( true ) }
 			onMouseLeave={ () => setIsHovered( false ) }
 		>
 			<TagName
-				aria-label={
-					seoSummary && seoSummary !== visibleFallbackText
-						? seoSummary
-						: undefined
-				}
-				className="k-typewriter__text k-typewriter-editor__preview"
+				aria-label={ previewAriaLabel }
+				className={ `k-typewriter__text k-typewriter-editor__preview${
+					isEmptyPreview
+						? ' k-typewriter-editor__preview--placeholder'
+						: ''
+				}` }
 				dir={ textDirection === 'auto' ? 'auto' : textDirection }
 				ref={ textRef }
 				style={ previewStyle }
 			>
 				<span className="k-typewriter__line">
 					<span className="k-typewriter__content">
-						{ frame.displayText }
+						{ previewDisplayText }
 					</span>
 					{ isCursorVisible && (
 						<span

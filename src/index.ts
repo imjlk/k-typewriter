@@ -7,10 +7,10 @@ import './style.scss';
 import Edit from './edit';
 import metadata from './block.json';
 import save from './save';
-import type { TypewriterAttributes } from './shared';
+import { SAMPLE_ITEMS, type TypewriterAttributes } from './shared';
 import transforms from './transforms';
 
-const translatedDefaultItems = [
+const translatedSampleItems = [
 	__( '한 글자씩, 리듬 있게.', 'k-typewriter' ),
 	__( 'Animate headlines in any language.', 'k-typewriter' ),
 	__( 'Ship polished hero copy in minutes.', 'k-typewriter' ),
@@ -18,18 +18,13 @@ const translatedDefaultItems = [
 
 const translatedMetadata = {
 	...metadata,
-	attributes: {
-		...metadata.attributes,
-		items: {
-			...metadata.attributes.items,
-			default: translatedDefaultItems,
-		},
-	},
 	example: {
 		...metadata.example,
 		attributes: {
 			...metadata.example.attributes,
-			items: translatedDefaultItems.slice( 0, 2 ),
+			items: translatedSampleItems.length
+				? translatedSampleItems.slice( 0, 2 )
+				: SAMPLE_ITEMS.slice( 0, 2 ),
 		},
 	},
 } as const;

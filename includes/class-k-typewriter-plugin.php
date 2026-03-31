@@ -107,6 +107,7 @@ final class K_Typewriter_Plugin {
 		$seo_summary      = self::get_effective_seo_summary( $settings );
 		$inline_width_ch  = self::get_approximate_inline_width_ch( $settings );
 		$tag_name         = $settings['tagName'];
+		$has_items        = ! empty( $settings['items'] );
 		$cursor_class     = 'transition' === $settings['cursorAnimationMode']
 			? 'k-typewriter__cursor k-typewriter__cursor--transition'
 			: 'k-typewriter__cursor k-typewriter__cursor--blink';
@@ -159,8 +160,9 @@ final class K_Typewriter_Plugin {
 				'inlineWidthMode'     => $settings['inlineWidthMode'],
 				'cursorAnimationMode' => $settings['cursorAnimationMode'],
 				'showCursor'          => $settings['showCursor'],
-				'cursorVisible'       => $settings['showCursor'],
+				'cursorVisible'       => $settings['showCursor'] && $has_items,
 				'hideCursorWhenComplete' => $settings['hideCursorWhenComplete'],
+				'keepCursorAnimationOnComplete' => $settings['keepCursorAnimationOnComplete'],
 				'isPlaying'           => false,
 				'isPaused'            => true,
 				'isComplete'          => false,
@@ -172,6 +174,7 @@ final class K_Typewriter_Plugin {
 				'reservedMinHeight'   => '',
 				'reservedMinBlockSize' => '',
 				'startOnView'         => $settings['startOnView'],
+				'replayOnReentry'     => $settings['replayOnReentry'],
 				'pauseOnHover'        => $settings['pauseOnHover'],
 				'typeDelay'           => $settings['typeDelay'],
 				'deleteDelay'         => $settings['deleteDelay'],
@@ -200,6 +203,7 @@ final class K_Typewriter_Plugin {
 					data-wp-class--is-complete="context.isComplete"
 					data-wp-class--is-hover-paused="context.isHoverPaused"
 					data-wp-class--has-inline-width="context.hasInlineWidthReserve"
+					data-wp-class--has-complete-cursor-animation="context.keepCursorAnimationOnComplete"
 				>
 				<<?php echo esc_html( $tag_name ); ?>
 					class="k-typewriter__text"
@@ -221,6 +225,9 @@ final class K_Typewriter_Plugin {
 						<span
 							aria-hidden="true"
 							class="<?php echo esc_attr( $cursor_class ); ?>"
+							<?php if ( ! $settings['showCursor'] || ! $has_items ) : ?>
+								hidden
+							<?php endif; ?>
 							data-wp-bind--hidden="!context.cursorVisible"
 							data-wp-class--k-typewriter__cursor--blink="context.useBlinkCursor"
 							data-wp-class--k-typewriter__cursor--transition="context.useTransitionCursor"
@@ -240,11 +247,7 @@ final class K_Typewriter_Plugin {
 	 * @return array<int,string>
 	 */
 	private static function get_default_items() {
-		return array(
-			__( '한 글자씩, 리듬 있게.', 'k-typewriter' ),
-			__( 'Animate headlines in any language.', 'k-typewriter' ),
-			__( 'Ship polished hero copy in minutes.', 'k-typewriter' ),
-		);
+		return array();
 	}
 
 	/**
@@ -258,7 +261,7 @@ final class K_Typewriter_Plugin {
 			return $settings['fallbackText'];
 		}
 
-		return $settings['items'][0];
+		return $settings['items'][0] ?? '';
 	}
 
 	/**
@@ -388,7 +391,9 @@ final class K_Typewriter_Plugin {
 			'cursorBlinkSpeed'   => 1000,
 			'cursorTransitionSpeed' => 900,
 			'hideCursorWhenComplete' => false,
+			'keepCursorAnimationOnComplete' => false,
 			'startOnView'        => true,
+			'replayOnReentry'    => false,
 			'pauseOnHover'       => false,
 			'fallbackMode'       => 'auto',
 			'fallbackText'       => '',
@@ -402,7 +407,12 @@ final class K_Typewriter_Plugin {
 			array_filter(
 				array_map(
 					static function( $item ) {
-						return trim( wp_strip_all_tags( (string) $item ) );
+						return trim(
+							wp_specialchars_decode(
+								wp_strip_all_tags( (string) $item ),
+								ENT_QUOTES
+							)
+						);
 					},
 					is_array( $attributes['items'] ) ? $attributes['items'] : $defaults['items']
 				)
@@ -463,10 +473,18 @@ final class K_Typewriter_Plugin {
 		$tag_name          = in_array( $attributes['tagName'], $valid_tags, true ) ? $attributes['tagName'] : $defaults['tagName'];
 		$delay_mode        = in_array( $attributes['startDelayMode'], $valid_delay_modes, true ) ? $attributes['startDelayMode'] : $defaults['startDelayMode'];
 		$transition_mode   = in_array( $attributes['transitionMode'], $valid_transition_modes, true ) ? $attributes['transitionMode'] : $defaults['transitionMode'];
-		$fallback_text     = trim( wp_strip_all_tags( (string) $attributes['fallbackText'] ) );
+		$fallback_text     = trim(
+			wp_specialchars_decode(
+				wp_strip_all_tags( (string) $attributes['fallbackText'] ),
+				ENT_QUOTES
+			)
+		);
 		$summary_text      = trim(
-			wp_strip_all_tags(
-				(string) $attributes['summaryText']
+			wp_specialchars_decode(
+				wp_strip_all_tags(
+					(string) $attributes['summaryText']
+				),
+				ENT_QUOTES
 			)
 		);
 		$fallback_mode     = in_array( $attributes['fallbackMode'], $valid_content_modes, true )
@@ -513,7 +531,9 @@ final class K_Typewriter_Plugin {
 			'cursorBlinkSpeed'  => min( 2000, max( 200, (int) $attributes['cursorBlinkSpeed'] ) ),
 			'cursorTransitionSpeed' => min( 2000, max( 200, (int) $attributes['cursorTransitionSpeed'] ) ),
 			'hideCursorWhenComplete' => (bool) $attributes['hideCursorWhenComplete'],
+			'keepCursorAnimationOnComplete' => (bool) $attributes['keepCursorAnimationOnComplete'],
 			'startOnView'       => (bool) $attributes['startOnView'],
+			'replayOnReentry'   => (bool) $attributes['replayOnReentry'],
 			'pauseOnHover'      => (bool) $attributes['pauseOnHover'],
 			'fallbackMode'      => $fallback_mode,
 			'fallbackText'      => $fallback_text,

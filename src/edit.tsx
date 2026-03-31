@@ -121,6 +121,27 @@ const contentSourceOptions = [
 	},
 ] as const;
 
+const messagesPlaceholder = [
+	__( 'Add one message per line.', 'k-typewriter' ),
+	__( 'Animate headlines in any language.', 'k-typewriter' ),
+	__( 'Keep the first paint readable.', 'k-typewriter' ),
+].join( '\n' );
+
+const fallbackPlaceholder = __(
+	'Optional custom first-paint fallback text',
+	'k-typewriter'
+);
+
+const summaryPlaceholder = __(
+	'Optional non-visual summary for assistive technology',
+	'k-typewriter'
+);
+
+const emptyPreviewPlaceholder = __(
+	'Add one message per line to preview the animation.',
+	'k-typewriter'
+);
+
 export default function Edit( {
 	attributes,
 	isSelected,
@@ -157,7 +178,9 @@ export default function Edit( {
 		cursorBlinkSpeed,
 		cursorTransitionSpeed,
 		hideCursorWhenComplete,
+		keepCursorAnimationOnComplete,
 		startOnView,
+		replayOnReentry,
 		pauseOnHover,
 		fallbackMode,
 		fallbackText,
@@ -174,6 +197,12 @@ export default function Edit( {
 		getEffectiveFallbackText( normalizedAttributes );
 	const effectiveSummaryText =
 		getEffectiveSummaryText( normalizedAttributes );
+	const effectiveFallbackPreview =
+		effectiveFallbackText ||
+		__( 'Uses the first message when available.', 'k-typewriter' );
+	const effectiveSummaryPreview =
+		effectiveSummaryText ||
+		__( 'Add messages to generate a non-visual summary.', 'k-typewriter' );
 	const fallbackSourceHelp =
 		fallbackMode === 'auto'
 			? __( 'Auto uses the first message.', 'k-typewriter' )
@@ -292,6 +321,7 @@ export default function Edit( {
 							'k-typewriter'
 						) }
 						label={ __( 'Messages', 'k-typewriter' ) }
+						placeholder={ messagesPlaceholder }
 						rows={ 6 }
 						value={ itemsDraft }
 						onBlur={ () => {
@@ -487,6 +517,7 @@ export default function Edit( {
 								'k-typewriter'
 							) }
 							label={ __( 'Fallback override', 'k-typewriter' ) }
+							placeholder={ fallbackPlaceholder }
 							value={ fallbackText }
 							onChange={ ( value ) =>
 								setAttributes( { fallbackText: value } )
@@ -501,7 +532,7 @@ export default function Edit( {
 							) }
 						</p>
 						<p className="k-typewriter-editor__effective-value">
-							{ effectiveFallbackText }
+							{ effectiveFallbackPreview }
 						</p>
 					</div>
 					<div className="k-typewriter-editor__settings-divider" />
@@ -535,6 +566,7 @@ export default function Edit( {
 							) }
 							label={ __( 'Summary override', 'k-typewriter' ) }
 							onKeyDown={ stopTextareaEnterPropagation }
+							placeholder={ summaryPlaceholder }
 							rows={ 3 }
 							value={ summaryText }
 							onChange={ ( value ) =>
@@ -550,7 +582,7 @@ export default function Edit( {
 							) }
 						</p>
 						<p className="k-typewriter-editor__effective-value">
-							{ effectiveSummaryText }
+							{ effectiveSummaryPreview }
 						</p>
 					</div>
 				</PanelBody>
@@ -664,6 +696,24 @@ export default function Edit( {
 							setAttributes( { loop: value } )
 						}
 					/>
+					{ loop || ! showCursor ? null : (
+						<ToggleControl
+							help={ __(
+								'Keep the cursor animation running after the final message has finished.',
+								'k-typewriter'
+							) }
+							label={ __(
+								'Keep cursor animation when complete',
+								'k-typewriter'
+							) }
+							checked={ keepCursorAnimationOnComplete }
+							onChange={ ( value ) =>
+								setAttributes( {
+									keepCursorAnimationOnComplete: value,
+								} )
+							}
+						/>
+					) }
 					<ToggleControl
 						label={ __( 'Start when visible', 'k-typewriter' ) }
 						checked={ startOnView }
@@ -671,6 +721,21 @@ export default function Edit( {
 							setAttributes( { startOnView: value } )
 						}
 					/>
+					{ ! startOnView ? null : (
+						<ToggleControl
+							help={ __(
+								'When the block leaves the viewport and becomes visible again, restart the animation from the beginning instead of resuming where it paused.',
+								'k-typewriter'
+							) }
+							label={ __( 'Replay on re-entry', 'k-typewriter' ) }
+							checked={ replayOnReentry }
+							onChange={ ( value ) =>
+								setAttributes( {
+									replayOnReentry: value,
+								} )
+							}
+						/>
+					) }
 					<ToggleControl
 						help={ __(
 							'Pause the animation while the pointer is over the block.',
@@ -696,6 +761,18 @@ export default function Edit( {
 					/>
 					{ ! showCursor ? null : (
 						<>
+							<ToggleControl
+								label={ __(
+									'Hide cursor when complete',
+									'k-typewriter'
+								) }
+								checked={ hideCursorWhenComplete }
+								onChange={ ( value ) =>
+									setAttributes( {
+										hideCursorWhenComplete: value,
+									} )
+								}
+							/>
 							<SelectControl
 								help={ __(
 									'Blink gives a crisp on-off cursor. Fade transition keeps the cursor softer and more fluid.',
@@ -830,18 +907,6 @@ export default function Edit( {
 									} )
 								}
 							/>
-							<ToggleControl
-								label={ __(
-									'Hide cursor when complete',
-									'k-typewriter'
-								) }
-								checked={ hideCursorWhenComplete }
-								onChange={ ( value ) =>
-									setAttributes( {
-										hideCursorWhenComplete: value,
-									} )
-								}
-							/>
 						</>
 					) }
 				</PanelBody>
@@ -849,6 +914,7 @@ export default function Edit( {
 			<div { ...blockProps }>
 				<EditorPreview
 					attributes={ normalizedAttributes }
+					emptyPreviewPlaceholder={ emptyPreviewPlaceholder }
 					isPreviewPaused={ isPreviewPaused }
 					isSelected={ Boolean( isSelected ) }
 				/>

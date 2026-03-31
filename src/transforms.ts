@@ -89,7 +89,19 @@ export function getStoredTransformItems( items: unknown ) {
 		return [];
 	}
 
-	return items.map( ( item ) => String( item ).trim() ).filter( Boolean );
+	return items
+		.map( ( item ) =>
+			String( item )
+				.replaceAll( '&gt;', '>' )
+				.replaceAll( '&lt;', '<' )
+				.replaceAll( '&amp;', '&' )
+				.replaceAll( '&quot;', '"' )
+				.replaceAll( '&#039;', "'" )
+				.replaceAll( '&#8217;', "'" )
+				.replaceAll( '&#8230;', '...' )
+				.trim()
+		)
+		.filter( Boolean );
 }
 
 export function htmlToPlainText( html: unknown ) {

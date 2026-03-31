@@ -1,4 +1,4 @@
-export const DEFAULT_ITEMS = [
+export const SAMPLE_ITEMS = [
 	'한 글자씩, 리듬 있게.',
 	'Animate headlines in any language.',
 	'Ship polished hero copy in minutes.',
@@ -18,7 +18,7 @@ export const INLINE_WIDTH_MODES = [ 'auto', 'characters', 'measure' ] as const;
 export const CURSOR_ANIMATION_MODES = [ 'blink', 'transition' ] as const;
 
 export const DEFAULT_ATTRIBUTES = {
-	items: DEFAULT_ITEMS,
+	items: [] as string[],
 	typeDelay: 80,
 	transitionMode: 'backspace',
 	deleteDelay: 40,
@@ -42,7 +42,9 @@ export const DEFAULT_ATTRIBUTES = {
 	cursorBlinkSpeed: 1000,
 	cursorTransitionSpeed: 900,
 	hideCursorWhenComplete: false,
+	keepCursorAnimationOnComplete: false,
 	startOnView: true,
+	replayOnReentry: false,
 	pauseOnHover: false,
 	fallbackMode: 'auto',
 	fallbackText: '',
@@ -105,7 +107,9 @@ export type TypewriterAttributes = {
 	cursorBlinkSpeed: number;
 	cursorTransitionSpeed: number;
 	hideCursorWhenComplete: boolean;
+	keepCursorAnimationOnComplete: boolean;
 	startOnView: boolean;
+	replayOnReentry: boolean;
 	pauseOnHover: boolean;
 	fallbackMode: ContentSourceMode;
 	fallbackText: string;
@@ -115,7 +119,24 @@ export type TypewriterAttributes = {
 };
 
 function sanitizeText( value: unknown ): string {
-	return typeof value === 'string' ? value.trim() : '';
+	return typeof value === 'string' ? decodeHtmlEntities( value ).trim() : '';
+}
+
+function decodeHtmlEntities( value: string ): string {
+	if ( typeof document !== 'undefined' ) {
+		const textarea = document.createElement( 'textarea' );
+		textarea.innerHTML = value;
+		return textarea.value;
+	}
+
+	return value
+		.replaceAll( '&gt;', '>' )
+		.replaceAll( '&lt;', '<' )
+		.replaceAll( '&amp;', '&' )
+		.replaceAll( '&quot;', '"' )
+		.replaceAll( '&#039;', "'" )
+		.replaceAll( '&#8217;', "'" )
+		.replaceAll( '&#8230;', '...' );
 }
 
 function clampNumber( value: unknown, minimum: number, maximum: number ) {
@@ -128,14 +149,14 @@ function clampNumber( value: unknown, minimum: number, maximum: number ) {
 
 export function sanitizeItems( items: unknown ): string[] {
 	if ( ! Array.isArray( items ) ) {
-		return [ ...DEFAULT_ITEMS ];
+		return [];
 	}
 
 	const nextItems = items
-		.map( ( item ) => String( item ).trim() )
+		.map( ( item ) => decodeHtmlEntities( String( item ) ).trim() )
 		.filter( Boolean );
 
-	return nextItems.length ? nextItems : [ ...DEFAULT_ITEMS ];
+	return nextItems;
 }
 
 export function coerceStartDelayMode( value: unknown ): StartDelayMode {
@@ -456,10 +477,18 @@ export function normalizeAttributes(
 			typeof attributes.hideCursorWhenComplete === 'boolean'
 				? attributes.hideCursorWhenComplete
 				: DEFAULT_ATTRIBUTES.hideCursorWhenComplete,
+		keepCursorAnimationOnComplete:
+			typeof attributes.keepCursorAnimationOnComplete === 'boolean'
+				? attributes.keepCursorAnimationOnComplete
+				: DEFAULT_ATTRIBUTES.keepCursorAnimationOnComplete,
 		startOnView:
 			typeof attributes.startOnView === 'boolean'
 				? attributes.startOnView
 				: DEFAULT_ATTRIBUTES.startOnView,
+		replayOnReentry:
+			typeof attributes.replayOnReentry === 'boolean'
+				? attributes.replayOnReentry
+				: DEFAULT_ATTRIBUTES.replayOnReentry,
 		pauseOnHover:
 			typeof attributes.pauseOnHover === 'boolean'
 				? attributes.pauseOnHover

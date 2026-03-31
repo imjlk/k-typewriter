@@ -11,11 +11,7 @@
 	"attributes": {
 		"items": {
 			"type": "array",
-			"default": [
-				"한 글자씩, 리듬 있게.",
-				"Animate headlines in any language.",
-				"Ship polished hero copy in minutes."
-			]
+			"default": []
 		},
 		"typeDelay": {
 			"type": "number",
@@ -109,9 +105,17 @@
 			"type": "boolean",
 			"default": false
 		},
+		"keepCursorAnimationOnComplete": {
+			"type": "boolean",
+			"default": false
+		},
 		"startOnView": {
 			"type": "boolean",
 			"default": true
+		},
+		"replayOnReentry": {
+			"type": "boolean",
+			"default": false
 		},
 		"pauseOnHover": {
 			"type": "boolean",

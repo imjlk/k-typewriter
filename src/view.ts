@@ -38,6 +38,7 @@ type TypewriterContext = {
 	showCursor: boolean;
 	cursorVisible: boolean;
 	hideCursorWhenComplete: boolean;
+	keepCursorAnimationOnComplete: boolean;
 	isPlaying: boolean;
 	isPaused: boolean;
 	isComplete: boolean;
@@ -49,6 +50,7 @@ type TypewriterContext = {
 	reservedMinHeight: string;
 	reservedMinBlockSize: string;
 	startOnView: boolean;
+	replayOnReentry: boolean;
 	pauseOnHover: boolean;
 	typeDelay: number;
 	deleteDelay: number;
@@ -204,9 +206,23 @@ const { actions } = store( STORE_NAME, {
 				runtime.inView = false;
 				runtime.observer = new IntersectionObserver(
 					withScope( ( entries: IntersectionObserverEntry[] ) => {
-						runtime.inView = entries.some(
+						const nextItems = normalizeTypingItems( context.items );
+						const wasInView = runtime.inView;
+						const nextInView = entries.some(
 							( entry ) => entry.isIntersecting
 						);
+						runtime.inView = nextInView;
+
+						if (
+							context.replayOnReentry &&
+							! wasInView &&
+							nextInView &&
+							runtime.hasEnteredView &&
+							nextItems.length
+						) {
+							resetToFallback( context, nextItems );
+						}
+
 						runtime.hasEnteredView =
 							runtime.hasEnteredView || runtime.inView;
 						scheduleTick();
