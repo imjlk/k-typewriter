@@ -17,6 +17,10 @@ Highlights:
 - Optional non-visual summary text for assistive technology
 - Hangul-aware typing playback
 - Start delay controls for first start, every cycle, or every re-entry
+- Start when visible, with optional replay on re-entry
+- Inline layout with width reservation using `ch` or measured longest-message mode
+- Text direction controls for `auto`, `ltr`, and `rtl`
+- Cursor controls for animation mode, thickness, height, and offsets
 - Semantic tag selection from `p`, `div`, `span`, `h1`-`h6`, `strong`, `em`, `small`, and `mark`
 - Support for theme typography, spacing, and color tools
 
@@ -29,6 +33,10 @@ The plugin now ships starter block patterns so the block is useful immediately a
 - `Announcement Strip`: a compact banner for launches, reminders, and promo messages
 - `Feature Spotlight`: a practical mid-page section intro with CTA buttons
 - `Multilingual Spotlight`: a showcase section for Korean, English, and Arabic messaging
+- `Split Launch Hero`: a left-aligned product-launch hero with supporting content
+- `Editorial Section Lead`: a practical section intro for case studies and resource hubs
+- `404 Error Prompt`: a friendly recovery pattern with an inline rotating destination
+- `Terminal Simulation`: a developer-focused terminal loading sequence
 
 For more experimental width and layout stability comparisons, use the Playground `Stability Examples` page instead of the starter patterns.
 
@@ -77,6 +85,7 @@ Notes:
 
 - `test:unit` covers the typing engine and shared attribute helpers.
 - `test:smoke` exercises the editor and front-end flow, but it still depends on the exact Gutenberg UI shape of the local WordPress instance.
+- For local Playground demos, use `http://127.0.0.1:9410` to avoid host-mismatch issues between `localhost` and `127.0.0.1`.
 
 ## Localization
 

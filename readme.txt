@@ -31,15 +31,18 @@ Key features:
 * Multiple messages with one message per line
 * Configurable typing, deleting, and pause timing
 * Optional start delay with first-start, every-cycle, and every-reentry timing modes
-* Optional looping and cursor display
+* Optional looping, viewport start, and replay-on-re-entry behavior
+* Cursor controls for visibility, animation mode, thickness, height, and offset
 * First-message static fallback by default, with an optional custom fallback override
 * Auto-generated non-visual summary with optional override text
+* Inline layout support with width reservation in `ch` or measured longest-message mode
+* Text direction controls for `auto`, `ltr`, and `rtl`
 * Start animation only when the block enters the viewport
 * Dynamic rendering for SEO-friendly first paint and no-JavaScript fallback
 * Reduced-motion support for visitors who prefer less animation
 * Semantic tag selection for `p`, `div`, `span`, `h1`-`h6`, `strong`, `em`, `small`, and `mark`
 * Support for theme typography, spacing, and color tools
-* Bundled starter patterns for hero headlines, inline keyword rotators, announcement strips, feature spotlights, and multilingual sections
+* Bundled patterns for hero headlines, inline keyword rotators, announcement strips, feature spotlights, multilingual sections, split launch heroes, editorial leads, 404 prompts, and terminal-style loading sequences
 
 == Installation ==
 
@@ -47,7 +50,7 @@ Key features:
 2. Activate the plugin through the `Plugins` screen in WordPress.
 3. Open the block editor and insert the `K Typewriter` block.
 4. Add one message per line in the block settings sidebar.
-5. Adjust timing, cursor, loop, and viewport options to match your design.
+5. Adjust timing, cursor, inline layout, width reservation, loop, and viewport options to match your design.
 
 == Frequently Asked Questions ==
 
@@ -65,11 +68,15 @@ Yes. Leave the summary on `Auto-generated` to build a locale-aware summary from 
 
 = Can I use Korean and English together? =
 
-Yes. The block is designed for multilingual messaging and works well with Korean, English, and mixed-language headlines.
+Yes. The block is designed for multilingual messaging and works well with Korean, English, Arabic, and mixed-language headlines. Use `Text direction` when you need explicit `ltr` or `rtl` behavior.
 
 = Can I change the HTML tag? =
 
 Yes. Choose between `p`, `div`, `span`, `h1`-`h6`, `strong`, `em`, `small`, and `mark` from the block settings. Use `h1` only when the block is the primary page heading.
+
+= Can I keep inline layouts stable while the text changes? =
+
+Yes. Turn on `Inline layout` and use `Inline width reserve` with either `Characters (ch)` or `Measure longest message` to keep inline keyword rotators and row layouts steadier.
 
 = Does it support a WordPress Playground preview? =
 
@@ -87,8 +94,9 @@ Yes. The plugin includes a WordPress.org Playground blueprint, so maintainers ca
 
 * First public release.
 * Added a dynamic, Interactivity API-powered typewriter block.
-* Added viewport-aware animation start, reduced-motion support, and graceful no-JS fallback.
-* Added packaging, local `wp-env` tooling, smoke tests, and release workflows.
+* Added viewport-aware animation start, replay-on-re-entry, reduced-motion support, and graceful no-JS fallback.
+* Added inline layout, width reservation, text direction controls, and detailed cursor controls.
+* Added bundled starter and advanced patterns, WordPress Playground demos, packaging, local `wp-env` tooling, smoke tests, and release workflows.
 
 == Upgrade Notice ==
 
