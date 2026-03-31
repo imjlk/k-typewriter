@@ -290,7 +290,9 @@ export default function EditorPreview( {
 
 	return (
 		<div
-			className="k-typewriter k-typewriter-editor"
+			className={ `k-typewriter k-typewriter-editor${
+				inlineLayout ? ' k-typewriter-editor--inline' : ''
+			}` }
 			data-keep-complete-cursor-animation={
 				keepCursorAnimationOnComplete ? 'true' : 'false'
 			}

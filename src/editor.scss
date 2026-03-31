@@ -1,8 +1,23 @@
 .wp-block-imjlk-k-typewriter .k-typewriter-editor {
 	width: 100%;
-	min-height: clamp(3rem, 6vw, 5.25rem);
+	min-height: 1em;
 	padding: 0.15rem 0;
 	text-align: inherit;
+}
+
+.wp-block-imjlk-k-typewriter.is-inline-layout {
+	display: inline-block;
+	width: fit-content;
+	max-width: 100%;
+	flex: 0 0 auto;
+	vertical-align: top;
+}
+
+.wp-block-imjlk-k-typewriter.is-inline-layout .k-typewriter-editor {
+	display: inline-block;
+	width: auto;
+	max-width: 100%;
+	min-height: 1em;
 }
 
 .wp-block-imjlk-k-typewriter .k-typewriter-editor__preview {
