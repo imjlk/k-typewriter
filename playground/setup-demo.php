@@ -15,6 +15,10 @@ $inline       = require $patterns_dir . '/inline-keyword-rotator.php';
 $announcement = require $patterns_dir . '/announcement-strip.php';
 $feature      = require $patterns_dir . '/feature-spotlight.php';
 $multilingual = require $patterns_dir . '/multilingual-spotlight.php';
+$split_hero   = require $patterns_dir . '/split-launch-hero.php';
+$editorial    = require $patterns_dir . '/editorial-section-lead.php';
+$error_prompt = require $patterns_dir . '/404-error-prompt.php';
+$terminal     = require $patterns_dir . '/terminal-loading-steps.php';
 
 $upsert_page = static function( $slug, $title, $content ) {
 	$existing_page = get_page_by_path( $slug, OBJECT, 'page' );
@@ -78,6 +82,22 @@ HTML,
 
 $section_spacer = "\n<!-- wp:spacer {\"height\":\"2rem\"} -->\n<div style=\"height:2rem\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>\n<!-- /wp:spacer -->\n";
 
+$experimental_intro = <<<'HTML'
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"2rem","bottom":"0.5rem"}}},"layout":{"type":"constrained","contentSize":"980px"}} -->
+<div class="wp-block-group" style="padding-top:2rem;padding-bottom:0.5rem"><!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"0.85rem","textTransform":"uppercase","letterSpacing":"0.14em"}},"textColor":"accent-4"} -->
+<p class="has-text-align-center has-accent-4-color has-text-color" style="font-size:0.85rem;letter-spacing:0.14em;text-transform:uppercase">Experimental combinations</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"textAlign":"center","level":2,"style":{"typography":{"fontSize":"clamp(1.9rem,4vw,3rem)","lineHeight":"1.08"}}} -->
+<h2 class="wp-block-heading has-text-align-center" style="font-size:clamp(1.9rem,4vw,3rem);line-height:1.08">Try K Typewriter inside layouts people actually build.</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"0.98rem"}}} -->
+<p class="has-text-align-center" style="font-size:0.98rem">These are slightly more opinionated compositions that combine the block with columns, pricing cards, buttons, and editorial sections.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+HTML;
+
 $gallery_footer = sprintf(
 	<<<'HTML'
 <!-- wp:group {"style":{"spacing":{"padding":{"top":"2rem","bottom":"4rem"}}},"layout":{"type":"constrained"}} -->
@@ -104,6 +124,11 @@ $gallery_content = implode(
 		$announcement['content'],
 		$feature['content'],
 		$multilingual['content'],
+		$experimental_intro,
+		$split_hero['content'],
+		$editorial['content'],
+		$error_prompt['content'],
+		$terminal['content'],
 		$gallery_footer,
 	)
 );
