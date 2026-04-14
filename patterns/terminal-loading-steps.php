@@ -5,6 +5,10 @@
  * @package KTypewriter
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 return array(
 	'slug'         => 'k-typewriter/terminal-loading-steps',
 	'title'        => __( 'Terminal Simulation', 'k-typewriter' ),

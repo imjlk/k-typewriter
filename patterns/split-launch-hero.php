@@ -5,6 +5,10 @@
  * @package KTypewriter
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 return array(
 	'slug'          => 'k-typewriter/split-launch-hero',
 	'title'         => __( 'Split Launch Hero', 'k-typewriter' ),

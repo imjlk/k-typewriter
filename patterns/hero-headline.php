@@ -5,6 +5,10 @@
  * @package KTypewriter
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 return array(
 	'slug'         => 'k-typewriter/hero-headline',
 	'title'        => __( 'Hero Headline', 'k-typewriter' ),

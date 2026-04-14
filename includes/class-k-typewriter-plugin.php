@@ -18,23 +18,34 @@ final class K_Typewriter_Plugin {
 	 * @return void
 	 */
 	public static function boot() {
-		add_action( 'init', array( __CLASS__, 'load_textdomain' ) );
+		add_action( 'init', array( __CLASS__, 'maybe_load_bundled_textdomain' ) );
 		add_action( 'init', array( __CLASS__, 'register_blocks' ) );
 		add_action( 'init', array( __CLASS__, 'register_pattern_category' ) );
 		add_action( 'init', array( __CLASS__, 'register_patterns' ) );
 	}
 
 	/**
-	 * Load translations.
+	 * Load bundled translations for direct installs when WordPress has not
+	 * already auto-loaded the textdomain.
 	 *
 	 * @return void
 	 */
-	public static function load_textdomain() {
-		load_plugin_textdomain(
-			'k-typewriter',
-			false,
-			dirname( plugin_basename( __DIR__ . '/../k-typewriter.php' ) ) . '/languages'
-		);
+	public static function maybe_load_bundled_textdomain() {
+		if ( is_textdomain_loaded( 'k-typewriter' ) ) {
+			return;
+		}
+
+		$locale = function_exists( 'determine_locale' ) ? determine_locale() : get_locale();
+
+		if ( ! is_string( $locale ) || '' === $locale ) {
+			return;
+		}
+
+		$mofile = dirname( __DIR__ ) . '/languages/k-typewriter-' . $locale . '.mo';
+
+		if ( file_exists( $mofile ) ) {
+			load_textdomain( 'k-typewriter', $mofile );
+		}
 	}
 
 	/**

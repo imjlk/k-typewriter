@@ -5,6 +5,10 @@
  * @package KTypewriter
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 return array(
 	'slug'         => 'k-typewriter/inline-keyword-rotator',
 	'title'        => __( 'Inline Keyword Rotator', 'k-typewriter' ),

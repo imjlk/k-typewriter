@@ -5,6 +5,10 @@
  * @package KTypewriter
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 return array(
 	'slug'         => 'k-typewriter/404-error-prompt',
 	'title'        => __( '404 Error Prompt', 'k-typewriter' ),

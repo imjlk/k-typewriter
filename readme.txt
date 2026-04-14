@@ -17,6 +17,9 @@ K Typewriter is a dynamic block for WordPress sites that need expressive text mo
 Its typing playback is built on top of UniTyper by Beaver Coding:
 https://github.com/beavercoding2022/uni-typer
 
+Development repository:
+https://github.com/imjlk/k-typewriter
+
 Use it for:
 
 * Homepage hero copy
