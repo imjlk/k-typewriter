@@ -15,7 +15,8 @@
 		"lint:js": "wp-scripts lint-js",
 		"make:pot": "wp-env run cli --env-cwd=wp-content/plugins/k-typewriter wp i18n make-pot . languages/sbs-typing-effect-block.pot --slug=sbs-typing-effect-block --domain=sbs-typing-effect-block --exclude=node_modules,.git,coverage,test-results,playwright-report --allow-root",
 		"packages-update": "wp-scripts packages-update",
-		"plugin-zip": "wp-scripts plugin-zip",
+		"plugin-zip:upstream": "wp-scripts plugin-zip",
+		"plugin-zip": "node ./scripts/build-release-zip.mjs",
 		"start": "wp-scripts start --experimental-modules",
 		"test:smoke": "playwright test",
 		"test:unit": "wp-scripts test-unit-js --runInBand"

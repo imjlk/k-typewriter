@@ -1,0 +1,187 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "imjlk/sbs-typing-effect-block",
+  "version": "1.0.0",
+  "title": "Stroke by stroke typing effect Block",
+  "category": "text",
+  "icon": "editor-textcolor",
+  "description": "Animate multilingual headlines, notices, and hero copy with a polished typewriter effect.",
+  "keywords": [
+    "typewriter",
+    "headline",
+    "hero"
+  ],
+  "attributes": {
+    "items": {
+      "type": "array",
+      "default": []
+    },
+    "typeDelay": {
+      "type": "number",
+      "default": 80
+    },
+    "transitionMode": {
+      "type": "string",
+      "default": "backspace"
+    },
+    "deleteDelay": {
+      "type": "number",
+      "default": 40
+    },
+    "pauseDelay": {
+      "type": "number",
+      "default": 1200
+    },
+    "startDelay": {
+      "type": "number",
+      "default": 0
+    },
+    "startDelayMode": {
+      "type": "string",
+      "default": "first-start"
+    },
+    "loop": {
+      "type": "boolean",
+      "default": true
+    },
+    "reserveLines": {
+      "type": "number",
+      "default": 1
+    },
+    "verticalAlign": {
+      "type": "string",
+      "default": "top"
+    },
+    "inlineLayout": {
+      "type": "boolean",
+      "default": false
+    },
+    "inlineWidthMode": {
+      "type": "string",
+      "default": "auto"
+    },
+    "inlineWidthCh": {
+      "type": "number",
+      "default": 24
+    },
+    "textDirection": {
+      "type": "string",
+      "default": "auto"
+    },
+    "startFromEmpty": {
+      "type": "boolean",
+      "default": false
+    },
+    "showCursor": {
+      "type": "boolean",
+      "default": true
+    },
+    "cursorAnimationMode": {
+      "type": "string",
+      "default": "blink"
+    },
+    "cursorWidth": {
+      "type": "number",
+      "default": 0.08
+    },
+    "cursorHeight": {
+      "type": "number",
+      "default": 0.86
+    },
+    "cursorOffsetX": {
+      "type": "number",
+      "default": 0
+    },
+    "cursorOffsetY": {
+      "type": "number",
+      "default": 0
+    },
+    "cursorBlinkSpeed": {
+      "type": "number",
+      "default": 1000
+    },
+    "cursorTransitionSpeed": {
+      "type": "number",
+      "default": 900
+    },
+    "hideCursorWhenComplete": {
+      "type": "boolean",
+      "default": false
+    },
+    "keepCursorAnimationOnComplete": {
+      "type": "boolean",
+      "default": false
+    },
+    "startOnView": {
+      "type": "boolean",
+      "default": true
+    },
+    "replayOnReentry": {
+      "type": "boolean",
+      "default": false
+    },
+    "pauseOnHover": {
+      "type": "boolean",
+      "default": false
+    },
+    "fallbackMode": {
+      "type": "string",
+      "default": "auto"
+    },
+    "fallbackText": {
+      "type": "string",
+      "default": ""
+    },
+    "summaryMode": {
+      "type": "string",
+      "default": "auto"
+    },
+    "summaryText": {
+      "type": "string",
+      "default": ""
+    },
+    "tagName": {
+      "type": "string",
+      "default": "p"
+    }
+  },
+  "example": {
+    "attributes": {
+      "items": [
+        "한 글자씩, 리듬 있게.",
+        "Animate headlines in any language."
+      ],
+      "reserveLines": 2,
+      "verticalAlign": "middle",
+      "inlineLayout": true,
+      "inlineWidthMode": "measure",
+      "textDirection": "auto",
+      "startDelay": 250,
+      "startDelayMode": "first-start",
+      "tagName": "h2"
+    }
+  },
+  "supports": {
+    "html": false,
+    "interactivity": true,
+    "color": {
+      "text": true,
+      "background": true
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "textAlign": true
+    }
+  },
+  "textdomain": "sbs-typing-effect-block",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScriptModule": "file:./view.js"
+}
