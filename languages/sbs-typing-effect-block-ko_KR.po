@@ -3,8 +3,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: K Typewriter 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/k-typewriter\n"
-"POT-Creation-Date: 2026-03-27T18:16:45+00:00\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sbs-typing-effect-"
+"block\n"
+"POT-Creation-Date: 2026-05-03T05:55:00+00:00\n"
 "PO-Revision-Date: 2026-03-27 14:50+0900\n"
 "Last-Translator: imjlk\n"
 "Language-Team: Korean\n"
@@ -17,17 +18,17 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Plugin Name of the plugin
-#: k-typewriter.php includes/class-k-typewriter-plugin.php:67
-msgid "K Typewriter"
-msgstr "K Typewriter"
+#: sbs-typing-effect-block.php includes/class-k-typewriter-plugin.php:78
+msgid "Stroke by stroke typing effect Block"
+msgstr ""
 
 #. Plugin URI of the plugin
-#: k-typewriter.php
+#: sbs-typing-effect-block.php
 msgid "https://github.com/imjlk/k-typewriter"
 msgstr "https://github.com/imjlk/k-typewriter"
 
 #. Description of the plugin
-#: k-typewriter.php
+#: sbs-typing-effect-block.php
 msgid ""
 "Add a configurable typewriter text block for hero headlines, notices, and "
 "multilingual messaging."
@@ -36,49 +37,56 @@ msgstr ""
 "스트 블록을 추가합니다."
 
 #. Author of the plugin
-#: k-typewriter.php
+#: sbs-typing-effect-block.php
 msgid "imjlk"
 msgstr "imjlk"
 
 #. Author URI of the plugin
-#: k-typewriter.php
-msgid "https://github.com/imjlk"
-msgstr "https://github.com/imjlk"
+#: sbs-typing-effect-block.php
+msgid "https://profiles.wordpress.org/imjlk/"
+msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:68
-msgid "Ready-to-use patterns for K Typewriter."
+#: includes/class-k-typewriter-plugin.php:79
+#, fuzzy
+msgid "Ready-to-use patterns for Stroke by stroke typing effect Block."
 msgstr "K Typewriter용 바로 쓸 수 있는 패턴입니다."
 
-#: includes/class-k-typewriter-plugin.php:244 build/index.js:1
-msgid "한 글자씩, 리듬 있게."
-msgstr "한 글자씩, 리듬 있게."
-
-#: includes/class-k-typewriter-plugin.php:245 build/index.js:1
-msgid "Animate headlines in any language."
-msgstr "어떤 언어든 자연스럽게 헤드라인을 애니메이션하세요."
-
-#: includes/class-k-typewriter-plugin.php:246 build/index.js:1
-msgid "Ship polished hero copy in minutes."
-msgstr "완성도 높은 히어로 카피를 몇 분 만에 배포하세요."
-
 #. translators: %s: locale-aware list of animated messages.
-#: includes/class-k-typewriter-plugin.php:283
+#: includes/class-k-typewriter-plugin.php:297
 msgid "Typewriter animation that sequentially types %s."
 msgstr "%s가 순차적으로 타이핑되는 애니메이션"
 
-#: patterns/announcement-strip.php:10
+#: patterns/404-error-prompt.php:14
+msgid "404 Error Prompt"
+msgstr ""
+
+#: patterns/404-error-prompt.php:15
+msgid "A friendly 404 error page prompt that suggests popular destinations."
+msgstr ""
+
+#: patterns/announcement-strip.php:14
 msgid "Announcement Strip"
 msgstr "공지 배너"
 
-#: patterns/announcement-strip.php:11
+#: patterns/announcement-strip.php:15
 msgid "A compact banner for rotating launches, promos, or deadline reminders."
 msgstr "출시, 프로모션, 마감 알림을 순환하기 좋은 간결한 배너입니다."
 
-#: patterns/feature-spotlight.php:10
+#: patterns/editorial-section-lead.php:14
+msgid "Editorial Section Lead"
+msgstr ""
+
+#: patterns/editorial-section-lead.php:15
+msgid ""
+"A section intro pattern for stories, resources, and long-form editorial "
+"pages."
+msgstr ""
+
+#: patterns/feature-spotlight.php:14
 msgid "Feature Spotlight"
 msgstr "기능 스포트라이트"
 
-#: patterns/feature-spotlight.php:11
+#: patterns/feature-spotlight.php:15
 msgid ""
 "A practical section intro pattern for feature pages, launch sections, and "
 "campaign callouts."
@@ -86,11 +94,11 @@ msgstr ""
 "기능 페이지, 출시 섹션, 캠페인 콜아웃에 어울리는 실용적인 섹션 인트로 패턴입"
 "니다."
 
-#: patterns/hero-headline.php:10
+#: patterns/hero-headline.php:14
 msgid "Hero Headline"
 msgstr "히어로 헤드라인"
 
-#: patterns/hero-headline.php:11
+#: patterns/hero-headline.php:15
 msgid ""
 "A centered hero headline with polished typewriter playback and stable "
 "reserved height."
@@ -98,11 +106,11 @@ msgstr ""
 "안정적인 예약 높이와 함께 완성도 높은 타이프라이터 재생을 제공하는 중앙 정렬 "
 "히어로 헤드라인 패턴입니다."
 
-#: patterns/inline-keyword-rotator.php:10
+#: patterns/inline-keyword-rotator.php:14
 msgid "Inline Keyword Rotator"
 msgstr "인라인 키워드 로테이터"
 
-#: patterns/inline-keyword-rotator.php:11
+#: patterns/inline-keyword-rotator.php:15
 msgid ""
 "A row-based inline layout that rotates compact keywords without widening the "
 "whole line."
@@ -110,11 +118,11 @@ msgstr ""
 "한 줄 전체 폭을 과하게 넓히지 않으면서 짧은 키워드를 순환하는 Row 기반 인라"
 "인 패턴입니다."
 
-#: patterns/multilingual-spotlight.php:10
+#: patterns/multilingual-spotlight.php:14
 msgid "Multilingual Spotlight"
 msgstr "다국어 스포트라이트"
 
-#: patterns/multilingual-spotlight.php:11
+#: patterns/multilingual-spotlight.php:15
 #, fuzzy
 msgid ""
 "A showcase pattern for Korean, English, and Arabic messaging in one polished "
@@ -122,6 +130,22 @@ msgid ""
 msgstr ""
 "한글, 영어, 일본어 메시지를 하나의 완성도 높은 섹션에서 보여주는 쇼케이스 패"
 "턴입니다."
+
+#: patterns/split-launch-hero.php:14
+msgid "Split Launch Hero"
+msgstr ""
+
+#: patterns/split-launch-hero.php:15
+msgid "A left-aligned hero with supporting launch details and calls to action."
+msgstr ""
+
+#: patterns/terminal-loading-steps.php:14
+msgid "Terminal Simulation"
+msgstr ""
+
+#: patterns/terminal-loading-steps.php:15
+msgid "A developer-focused terminal animation for SaaS or IT websites."
+msgstr ""
 
 #: build/index.js:1
 msgid "First start only"
@@ -190,6 +214,51 @@ msgstr "자동 생성"
 #: build/index.js:1
 msgid "Custom override"
 msgstr "사용자 지정 덮어쓰기"
+
+#: build/index.js:1
+msgid "Add one message per line."
+msgstr ""
+
+#: build/index.js:1
+msgid "Animate headlines in any language."
+msgstr "어떤 언어든 자연스럽게 헤드라인을 애니메이션하세요."
+
+#: build/index.js:1
+msgid "Keep the first paint readable."
+msgstr ""
+
+#: build/index.js:1
+msgid "Optional custom first-paint fallback text"
+msgstr ""
+
+#: build/index.js:1
+#, fuzzy
+msgid "Optional non-visual summary for assistive technology"
+msgstr ""
+"보조 기술에 사용되는 비시각 요약을 선택하세요. 자동 모드는 모든 메시지를 함"
+"께 요약합니다."
+
+#: build/index.js:1
+#, fuzzy
+msgid "Add one message per line to preview the animation."
+msgstr "메시지를 한 줄에 하나씩 입력하세요. 빈 줄은 무시됩니다."
+
+#: build/index.js:1
+msgid "한 글자씩, 리듬 있게."
+msgstr "한 글자씩, 리듬 있게."
+
+#: build/index.js:1
+msgid "Ship polished hero copy in minutes."
+msgstr "완성도 높은 히어로 카피를 몇 분 만에 배포하세요."
+
+#: build/index.js:1
+#, fuzzy
+msgid "Uses the first message when available."
+msgstr "자동 모드는 첫 번째 메시지를 사용합니다."
+
+#: build/index.js:1
+msgid "Add messages to generate a non-visual summary."
+msgstr ""
 
 #: build/index.js:1
 msgid "Auto uses the first message."
@@ -439,8 +508,28 @@ msgid "Loop messages"
 msgstr "메시지 반복"
 
 #: build/index.js:1
+msgid "Keep the cursor animation running after the final message has finished."
+msgstr ""
+
+#: build/index.js:1
+#, fuzzy
+msgid "Keep cursor animation when complete"
+msgstr "완료 시 커서 숨기기"
+
+#: build/index.js:1
 msgid "Start when visible"
 msgstr "보일 때 시작"
+
+#: build/index.js:1
+msgid ""
+"When the block leaves the viewport and becomes visible again, restart the "
+"animation from the beginning instead of resuming where it paused."
+msgstr ""
+
+#: build/index.js:1
+#, fuzzy
+msgid "Replay on re-entry"
+msgstr "다시 진입할 때마다"
 
 #: build/index.js:1
 msgid "Pause the animation while the pointer is over the block."
@@ -457,6 +546,10 @@ msgstr "커서"
 #: build/index.js:1
 msgid "Show cursor"
 msgstr "커서 표시"
+
+#: build/index.js:1
+msgid "Hide cursor when complete"
+msgstr "완료 시 커서 숨기기"
 
 #: build/index.js:1
 msgid ""
@@ -518,14 +611,10 @@ msgstr "폰트에 더 잘 맞도록 커서를 조금 위나 아래로 조정합�
 msgid "Cursor vertical offset"
 msgstr "커서 세로 오프셋"
 
-#: build/index.js:1
-msgid "Hide cursor when complete"
-msgstr "완료 시 커서 숨기기"
-
 #: build/block.json src/block.json
 msgctxt "block title"
-msgid "K Typewriter"
-msgstr "K Typewriter"
+msgid "Stroke by stroke typing effect Block"
+msgstr ""
 
 #: build/block.json src/block.json
 msgctxt "block description"
@@ -551,15 +640,18 @@ msgctxt "block keyword"
 msgid "hero"
 msgstr "히어로"
 
+#~ msgid "K Typewriter"
+#~ msgstr "K Typewriter"
+
+#~ msgid "https://github.com/imjlk"
+#~ msgstr "https://github.com/imjlk"
+
+#~ msgctxt "block title"
+#~ msgid "K Typewriter"
+#~ msgstr "K Typewriter"
+
 #~ msgid "Reserve width using an approximate number of character columns."
 #~ msgstr "대략적인 문자 칸 수를 기준으로 너비를 예약합니다."
-
-#~ msgid ""
-#~ "Choose the non-visual summary used for assistive technology. Auto mode "
-#~ "combines every message."
-#~ msgstr ""
-#~ "보조 기술에 사용되는 비시각 요약을 선택하세요. 자동 모드는 모든 메시지를 "
-#~ "함께 요약합니다."
 
 #~ msgid "Use custom fallback"
 #~ msgstr "커스텀 폴백 사용"

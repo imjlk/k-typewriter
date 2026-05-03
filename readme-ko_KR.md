@@ -1,4 +1,4 @@
-# K Typewriter
+# Stroke by stroke typing effect Block
 
 워드프레스 히어로 헤드라인, 공지, 안내 카피를 위한 다국어 타이프라이터 블록 플러그인입니다.
 
@@ -6,7 +6,7 @@
 
 ## 개요
 
-K Typewriter는 서버 렌더링 기반 폴백 콘텐츠, Interactivity API 재생, 다국어 타이핑 지원을 갖춘 동적 Gutenberg 블록입니다.
+Stroke by stroke typing effect Block은 서버 렌더링 기반 폴백 콘텐츠, Interactivity API 재생, 다국어 타이핑 지원을 갖춘 동적 Gutenberg 블록입니다.
 
 타이핑 재생은 Beaver Coding의 [UniTyper](https://github.com/beavercoding2022/uni-typer)를 기반으로 구현되어 있습니다.
 
@@ -77,7 +77,7 @@ pnpm run lint:css
 pnpm run test:unit
 pnpm run build
 pnpm run test:smoke
-php -l k-typewriter.php
+php -l sbs-typing-effect-block.php
 php -l includes/class-k-typewriter-plugin.php
 ```
 
@@ -91,9 +91,9 @@ php -l includes/class-k-typewriter-plugin.php
 
 플러그인 번역 자산은 [`languages/`](./languages) 아래에 있습니다.
 
-- 템플릿: `k-typewriter.pot`
-- 번들 한국어 번역: `k-typewriter-ko_KR.po`, `k-typewriter-ko_KR.mo`
-- 한국어 블록 에디터용 JSON 번역 파일도 함께 커밋되어 있어 직접 설치나 zip 배포에서도 바로 반영됩니다
+- 템플릿: `sbs-typing-effect-block.pot`
+- 번들 한국어 번역: `sbs-typing-effect-block-ko_KR.po`, `sbs-typing-effect-block-ko_KR.mo`
+- 한국어 번역 파일이 함께 포함되어 있어 직접 설치나 zip 배포에서도 바로 사용할 수 있습니다
 
 WordPress.org 에서는 나중에 `translate.wordpress.org` 에서 승인된 번역이 언어팩으로 배포되면, 그 언어팩이 번들 번역보다 우선할 수 있습니다.
 

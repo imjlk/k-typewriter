@@ -47,9 +47,9 @@ const tagNameOptions = VALID_TAG_NAMES.map( ( tagName ) => ( {
 } ) );
 
 const startDelayModeLabels = {
-	'first-start': __( 'First start only', 'k-typewriter' ),
-	'every-cycle': __( 'Every cycle', 'k-typewriter' ),
-	'every-reentry': __( 'Every re-entry', 'k-typewriter' ),
+	'first-start': __( 'First start only', 'sbs-typing-effect-block' ),
+	'every-cycle': __( 'Every cycle', 'sbs-typing-effect-block' ),
+	'every-reentry': __( 'Every re-entry', 'sbs-typing-effect-block' ),
 } as const;
 
 const startDelayModeOptions = START_DELAY_MODES.map( ( value ) => ( {
@@ -58,8 +58,8 @@ const startDelayModeOptions = START_DELAY_MODES.map( ( value ) => ( {
 } ) );
 
 const transitionModeLabels = {
-	backspace: __( 'Backspace previous message', 'k-typewriter' ),
-	restart: __( 'Restart from empty', 'k-typewriter' ),
+	backspace: __( 'Backspace previous message', 'sbs-typing-effect-block' ),
+	restart: __( 'Restart from empty', 'sbs-typing-effect-block' ),
 } as const;
 
 const transitionModeOptions = TRANSITION_MODES.map( ( value ) => ( {
@@ -68,9 +68,9 @@ const transitionModeOptions = TRANSITION_MODES.map( ( value ) => ( {
 } ) );
 
 const verticalAlignmentLabels = {
-	top: __( 'Top', 'k-typewriter' ),
-	middle: __( 'Middle', 'k-typewriter' ),
-	bottom: __( 'Bottom', 'k-typewriter' ),
+	top: __( 'Top', 'sbs-typing-effect-block' ),
+	middle: __( 'Middle', 'sbs-typing-effect-block' ),
+	bottom: __( 'Bottom', 'sbs-typing-effect-block' ),
 } as const;
 
 const verticalAlignmentOptions = VERTICAL_ALIGNMENTS.map( ( value ) => ( {
@@ -79,9 +79,9 @@ const verticalAlignmentOptions = VERTICAL_ALIGNMENTS.map( ( value ) => ( {
 } ) );
 
 const textDirectionLabels = {
-	auto: __( 'Auto', 'k-typewriter' ),
-	ltr: __( 'Left to right', 'k-typewriter' ),
-	rtl: __( 'Right to left', 'k-typewriter' ),
+	auto: __( 'Auto', 'sbs-typing-effect-block' ),
+	ltr: __( 'Left to right', 'sbs-typing-effect-block' ),
+	rtl: __( 'Right to left', 'sbs-typing-effect-block' ),
 } as const;
 
 const textDirectionOptions = TEXT_DIRECTIONS.map( ( value ) => ( {
@@ -90,9 +90,9 @@ const textDirectionOptions = TEXT_DIRECTIONS.map( ( value ) => ( {
 } ) );
 
 const inlineWidthModeLabels = {
-	auto: __( 'Auto', 'k-typewriter' ),
-	characters: __( 'Characters (ch)', 'k-typewriter' ),
-	measure: __( 'Measure longest message', 'k-typewriter' ),
+	auto: __( 'Auto', 'sbs-typing-effect-block' ),
+	characters: __( 'Characters (ch)', 'sbs-typing-effect-block' ),
+	measure: __( 'Measure longest message', 'sbs-typing-effect-block' ),
 } as const;
 
 const inlineWidthModeOptions = INLINE_WIDTH_MODES.map( ( value ) => ( {
@@ -101,8 +101,8 @@ const inlineWidthModeOptions = INLINE_WIDTH_MODES.map( ( value ) => ( {
 } ) );
 
 const cursorAnimationModeLabels = {
-	blink: __( 'Blink', 'k-typewriter' ),
-	transition: __( 'Fade transition', 'k-typewriter' ),
+	blink: __( 'Blink', 'sbs-typing-effect-block' ),
+	transition: __( 'Fade transition', 'sbs-typing-effect-block' ),
 } as const;
 
 const cursorAnimationModeOptions = CURSOR_ANIMATION_MODES.map( ( value ) => ( {
@@ -112,34 +112,34 @@ const cursorAnimationModeOptions = CURSOR_ANIMATION_MODES.map( ( value ) => ( {
 
 const contentSourceOptions = [
 	{
-		label: __( 'Auto-generated', 'k-typewriter' ),
+		label: __( 'Auto-generated', 'sbs-typing-effect-block' ),
 		value: 'auto',
 	},
 	{
-		label: __( 'Custom override', 'k-typewriter' ),
+		label: __( 'Custom override', 'sbs-typing-effect-block' ),
 		value: 'custom',
 	},
 ] as const;
 
 const messagesPlaceholder = [
-	__( 'Add one message per line.', 'k-typewriter' ),
-	__( 'Animate headlines in any language.', 'k-typewriter' ),
-	__( 'Keep the first paint readable.', 'k-typewriter' ),
+	__( 'Add one message per line.', 'sbs-typing-effect-block' ),
+	__( 'Animate headlines in any language.', 'sbs-typing-effect-block' ),
+	__( 'Keep the first paint readable.', 'sbs-typing-effect-block' ),
 ].join( '\n' );
 
 const fallbackPlaceholder = __(
 	'Optional custom first-paint fallback text',
-	'k-typewriter'
+	'sbs-typing-effect-block'
 );
 
 const summaryPlaceholder = __(
 	'Optional non-visual summary for assistive technology',
-	'k-typewriter'
+	'sbs-typing-effect-block'
 );
 
 const emptyPreviewPlaceholder = __(
 	'Add one message per line to preview the animation.',
-	'k-typewriter'
+	'sbs-typing-effect-block'
 );
 
 export default function Edit( {
@@ -199,26 +199,32 @@ export default function Edit( {
 		getEffectiveSummaryText( normalizedAttributes );
 	const effectiveFallbackPreview =
 		effectiveFallbackText ||
-		__( 'Uses the first message when available.', 'k-typewriter' );
+		__(
+			'Uses the first message when available.',
+			'sbs-typing-effect-block'
+		);
 	const effectiveSummaryPreview =
 		effectiveSummaryText ||
-		__( 'Add messages to generate a non-visual summary.', 'k-typewriter' );
+		__(
+			'Add messages to generate a non-visual summary.',
+			'sbs-typing-effect-block'
+		);
 	const fallbackSourceHelp =
 		fallbackMode === 'auto'
-			? __( 'Auto uses the first message.', 'k-typewriter' )
+			? __( 'Auto uses the first message.', 'sbs-typing-effect-block' )
 			: __(
 					'Custom mode lets you keep a different first-paint message.',
-					'k-typewriter'
+					'sbs-typing-effect-block'
 			  );
 	const summarySourceHelp =
 		summaryMode === 'auto'
 			? __(
 					'Auto combines every message into a single summary.',
-					'k-typewriter'
+					'sbs-typing-effect-block'
 			  )
 			: __(
 					'Custom mode lets you write a shorter or more intentional summary.',
-					'k-typewriter'
+					'sbs-typing-effect-block'
 			  );
 
 	useEffect( () => {
@@ -298,8 +304,14 @@ export default function Edit( {
 						isPressed={ isPreviewPaused }
 						label={
 							isPreviewPlaying
-								? __( 'Pause preview', 'k-typewriter' )
-								: __( 'Play preview', 'k-typewriter' )
+								? __(
+										'Pause preview',
+										'sbs-typing-effect-block'
+								  )
+								: __(
+										'Play preview',
+										'sbs-typing-effect-block'
+								  )
 						}
 						onClick={ () =>
 							setIsPreviewPaused(
@@ -313,14 +325,14 @@ export default function Edit( {
 			<InspectorControls>
 				<PanelBody
 					initialOpen={ true }
-					title={ __( 'Content', 'k-typewriter' ) }
+					title={ __( 'Content', 'sbs-typing-effect-block' ) }
 				>
 					<TextareaControl
 						help={ __(
 							'Write one message per line. Empty lines are ignored.',
-							'k-typewriter'
+							'sbs-typing-effect-block'
 						) }
-						label={ __( 'Messages', 'k-typewriter' ) }
+						label={ __( 'Messages', 'sbs-typing-effect-block' ) }
 						placeholder={ messagesPlaceholder }
 						rows={ 6 }
 						value={ itemsDraft }
@@ -342,9 +354,12 @@ export default function Edit( {
 					<SelectControl
 						help={ __(
 							'Auto follows the current site or page direction. Choose LTR or RTL only when you want to override it.',
-							'k-typewriter'
+							'sbs-typing-effect-block'
 						) }
-						label={ __( 'Text direction', 'k-typewriter' ) }
+						label={ __(
+							'Text direction',
+							'sbs-typing-effect-block'
+						) }
 						options={ textDirectionOptions }
 						value={ textDirection }
 						onChange={ ( value ) =>
@@ -356,9 +371,12 @@ export default function Edit( {
 					<ToggleControl
 						help={ __(
 							'Shrink the block to its content so it fits more naturally inside groups and flex layouts.',
-							'k-typewriter'
+							'sbs-typing-effect-block'
 						) }
-						label={ __( 'Inline layout', 'k-typewriter' ) }
+						label={ __(
+							'Inline layout',
+							'sbs-typing-effect-block'
+						) }
 						checked={ inlineLayout }
 						onChange={ ( value ) =>
 							setAttributes( { inlineLayout: value } )
@@ -369,11 +387,11 @@ export default function Edit( {
 							<SelectControl
 								help={ __(
 									'Auto lets the block grow naturally. Characters uses an approximate ch width. Measure longest message uses the current font to reserve a steadier inline width.',
-									'k-typewriter'
+									'sbs-typing-effect-block'
 								) }
 								label={ __(
 									'Inline width reserve',
-									'k-typewriter'
+									'sbs-typing-effect-block'
 								) }
 								options={ inlineWidthModeOptions }
 								value={ inlineWidthMode }
@@ -389,11 +407,11 @@ export default function Edit( {
 									<RangeControl
 										help={ __(
 											'The slider goes up to 80ch. Enter a larger number directly when you need a wider inline reserve.',
-											'k-typewriter'
+											'sbs-typing-effect-block'
 										) }
 										label={ __(
 											'Width in ch',
-											'k-typewriter'
+											'sbs-typing-effect-block'
 										) }
 										max={ INLINE_WIDTH_CH_SLIDER_MAX }
 										min={ INLINE_WIDTH_CH_MIN }
@@ -412,11 +430,11 @@ export default function Edit( {
 									<TextControl
 										help={ __(
 											'Use any value from 1 and up when you want a larger fixed width than the slider range.',
-											'k-typewriter'
+											'sbs-typing-effect-block'
 										) }
 										label={ __(
 											'Width in ch input',
-											'k-typewriter'
+											'sbs-typing-effect-block'
 										) }
 										type="number"
 										min={ INLINE_WIDTH_CH_MIN }
@@ -435,9 +453,9 @@ export default function Edit( {
 					<SelectControl
 						help={ __(
 							'Choose a semantic text tag. Use H1 only when this block is the main page heading.',
-							'k-typewriter'
+							'sbs-typing-effect-block'
 						) }
-						label={ __( 'Markup tag', 'k-typewriter' ) }
+						label={ __( 'Markup tag', 'sbs-typing-effect-block' ) }
 						options={ tagNameOptions }
 						value={ tagName }
 						onChange={ ( value ) =>
@@ -450,9 +468,12 @@ export default function Edit( {
 					<RangeControl
 						help={ __(
 							'Reserve extra line height so the layout stays steadier when longer messages wrap.',
-							'k-typewriter'
+							'sbs-typing-effect-block'
 						) }
-						label={ __( 'Reserve lines', 'k-typewriter' ) }
+						label={ __(
+							'Reserve lines',
+							'sbs-typing-effect-block'
+						) }
 						max={ 6 }
 						min={ 1 }
 						step={ 1 }
@@ -467,9 +488,12 @@ export default function Edit( {
 						<SelectControl
 							help={ __(
 								'Choose how the animated line sits inside the reserved height.',
-								'k-typewriter'
+								'sbs-typing-effect-block'
 							) }
-							label={ __( 'Vertical align', 'k-typewriter' ) }
+							label={ __(
+								'Vertical align',
+								'sbs-typing-effect-block'
+							) }
 							options={ verticalAlignmentOptions }
 							value={ verticalAlign }
 							onChange={ ( value ) =>
@@ -483,16 +507,22 @@ export default function Edit( {
 				</PanelBody>
 				<PanelBody
 					initialOpen={ false }
-					title={ __( 'Fallback & Summary', 'k-typewriter' ) }
+					title={ __(
+						'Fallback & Summary',
+						'sbs-typing-effect-block'
+					) }
 				>
 					<div className="k-typewriter-editor__settings-section">
 						<p className="k-typewriter-editor__settings-heading">
-							{ __( 'Visible fallback', 'k-typewriter' ) }
+							{ __(
+								'Visible fallback',
+								'sbs-typing-effect-block'
+							) }
 						</p>
 						<p className="k-typewriter-editor__settings-description">
 							{ __(
 								'Shown before animation starts, with reduced motion, and without JavaScript.',
-								'k-typewriter'
+								'sbs-typing-effect-block'
 							) }
 						</p>
 					</div>
@@ -500,7 +530,7 @@ export default function Edit( {
 						help={ fallbackSourceHelp }
 						label={ __(
 							'Visible fallback source',
-							'k-typewriter'
+							'sbs-typing-effect-block'
 						) }
 						options={ contentSourceOptions }
 						value={ fallbackMode }
@@ -514,9 +544,12 @@ export default function Edit( {
 						<TextControl
 							help={ __(
 								'Leave this empty to fall back to the first message.',
-								'k-typewriter'
+								'sbs-typing-effect-block'
 							) }
-							label={ __( 'Fallback override', 'k-typewriter' ) }
+							label={ __(
+								'Fallback override',
+								'sbs-typing-effect-block'
+							) }
 							placeholder={ fallbackPlaceholder }
 							value={ fallbackText }
 							onChange={ ( value ) =>
@@ -528,7 +561,7 @@ export default function Edit( {
 						<p className="k-typewriter-editor__effective-label">
 							{ __(
 								'Effective fallback preview:',
-								'k-typewriter'
+								'sbs-typing-effect-block'
 							) }
 						</p>
 						<p className="k-typewriter-editor__effective-value">
@@ -538,18 +571,24 @@ export default function Edit( {
 					<div className="k-typewriter-editor__settings-divider" />
 					<div className="k-typewriter-editor__settings-section">
 						<p className="k-typewriter-editor__settings-heading">
-							{ __( 'Non-visual summary', 'k-typewriter' ) }
+							{ __(
+								'Non-visual summary',
+								'sbs-typing-effect-block'
+							) }
 						</p>
 						<p className="k-typewriter-editor__settings-description">
 							{ __(
 								'Used by assistive technology when you want a fuller summary of every message.',
-								'k-typewriter'
+								'sbs-typing-effect-block'
 							) }
 						</p>
 					</div>
 					<SelectControl
 						help={ summarySourceHelp }
-						label={ __( 'Summary source', 'k-typewriter' ) }
+						label={ __(
+							'Summary source',
+							'sbs-typing-effect-block'
+						) }
 						options={ contentSourceOptions }
 						value={ summaryMode }
 						onChange={ ( value ) =>
@@ -562,9 +601,12 @@ export default function Edit( {
 						<TextareaControl
 							help={ __(
 								'Leave this empty to auto-generate the summary from every message.',
-								'k-typewriter'
+								'sbs-typing-effect-block'
 							) }
-							label={ __( 'Summary override', 'k-typewriter' ) }
+							label={ __(
+								'Summary override',
+								'sbs-typing-effect-block'
+							) }
 							onKeyDown={ stopTextareaEnterPropagation }
 							placeholder={ summaryPlaceholder }
 							rows={ 3 }
@@ -578,7 +620,7 @@ export default function Edit( {
 						<p className="k-typewriter-editor__effective-label">
 							{ __(
 								'Effective non-visual summary:',
-								'k-typewriter'
+								'sbs-typing-effect-block'
 							) }
 						</p>
 						<p className="k-typewriter-editor__effective-value">
@@ -588,10 +630,13 @@ export default function Edit( {
 				</PanelBody>
 				<PanelBody
 					initialOpen={ true }
-					title={ __( 'Animation', 'k-typewriter' ) }
+					title={ __( 'Animation', 'sbs-typing-effect-block' ) }
 				>
 					<RangeControl
-						label={ __( 'Typing delay (ms)', 'k-typewriter' ) }
+						label={ __(
+							'Typing delay (ms)',
+							'sbs-typing-effect-block'
+						) }
 						max={ 300 }
 						min={ 20 }
 						step={ 10 }
@@ -603,9 +648,12 @@ export default function Edit( {
 					<SelectControl
 						help={ __(
 							'Choose whether each new message backspaces the previous one or restarts from an empty state.',
-							'k-typewriter'
+							'sbs-typing-effect-block'
 						) }
-						label={ __( 'Transition mode', 'k-typewriter' ) }
+						label={ __(
+							'Transition mode',
+							'sbs-typing-effect-block'
+						) }
 						options={ transitionModeOptions }
 						value={ transitionMode }
 						onChange={ ( value ) =>
@@ -619,7 +667,7 @@ export default function Edit( {
 						<RangeControl
 							label={ __(
 								'Deleting delay (ms)',
-								'k-typewriter'
+								'sbs-typing-effect-block'
 							) }
 							max={ 240 }
 							min={ 10 }
@@ -633,7 +681,10 @@ export default function Edit( {
 						/>
 					) }
 					<RangeControl
-						label={ __( 'Pause delay (ms)', 'k-typewriter' ) }
+						label={ __(
+							'Pause delay (ms)',
+							'sbs-typing-effect-block'
+						) }
 						max={ 4000 }
 						min={ 200 }
 						step={ 100 }
@@ -647,9 +698,12 @@ export default function Edit( {
 					<SelectControl
 						help={ __(
 							'Choose when the extra delay should run before animation continues.',
-							'k-typewriter'
+							'sbs-typing-effect-block'
 						) }
-						label={ __( 'Start delay mode', 'k-typewriter' ) }
+						label={ __(
+							'Start delay mode',
+							'sbs-typing-effect-block'
+						) }
 						options={ startDelayModeOptions }
 						value={ startDelayMode }
 						onChange={ ( value ) =>
@@ -660,7 +714,10 @@ export default function Edit( {
 						}
 					/>
 					<RangeControl
-						label={ __( 'Start delay (ms)', 'k-typewriter' ) }
+						label={ __(
+							'Start delay (ms)',
+							'sbs-typing-effect-block'
+						) }
 						max={ 5000 }
 						min={ 0 }
 						step={ 100 }
@@ -674,11 +731,11 @@ export default function Edit( {
 					<ToggleControl
 						help={ __(
 							'Clear the static fallback and type the first message from an empty state when animation begins.',
-							'k-typewriter'
+							'sbs-typing-effect-block'
 						) }
 						label={ __(
 							'Type first message from empty',
-							'k-typewriter'
+							'sbs-typing-effect-block'
 						) }
 						checked={ startFromEmpty }
 						onChange={ ( value ) =>
@@ -688,9 +745,12 @@ export default function Edit( {
 					<ToggleControl
 						help={ __(
 							'Turn this off to stop on the final message instead of looping back to the beginning.',
-							'k-typewriter'
+							'sbs-typing-effect-block'
 						) }
-						label={ __( 'Loop messages', 'k-typewriter' ) }
+						label={ __(
+							'Loop messages',
+							'sbs-typing-effect-block'
+						) }
 						checked={ loop }
 						onChange={ ( value ) =>
 							setAttributes( { loop: value } )
@@ -700,11 +760,11 @@ export default function Edit( {
 						<ToggleControl
 							help={ __(
 								'Keep the cursor animation running after the final message has finished.',
-								'k-typewriter'
+								'sbs-typing-effect-block'
 							) }
 							label={ __(
 								'Keep cursor animation when complete',
-								'k-typewriter'
+								'sbs-typing-effect-block'
 							) }
 							checked={ keepCursorAnimationOnComplete }
 							onChange={ ( value ) =>
@@ -715,7 +775,10 @@ export default function Edit( {
 						/>
 					) }
 					<ToggleControl
-						label={ __( 'Start when visible', 'k-typewriter' ) }
+						label={ __(
+							'Start when visible',
+							'sbs-typing-effect-block'
+						) }
 						checked={ startOnView }
 						onChange={ ( value ) =>
 							setAttributes( { startOnView: value } )
@@ -725,9 +788,12 @@ export default function Edit( {
 						<ToggleControl
 							help={ __(
 								'When the block leaves the viewport and becomes visible again, restart the animation from the beginning instead of resuming where it paused.',
-								'k-typewriter'
+								'sbs-typing-effect-block'
 							) }
-							label={ __( 'Replay on re-entry', 'k-typewriter' ) }
+							label={ __(
+								'Replay on re-entry',
+								'sbs-typing-effect-block'
+							) }
 							checked={ replayOnReentry }
 							onChange={ ( value ) =>
 								setAttributes( {
@@ -739,9 +805,12 @@ export default function Edit( {
 					<ToggleControl
 						help={ __(
 							'Pause the animation while the pointer is over the block.',
-							'k-typewriter'
+							'sbs-typing-effect-block'
 						) }
-						label={ __( 'Pause on hover', 'k-typewriter' ) }
+						label={ __(
+							'Pause on hover',
+							'sbs-typing-effect-block'
+						) }
 						checked={ pauseOnHover }
 						onChange={ ( value ) =>
 							setAttributes( { pauseOnHover: value } )
@@ -750,10 +819,10 @@ export default function Edit( {
 				</PanelBody>
 				<PanelBody
 					initialOpen={ false }
-					title={ __( 'Cursor', 'k-typewriter' ) }
+					title={ __( 'Cursor', 'sbs-typing-effect-block' ) }
 				>
 					<ToggleControl
-						label={ __( 'Show cursor', 'k-typewriter' ) }
+						label={ __( 'Show cursor', 'sbs-typing-effect-block' ) }
 						checked={ showCursor }
 						onChange={ ( value ) =>
 							setAttributes( { showCursor: value } )
@@ -764,7 +833,7 @@ export default function Edit( {
 							<ToggleControl
 								label={ __(
 									'Hide cursor when complete',
-									'k-typewriter'
+									'sbs-typing-effect-block'
 								) }
 								checked={ hideCursorWhenComplete }
 								onChange={ ( value ) =>
@@ -776,11 +845,11 @@ export default function Edit( {
 							<SelectControl
 								help={ __(
 									'Blink gives a crisp on-off cursor. Fade transition keeps the cursor softer and more fluid.',
-									'k-typewriter'
+									'sbs-typing-effect-block'
 								) }
 								label={ __(
 									'Cursor animation',
-									'k-typewriter'
+									'sbs-typing-effect-block'
 								) }
 								options={ cursorAnimationModeOptions }
 								value={ cursorAnimationMode }
@@ -794,11 +863,11 @@ export default function Edit( {
 							<RangeControl
 								help={ __(
 									'Adjust the cursor bar thickness relative to the current font size.',
-									'k-typewriter'
+									'sbs-typing-effect-block'
 								) }
 								label={ __(
 									'Cursor thickness',
-									'k-typewriter'
+									'sbs-typing-effect-block'
 								) }
 								max={ 0.24 }
 								min={ 0.04 }
@@ -813,9 +882,12 @@ export default function Edit( {
 							<RangeControl
 								help={ __(
 									'Adjust the cursor bar height relative to the current font size.',
-									'k-typewriter'
+									'sbs-typing-effect-block'
 								) }
-								label={ __( 'Cursor height', 'k-typewriter' ) }
+								label={ __(
+									'Cursor height',
+									'sbs-typing-effect-block'
+								) }
 								max={ 1.2 }
 								min={ 0.6 }
 								step={ 0.01 }
@@ -830,11 +902,11 @@ export default function Edit( {
 								<RangeControl
 									help={ __(
 										'Adjust how quickly the cursor blinks.',
-										'k-typewriter'
+										'sbs-typing-effect-block'
 									) }
 									label={ __(
 										'Cursor blink speed (ms)',
-										'k-typewriter'
+										'sbs-typing-effect-block'
 									) }
 									max={ 2000 }
 									min={ 200 }
@@ -851,11 +923,11 @@ export default function Edit( {
 								<RangeControl
 									help={ __(
 										'Adjust how quickly the cursor fades in and out.',
-										'k-typewriter'
+										'sbs-typing-effect-block'
 									) }
 									label={ __(
 										'Cursor transition speed (ms)',
-										'k-typewriter'
+										'sbs-typing-effect-block'
 									) }
 									max={ 2000 }
 									min={ 200 }
@@ -872,11 +944,11 @@ export default function Edit( {
 							<RangeControl
 								help={ __(
 									'Move the cursor slightly left or right to match your font better.',
-									'k-typewriter'
+									'sbs-typing-effect-block'
 								) }
 								label={ __(
 									'Cursor horizontal offset',
-									'k-typewriter'
+									'sbs-typing-effect-block'
 								) }
 								max={ 0.3 }
 								min={ -0.3 }
@@ -891,11 +963,11 @@ export default function Edit( {
 							<RangeControl
 								help={ __(
 									'Move the cursor slightly up or down to match your font better.',
-									'k-typewriter'
+									'sbs-typing-effect-block'
 								) }
 								label={ __(
 									'Cursor vertical offset',
-									'k-typewriter'
+									'sbs-typing-effect-block'
 								) }
 								max={ 0.3 }
 								min={ -0.3 }

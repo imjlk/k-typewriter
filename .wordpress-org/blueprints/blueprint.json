@@ -2,8 +2,8 @@
 	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
 	"meta": {
 		"author": "imjlk",
-		"title": "K Typewriter Preview",
-		"description": "Front-end demo for the K Typewriter block with a published homepage and graceful fallback content."
+		"title": "Stroke by stroke typing effect Block Preview",
+		"description": "Front-end demo for Stroke by stroke typing effect Block with a published homepage and graceful fallback content."
 	},
 	"landingPage": "/",
 	"preferredVersions": {
@@ -13,12 +13,12 @@
 	"steps": [
 		{
 			"step": "activatePlugin",
-			"pluginName": "K Typewriter",
-			"pluginPath": "k-typewriter/k-typewriter.php"
+			"pluginName": "Stroke by stroke typing effect Block",
+			"pluginPath": "sbs-typing-effect-block/sbs-typing-effect-block.php"
 		},
 		{
 			"step": "runPHP",
-			"code": "<?php require_once '/wordpress/wp-load.php'; require WP_PLUGIN_DIR . '/k-typewriter/playground/setup-demo.php'; ?>"
+			"code": "<?php require_once '/wordpress/wp-load.php'; require WP_PLUGIN_DIR . '/sbs-typing-effect-block/playground/setup-demo.php'; ?>"
 		}
 	]
 }

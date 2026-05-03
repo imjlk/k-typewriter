@@ -1,20 +1,20 @@
-.wp-block-imjlk-k-typewriter .k-typewriter {
+.wp-block-imjlk-sbs-typing-effect-block .k-typewriter {
 	width: 100%;
 }
 
-.wp-block-imjlk-k-typewriter.is-inline-layout {
+.wp-block-imjlk-sbs-typing-effect-block.is-inline-layout {
 	display: inline-block;
 	max-width: 100%;
 	vertical-align: top;
 }
 
-.wp-block-imjlk-k-typewriter.is-inline-layout .k-typewriter {
+.wp-block-imjlk-sbs-typing-effect-block.is-inline-layout .k-typewriter {
 	display: inline-block;
 	width: auto;
 	max-width: 100%;
 }
 
-.wp-block-imjlk-k-typewriter .k-typewriter__text {
+.wp-block-imjlk-sbs-typing-effect-block .k-typewriter__text {
 	display: flex;
 	flex-direction: column;
 	justify-content: var(--k-typewriter-vertical-align, flex-start);
@@ -25,16 +25,16 @@
 	min-block-size: var(--k-typewriter-reserved-height, calc(var(--k-typewriter-reserve-lines, 1) * 1lh));
 }
 
-.wp-block-imjlk-k-typewriter.is-inline-layout .k-typewriter__text {
+.wp-block-imjlk-sbs-typing-effect-block.is-inline-layout .k-typewriter__text {
 	--k-typewriter-inline-cursor-reserve: calc(var(--k-typewriter-cursor-width, 0.08em) + 0.2em);
 }
 
-.wp-block-imjlk-k-typewriter.is-inline-layout .k-typewriter.has-inline-width .k-typewriter__text {
+.wp-block-imjlk-sbs-typing-effect-block.is-inline-layout .k-typewriter.has-inline-width .k-typewriter__text {
 	inline-size: calc(var(--k-typewriter-inline-measured-width, var(--k-typewriter-inline-width, auto)) + var(--k-typewriter-inline-cursor-reserve, 0px));
 	max-inline-size: 100%;
 }
 
-.wp-block-imjlk-k-typewriter .k-typewriter__line {
+.wp-block-imjlk-sbs-typing-effect-block .k-typewriter__line {
 	display: block;
 	max-width: 100%;
 	direction: inherit;
@@ -46,12 +46,12 @@
 	overflow-wrap: anywhere;
 }
 
-.wp-block-imjlk-k-typewriter.is-inline-layout .k-typewriter__line {
+.wp-block-imjlk-sbs-typing-effect-block.is-inline-layout .k-typewriter__line {
 	overflow-wrap: normal;
 	white-space: nowrap;
 }
 
-.wp-block-imjlk-k-typewriter .k-typewriter__content {
+.wp-block-imjlk-sbs-typing-effect-block .k-typewriter__content {
 	direction: inherit;
 	line-height: inherit;
 	unicode-bidi: isolate;
@@ -59,15 +59,15 @@
 	transition: opacity 160ms ease;
 }
 
-.wp-block-imjlk-k-typewriter .k-typewriter__content:empty::before {
+.wp-block-imjlk-sbs-typing-effect-block .k-typewriter__content:empty::before {
 	content: "\200b";
 }
 
-.wp-block-imjlk-k-typewriter .k-typewriter.is-hover-paused .k-typewriter__content {
+.wp-block-imjlk-sbs-typing-effect-block .k-typewriter.is-hover-paused .k-typewriter__content {
 	opacity: 0.9;
 }
 
-.wp-block-imjlk-k-typewriter .k-typewriter__cursor {
+.wp-block-imjlk-sbs-typing-effect-block .k-typewriter__cursor {
 	display: inline-block;
 	margin-inline-start: 0.04em;
 	inline-size: var(--k-typewriter-cursor-width, 0.08em);
@@ -83,38 +83,38 @@
 	vertical-align: baseline;
 }
 
-.wp-block-imjlk-k-typewriter .k-typewriter__cursor[hidden] {
+.wp-block-imjlk-sbs-typing-effect-block .k-typewriter__cursor[hidden] {
 	display: none;
 }
 
-.wp-block-imjlk-k-typewriter .k-typewriter__cursor--blink {
+.wp-block-imjlk-sbs-typing-effect-block .k-typewriter__cursor--blink {
 	animation:
 		k-typewriter-blink var(--k-typewriter-cursor-blink-speed, 1000ms)
 		steps(2, jump-none) infinite;
 }
 
-.wp-block-imjlk-k-typewriter .k-typewriter__cursor--transition {
+.wp-block-imjlk-sbs-typing-effect-block .k-typewriter__cursor--transition {
 	animation:
 		k-typewriter-cursor-fade
 		var(--k-typewriter-cursor-transition-speed, 900ms)
 		ease-in-out infinite alternate;
 }
 
-.wp-block-imjlk-k-typewriter .k-typewriter.is-complete .k-typewriter__cursor {
+.wp-block-imjlk-sbs-typing-effect-block .k-typewriter.is-complete .k-typewriter__cursor {
 	animation: none;
 }
 
-.wp-block-imjlk-k-typewriter .k-typewriter.is-complete .k-typewriter__cursor--transition {
+.wp-block-imjlk-sbs-typing-effect-block .k-typewriter.is-complete .k-typewriter__cursor--transition {
 	opacity: 0.35;
 }
 
-.wp-block-imjlk-k-typewriter .k-typewriter.is-complete.has-complete-cursor-animation .k-typewriter__cursor--blink {
+.wp-block-imjlk-sbs-typing-effect-block .k-typewriter.is-complete.has-complete-cursor-animation .k-typewriter__cursor--blink {
 	animation:
 		k-typewriter-blink var(--k-typewriter-cursor-blink-speed, 1000ms)
 		steps(2, jump-none) infinite;
 }
 
-.wp-block-imjlk-k-typewriter .k-typewriter.is-complete.has-complete-cursor-animation .k-typewriter__cursor--transition {
+.wp-block-imjlk-sbs-typing-effect-block .k-typewriter.is-complete.has-complete-cursor-animation .k-typewriter__cursor--transition {
 	animation:
 		k-typewriter-cursor-fade
 		var(--k-typewriter-cursor-transition-speed, 900ms)
@@ -124,7 +124,7 @@
 
 @media (prefers-reduced-motion: reduce) {
 
-	.wp-block-imjlk-k-typewriter .k-typewriter__cursor {
+	.wp-block-imjlk-sbs-typing-effect-block .k-typewriter__cursor {
 		animation: none;
 	}
 }

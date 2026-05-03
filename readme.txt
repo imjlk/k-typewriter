@@ -1,4 +1,4 @@
-=== K Typewriter ===
+=== Stroke by stroke typing effect Block ===
 Contributors: imjlk
 Tags: block, typewriter, headline, hero, multilingual
 Requires at least: 6.6
@@ -12,7 +12,7 @@ Animate headlines, notices, and hero copy with a polished typewriter block that 
 
 == Description ==
 
-K Typewriter is a dynamic block for WordPress sites that need expressive text motion without sacrificing accessibility or graceful fallbacks.
+Stroke by stroke typing effect Block is a dynamic block for WordPress sites that need expressive text motion without sacrificing accessibility or graceful fallbacks.
 
 Its typing playback is built on top of UniTyper by Beaver Coding:
 https://github.com/beavercoding2022/uni-typer
@@ -49,9 +49,9 @@ Key features:
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/k-typewriter` directory, or install the plugin through the WordPress plugins screen.
+1. Upload the plugin files to the `/wp-content/plugins/sbs-typing-effect-block` directory, or install the plugin through the WordPress plugins screen.
 2. Activate the plugin through the `Plugins` screen in WordPress.
-3. Open the block editor and insert the `K Typewriter` block.
+3. Open the block editor and insert the `Stroke by stroke typing effect Block`.
 4. Add one message per line in the block settings sidebar.
 5. Adjust timing, cursor, inline layout, width reservation, loop, and viewport options to match your design.
 
@@ -88,7 +88,7 @@ Yes. The plugin includes a WordPress.org Playground blueprint, so maintainers ca
 == Screenshots ==
 
 1. Editing multiple messages and animation timing in the block sidebar.
-2. A front-end hero section using K Typewriter with multilingual text.
+2. A front-end hero section using Stroke by stroke typing effect Block with multilingual text.
 3. Reduced-motion mode preserving the first message as a static fallback.
 
 == Changelog ==
@@ -105,4 +105,4 @@ Yes. The plugin includes a WordPress.org Playground blueprint, so maintainers ca
 
 = 1.0.0 =
 
-First public release of K Typewriter.
+First public release of Stroke by stroke typing effect Block.

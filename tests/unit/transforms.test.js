@@ -145,7 +145,7 @@ describe( 'block transforms helpers', () => {
 		expect( multiBlockTransform.isMatch( [], blocks ) ).toBe( true );
 		expect( multiBlockTransform.__experimentalConvert( blocks ) ).toEqual(
 			expect.objectContaining( {
-				name: 'imjlk/k-typewriter',
+				name: 'imjlk/sbs-typing-effect-block',
 				attributes: expect.objectContaining( {
 					items: [ 'Alpha line', 'Beta line', 'Gamma line' ],
 				} ),

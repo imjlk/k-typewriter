@@ -63,7 +63,7 @@ jobs:
               run: pnpm run plugin-zip
 
             - name: Verify tested release zip
-              run: test -f "./${{ github.event.repository.name }}.zip"
+              run: test -f "./sbs-typing-effect-block.zip"
 
             - name: Upload Playwright artifacts
               if: failure()

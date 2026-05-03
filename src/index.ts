@@ -11,9 +11,9 @@ import { SAMPLE_ITEMS, type TypewriterAttributes } from './shared';
 import transforms from './transforms';
 
 const translatedSampleItems = [
-	__( '한 글자씩, 리듬 있게.', 'k-typewriter' ),
-	__( 'Animate headlines in any language.', 'k-typewriter' ),
-	__( 'Ship polished hero copy in minutes.', 'k-typewriter' ),
+	__( '한 글자씩, 리듬 있게.', 'sbs-typing-effect-block' ),
+	__( 'Animate headlines in any language.', 'sbs-typing-effect-block' ),
+	__( 'Ship polished hero copy in minutes.', 'sbs-typing-effect-block' ),
 ];
 
 const translatedMetadata = {

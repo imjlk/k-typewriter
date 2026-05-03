@@ -1,5 +1,5 @@
 {
-	"name": "k-typewriter",
+	"name": "sbs-typing-effect-block",
 	"version": "1.0.0",
 	"description": "A polished WordPress block for multilingual typewriter headlines and hero copy.",
 	"author": "imjlk",
@@ -13,7 +13,7 @@
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
-		"make:pot": "wp-env run cli --env-cwd=wp-content/plugins/k-typewriter wp i18n make-pot . languages/k-typewriter.pot --allow-root",
+		"make:pot": "wp-env run cli --env-cwd=wp-content/plugins/k-typewriter wp i18n make-pot . languages/sbs-typing-effect-block.pot --slug=sbs-typing-effect-block --domain=sbs-typing-effect-block --exclude=node_modules,.git,coverage,test-results,playwright-report --allow-root",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
 		"start": "wp-scripts start --experimental-modules",

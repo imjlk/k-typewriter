@@ -10,11 +10,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 return array(
-	'slug'         => 'k-typewriter/404-error-prompt',
-	'title'        => __( '404 Error Prompt', 'k-typewriter' ),
-	'description'  => __( 'A friendly 404 error page prompt that suggests popular destinations.', 'k-typewriter' ),
-	'categories'   => array( 'k-typewriter' ),
-	'blockTypes'   => array( 'imjlk/k-typewriter' ),
+	'slug'         => 'sbs-typing-effect-block/404-error-prompt',
+	'title'        => __( '404 Error Prompt', 'sbs-typing-effect-block' ),
+	'description'  => __( 'A friendly 404 error page prompt that suggests popular destinations.', 'sbs-typing-effect-block' ),
+	'categories'   => array( 'sbs-typing-effect-block' ),
+	'blockTypes'   => array( 'imjlk/sbs-typing-effect-block' ),
 	'viewportWidth' => 1200,
 	'content'      => <<<'HTML'
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"5rem","right":"1.5rem","bottom":"5rem","left":"1.5rem"}},"color":{"text":"#111827","background":"#f9fafb"}},"layout":{"type":"constrained","contentSize":"800px"}} -->
@@ -35,7 +35,7 @@ return array(
 <p style="font-size:1.5rem;font-weight:600">Did you mean to visit</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:imjlk/k-typewriter {"items":["the homepage?","our latest blog post?","the contact page?","our pricing plans?"],"inlineLayout":true,"inlineWidthMode":"measure","tagName":"span","reserveLines":1,"pauseOnHover":true,"typeDelay":50,"deleteDelay":30,"pauseDelay":1500,"style":{"color":{"text":"#3b82f6"},"typography":{"fontSize":"1.5rem","fontWeight":"600"}}} /--></div>
+<!-- wp:imjlk/sbs-typing-effect-block {"items":["the homepage?","our latest blog post?","the contact page?","our pricing plans?"],"inlineLayout":true,"inlineWidthMode":"measure","tagName":"span","reserveLines":1,"pauseOnHover":true,"typeDelay":50,"deleteDelay":30,"pauseDelay":1500,"style":{"color":{"text":"#3b82f6"},"typography":{"fontSize":"1.5rem","fontWeight":"600"}}} /--></div>
 <!-- /wp:group -->
 
 <!-- wp:spacer {"height":"2rem"} -->

@@ -31,7 +31,7 @@ final class K_Typewriter_Plugin {
 	 * @return void
 	 */
 	public static function maybe_load_bundled_textdomain() {
-		if ( is_textdomain_loaded( 'k-typewriter' ) ) {
+		if ( is_textdomain_loaded( 'sbs-typing-effect-block' ) ) {
 			return;
 		}
 
@@ -41,10 +41,10 @@ final class K_Typewriter_Plugin {
 			return;
 		}
 
-		$mofile = dirname( __DIR__ ) . '/languages/k-typewriter-' . $locale . '.mo';
+		$mofile = dirname( __DIR__ ) . '/languages/sbs-typing-effect-block-' . $locale . '.mo';
 
 		if ( file_exists( $mofile ) ) {
-			load_textdomain( 'k-typewriter', $mofile );
+			load_textdomain( 'sbs-typing-effect-block', $mofile );
 		}
 	}
 
@@ -73,10 +73,10 @@ final class K_Typewriter_Plugin {
 		}
 
 		register_block_pattern_category(
-			'k-typewriter',
+			'sbs-typing-effect-block',
 			array(
-				'label'       => __( 'K Typewriter', 'k-typewriter' ),
-				'description' => __( 'Ready-to-use patterns for K Typewriter.', 'k-typewriter' ),
+				'label'       => __( 'Stroke by stroke typing effect Block', 'sbs-typing-effect-block' ),
+				'description' => __( 'Ready-to-use patterns for Stroke by stroke typing effect Block.', 'sbs-typing-effect-block' ),
 			)
 		);
 	}
@@ -294,7 +294,7 @@ final class K_Typewriter_Plugin {
 
 		return sprintf(
 			/* translators: %s: locale-aware list of animated messages. */
-			__( 'Typewriter animation that sequentially types %s.', 'k-typewriter' ),
+			__( 'Typewriter animation that sequentially types %s.', 'sbs-typing-effect-block' ),
 			$summary_list
 		);
 	}

@@ -3,7 +3,7 @@
 ## Local
 
 1. Start a clean WordPress environment.
-2. Activate `K Typewriter`.
+2. Activate `Stroke by stroke typing effect Block`.
 3. Insert the block into a new page.
 4. Change messages, speeds, cursor, and viewport start options.
 5. Publish the page and confirm there is no invalid block warning.
@@ -34,7 +34,7 @@
    - `screenshot-2.png`
    - `screenshot-3.png`
 2. Confirm `readme.txt` screenshot count matches the actual files.
-3. Confirm `languages/k-typewriter.pot` exists and reflects the latest strings.
+3. Confirm `languages/sbs-typing-effect-block.pot` exists and reflects the latest strings.
 4. Confirm `.wordpress-org/blueprints/blueprint.json` still matches the current plugin slug and demo messaging.
 5. Confirm `.wordpress-org/blueprints/github-playground.json` points at the correct GitHub repo/ref before sharing a branch preview link.
 
@@ -42,7 +42,7 @@
 
 1. Confirm the tag follows the `v*` pattern.
 2. Confirm the CI and release workflows build the tested package with the 10up build-zip action.
-3. Confirm the GitHub release attaches the tested `k-typewriter.zip` built in the release workflow.
+3. Confirm the GitHub release attaches the tested release zip built in the release workflow.
 4. Confirm the WordPress.org deploy step is enabled only when the plugin slug exists by setting `WPORG_DEPLOY_ENABLED=true`.
 5. Confirm `SVN_USERNAME` and `SVN_PASSWORD` are set before enabling WordPress.org deploy.
 6. Confirm the WordPress.org deploy step runs only after the smoke checks pass.

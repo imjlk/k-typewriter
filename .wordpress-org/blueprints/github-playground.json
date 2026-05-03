@@ -2,8 +2,8 @@
 	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
 	"meta": {
 		"author": "imjlk",
-		"title": "K Typewriter GitHub Preview",
-		"description": "Install K Typewriter directly from the GitHub repository and open a published demo page in WordPress Playground."
+		"title": "Stroke by stroke typing effect Block GitHub Preview",
+		"description": "Install Stroke by stroke typing effect Block directly from the GitHub repository and open a published demo page in WordPress Playground."
 	},
 	"landingPage": "/",
 	"preferredVersions": {
@@ -21,12 +21,12 @@
 			},
 			"options": {
 				"activate": true,
-				"targetFolderName": "k-typewriter"
+				"targetFolderName": "sbs-typing-effect-block"
 			}
 		},
 		{
 			"step": "runPHP",
-			"code": "<?php require_once '/wordpress/wp-load.php'; require WP_PLUGIN_DIR . '/k-typewriter/playground/setup-demo.php'; ?>"
+			"code": "<?php require_once '/wordpress/wp-load.php'; require WP_PLUGIN_DIR . '/sbs-typing-effect-block/playground/setup-demo.php'; ?>"
 		}
 	]
 }

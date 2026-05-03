@@ -2,106 +2,123 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: K Typewriter 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/k-typewriter\n"
+"Project-Id-Version: Stroke by stroke typing effect Block 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sbs-typing-effect-block\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-27T18:16:45+00:00\n"
+"POT-Creation-Date: 2026-05-03T05:55:00+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
-"X-Domain: k-typewriter\n"
+"X-Domain: sbs-typing-effect-block\n"
 
 #. Plugin Name of the plugin
-#: k-typewriter.php
-#: includes/class-k-typewriter-plugin.php:67
-msgid "K Typewriter"
+#: sbs-typing-effect-block.php
+#: includes/class-k-typewriter-plugin.php:78
+msgid "Stroke by stroke typing effect Block"
 msgstr ""
 
 #. Plugin URI of the plugin
-#: k-typewriter.php
+#: sbs-typing-effect-block.php
 msgid "https://github.com/imjlk/k-typewriter"
 msgstr ""
 
 #. Description of the plugin
-#: k-typewriter.php
+#: sbs-typing-effect-block.php
 msgid "Add a configurable typewriter text block for hero headlines, notices, and multilingual messaging."
 msgstr ""
 
 #. Author of the plugin
-#: k-typewriter.php
+#: sbs-typing-effect-block.php
 msgid "imjlk"
 msgstr ""
 
 #. Author URI of the plugin
-#: k-typewriter.php
-msgid "https://github.com/imjlk"
+#: sbs-typing-effect-block.php
+msgid "https://profiles.wordpress.org/imjlk/"
 msgstr ""
 
-#: includes/class-k-typewriter-plugin.php:68
-msgid "Ready-to-use patterns for K Typewriter."
-msgstr ""
-
-#: includes/class-k-typewriter-plugin.php:244
-#: build/index.js:1
-msgid "한 글자씩, 리듬 있게."
-msgstr ""
-
-#: includes/class-k-typewriter-plugin.php:245
-#: build/index.js:1
-msgid "Animate headlines in any language."
-msgstr ""
-
-#: includes/class-k-typewriter-plugin.php:246
-#: build/index.js:1
-msgid "Ship polished hero copy in minutes."
+#: includes/class-k-typewriter-plugin.php:79
+msgid "Ready-to-use patterns for Stroke by stroke typing effect Block."
 msgstr ""
 
 #. translators: %s: locale-aware list of animated messages.
-#: includes/class-k-typewriter-plugin.php:283
+#: includes/class-k-typewriter-plugin.php:297
 msgid "Typewriter animation that sequentially types %s."
 msgstr ""
 
-#: patterns/announcement-strip.php:10
+#: patterns/404-error-prompt.php:14
+msgid "404 Error Prompt"
+msgstr ""
+
+#: patterns/404-error-prompt.php:15
+msgid "A friendly 404 error page prompt that suggests popular destinations."
+msgstr ""
+
+#: patterns/announcement-strip.php:14
 msgid "Announcement Strip"
 msgstr ""
 
-#: patterns/announcement-strip.php:11
+#: patterns/announcement-strip.php:15
 msgid "A compact banner for rotating launches, promos, or deadline reminders."
 msgstr ""
 
-#: patterns/feature-spotlight.php:10
+#: patterns/editorial-section-lead.php:14
+msgid "Editorial Section Lead"
+msgstr ""
+
+#: patterns/editorial-section-lead.php:15
+msgid "A section intro pattern for stories, resources, and long-form editorial pages."
+msgstr ""
+
+#: patterns/feature-spotlight.php:14
 msgid "Feature Spotlight"
 msgstr ""
 
-#: patterns/feature-spotlight.php:11
+#: patterns/feature-spotlight.php:15
 msgid "A practical section intro pattern for feature pages, launch sections, and campaign callouts."
 msgstr ""
 
-#: patterns/hero-headline.php:10
+#: patterns/hero-headline.php:14
 msgid "Hero Headline"
 msgstr ""
 
-#: patterns/hero-headline.php:11
+#: patterns/hero-headline.php:15
 msgid "A centered hero headline with polished typewriter playback and stable reserved height."
 msgstr ""
 
-#: patterns/inline-keyword-rotator.php:10
+#: patterns/inline-keyword-rotator.php:14
 msgid "Inline Keyword Rotator"
 msgstr ""
 
-#: patterns/inline-keyword-rotator.php:11
+#: patterns/inline-keyword-rotator.php:15
 msgid "A row-based inline layout that rotates compact keywords without widening the whole line."
 msgstr ""
 
-#: patterns/multilingual-spotlight.php:10
+#: patterns/multilingual-spotlight.php:14
 msgid "Multilingual Spotlight"
 msgstr ""
 
-#: patterns/multilingual-spotlight.php:11
+#: patterns/multilingual-spotlight.php:15
 msgid "A showcase pattern for Korean, English, and Arabic messaging in one polished section."
+msgstr ""
+
+#: patterns/split-launch-hero.php:14
+msgid "Split Launch Hero"
+msgstr ""
+
+#: patterns/split-launch-hero.php:15
+msgid "A left-aligned hero with supporting launch details and calls to action."
+msgstr ""
+
+#: patterns/terminal-loading-steps.php:14
+msgid "Terminal Simulation"
+msgstr ""
+
+#: patterns/terminal-loading-steps.php:15
+msgid "A developer-focused terminal animation for SaaS or IT websites."
 msgstr ""
 
 #: build/index.js:1
@@ -170,6 +187,46 @@ msgstr ""
 
 #: build/index.js:1
 msgid "Custom override"
+msgstr ""
+
+#: build/index.js:1
+msgid "Add one message per line."
+msgstr ""
+
+#: build/index.js:1
+msgid "Animate headlines in any language."
+msgstr ""
+
+#: build/index.js:1
+msgid "Keep the first paint readable."
+msgstr ""
+
+#: build/index.js:1
+msgid "Optional custom first-paint fallback text"
+msgstr ""
+
+#: build/index.js:1
+msgid "Optional non-visual summary for assistive technology"
+msgstr ""
+
+#: build/index.js:1
+msgid "Add one message per line to preview the animation."
+msgstr ""
+
+#: build/index.js:1
+msgid "한 글자씩, 리듬 있게."
+msgstr ""
+
+#: build/index.js:1
+msgid "Ship polished hero copy in minutes."
+msgstr ""
+
+#: build/index.js:1
+msgid "Uses the first message when available."
+msgstr ""
+
+#: build/index.js:1
+msgid "Add messages to generate a non-visual summary."
 msgstr ""
 
 #: build/index.js:1
@@ -377,7 +434,23 @@ msgid "Loop messages"
 msgstr ""
 
 #: build/index.js:1
+msgid "Keep the cursor animation running after the final message has finished."
+msgstr ""
+
+#: build/index.js:1
+msgid "Keep cursor animation when complete"
+msgstr ""
+
+#: build/index.js:1
 msgid "Start when visible"
+msgstr ""
+
+#: build/index.js:1
+msgid "When the block leaves the viewport and becomes visible again, restart the animation from the beginning instead of resuming where it paused."
+msgstr ""
+
+#: build/index.js:1
+msgid "Replay on re-entry"
 msgstr ""
 
 #: build/index.js:1
@@ -394,6 +467,10 @@ msgstr ""
 
 #: build/index.js:1
 msgid "Show cursor"
+msgstr ""
+
+#: build/index.js:1
+msgid "Hide cursor when complete"
 msgstr ""
 
 #: build/index.js:1
@@ -452,14 +529,10 @@ msgstr ""
 msgid "Cursor vertical offset"
 msgstr ""
 
-#: build/index.js:1
-msgid "Hide cursor when complete"
-msgstr ""
-
 #: build/block.json
 #: src/block.json
 msgctxt "block title"
-msgid "K Typewriter"
+msgid "Stroke by stroke typing effect Block"
 msgstr ""
 
 #: build/block.json

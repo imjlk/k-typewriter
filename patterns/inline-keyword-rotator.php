@@ -10,11 +10,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 return array(
-	'slug'         => 'k-typewriter/inline-keyword-rotator',
-	'title'        => __( 'Inline Keyword Rotator', 'k-typewriter' ),
-	'description'  => __( 'A row-based inline layout that rotates compact keywords without widening the whole line.', 'k-typewriter' ),
-	'categories'   => array( 'k-typewriter' ),
-	'blockTypes'   => array( 'imjlk/k-typewriter' ),
+	'slug'         => 'sbs-typing-effect-block/inline-keyword-rotator',
+	'title'        => __( 'Inline Keyword Rotator', 'sbs-typing-effect-block' ),
+	'description'  => __( 'A row-based inline layout that rotates compact keywords without widening the whole line.', 'sbs-typing-effect-block' ),
+	'categories'   => array( 'sbs-typing-effect-block' ),
+	'blockTypes'   => array( 'imjlk/sbs-typing-effect-block' ),
 	'viewportWidth' => 1200,
 	'content'      => <<<'HTML'
 <!-- wp:group {"style":{"spacing":{"padding":{"top":"1rem","bottom":"1rem","left":"0.75rem","right":"0.75rem"}},"color":{"background":"#ffffff","text":"#111827"}},"layout":{"type":"constrained"}} -->
@@ -23,7 +23,7 @@ return array(
 <p style="font-size:clamp(1.5rem,4vw,2.4rem);font-weight:700">Built for</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:imjlk/k-typewriter {"items":["design teams","product launches","global brands"],"inlineLayout":true,"inlineWidthMode":"measure","tagName":"span","reserveLines":1,"pauseOnHover":true,"style":{"typography":{"fontSize":"clamp(1.5rem,4vw,2.4rem)","fontWeight":"700"}}} /--></div>
+<!-- wp:imjlk/sbs-typing-effect-block {"items":["design teams","product launches","global brands"],"inlineLayout":true,"inlineWidthMode":"measure","tagName":"span","reserveLines":1,"pauseOnHover":true,"style":{"typography":{"fontSize":"clamp(1.5rem,4vw,2.4rem)","fontWeight":"700"}}} /--></div>
 <!-- /wp:group -->
 
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"0.95rem"}}} -->

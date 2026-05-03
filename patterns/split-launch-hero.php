@@ -10,11 +10,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 return array(
-	'slug'          => 'k-typewriter/split-launch-hero',
-	'title'         => __( 'Split Launch Hero', 'k-typewriter' ),
-	'description'   => __( 'A left-aligned hero with supporting launch details and calls to action.', 'k-typewriter' ),
-	'categories'    => array( 'k-typewriter' ),
-	'blockTypes'    => array( 'imjlk/k-typewriter' ),
+	'slug'          => 'sbs-typing-effect-block/split-launch-hero',
+	'title'         => __( 'Split Launch Hero', 'sbs-typing-effect-block' ),
+	'description'   => __( 'A left-aligned hero with supporting launch details and calls to action.', 'sbs-typing-effect-block' ),
+	'categories'    => array( 'sbs-typing-effect-block' ),
+	'blockTypes'    => array( 'imjlk/sbs-typing-effect-block' ),
 	'viewportWidth' => 1200,
 	'content'       => <<<'HTML'
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"5rem","right":"1.5rem","bottom":"5rem","left":"1.5rem"}},"color":{"background":"#0f172a","text":"#f8fafc"}},"layout":{"type":"constrained","contentSize":"1120px"}} -->
@@ -24,7 +24,7 @@ return array(
 <p class="has-accent-4-color has-text-color" style="font-size:0.85rem;letter-spacing:0.14em;text-transform:uppercase">Experimental combination</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:imjlk/k-typewriter {"items":["Launch pages that feel tailored to your theme.","Swap multilingual hero copy without layout shock.","Keep the first paint readable, even before animation starts."],"reserveLines":2,"verticalAlign":"middle","startDelay":300,"startDelayMode":"first-start","tagName":"h1","style":{"typography":{"fontSize":"clamp(2.5rem,6vw,4.8rem)","lineHeight":"1.02","textAlign":"left"}}} /-->
+<!-- wp:imjlk/sbs-typing-effect-block {"items":["Launch pages that feel tailored to your theme.","Swap multilingual hero copy without layout shock.","Keep the first paint readable, even before animation starts."],"reserveLines":2,"verticalAlign":"middle","startDelay":300,"startDelayMode":"first-start","tagName":"h1","style":{"typography":{"fontSize":"clamp(2.5rem,6vw,4.8rem)","lineHeight":"1.02","textAlign":"left"}}} /-->
 
 <!-- wp:paragraph {"style":{"typography":{"fontSize":"1.05rem"}},"textColor":"accent-5"} -->
 <p class="has-accent-5-color has-text-color" style="font-size:1.05rem">A practical hero pattern for launches, product reveal pages, and homepages where animated copy needs to sit beside real supporting content.</p>

@@ -315,7 +315,7 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 	browser,
 	page,
 }, testInfo ) => {
-	const title = `K Typewriter Smoke ${ Date.now() }`;
+	const title = `Stroke by stroke typing effect Block Smoke ${ Date.now() }`;
 	let viewPageUrl = '';
 	let frontEndUrl = '';
 	let frontEndPage;
@@ -346,8 +346,12 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 			.getByRole( 'searchbox', {
 				name: /Search(?: for blocks and patterns)?/u,
 			} )
-			.fill( 'K Typewriter' );
-		await page.getByRole( 'option', { name: /K Typewriter/u } ).click();
+			.fill( 'Stroke by stroke typing effect Block' );
+		await page
+			.getByRole( 'option', {
+				name: /Stroke by stroke typing effect Block/u,
+			} )
+			.click();
 		await openBlockSettings( page );
 
 		await page
@@ -380,7 +384,7 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 			.uncheck();
 
 		const editorPreviewText = canvas.locator(
-			'.wp-block-imjlk-k-typewriter .k-typewriter__content'
+			'.wp-block-imjlk-sbs-typing-effect-block .k-typewriter__content'
 		);
 
 		await expectEditorPreviewToChange( editorPreviewText );
@@ -412,7 +416,9 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 		await expect( editorPreviewText ).toHaveText( FIRST_MESSAGE );
 
 		await canvas
-			.locator( '.wp-block-imjlk-k-typewriter .k-typewriter-editor' )
+			.locator(
+				'.wp-block-imjlk-sbs-typing-effect-block .k-typewriter-editor'
+			)
 			.click();
 		await expectEditorPreviewToChange( editorPreviewText );
 
@@ -462,7 +468,7 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 
 					return {
 						hasBlockMarkup: html.includes(
-							'wp-block-imjlk-k-typewriter'
+							'wp-block-imjlk-sbs-typing-effect-block'
 						),
 						hasFirstMessage: html.includes( FIRST_MESSAGE ),
 						hasSeoSummary: html.includes( SEO_SUMMARY ),
@@ -491,7 +497,7 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 		const html = await htmlResponse.text();
 
 		expect( htmlResponse.status() ).toBeLessThan( 400 );
-		expect( html ).toContain( 'wp-block-imjlk-k-typewriter' );
+		expect( html ).toContain( 'wp-block-imjlk-sbs-typing-effect-block' );
 		expect( html ).toContain( FIRST_MESSAGE );
 		expect( html ).toContain( SEO_SUMMARY );
 		expect( html ).toMatch( /<h6[^>]*class="k-typewriter__text"/u );
@@ -503,7 +509,9 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 			waitUntil: 'domcontentloaded',
 		} );
 
-		const block = frontEndPage.locator( '.wp-block-imjlk-k-typewriter' );
+		const block = frontEndPage.locator(
+			'.wp-block-imjlk-sbs-typing-effect-block'
+		);
 		const animatedText = block.locator( '.k-typewriter__content' );
 		const animatedHeading = block.locator( 'h6.k-typewriter__text' );
 
@@ -544,7 +552,7 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 
 		await expect(
 			reducedMotionPage.locator(
-				'.wp-block-imjlk-k-typewriter .k-typewriter__content'
+				'.wp-block-imjlk-sbs-typing-effect-block .k-typewriter__content'
 			)
 		).toHaveText( FIRST_MESSAGE );
 
@@ -559,7 +567,7 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 
 		await expect(
 			noJsPage.locator(
-				'.wp-block-imjlk-k-typewriter .k-typewriter__content'
+				'.wp-block-imjlk-sbs-typing-effect-block .k-typewriter__content'
 			)
 		).toHaveText( FIRST_MESSAGE );
 	} catch ( error ) {

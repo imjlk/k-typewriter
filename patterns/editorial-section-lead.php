@@ -10,11 +10,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 return array(
-	'slug'          => 'k-typewriter/editorial-section-lead',
-	'title'         => __( 'Editorial Section Lead', 'k-typewriter' ),
-	'description'   => __( 'A section intro pattern for stories, resources, and long-form editorial pages.', 'k-typewriter' ),
-	'categories'    => array( 'k-typewriter' ),
-	'blockTypes'    => array( 'imjlk/k-typewriter' ),
+	'slug'          => 'sbs-typing-effect-block/editorial-section-lead',
+	'title'         => __( 'Editorial Section Lead', 'sbs-typing-effect-block' ),
+	'description'   => __( 'A section intro pattern for stories, resources, and long-form editorial pages.', 'sbs-typing-effect-block' ),
+	'categories'    => array( 'sbs-typing-effect-block' ),
+	'blockTypes'    => array( 'imjlk/sbs-typing-effect-block' ),
 	'viewportWidth' => 1200,
 	'content'       => <<<'HTML'
 <!-- wp:group {"style":{"spacing":{"padding":{"top":"3rem","right":"1.5rem","bottom":"3rem","left":"1.5rem"}},"border":{"radius":"24px"},"color":{"background":"#f6efe5","text":"#1f2937"}},"layout":{"type":"constrained","contentSize":"900px"}} -->
@@ -22,7 +22,7 @@ return array(
 <p style="font-size:0.85rem;letter-spacing:0.12em;text-transform:uppercase">Experimental combination</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:imjlk/k-typewriter {"items":["Tell one story in a more editorial rhythm.","Swap section framing without reworking the layout.","Keep the motion subtle and the structure readable."],"reserveLines":2,"verticalAlign":"top","pauseOnHover":true,"showCursor":false,"tagName":"h2","style":{"typography":{"fontSize":"clamp(2rem,4vw,3rem)","lineHeight":"1.08","textAlign":"left"}}} /-->
+<!-- wp:imjlk/sbs-typing-effect-block {"items":["Tell one story in a more editorial rhythm.","Swap section framing without reworking the layout.","Keep the motion subtle and the structure readable."],"reserveLines":2,"verticalAlign":"top","pauseOnHover":true,"showCursor":false,"tagName":"h2","style":{"typography":{"fontSize":"clamp(2rem,4vw,3rem)","lineHeight":"1.08","textAlign":"left"}}} /-->
 
 <!-- wp:paragraph {"style":{"typography":{"fontSize":"1rem"}}} -->
 <p style="font-size:1rem">This works well for case studies, blog landing pages, resource hubs, and feature sections where animated language should feel supportive rather than flashy.</p>

@@ -96,7 +96,7 @@ function getReserveLines( textElement: HTMLElement ) {
 
 function getStyleTarget( textElement: HTMLElement ) {
 	return (
-		textElement.closest( '.wp-block-imjlk-k-typewriter' ) ??
+		textElement.closest( '.wp-block-imjlk-sbs-typing-effect-block' ) ??
 		textElement.parentElement
 	);
 }

@@ -1,4 +1,4 @@
-# K Typewriter
+# Stroke by stroke typing effect Block
 
 Multilingual typewriter block plugin for WordPress hero headlines, notices, and announcement copy.
 
@@ -6,7 +6,7 @@ Multilingual typewriter block plugin for WordPress hero headlines, notices, and 
 
 ## Overview
 
-K Typewriter ships as a dynamic Gutenberg block with server-rendered fallback content, Interactivity API playback, and multilingual typing support.
+Stroke by stroke typing effect Block ships as a dynamic Gutenberg block with server-rendered fallback content, Interactivity API playback, and multilingual typing support.
 
 Typing playback is built on top of [UniTyper](https://github.com/beavercoding2022/uni-typer) by Beaver Coding.
 
@@ -77,7 +77,7 @@ pnpm run lint:css
 pnpm run test:unit
 pnpm run build
 pnpm run test:smoke
-php -l k-typewriter.php
+php -l sbs-typing-effect-block.php
 php -l includes/class-k-typewriter-plugin.php
 ```
 
@@ -91,9 +91,9 @@ Notes:
 
 The plugin keeps translation assets in [`languages/`](./languages).
 
-- Template: `k-typewriter.pot`
-- Bundled Korean translations: `k-typewriter-ko_KR.po`, `k-typewriter-ko_KR.mo`
-- Bundled block editor JSON translations for Korean are committed for direct installs and zip builds
+- Template: `sbs-typing-effect-block.pot`
+- Bundled Korean translations: `sbs-typing-effect-block-ko_KR.po`, `sbs-typing-effect-block-ko_KR.mo`
+- Bundled Korean translation files are included for direct installs and zip builds
 
 For WordPress.org, approved translations from `translate.wordpress.org` will eventually be delivered as language packs and may take precedence over bundled translations.
 

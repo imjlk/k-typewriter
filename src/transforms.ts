@@ -2,7 +2,7 @@ import { createBlock } from '@wordpress/blocks';
 
 import type { TypewriterAttributes } from './shared';
 
-const K_TYPEWRITER_BLOCK = 'imjlk/k-typewriter';
+const K_TYPEWRITER_BLOCK = 'imjlk/sbs-typing-effect-block';
 
 export const SUPPORTED_TEXT_TRANSFORM_BLOCKS = [
 	'core/paragraph',

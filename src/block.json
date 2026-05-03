@@ -1,9 +1,9 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "imjlk/k-typewriter",
+	"name": "imjlk/sbs-typing-effect-block",
 	"version": "1.0.0",
-	"title": "K Typewriter",
+	"title": "Stroke by stroke typing effect Block",
 	"category": "text",
 	"icon": "editor-textcolor",
 	"description": "Animate multilingual headlines, notices, and hero copy with a polished typewriter effect.",
@@ -172,7 +172,7 @@
 			"textAlign": true
 		}
 	},
-	"textdomain": "k-typewriter",
+	"textdomain": "sbs-typing-effect-block",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",

@@ -70,7 +70,7 @@ jobs:
               run: pnpm run plugin-zip
 
             - name: Verify tested release zip
-              run: test -f "./${{ github.event.repository.name }}.zip"
+              run: test -f "./sbs-typing-effect-block.zip"
 
             - name: Upload Playwright artifacts
               if: failure()
@@ -91,12 +91,12 @@ jobs:
               id: deploy
               uses: 10up/action-wordpress-plugin-deploy@54bd289b8525fd23a5c365ec369185f2966529c2
               env:
-                  SLUG: k-typewriter
+                  SLUG: sbs-typing-effect-block
                   SVN_USERNAME: ${{ env.SVN_USERNAME }}
                   SVN_PASSWORD: ${{ env.SVN_PASSWORD }}
 
             - name: Create GitHub release
               uses: softprops/action-gh-release@v2
               with:
-                  files: ./${{ github.event.repository.name }}.zip
+                  files: ./sbs-typing-effect-block.zip
                   generate_release_notes: true

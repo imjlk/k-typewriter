@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       K Typewriter
+ * Plugin Name:       Stroke by stroke typing effect Block
  * Plugin URI:        https://github.com/imjlk/k-typewriter
  * Description:       Add a configurable typewriter text block for hero headlines, notices, and multilingual messaging.
  * Version:           1.0.0
@@ -10,7 +10,7 @@
  * Author URI:        https://profiles.wordpress.org/imjlk/
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       k-typewriter
+ * Text Domain:       sbs-typing-effect-block
  *
  * @package KTypewriter
  */
