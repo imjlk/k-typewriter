@@ -3,18 +3,24 @@
 /.wordpress-org
 /docs
 /node_modules
+/output
+/scripts
 /src
 /tests
 
+.playwright-cli
 .DS_Store
 .distignore
 .editorconfig
 .gitignore
 .wp-env.json
+playwright-report
 README.md
 readme-ko_KR.md
 package.json
 package-lock.json
 playwright.config.js
 pnpm-lock.yaml
+test-results
 tsconfig.json
+*.zip

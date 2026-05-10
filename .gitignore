@@ -29,6 +29,8 @@ node_modules/
 # Playwright output
 playwright-report/
 test-results/
+output/
+.playwright-cli/
 
 # dotenv environment variables file
 .env

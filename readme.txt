@@ -87,9 +87,10 @@ Yes. The plugin includes a WordPress.org Playground blueprint, so maintainers ca
 
 == Screenshots ==
 
-1. Editing multiple messages and animation timing in the block sidebar.
-2. A front-end hero section using Stroke by stroke typing effect Block with multilingual text.
-3. Reduced-motion mode preserving the first message as a static fallback.
+1. Editing inline layout, width reservation, and message timing in the block sidebar.
+2. A starter pattern gallery showing multiple ready-to-use front-end layouts.
+3. Editor and front-end parity for the same inline typewriter pattern.
+4. The same starter pattern gallery viewed inside the block editor canvas.
 
 == Changelog ==
 
