@@ -6,8 +6,17 @@ const root = process.cwd();
 
 const iconPath = path.join( root, '.wordpress-org', 'icon-256x256.png' );
 const frontPath = path.join( root, 'output', 'playwright', 'inline-card.png' );
-const editorPath = path.join( root, 'output', 'playwright', 'editor-inline-focused-5.png' );
-const retinaBannerPath = path.join( root, '.wordpress-org', 'banner-1544x500.png' );
+const editorPath = path.join(
+	root,
+	'output',
+	'playwright',
+	'editor-inline-focused-5.png'
+);
+const retinaBannerPath = path.join(
+	root,
+	'.wordpress-org',
+	'banner-1544x500.png'
+);
 
 function toDataUri( buffer ) {
 	return `data:image/png;base64,${ buffer.toString( 'base64' ) }`;

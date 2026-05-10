@@ -43,5 +43,3 @@ execFileSync( 'zip', [ '-rq', zipPath, pluginSlug ], {
 	cwd: tempRoot,
 	stdio: 'inherit',
 } );
-
-console.log( `Created ${ zipPath }` );
