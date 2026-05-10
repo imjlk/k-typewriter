@@ -8,7 +8,11 @@
 /src
 /tests
 
+.eslintignore
+.prettierignore
+.stylelintignore
 .playwright-cli
+.tmp-release
 .DS_Store
 .distignore
 .editorconfig
