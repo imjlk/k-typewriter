@@ -109,6 +109,8 @@ async function openNewPageEditor( page ) {
 }
 
 async function dismissEditorOverlays( page ) {
+	await dismissModalOverlay( page );
+
 	const patternHeading = page.getByRole( 'heading', {
 		name: 'Choose a pattern',
 		exact: true,
@@ -169,6 +171,51 @@ async function dismissEditorOverlays( page ) {
 		await welcomeGuideCloseButton
 			.first()
 			.click( {
+				timeout: 1000,
+			} )
+			.catch( () => {} );
+	}
+
+	await dismissModalOverlay( page );
+}
+
+async function dismissModalOverlay( page ) {
+	const modalOverlay = page.locator( '.components-modal__screen-overlay' );
+
+	for ( let attempt = 0; attempt < 3; attempt++ ) {
+		if (
+			( await modalOverlay.count() ) === 0 ||
+			! ( await modalOverlay
+				.first()
+				.isVisible()
+				.catch( () => false ) )
+		) {
+			return;
+		}
+
+		const closeButton = modalOverlay
+			.locator(
+				'button[aria-label*="Close" i], button:has-text("Close")'
+			)
+			.last();
+
+		if (
+			( await closeButton.count() ) > 0 &&
+			( await closeButton.isVisible().catch( () => false ) )
+		) {
+			await closeButton
+				.click( {
+					timeout: 1000,
+				} )
+				.catch( () => {} );
+		} else {
+			await page.keyboard.press( 'Escape' ).catch( () => {} );
+		}
+
+		await modalOverlay
+			.first()
+			.waitFor( {
+				state: 'hidden',
 				timeout: 1000,
 			} )
 			.catch( () => {} );
