@@ -9,6 +9,8 @@ on:
 env:
     PLAYWRIGHT_BASE_URL: http://localhost:8888
     WP_ENV_PORT: 8888
+    WP_ENV_CORE_MINIMUM: WordPress/WordPress#6.6
+    WP_ENV_CORE_NEXT: https://wordpress.org/wordpress-7.0-RC3.zip
 
 jobs:
     build-and-test:
@@ -53,11 +55,38 @@ jobs:
                   printf '{}\n' > "$HOME/.docker/config.json"
                   docker logout || true
 
-            - name: Start wp-env
+            - name: Start wp-env (WordPress 6.6 minimum)
+              env:
+                  WP_ENV_CORE: ${{ env.WP_ENV_CORE_MINIMUM }}
               run: pnpm run env:start
 
-            - name: Smoke test
+            - name: Smoke test (WordPress 6.6 minimum)
               run: pnpm run test:smoke
+
+            - name: Stop wp-env (WordPress 6.6 minimum)
+              if: always()
+              env:
+                  WP_ENV_CORE: ${{ env.WP_ENV_CORE_MINIMUM }}
+              run: pnpm run env:stop || true
+
+            - name: Start wp-env (WordPress 7.0 RC)
+              env:
+                  WP_ENV_CORE: ${{ env.WP_ENV_CORE_NEXT }}
+              run: pnpm run env:start
+
+            - name: Upgrade database (WordPress 7.0 RC)
+              env:
+                  WP_ENV_CORE: ${{ env.WP_ENV_CORE_NEXT }}
+              run: pnpm exec wp-env run cli wp core update-db --allow-root
+
+            - name: Smoke test (WordPress 7.0 RC)
+              run: pnpm run test:smoke
+
+            - name: Stop wp-env (WordPress 7.0 RC)
+              if: always()
+              env:
+                  WP_ENV_CORE: ${{ env.WP_ENV_CORE_NEXT }}
+              run: pnpm run env:stop || true
 
             - name: Build tested release zip
               run: pnpm run plugin-zip
@@ -74,7 +103,3 @@ jobs:
                       test-results
                       playwright-report
                   if-no-files-found: ignore
-
-            - name: Stop wp-env
-              if: always()
-              run: pnpm run env:stop || true

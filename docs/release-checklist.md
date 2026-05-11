@@ -19,7 +19,8 @@
 
 1. Verify the plugin still activates on WordPress 6.6 / PHP 8.0.
 2. Verify a minimal smoke test on the latest stable WordPress release.
-3. Run the unit tests for the typewriter engine helpers.
+3. Verify a minimal smoke test on the current WordPress 7.0 release candidate until 7.0 is final.
+4. Run the unit tests for the typewriter engine helpers.
 
 ## Packaging
 
@@ -33,6 +34,7 @@
    - `screenshot-1.png`
    - `screenshot-2.png`
    - `screenshot-3.png`
+   - `screenshot-4.png`
 2. Confirm `readme.txt` screenshot count matches the actual files.
 3. Confirm `languages/sbs-typing-effect-block.pot` exists and reflects the latest strings.
 4. Confirm `.wordpress-org/blueprints/blueprint.json` still matches the current plugin slug and demo messaging.
