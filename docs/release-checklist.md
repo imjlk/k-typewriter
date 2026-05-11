@@ -19,8 +19,7 @@
 
 1. Verify the plugin still activates on WordPress 6.6 / PHP 8.0.
 2. Verify a minimal smoke test on the latest stable WordPress release.
-3. Verify a minimal smoke test on the current WordPress 7.0 release candidate until 7.0 is final.
-4. Run the unit tests for the typewriter engine helpers.
+3. Run the unit tests for the typewriter engine helpers.
 
 ## Packaging
 

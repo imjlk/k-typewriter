@@ -81,20 +81,10 @@ php -l sbs-typing-effect-block.php
 php -l includes/class-k-typewriter-plugin.php
 ```
 
-WordPress 7.0 is still in the RC cycle as of May 11, 2026. To smoke test against the current 7.0 release candidate locally:
-
-```bash
-WP_ENV_PORT=8899 pnpm run env:start:wp70
-WP_ENV_PORT=8899 pnpm run env:update-db:wp70
-PLAYWRIGHT_BASE_URL=http://localhost:8899 pnpm run test:smoke
-WP_ENV_PORT=8899 pnpm run env:stop:wp70
-```
-
 Notes:
 
 - `test:unit` covers the typing engine and shared attribute helpers.
 - `test:smoke` exercises the editor and front-end flow, but it still depends on the exact Gutenberg UI shape of the local WordPress instance.
-- GitHub Actions runs smoke coverage against the minimum supported WordPress 6.6 environment and the current WordPress 7.0 RC.
 - For local Playground demos, use `http://127.0.0.1:9410` to avoid host-mismatch issues between `localhost` and `127.0.0.1`.
 
 ## Localization
