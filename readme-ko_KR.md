@@ -81,10 +81,20 @@ php -l sbs-typing-effect-block.php
 php -l includes/class-k-typewriter-plugin.php
 ```
 
+WordPress 7.0 stable 대상으로 로컬 smoke test를 돌리려면:
+
+```bash
+WP_ENV_PORT=8899 WP_ENV_CORE=https://wordpress.org/wordpress-7.0.zip pnpm exec wp-env start --update
+WP_ENV_PORT=8899 WP_ENV_CORE=https://wordpress.org/wordpress-7.0.zip pnpm exec wp-env run cli wp core update-db --allow-root
+PLAYWRIGHT_BASE_URL=http://localhost:8899 pnpm run test:smoke
+WP_ENV_PORT=8899 WP_ENV_CORE=https://wordpress.org/wordpress-7.0.zip pnpm exec wp-env stop
+```
+
 참고:
 
 - `test:unit` 은 타이핑 엔진과 공유 attribute helper를 검증합니다.
 - `test:smoke` 는 에디터와 프런트 흐름을 검증하지만, 로컬 워드프레스 인스턴스의 Gutenberg UI 구성에 영향을 받을 수 있습니다.
+- GitHub Actions는 최소 지원 버전인 WordPress 6.6 환경과 WordPress 7.0 stable 환경에서 smoke coverage를 확인한 뒤 배포합니다.
 - 로컬 Playground 데모는 `localhost` 대신 `http://127.0.0.1:9410` 로 여는 쪽이 더 안정적입니다.
 
 ## 번역

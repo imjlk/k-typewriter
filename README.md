@@ -81,10 +81,20 @@ php -l sbs-typing-effect-block.php
 php -l includes/class-k-typewriter-plugin.php
 ```
 
+To smoke test the WordPress 7.0 stable target locally:
+
+```bash
+WP_ENV_PORT=8899 WP_ENV_CORE=https://wordpress.org/wordpress-7.0.zip pnpm exec wp-env start --update
+WP_ENV_PORT=8899 WP_ENV_CORE=https://wordpress.org/wordpress-7.0.zip pnpm exec wp-env run cli wp core update-db --allow-root
+PLAYWRIGHT_BASE_URL=http://localhost:8899 pnpm run test:smoke
+WP_ENV_PORT=8899 WP_ENV_CORE=https://wordpress.org/wordpress-7.0.zip pnpm exec wp-env stop
+```
+
 Notes:
 
 - `test:unit` covers the typing engine and shared attribute helpers.
 - `test:smoke` exercises the editor and front-end flow, but it still depends on the exact Gutenberg UI shape of the local WordPress instance.
+- GitHub Actions runs smoke coverage against the minimum supported WordPress 6.6 environment and WordPress 7.0 stable before deploys.
 - For local Playground demos, use `http://127.0.0.1:9410` to avoid host-mismatch issues between `localhost` and `127.0.0.1`.
 
 ## Localization

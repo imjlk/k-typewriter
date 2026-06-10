@@ -2,7 +2,7 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: K Typewriter 1.0.0\n"
+"Project-Id-Version: Stroke by stroke typing effect Block 1.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sbs-typing-effect-"
 "block\n"
 "POT-Creation-Date: 2026-05-03T05:55:00+00:00\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Codex\n"
-"X-Domain: k-typewriter\n"
+"X-Domain: sbs-typing-effect-block\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Plugin Name of the plugin

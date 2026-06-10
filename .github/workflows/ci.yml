@@ -7,8 +7,11 @@ on:
             - main
 
 env:
+    FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
     PLAYWRIGHT_BASE_URL: http://localhost:8888
     WP_ENV_PORT: 8888
+    WP_ENV_CORE_MINIMUM: WordPress/WordPress#6.6
+    WP_ENV_CORE_WORDPRESS_70: https://wordpress.org/wordpress-7.0.zip
 
 jobs:
     build-and-test:
@@ -16,18 +19,18 @@ jobs:
 
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
 
             - name: Setup pnpm
-              uses: pnpm/action-setup@v4
+              uses: pnpm/action-setup@v6
               with:
                   version: 10.20.0
 
             - name: Setup Node.js
-              uses: actions/setup-node@v4
+              uses: actions/setup-node@v6
               with:
                   cache: pnpm
-                  node-version: 20
+                  node-version: '24'
 
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
@@ -53,10 +56,36 @@ jobs:
                   printf '{}\n' > "$HOME/.docker/config.json"
                   docker logout || true
 
-            - name: Start wp-env
+            - name: Start wp-env (WordPress 6.6 minimum)
+              env:
+                  WP_ENV_CORE: ${{ env.WP_ENV_CORE_MINIMUM }}
               run: pnpm run env:start
 
-            - name: Smoke test
+            - name: Upgrade database (WordPress 6.6 minimum)
+              env:
+                  WP_ENV_CORE: ${{ env.WP_ENV_CORE_MINIMUM }}
+              run: pnpm exec wp-env run cli wp core update-db --allow-root
+
+            - name: Smoke test (WordPress 6.6 minimum)
+              run: pnpm run test:smoke
+
+            - name: Stop wp-env (WordPress 6.6 minimum)
+              if: always()
+              env:
+                  WP_ENV_CORE: ${{ env.WP_ENV_CORE_MINIMUM }}
+              run: pnpm run env:stop || true
+
+            - name: Start wp-env (WordPress 7.0 stable)
+              env:
+                  WP_ENV_CORE: ${{ env.WP_ENV_CORE_WORDPRESS_70 }}
+              run: pnpm run env:start
+
+            - name: Upgrade database (WordPress 7.0 stable)
+              env:
+                  WP_ENV_CORE: ${{ env.WP_ENV_CORE_WORDPRESS_70 }}
+              run: pnpm exec wp-env run cli wp core update-db --allow-root
+
+            - name: Smoke test (WordPress 7.0 stable)
               run: pnpm run test:smoke
 
             - name: Build tested release zip
@@ -67,7 +96,7 @@ jobs:
 
             - name: Upload Playwright artifacts
               if: failure()
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v7
               with:
                   name: playwright-artifacts
                   path: |
@@ -75,6 +104,8 @@ jobs:
                       playwright-report
                   if-no-files-found: ignore
 
-            - name: Stop wp-env
+            - name: Stop wp-env (WordPress 7.0 stable)
               if: always()
+              env:
+                  WP_ENV_CORE: ${{ env.WP_ENV_CORE_WORDPRESS_70 }}
               run: pnpm run env:stop || true

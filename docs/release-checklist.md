@@ -18,7 +18,7 @@
 ## Compatibility
 
 1. Verify the plugin still activates on WordPress 6.6 / PHP 8.0.
-2. Verify a minimal smoke test on the latest stable WordPress release.
+2. Verify a minimal smoke test on WordPress 7.0 stable.
 3. Run the unit tests for the typewriter engine helpers.
 
 ## Packaging
@@ -42,7 +42,7 @@
 ## GitHub Actions
 
 1. Confirm the tag follows the `v*` pattern.
-2. Confirm the CI and release workflows build the tested package with the 10up build-zip action.
+2. Confirm the CI and release workflows build the tested package with `pnpm run plugin-zip`.
 3. Confirm the GitHub release attaches the tested release zip built in the release workflow.
 4. Confirm the WordPress.org deploy step is enabled only when the plugin slug exists by setting `WPORG_DEPLOY_ENABLED=true`.
 5. Confirm `SVN_USERNAME` and `SVN_PASSWORD` are set before enabling WordPress.org deploy.

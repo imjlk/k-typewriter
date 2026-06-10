@@ -10,13 +10,115 @@ async function login( page ) {
 		return;
 	}
 
+	await page.locator( '#user_login' ).waitFor();
+	await page.waitForTimeout( 250 );
 	await page.locator( '#user_login' ).fill( 'admin' );
 	await page.locator( '#user_pass' ).fill( 'password' );
-	await page.getByRole( 'button', { name: 'Log In' } ).click();
-	await page.waitForURL( /\/wp-admin\//u );
+	await Promise.all( [
+		page.waitForURL( /\/wp-admin\//u, { waitUntil: 'domcontentloaded' } ),
+		page.getByRole( 'button', { name: 'Log In' } ).click(),
+	] );
+	await completeDatabaseUpgradeIfNeeded( page );
+}
+
+async function completeDatabaseUpgradeIfNeeded( page ) {
+	const upgradeHeading = page.getByRole( 'heading', {
+		name: /Database Update Required/iu,
+	} );
+	const needsUpgrade =
+		page.url().includes( '/wp-admin/upgrade.php' ) ||
+		( await upgradeHeading
+			.first()
+			.isVisible( { timeout: 1500 } )
+			.catch( () => false ) );
+
+	if ( ! needsUpgrade ) {
+		return;
+	}
+
+	const updateButton = page.getByRole( 'button', {
+		name: /Update WordPress Database/iu,
+	} );
+	const updateLink = page.getByRole( 'link', {
+		name: /Update WordPress Database/iu,
+	} );
+	const updateSubmit = page.locator(
+		'input[type="submit"][value="Update WordPress Database"]'
+	);
+	let upgradeControl = updateSubmit;
+
+	if ( ( await updateButton.count() ) > 0 ) {
+		upgradeControl = updateButton;
+	} else if ( ( await updateLink.count() ) > 0 ) {
+		upgradeControl = updateLink;
+	}
+
+	if ( ( await upgradeControl.count() ) > 0 ) {
+		await upgradeControl.first().waitFor( {
+			state: 'visible',
+			timeout: 5000,
+		} );
+		await Promise.all( [
+			page.waitForLoadState( 'domcontentloaded' ).catch( () => {} ),
+			upgradeControl.first().click(),
+		] );
+	}
+
+	const continueLink = page.getByRole( 'link', { name: /^Continue$/iu } );
+
+	if (
+		( await continueLink.count() ) > 0 &&
+		( await continueLink
+			.first()
+			.isVisible( { timeout: 5000 } )
+			.catch( () => false ) )
+	) {
+		await Promise.all( [
+			page.waitForLoadState( 'domcontentloaded' ).catch( () => {} ),
+			continueLink.first().click(),
+		] );
+	}
+
+	await page.waitForLoadState( 'domcontentloaded' ).catch( () => {} );
+}
+
+async function openNewPageEditor( page ) {
+	const editorFrame = page.locator( 'iframe[name="editor-canvas"]' );
+	const upgradeHeading = page.getByRole( 'heading', {
+		name: /Database Update Required/iu,
+	} );
+
+	for ( let attempt = 0; attempt < 2; attempt++ ) {
+		await page.goto( '/wp-admin/post-new.php?post_type=page', {
+			waitUntil: 'domcontentloaded',
+		} );
+
+		const destination = await Promise.race( [
+			editorFrame
+				.waitFor( { state: 'visible', timeout: 15000 } )
+				.then( () => 'editor' )
+				.catch( () => null ),
+			upgradeHeading
+				.waitFor( { state: 'visible', timeout: 15000 } )
+				.then( () => 'upgrade' )
+				.catch( () => null ),
+		] );
+
+		if ( destination === 'editor' ) {
+			return;
+		}
+
+		if ( destination === 'upgrade' ) {
+			await completeDatabaseUpgradeIfNeeded( page );
+		}
+	}
+
+	await editorFrame.waitFor();
 }
 
 async function dismissEditorOverlays( page ) {
+	await dismissModalOverlay( page );
+
 	const patternHeading = page.getByRole( 'heading', {
 		name: 'Choose a pattern',
 		exact: true,
@@ -77,6 +179,51 @@ async function dismissEditorOverlays( page ) {
 		await welcomeGuideCloseButton
 			.first()
 			.click( {
+				timeout: 1000,
+			} )
+			.catch( () => {} );
+	}
+
+	await dismissModalOverlay( page );
+}
+
+async function dismissModalOverlay( page ) {
+	const modalOverlay = page.locator( '.components-modal__screen-overlay' );
+
+	for ( let attempt = 0; attempt < 3; attempt++ ) {
+		if (
+			( await modalOverlay.count() ) === 0 ||
+			! ( await modalOverlay
+				.first()
+				.isVisible()
+				.catch( () => false ) )
+		) {
+			return;
+		}
+
+		const closeButton = modalOverlay
+			.locator(
+				'button[aria-label*="Close" i], button:has-text("Close")'
+			)
+			.last();
+
+		if (
+			( await closeButton.count() ) > 0 &&
+			( await closeButton.isVisible().catch( () => false ) )
+		) {
+			await closeButton
+				.click( {
+					timeout: 1000,
+				} )
+				.catch( () => {} );
+		} else {
+			await page.keyboard.press( 'Escape' ).catch( () => {} );
+		}
+
+		await modalOverlay
+			.first()
+			.waitFor( {
+				state: 'hidden',
 				timeout: 1000,
 			} )
 			.catch( () => {} );
@@ -325,10 +472,7 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 
 	try {
 		await login( page );
-		await page.goto( '/wp-admin/post-new.php?post_type=page', {
-			waitUntil: 'domcontentloaded',
-		} );
-		await page.locator( 'iframe[name="editor-canvas"]' ).waitFor();
+		await openNewPageEditor( page );
 		await dismissEditorOverlays( page );
 
 		const canvas = page.frameLocator( 'iframe[name="editor-canvas"]' );
@@ -352,7 +496,18 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 				name: /Stroke by stroke typing effect Block/u,
 			} )
 			.click();
+		const insertedTypewriterBlock = canvas
+			.locator( '.wp-block-imjlk-sbs-typing-effect-block' )
+			.first();
+		await insertedTypewriterBlock.waitFor( {
+			state: 'visible',
+			timeout: 15000,
+		} );
+		await insertedTypewriterBlock.click();
 		await openBlockSettings( page );
+		await page
+			.getByRole( 'textbox', { name: 'Messages', exact: true } )
+			.waitFor( { state: 'visible', timeout: 15000 } );
 
 		await page
 			.getByRole( 'textbox', { name: 'Messages', exact: true } )
@@ -414,6 +569,7 @@ test( 'the block inserts, saves, and renders with front-end fallbacks', async ( 
 
 		await canvas.getByRole( 'textbox', { name: 'Add title' } ).click();
 		await expect( editorPreviewText ).toHaveText( FIRST_MESSAGE );
+		await dismissEditorOverlays( page );
 
 		await canvas
 			.locator(

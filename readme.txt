@@ -2,9 +2,9 @@
 Contributors: imjlk
 Tags: block, typewriter, headline, hero, multilingual
 Requires at least: 6.6
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 8.0
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,6 +94,12 @@ Yes. The plugin includes a WordPress.org Playground blueprint, so maintainers ca
 
 == Changelog ==
 
+= 1.0.1 =
+
+* Confirmed compatibility with WordPress 7.0.
+* Updated release workflows to smoke test WordPress 7.0 stable before WordPress.org deploys.
+* Refreshed GitHub Actions versions to use Node.js 24-compatible action runtimes.
+
 = 1.0.0 =
 
 * First public release.
@@ -103,6 +109,10 @@ Yes. The plugin includes a WordPress.org Playground blueprint, so maintainers ca
 * Added bundled starter and advanced patterns, WordPress Playground demos, packaging, local `wp-env` tooling, smoke tests, and release workflows.
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+
+Compatibility release for WordPress 7.0.
 
 = 1.0.0 =
 

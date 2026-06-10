@@ -3,7 +3,7 @@
  * Plugin Name:       Stroke by stroke typing effect Block
  * Plugin URI:        https://github.com/imjlk/k-typewriter
  * Description:       Add a configurable typewriter text block for hero headlines, notices, and multilingual messaging.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 6.6
  * Requires PHP:      8.0
  * Author:            imjlk
