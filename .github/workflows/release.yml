@@ -67,12 +67,17 @@ jobs:
             - name: Start wp-env (WordPress 6.6 minimum)
               env:
                   WP_ENV_CORE: ${{ env.WP_ENV_CORE_MINIMUM }}
-              run: pnpm run env:start
+              run: pnpm exec wp-env start --update
 
             - name: Upgrade database (WordPress 6.6 minimum)
               env:
                   WP_ENV_CORE: ${{ env.WP_ENV_CORE_MINIMUM }}
-              run: pnpm exec wp-env run cli wp core update-db --allow-root
+              run: |
+                  for attempt in 1 2 3 4 5 6 7 8 9 10; do
+                      pnpm exec wp-env run cli wp core update-db --allow-root && exit 0
+                      sleep 3
+                  done
+                  exit 1
 
             - name: Smoke test (WordPress 6.6 minimum)
               run: pnpm run test:smoke
@@ -86,12 +91,17 @@ jobs:
             - name: Start wp-env (WordPress 7.0 stable)
               env:
                   WP_ENV_CORE: ${{ env.WP_ENV_CORE_WORDPRESS_70 }}
-              run: pnpm run env:start
+              run: pnpm exec wp-env start --update
 
             - name: Upgrade database (WordPress 7.0 stable)
               env:
                   WP_ENV_CORE: ${{ env.WP_ENV_CORE_WORDPRESS_70 }}
-              run: pnpm exec wp-env run cli wp core update-db --allow-root
+              run: |
+                  for attempt in 1 2 3 4 5 6 7 8 9 10; do
+                      pnpm exec wp-env run cli wp core update-db --allow-root && exit 0
+                      sleep 3
+                  done
+                  exit 1
 
             - name: Smoke test (WordPress 7.0 stable)
               run: pnpm run test:smoke
