@@ -88,6 +88,9 @@ jobs:
                   WP_ENV_CORE: ${{ env.WP_ENV_CORE_MINIMUM }}
               run: pnpm run env:stop || true
 
+            - name: Cleanup wp-env before WordPress 7.0 stable
+              run: pnpm exec wp-env cleanup || true
+
             - name: Start wp-env (WordPress 7.0 stable)
               env:
                   WP_ENV_CORE: ${{ env.WP_ENV_CORE_WORDPRESS_70 }}
