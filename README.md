@@ -84,10 +84,10 @@ php -l includes/class-k-typewriter-plugin.php
 To smoke test the WordPress 7.0 stable target locally:
 
 ```bash
-WP_ENV_PORT=8899 WP_ENV_CORE=https://wordpress.org/wordpress-7.0.zip pnpm exec wp-env start --update
-WP_ENV_PORT=8899 WP_ENV_CORE=https://wordpress.org/wordpress-7.0.zip pnpm exec wp-env run cli wp core update-db --allow-root
+WP_ENV_PORT=8899 WP_ENV_CORE=WordPress/WordPress#7.0 pnpm exec wp-env start --update
+WP_ENV_PORT=8899 WP_ENV_CORE=WordPress/WordPress#7.0 pnpm exec wp-env run cli wp core update-db --allow-root
 PLAYWRIGHT_BASE_URL=http://localhost:8899 pnpm run test:smoke
-WP_ENV_PORT=8899 WP_ENV_CORE=https://wordpress.org/wordpress-7.0.zip pnpm exec wp-env stop
+WP_ENV_PORT=8899 WP_ENV_CORE=WordPress/WordPress#7.0 pnpm exec wp-env stop
 ```
 
 Notes:

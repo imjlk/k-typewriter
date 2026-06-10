@@ -67,7 +67,7 @@ jobs:
                       core: WordPress/WordPress#6.6
                       artifact: wordpress-66
                     - name: WordPress 7.0 stable
-                      core: https://wordpress.org/wordpress-7.0.zip
+                      core: WordPress/WordPress#7.0
                       artifact: wordpress-70
         env:
             WP_ENV_CORE: ${{ matrix.core }}
