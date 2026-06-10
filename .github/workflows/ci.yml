@@ -11,8 +11,6 @@ env:
     PLAYWRIGHT_BASE_URL: http://localhost:8888
     PLAYWRIGHT_BROWSER_CHANNEL: chrome
     WP_ENV_PORT: 8888
-    WP_ENV_CORE_MINIMUM: WordPress/WordPress#6.6
-    WP_ENV_CORE_WORDPRESS_70: https://wordpress.org/wordpress-7.0.zip
 
 jobs:
     build-and-test:
@@ -36,9 +34,6 @@ jobs:
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
 
-            - name: Verify system Chrome
-              run: google-chrome --version
-
             - name: Lint JavaScript
               run: pnpm run lint:js
 
@@ -51,75 +46,82 @@ jobs:
             - name: Build plugin
               run: pnpm run build
 
-            - name: Reset Docker auth for wp-env images
-              run: |
-                  mkdir -p "$HOME/.docker"
-                  printf '{}\n' > "$HOME/.docker/config.json"
-                  docker logout || true
-
-            - name: Start wp-env (WordPress 6.6 minimum)
-              env:
-                  WP_ENV_CORE: ${{ env.WP_ENV_CORE_MINIMUM }}
-              run: pnpm exec wp-env start --update
-
-            - name: Upgrade database (WordPress 6.6 minimum)
-              env:
-                  WP_ENV_CORE: ${{ env.WP_ENV_CORE_MINIMUM }}
-              run: |
-                  for attempt in 1 2 3 4 5 6 7 8 9 10; do
-                      pnpm exec wp-env run cli wp core update-db --allow-root && exit 0
-                      sleep 3
-                  done
-                  exit 1
-
-            - name: Smoke test (WordPress 6.6 minimum)
-              run: pnpm run test:smoke
-
-            - name: Stop wp-env (WordPress 6.6 minimum)
-              if: always()
-              env:
-                  WP_ENV_CORE: ${{ env.WP_ENV_CORE_MINIMUM }}
-              run: pnpm run env:stop || true
-
-            - name: Cleanup wp-env before WordPress 7.0 stable
-              run: pnpm exec wp-env cleanup || true
-
-            - name: Start wp-env (WordPress 7.0 stable)
-              env:
-                  WP_ENV_CORE: ${{ env.WP_ENV_CORE_WORDPRESS_70 }}
-              run: pnpm exec wp-env start --update
-
-            - name: Upgrade database (WordPress 7.0 stable)
-              env:
-                  WP_ENV_CORE: ${{ env.WP_ENV_CORE_WORDPRESS_70 }}
-              run: |
-                  for attempt in 1 2 3 4 5 6 7 8 9 10; do
-                      pnpm exec wp-env run cli wp core update-db --allow-root && exit 0
-                      sleep 3
-                  done
-                  exit 1
-
-            - name: Smoke test (WordPress 7.0 stable)
-              run: pnpm run test:smoke
-
             - name: Build tested release zip
               run: pnpm run plugin-zip
 
             - name: Verify tested release zip
               run: test -f "./sbs-typing-effect-block.zip"
 
+    smoke:
+        runs-on: ubuntu-latest
+        needs: build-and-test
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - name: WordPress 6.6 minimum
+                      core: WordPress/WordPress#6.6
+                      artifact: wordpress-66
+                    - name: WordPress 7.0 stable
+                      core: https://wordpress.org/wordpress-7.0.zip
+                      artifact: wordpress-70
+        env:
+            WP_ENV_CORE: ${{ matrix.core }}
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v6
+
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v6
+              with:
+                  version: 10.20.0
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v6
+              with:
+                  cache: pnpm
+                  node-version: '24'
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Verify system Chrome
+              run: google-chrome --version
+
+            - name: Build plugin
+              run: pnpm run build
+
+            - name: Reset Docker auth for wp-env images
+              run: |
+                  mkdir -p "$HOME/.docker"
+                  printf '{}\n' > "$HOME/.docker/config.json"
+                  docker logout || true
+
+            - name: Start wp-env (${{ matrix.name }})
+              run: pnpm exec wp-env start --update
+
+            - name: Upgrade database (${{ matrix.name }})
+              run: |
+                  for attempt in 1 2 3 4 5 6 7 8 9 10; do
+                      pnpm exec wp-env run cli wp core update-db --allow-root && exit 0
+                      sleep 3
+                  done
+                  exit 1
+
+            - name: Smoke test (${{ matrix.name }})
+              run: pnpm run test:smoke
+
             - name: Upload Playwright artifacts
               if: failure()
               uses: actions/upload-artifact@v7
               with:
-                  name: playwright-artifacts
+                  name: playwright-artifacts-${{ matrix.artifact }}
                   path: |
                       test-results
                       playwright-report
                   if-no-files-found: ignore
 
-            - name: Stop wp-env (WordPress 7.0 stable)
+            - name: Stop wp-env (${{ matrix.name }})
               if: always()
-              env:
-                  WP_ENV_CORE: ${{ env.WP_ENV_CORE_WORDPRESS_70 }}
               run: pnpm run env:stop || true
